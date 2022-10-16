@@ -6,7 +6,7 @@ from random import choice
 # Display ->
 display = customtkinter.CTk()
 
-with open("New_Shit__/Angela_Yu__/Day_31 #/data/fr_en.csv") as file:
+with open("New_Shit__/Angela_Yu__/Day_31 #Learning_game/data/fr_en.csv") as file:
     data = [(i.split(",")[0], i.split(",")[1][:-1]) for i in file.readlines()]
 
     tuple = choice(data)
@@ -16,11 +16,11 @@ with open("New_Shit__/Angela_Yu__/Day_31 #/data/fr_en.csv") as file:
 STATE = ["Dark", "Light"]
 BACKGROUND_COLOR = "#B1DDC6"
 
-CARD_FRONT = PhotoImage(file="New_Shit__/Angela_Yu__/Day_31 #/images/card_front.png")
-CARD_BACK = PhotoImage(file="New_Shit__/Angela_Yu__/Day_31 #/images/card_back.png")
+CARD_FRONT = PhotoImage(file="New_Shit__/Angela_Yu__/Day_31 #Learning_game/images/card_front.png")
+CARD_BACK = PhotoImage(file="New_Shit__/Angela_Yu__/Day_31 #Learning_game/images/card_back.png")
 
-RIGHT = PhotoImage(file="New_Shit__/Angela_Yu__/Day_31 #/images/right.png")
-WRONG = PhotoImage(file="New_Shit__/Angela_Yu__/Day_31 #/images/wrong.png")
+RIGHT = PhotoImage(file="New_Shit__/Angela_Yu__/Day_31 #Learning_game/images/right.png")
+WRONG = PhotoImage(file="New_Shit__/Angela_Yu__/Day_31 #Learning_game/images/wrong.png")
 
 
 # -------------------------------------------------------CUSTOMTKINTER-SETUPS---------------------------------------------------------------
