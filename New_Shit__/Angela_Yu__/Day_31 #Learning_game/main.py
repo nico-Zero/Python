@@ -1,4 +1,5 @@
 import customtkinter
+from pandas import read_csv
 from tkinter import PhotoImage
 from random import choice
 
@@ -6,12 +7,12 @@ from random import choice
 # Display ->
 display = customtkinter.CTk()
 
-with open("New_Shit__/Angela_Yu__/Day_31 #Learning_game/data/fr_en.csv") as file:
-    data = [(i.split(",")[0], i.split(",")[1][:-1]) for i in file.readlines()]
+data = read_csv("New_Shit__/Angela_Yu__/Day_31 #Learning_game/data/fr_en.csv")
+data = data.to_dict(orient="records")
 
-    tuple = choice(data)
-    france = tuple[0].lower()
-    english = tuple[1].lower()
+chosen_one = choice(data)
+france = chosen_one["France"].lower()
+english = chosen_one["English"].lower()
 
 STATE = ["Dark", "Light"]
 BACKGROUND_COLOR = "#B1DDC6"
@@ -35,11 +36,11 @@ display.config(bg=BACKGROUND_COLOR, padx=50, pady=50)
 
 # -------------------------------------------------------FUNCTIONS---------------------------------------------------------------
 def new_word():
-    global france, english, tuple
+    global france, english, chosen_one
 
-    tuple = choice(data)
-    france = tuple[0].lower()
-    english = tuple[1].lower()
+    chosen_one = choice(data)
+    france = chosen_one["France"].lower()
+    english = chosen_one["English"].lower()
 
 
 def turn_card(sec=3):
@@ -67,13 +68,13 @@ def start():
 
 
 def right():
-    print("Already know", tuple)
-    data.remove(tuple)
+    print("Already know", chosen_one)
+    data.remove(chosen_one)
     start()
 
 
 def wrong():
-    print("Don't know", tuple)
+    print("Don't know", chosen_one)
     start()
 
 
