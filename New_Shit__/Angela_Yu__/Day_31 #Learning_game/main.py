@@ -1,5 +1,5 @@
 import customtkinter
-from pandas import read_csv
+from pandas import read_csv, DataFrame
 from tkinter import PhotoImage
 from random import choice
 
@@ -59,6 +59,10 @@ def turn_card():
 def right():
     print("Already know", chosen_one)
     data.remove(chosen_one)
+    DataFrame(data).to_csv(
+        "New_Shit__/Angela_Yu__/Day_31 #Learning_game/data/word_to_learn.csv",
+        index=False,
+    )
     start()
 
 
