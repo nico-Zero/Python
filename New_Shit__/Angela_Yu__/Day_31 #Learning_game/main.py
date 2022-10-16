@@ -6,8 +6,10 @@ from random import choice
 # -------------------------------------------------------VARIABLES---------------------------------------------------------------
 # Display ->
 display = customtkinter.CTk()
-
-data = read_csv("New_Shit__/Angela_Yu__/Day_31 #Learning_game/data/fr_en.csv")
+try:
+    data = read_csv("New_Shit__/Angela_Yu__/Day_31 #Learning_game/data/words_to_learn.csv")
+except FileNotFoundError:
+    data = read_csv("New_Shit__/Angela_Yu__/Day_31 #Learning_game/data/fr_en.csv")
 data = data.to_dict(orient="records")
 
 
@@ -60,14 +62,14 @@ def right():
     print("Already know", chosen_one)
     data.remove(chosen_one)
     DataFrame(data).to_csv(
-        "New_Shit__/Angela_Yu__/Day_31 #Learning_game/data/word_to_learn.csv",
+        "New_Shit__/Angela_Yu__/Day_31 #Learning_game/data/words_to_learn.csv",
         index=False,
     )
     start()
 
 
 def wrong():
-    print("Don't know", chosen_one)
+    print("Don't know", chosen_one) 
     start()
 
 
