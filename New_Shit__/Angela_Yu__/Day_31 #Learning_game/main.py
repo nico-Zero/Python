@@ -45,7 +45,6 @@ def new_word():
 
 def turn_card(sec=3):
     if sec != 0:
-
         display.after(1000, turn_card, sec - 1)
     else:
         flash_card.itemconfig(card, image=CARD_BACK)
