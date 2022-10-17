@@ -1,3 +1,4 @@
+from tkinter import Y
 import customtkinter
 from password_generator import pass_gen
 from PIL import Image, ImageTk
@@ -136,6 +137,11 @@ def add_pass():
             all_clear(cf=False)
 
 
+def theme_switch():
+    x = theme.get()
+    print(x)
+
+
 # -------------------------------------------------------UI---------------------------------------------------------------
 
 # Window
@@ -149,7 +155,7 @@ img = ImageTk.PhotoImage(img)
 lock_img = customtkinter.CTkLabel(width=144, height=144, borderwidth=0, image=img)
 
 # Labels
-top_label = customtkinter.CTkLabel(text="Password", text_font=("Courier", 20))
+top_label = customtkinter.CTkLabel(text="Password", text_font=("Courier",20))
 website = customtkinter.CTkLabel(text="Website :", text_font=("Courier", 12))
 email = customtkinter.CTkLabel(text="Username/Email :", text_font=("Courier", 12))
 password = customtkinter.CTkLabel(text="Password :", text_font=("Courier", 12))
@@ -210,6 +216,10 @@ ok = customtkinter.CTkButton(
     border=False,
     command=ok_button,
 )
+
+theme = customtkinter.CTkSwitch(text="",command=theme_switch)
+theme.place(x=0,y=0)
+
 
 # Lock Image grid
 lock_img.grid(row=0, column=1)
