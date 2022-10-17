@@ -1,7 +1,7 @@
 from datetime import datetime
 import smtplib
 from random import choice
-from pandas import read_csv, DataFrame
+from pandas import read_csv
 
 LETTERS = [
     "New_Shit__/Angela_Yu__/Day_32 #Mailing_software/letter_templates/letter_1.txt",
