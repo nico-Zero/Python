@@ -1,7 +1,7 @@
 from datetime import datetime
 import smtplib
 from random import choice
-from pandas import read_csv
+from pandas import read_csv, DataFrame
 
 LETTERS = [
     "New_Shit__/Angela_Yu__/Day_32 #Mailing_software/letter_templates/letter_1.txt",
@@ -31,3 +31,7 @@ for i in birthdays:
                 to_addrs=i["email"],
                 msg=f"Subject:Happy Birthday {i['name']}\n\n{birthday_letter}",
             )
+
+
+
+
