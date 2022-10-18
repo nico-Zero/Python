@@ -1,6 +1,6 @@
 from datetime import datetime
 import smtplib
-from random import choice
+# from random import choice
 from email.message import EmailMessage
 import ssl
 
@@ -15,7 +15,7 @@ week_day = now.weekday()
 
 if week_day == 1:
     # with open("New_Shit__/Angela_Yu__/Day_32 #Mailing_software/quotes.txt") as file:
-    #     quot = file.readlines()
+    #     quot = file.readiness()
     #     random_quot = choice(quot)
     #     print(random_quot)
 
