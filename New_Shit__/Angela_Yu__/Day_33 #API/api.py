@@ -1,5 +1,1 @@
 print("Hello mother fucker")
-
-
-
-
