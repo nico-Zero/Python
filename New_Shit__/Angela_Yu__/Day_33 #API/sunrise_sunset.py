@@ -34,13 +34,10 @@ while True:
     iss_lat = float(iss_location["latitude"])
     iss_lng = float(iss_location["longitude"])
 
-    today = datetime.now()
-
     # today hour
-    today_hour = today.hour
-    today_hour = 13
+    today_hour = datetime.now().hour
 
-    if today_hour < sunrise_hour or today_hour > sunset_hour:
+    if sunrise_hour > today_hour > sunset_hour:
         if vision((MY_LAT, MY_LNG), (iss_lat, iss_lng)):
             print("look Up")
             sleep(60)
