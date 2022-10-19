@@ -5,7 +5,7 @@ class Brain:
         self.score = 0
 
     def question(self):
-        x = self.questions[self.question_number]
+        x = self.questions[self.question_number]["question"]
         self.question_number += 1
         return x
 

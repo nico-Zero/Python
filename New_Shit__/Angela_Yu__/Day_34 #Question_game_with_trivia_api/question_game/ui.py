@@ -37,7 +37,7 @@ class QuizGameUi:
         self.question_text = self.question_box.create_text(
             200,
             200,
-            text=self.quiz.question()["question"],
+            text=self.quiz.question(),
             justify="center",
             font=("Courier", 20, "bold"),
             width=350,
@@ -78,7 +78,7 @@ class QuizGameUi:
         else:
             self.question_box.config(bg="red")
 
-        self.window.after(1000, self.reset, self.quiz.question()["question"])
+        self.window.after(1000, self.reset, self.quiz.question())
 
     def reset(self, question):
         self.question_box.config(bg="white")
