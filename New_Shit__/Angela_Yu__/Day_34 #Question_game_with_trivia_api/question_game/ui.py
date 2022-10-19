@@ -72,15 +72,25 @@ class QuizGameUi:
         self.window.mainloop()
 
     def question_motion(self, answer):
-        if self.quiz.check_answer(answer):
-            self.question_box.config(bg="green")
-            self.score_label.configure(text=f"Score: {self.quiz.get_score()}")
-        else:
-            self.question_box.config(bg="red")
-        if self.quiz.error:
-            self.window.quit()
+        if self.quiz.still_question():
+            if self.quiz.check_answer(answer):
+                self.question_box.config(bg="green")
+                self.score_label.configure(text=f"Score: {self.quiz.get_score()}")
+            else:
+                self.question_box.config(bg="red")
 
-        self.window.after(1000, self.reset, self.quiz.question())
+            self.after = self.window.after(1000, self.reset, self.quiz.question())
+        else:
+            self.window.after_cancel(self.after)
+            self.question_box.config(bg="white")
+            self.question_box.itemconfig(
+                self.question_text,
+                text="Congregates You reached the end. Now fuck Off!",
+            )
+            self.right_button.configure(state=customtkinter.DISABLED)
+            self.wrong_button.configure(state=customtkinter.DISABLED)
+
+            self.window.after(100000, self.window.quit)
 
     def reset(self, question):
         self.question_box.config(bg="white")
