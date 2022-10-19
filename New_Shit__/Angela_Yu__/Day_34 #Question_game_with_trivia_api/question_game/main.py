@@ -1,4 +1,5 @@
 import requests
+import html
 import customtkinter
 from tkinter import PhotoImage
 
@@ -20,7 +21,8 @@ def get_question(amount):
     question = question.json()["results"]
 
     questions = [
-        {"question": i["question"], "ans": i["correct_answer"]} for i in question
+        {"question": html.unescape(i["question"]), "ans": i["correct_answer"]}
+        for i in question
     ]
 
     return questions
