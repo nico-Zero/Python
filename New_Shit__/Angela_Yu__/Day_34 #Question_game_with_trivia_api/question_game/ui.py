@@ -77,6 +77,8 @@ class QuizGameUi:
             self.score_label.configure(text=f"Score: {self.quiz.get_score()}")
         else:
             self.question_box.config(bg="red")
+        if self.quiz.error:
+            self.window.quit()
 
         self.window.after(1000, self.reset, self.quiz.question())
 
