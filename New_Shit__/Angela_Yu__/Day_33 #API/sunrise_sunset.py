@@ -9,8 +9,8 @@ parameter = {"lat": MY_LAT, "lng": MY_LNG, "formatted": 0}
 
 def vision(your_location, object_location):
     if (
-        object_location[0] - 5 < your_location[0] < object_location[0] + 5
-        and object_location[1] - 5 < your_location[1] < object_location[1] + 5
+        your_location[0] - 5 < object_location[0] < your_location[0] + 5
+        and your_location[1] - 5 < object_location[1] < your_location[1] + 5
     ):
         return True
     else:
