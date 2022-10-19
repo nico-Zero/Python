@@ -20,14 +20,11 @@ def get_question(amount):
     question = question.json()["results"]
 
     questions = [
-        {
-            "question": i["question"],
-            "ans": True if i["correct_answer"] == "True" else False,
-        }
-        for i in question
+        {"question": i["question"], "ans": i["correct_answer"]} for i in question
     ]
 
     return questions
+
 
 def reset(q_number):
     question_box.config(bg="white")
@@ -35,7 +32,7 @@ def reset(q_number):
 
 
 def question_motion(answer):
-    global question_number,score
+    global question_number, score
 
     if questions[question_number]["ans"] == answer:
         question_box.config(bg="green")
@@ -43,9 +40,10 @@ def question_motion(answer):
         score_label.configure(text=f"Score: {score}")
     else:
         question_box.config(bg="red")
-    
+
     question_number += 1
-    window.after(1000,reset,question_number)
+    window.after(1000, reset, question_number)
+
 
 questions = get_question(50)
 question_number = 0
@@ -97,7 +95,7 @@ right_button = customtkinter.CTkButton(
     highlightthickness=0,
     border=False,
     width=0,
-    command=lambda: question_motion(True)
+    command=lambda: question_motion("True"),
 )
 wrong_button = customtkinter.CTkButton(
     text="",
@@ -106,7 +104,7 @@ wrong_button = customtkinter.CTkButton(
     highlightthickness=0,
     border=False,
     width=0,
-    command=lambda: question_motion(False)
+    command=lambda: question_motion("False"),
 )
 
 # Griding
