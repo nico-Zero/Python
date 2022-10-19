@@ -1,11 +1,12 @@
 import customtkinter
 from tkinter import PhotoImage
+from quiz_brain import Brain
 
 BG_COLOR = "#212325"
 
 
 class QuizGameUi:
-    def __init__(self, brain):
+    def __init__(self, brain: Brain):
         self.quiz = brain
         self.window = customtkinter.CTk()
 
