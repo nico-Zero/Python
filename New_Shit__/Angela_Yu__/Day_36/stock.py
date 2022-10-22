@@ -27,7 +27,7 @@ stock_data = [
 is_up = "🔺" if (stock_data[0] - stock_data[1]) else "🔻"
 
 price = round(((stock_data[0] - stock_data[1]) * 100) / stock_data[0], 2)
-# price = round(((stock_data[0] - stock_data[1]) / 100) * stock_data[0], 2)
+
 
 print(stock_data)
 print(price)
