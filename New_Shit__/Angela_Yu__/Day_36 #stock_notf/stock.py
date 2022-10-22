@@ -16,7 +16,7 @@ stock_data = requests.get(stock_url, params=stock_parameters)
 
 stock_data = stock_data.json()
 
-with open("New_Shit__/Angela_Yu__/Day_36/stock_data.json", "w") as file:
+with open("New_Shit__/Angela_Yu__/Day_36 #stock_notf/stock_data.json", "w") as file:
     json.dump(stock_data, file, indent=4)
 
 stock_data = [
@@ -47,7 +47,7 @@ if price > 10 or price < -10:
 
     news_data = news_data.json()
 
-    with open("New_Shit__/Angela_Yu__/Day_36/news_data.json", "w") as file:
+    with open("New_Shit__/Angela_Yu__/Day_36 #stock_notf/news_data.json", "w") as file:
         json.dump(news_data, file, indent=4)
 
     news_data = news_data.get("articles")[0]
