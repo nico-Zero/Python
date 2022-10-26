@@ -16,9 +16,10 @@ with open("New_Shit__/Angela_Yu__/Day_39 #/data.json", "w") as file:
 
 filtered_data = DataManager(data).filtered_data
 
-# print(filtered_data)
-
-flight_search = FlightSearch(filtered_data[0]["iataCode"], "05/11/2022", "20/11/2022").result
+flight_search = [
+    FlightSearch("RPR", i["iataCode"], "05/11/2022", "5/11/2022").result
+    for i in filtered_data
+]
 
 print(flight_search)
 

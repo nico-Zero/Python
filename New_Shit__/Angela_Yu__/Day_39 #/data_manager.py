@@ -3,4 +3,3 @@ class DataManager:
     def __init__(self,data):
         self.filtered_data = list(data.values())[0]
     
-    pass

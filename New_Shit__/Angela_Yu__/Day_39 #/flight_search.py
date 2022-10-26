@@ -9,17 +9,19 @@ class FlightSearch:
     def __init__(
         self,
         fly_from,
+        fly_to,
         date_from,
         date_to,
-        fly_to=None,
         apikey="HCXPvXreO03zkkAEuK67L88jVGqA3mKP",
     ):
         self.header = {"apikey": apikey}
         self.parameters = {
             "fly_from": fly_from,
-            # "fly_to": fly_to,
+            "fly_to": fly_to,
             "date_from": date_from,
             "date_to": date_to,
+            "curr":"IDR",
+            "limit":1
         }
         self.result = get(url=URL, headers=self.header, params=self.parameters)
         self.result.raise_for_status()
