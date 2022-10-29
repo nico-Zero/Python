@@ -1,4 +1,9 @@
-a, b = 16, 8
-if not (a < b):
-    print("Hello")
-print(", world!")
+import pyautogui
+from time import sleep
+
+sleep(5)
+
+
+for _ in range(10):
+    pyautogui.write("hello world")
+    pyautogui.press("enter")
