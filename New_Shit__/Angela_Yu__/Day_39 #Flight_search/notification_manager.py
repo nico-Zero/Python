@@ -23,8 +23,8 @@ class NotificationManager:
                     from_="+12017206236",
                     to="+917247477955",
                 )
-                status.append(self.message.status)
+                status.append(str(self.message.status).capitalize() + " to " + city)
             else:
-                status.append("No Flight")
+                status.append("No Flight to " + city)
 
         return status
