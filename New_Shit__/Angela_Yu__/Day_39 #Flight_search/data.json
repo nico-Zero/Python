@@ -20,7 +20,7 @@
         },
         {
             "city": "Sydney",
-            "iataCode": "SYD",
+            "iataCode": "",
             "lowestPrice": 5510000,
             "id": 5
         },
@@ -44,7 +44,7 @@
         },
         {
             "city": "San Francisco",
-            "iataCode": "SFO",
+            "iataCode": "",
             "lowestPrice": 2600000,
             "id": 9
         },

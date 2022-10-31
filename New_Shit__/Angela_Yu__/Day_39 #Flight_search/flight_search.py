@@ -1,4 +1,3 @@
-from typing_extensions import Self
 from requests import get
 
 URL = "https://api.tequila.kiwi.com/v2/search"
