@@ -16,22 +16,33 @@ class Location:
             data.raise_for_status()
 
             formatted_data = {
+                "id": str(i["id"]),
                 "city": data.json().get("locations")[0].get("name"),
                 "code": data.json().get("locations")[0].get("code"),
             }
 
             self.iata.append(formatted_data)
 
-    def fix(self):
-        pass
+    def fix(self, api_url):
+        if self.iata:
+            print("Found missing data")
+            for i in self.iata:
+                print("Fixing row data id: ", i["id"])
+                parameters = {"sheet1": {"iataCode": i["code"]}}
 
+                x = put(
+                    url=api_url + "/" + i["id"],
+                    json=parameters,
+                )
+                x.raise_for_status()
+                print(i["id"], "Fixed")
 
-x = [
-    {"city": "Sydney", "iataCode": "", "lowestPrice": 5510000, "id": 5},
-    {"city": "San Francisco", "iataCode": "", "lowestPrice": 2600000, "id": 9},
-]
+            flight_data = get(url=api_url)
+            flight_data.raise_for_status()
+            flight_data = flight_data.json()
+            flight_data = list(flight_data.values())[0]
 
-oc = Location(x)
-
-with open("New_Shit__/Angela_Yu__/Day_39 #Flight_search/help.json", "w") as file:
-    dump(oc.iata, file, indent=4)
+            return flight_data
+        else:
+            print("No missing data")
+            return None

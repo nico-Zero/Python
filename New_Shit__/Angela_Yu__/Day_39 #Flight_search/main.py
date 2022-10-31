@@ -10,48 +10,49 @@ sheety_api = (
     "https://api.sheety.co/396fe2deb7f4f387c77a206b624a1c7e/flightPriceChecker/sheet1"
 )
 
-data = FlightData(sheety_api).flight_data
+##-------------------------------------------------------------------------------------------------- GATHERING DATA
 
+data = FlightData(sheety_api).flight_data
 
 with open("New_Shit__/Angela_Yu__/Day_39 #Flight_search/data.json", "w") as file:
     dump(data, file, indent=4)
+##---------------------------------------------------------------------------------------------------FILTERING DATA
+data_filter = DataManager(data)
 
-filtered_data = DataManager(data)
-rows = filtered_data.rows
-
+##---------------------------------------------------------------------------------------------------FINDING MISSING DATA AND FIXING IT
+rows = data_filter.rows
 missing_data = Location(rows)
 
 with open("New_Shit__/Angela_Yu__/Day_39 #Flight_search/help.json", "w") as file:
     dump(missing_data.iata, file, indent=4)
+filtered_data = missing_data.fix(sheety_api) or data_filter.filtered_data
 
+##--------------------------------------------------------------------------------------------------SEARCHING FLIGHTS
+flight_min_price = {i["city"]: i["lowestPrice"] for i in filtered_data}
 
-# flight_min_price = {i["city"]: i["lowestPrice"] for i in filtered_data.filtered_data}
-#
-# flight_search = [
-# FlightSearch("RPR", i["iataCode"], "05/11/2022", "5/11/2022").result
-# for i in filtered_data.filtered_data
-# ]
-#
-# with open("New_Shit__/Angela_Yu__/Day_39 #Flight_search/flight_data.json", "w") as file:
-# dump(flight_search, file, indent=4)
-#
-#
-# filtered_flight_search_data = {
-# i["data"][0]["cityTo"]: {
-# "cityFrom": i["data"][0]["cityFrom"],
-# "cityTo": i["data"][0]["cityTo"],
-# "countryFrom": i["data"][0]["countryFrom"]["name"],
-# "countryTo": i["data"][0]["countryTo"]["name"],
-# "price": i["data"][0]["price"],
-# }
-# for i in flight_search
-# }
-#
-# final_data = filtered_data.ok_price(filtered_flight_search_data)
-#
-# print(final_data)
-#
-# notification = NotificationManager()
-# message_status = notification.send_message(final_data)
-#
-# print(message_status)
+flight_search = [
+    FlightSearch("RPR", i["iataCode"], "05/11/2022", "5/11/2022").result
+    for i in filtered_data
+]
+
+with open("New_Shit__/Angela_Yu__/Day_39 #Flight_search/flight_data.json", "w") as file:
+    dump(flight_search, file, indent=4)
+
+filtered_flight_searched_data = {
+    i.get("data")[0]["cityTo"]: {
+        "cityFrom": i.get("data")[0]["cityFrom"],
+        "cityTo": i.get("data")[0]["cityTo"],
+        "countryFrom": i.get("data")[0]["countryFrom"]["name"],
+        "countryTo": i.get("data")[0]["countryTo"]["name"],
+        "price": i.get("data")[0]["price"],
+    }
+    for i in flight_search
+}
+
+final_data = data_filter.ok_price(filtered_flight_searched_data)
+
+# ---------------------------------------------------------------------------------------------------SENDING NOTIFICATIONS
+notification = NotificationManager()
+message_status = notification.send_message(final_data)
+
+print(*message_status, sep="\n")
