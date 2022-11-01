@@ -14,7 +14,7 @@ sheety_api = (
 
 data = FlightData(sheety_api).flight_data
 
-with open("New_Shit__/Angela_Yu__/Day_39 #Flight_search/data.json", "w") as file:
+with open("data.json", "w") as file:
     dump(data, file, indent=4)
 ##---------------------------------------------------------------------------------------------------FILTERING DATA
 data_filter = DataManager(data)
@@ -23,7 +23,7 @@ data_filter = DataManager(data)
 rows = data_filter.rows
 missing_data = Location(rows)
 
-with open("New_Shit__/Angela_Yu__/Day_39 #Flight_search/help.json", "w") as file:
+with open("help.json", "w") as file:
     dump(missing_data.iata, file, indent=4)
 filtered_data = missing_data.fix(sheety_api) or data_filter.filtered_data
 
@@ -35,7 +35,7 @@ flight_search = [
     for i in filtered_data
 ]
 
-with open("New_Shit__/Angela_Yu__/Day_39 #Flight_search/flight_data.json", "w") as file:
+with open("flight_data.json", "w") as file:
     dump(flight_search, file, indent=4)
 
 filtered_flight_searched_data = {
