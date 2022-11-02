@@ -1,1 +1,42 @@
-[]
+[
+    {
+        "id": "3",
+        "city": "Berlin",
+        "code": "BER"
+    },
+    {
+        "id": "4",
+        "city": "Tokyo",
+        "code": "TYO"
+    },
+    {
+        "id": "5",
+        "city": "Sydney",
+        "code": "SYD"
+    },
+    {
+        "id": "6",
+        "city": "Istanbul",
+        "code": "IST"
+    },
+    {
+        "id": "7",
+        "city": "Kuala Lumpur",
+        "code": "KUL"
+    },
+    {
+        "id": "8",
+        "city": "New York",
+        "code": "NYC"
+    },
+    {
+        "id": "9",
+        "city": "San Francisco",
+        "code": "SFO"
+    },
+    {
+        "id": "10",
+        "city": "Cape Town",
+        "code": "CPT"
+    }
+]
