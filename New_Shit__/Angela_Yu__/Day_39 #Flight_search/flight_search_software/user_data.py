@@ -21,20 +21,29 @@ class User:
         self.the_data = get(url=self.data_url)
         self.the_data.raise_for_status()
         self.the_data = self.the_data.json().get("sheet1")
+        self.first_names = [i["firstName"] for i in self.the_data]
 
         with open("user_data.json", "w") as file:
             dump(self.the_data, file, indent=4)
 
         # ----------------------------------------------------------------------------------------UPLOADING USER DATA'S
-        parameters = {
-            "sheet1": {
-                "firstName": self.user_first_name,
-                "lastName": self.user_last_name,
-                "userId": self.user_password,
+        # ----------------------------------------------------------WRITING NEW USER DATA
+        if self.user_first_name not in self.first_names:
+            parameters = {
+                "sheet1": {
+                    "firstName": self.user_first_name,
+                    "lastName": self.user_last_name,
+                    "userId": self.user_password,
+                }
             }
-        }
+            self.outgoing_data = post(url=self.data_url, json=parameters)
 
-        self.outgoing_data = post(url=self.data_url, json=parameters)
+            # ---------------------------------------------------------GETTING UPDATED USER DATA
+            self.the_data = get(url=self.data_url)
+            self.the_data.raise_for_status()
+            self.the_data = self.the_data.json().get("sheet1")
+            with open("user_data.json", "w") as file:
+                dump(self.the_data, file, indent=4)
 
 
 x = User(first_name="nova", last_name="zero", password="nicozero")
