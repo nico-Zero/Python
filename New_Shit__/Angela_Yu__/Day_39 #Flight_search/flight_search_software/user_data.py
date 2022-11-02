@@ -14,7 +14,6 @@ class User:
         self.user_first_name = first_name or input("What is your First name:- ")
         self.user_last_name = last_name or input("What is your Last name:- ")
         self.user_password = password or input("What is your Password:- ")
-        # self.user_data = input("Enter your data:- ")
         self.data_url = on_data
 
         # ----------------------------------------------------------------------------------------GETTING USER DATA'S
@@ -33,7 +32,7 @@ class User:
                 "sheet1": {
                     "firstName": self.user_first_name,
                     "lastName": self.user_last_name,
-                    "userId": self.user_password,
+                    "password": self.user_password,
                 }
             }
             self.outgoing_data = post(url=self.data_url, json=parameters)

@@ -2,7 +2,13 @@
     {
         "firstName": "yuvraj",
         "lastName": "mahilange",
-        "userId": "nico_zero69",
+        "password": "nico_zero69",
         "id": 2
+    },
+    {
+        "firstName": "nova",
+        "lastName": "zero",
+        "password": "nicozero",
+        "id": 3
     }
 ]
