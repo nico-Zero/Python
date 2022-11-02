@@ -26,18 +26,17 @@ class User:
             dump(self.the_data, file, indent=4)
 
         # ----------------------------------------------------------------------------------------UPLOADING USER DATA'S
-
         parameters = {
             "sheet1": {
-                "firstname": self.user_first_name,
-                "lastname": self.user_last_name,
-                "userid": self.user_password,
+                "firstName": self.user_first_name,
+                "lastName": self.user_last_name,
+                "userId": self.user_password,
             }
         }
 
         self.outgoing_data = post(url=self.data_url, json=parameters)
 
 
-x = User(first_name="zanda", last_name="nova", password="fuck")
+x = User(first_name="nova", last_name="zero", password="nicozero")
 
 print(x.the_data)
