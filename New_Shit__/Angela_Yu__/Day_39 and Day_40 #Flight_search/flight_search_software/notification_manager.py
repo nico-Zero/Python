@@ -28,3 +28,11 @@ class NotificationManager:
                 status.append("No Flight to " + city)
 
         return status
+
+    def otp(self, message, to):
+        self.message = self.client.messages.create(
+            body=message,
+            from_="+12017206236",
+            to="+91" + str(to),
+        )
+        return self.message.status
