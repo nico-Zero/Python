@@ -5,16 +5,8 @@ from json import dump
 class User:
     def __init__(
         self,
-        first_name=None,
-        last_name=None,
-        password=None,
         on_data="https://api.sheety.co/396fe2deb7f4f387c77a206b624a1c7e/userData/sheet1",
     ):
-
-        self.user_first_name = first_name or input("What is your First name:- ")
-        self.user_last_name = last_name or input("What is your Last name:- ")
-        self.user_password = password or input("What is your Password:- ")
-        self.data_url = on_data
 
         # ----------------------------------------------------------------------------------------GETTING USER DATA'S
         self.the_data = get(url=self.data_url)
@@ -24,6 +16,23 @@ class User:
 
         with open("user_data.json", "w") as file:
             dump(self.the_data, file, indent=4)
+
+        while 1:
+            self.user_first_name = input("What is your First name:- ")
+            if self.user_first_name in self.first_names:
+                print("This name is already in database !")
+                continue
+            else:
+                break
+        self.user_last_name = input("What is your Last name:- ")
+        while 1:
+            self.user_password = input("What is your Password:- ")
+            check = input("Enter your password again:- ")
+            if self.user_password == check:
+                break
+            else:
+                continue
+        self.data_url = on_data
 
         # ----------------------------------------------------------------------------------------UPLOADING USER DATA'S
         # ----------------------------------------------------------WRITING NEW USER DATA
@@ -45,6 +54,6 @@ class User:
                 dump(self.the_data, file, indent=4)
 
 
-x = User(first_name="nova", last_name="zero", password="nicozero")
+x = User()
 
 print(x.the_data)
