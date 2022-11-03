@@ -1,1 +1,6 @@
-print(input("Enter a number:- "))
+"""
+Hello World
+"""
+
+print(input("Enter your name:- "))
+print("Hello world!")
