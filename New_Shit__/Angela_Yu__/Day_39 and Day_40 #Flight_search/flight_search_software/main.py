@@ -31,7 +31,7 @@ filtered_data = missing_data.fix(sheety_api) or data_filter.filtered_data
 flight_min_price = {i["city"]: i["lowestPrice"] for i in filtered_data}
 
 flight_search = [
-    FlightSearch("RPR", i["iataCode"], "05/11/2022", "5/11/2022").result
+    FlightSearch("RPR", i["iataCode"], "05/11/2022", "05/11/2022").result
     for i in filtered_data
 ]
 
