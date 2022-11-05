@@ -1,5 +1,5 @@
 body {
-    background-color: #b9e0ff;
+    background-color: #c8e3f9;
 }
 hr {
     /* background-color: white; */
@@ -7,8 +7,14 @@ hr {
     border-width: 7px;
     border-style: none;
     border-top-style: dotted;
-    width: 30%;
+    width: 10%;
 }
 img {
     height: 200px;
+}
+h1 {
+    color: rgb(0, 120, 161);
+}
+h3 {
+    color: rgb(0, 152, 202);
 }
