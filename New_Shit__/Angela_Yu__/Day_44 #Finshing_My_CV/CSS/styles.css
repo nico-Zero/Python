@@ -33,12 +33,15 @@ h4 {
 }
 .cloud-1 {
     position: relative;
+    top: 0;
     left: 30%;
+    height: 200px;
 }
 .cloud-2 {
     position: absolute;
-    top: 15%;
+    top: 30%;
     left: 20%;
+    height: 150px;
 }
 
 .mountain {
