@@ -5,11 +5,6 @@ body {
 
 h1 {
     margin: 0;
-    position: relative;
-    margin: auto;
-}
-p {
-    position: relative;
 }
 
 .profile_image {
@@ -18,7 +13,19 @@ p {
     top: 0;
     left: 0;
 }
+.cloud-1 {
+    position: relative;
+    left: 30%;
+}
+.cloud-2 {
+    position: absolute;
+    top: 15%;
+    left: 20%;
+}
 
+.mountain {
+    height: 500px;
+}
 .top-container {
     background-color: #b5a7a7;
 }
