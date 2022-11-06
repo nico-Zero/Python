@@ -25,6 +25,9 @@ h4 {
     top: 0;
     right: 0;
 }
+.profile_img-2 {
+    height: 200px;
+}
 .data {
     text-decoration: underline;
 }
