@@ -12,7 +12,6 @@ h1 {
 
 .top-container {
     background-color: #b5a7a7;
-
 }
 .middle-container {
     background-color: red;
@@ -25,4 +24,7 @@ h1 {
     width: 200px;
     height: 200px;
     border: 10px;
+}
+.data {
+    text-decoration: underline;
 }
