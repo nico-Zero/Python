@@ -15,7 +15,7 @@ h2 {
 h3 {
     font-family: "Montserrat", sans-serif;
 }
-p {
+h4 {
     font-family: "Montserrat", sans-serif;
 }
 
@@ -23,7 +23,10 @@ p {
     height: 80px;
     position: fixed;
     top: 0;
-    left: 0;
+    right: 0;
+}
+.data {
+    text-decoration: underline;
 }
 .cloud-1 {
     position: relative;
@@ -38,25 +41,10 @@ p {
 .mountain {
     height: 500px;
 }
-.top-container {
-    background-color: #7ac5f000;
+.chilli-img {
+    height: 150px;
 }
-.middle-container {
-    background-color: red;
-    width: 200px;
-    height: 200px;
-}
-.bottom-container {
-    background-color: blue;
-    width: 200px;
-    height: 200px;
-}
-.last-container {
-    background-color: yellow;
-    width: 200px;
-    height: 200px;
-}
-
-.data {
-    text-decoration: underline;
+.computer-img {
+    height: 150px;
+    border-radius: 100%;
 }
