@@ -1,19 +1,22 @@
 body {
     margin: 0;
+    text-align: center;
 }
 
 h1 {
     margin: 0;
     position: relative;
-    left: 40%;
+    margin: auto;
 }
 p {
     position: relative;
-    left: 45%;
 }
 
 .profile_image {
     height: 80px;
+    position: fixed;
+    top: 0;
+    left: 0;
 }
 
 .top-container {
