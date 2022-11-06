@@ -4,6 +4,12 @@ body {
 
 h1 {
     margin: 0;
+    position: relative;
+    left: 40%;
+}
+p {
+    position: relative;
+    left: 45%;
 }
 
 .profile_image {
@@ -17,14 +23,18 @@ h1 {
     background-color: red;
     width: 200px;
     height: 200px;
-    border: 20px;
 }
 .bottom-container {
     background-color: blue;
     width: 200px;
     height: 200px;
-    border: 10px;
 }
+.last-container {
+    background-color: yellow;
+    width: 200px;
+    height: 200px;
+}
+
 .data {
     text-decoration: underline;
 }
