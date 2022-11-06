@@ -1,0 +1,28 @@
+body {
+    margin: 0;
+}
+
+h1 {
+    margin: 0;
+}
+
+.profile_image {
+    height: 80px;
+}
+
+.top-container {
+    background-color: #b5a7a7;
+
+}
+.middle-container {
+    background-color: red;
+    width: 200px;
+    height: 200px;
+    border: 20px;
+}
+.bottom-container {
+    background-color: blue;
+    width: 200px;
+    height: 200px;
+    border: 10px;
+}
