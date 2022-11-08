@@ -16,9 +16,18 @@ all_a = [tag.select_one("a") for tag in soup.find_all(name="span", class_="title
 all_span = soup.find_all(name="span", class_="score")
 news = [tag.getText() for tag in all_a]
 url = [tag.get("href") for tag in all_a]
-upvote = [tag.getText() for tag in all_span]
+upvote = [int(number.split(" ")[0]) for number in [tag.getText() for tag in all_span]]
 
 
+def show_all_news():
+    for i, j in zip(upvote, news):
+        print(j, ":- ", i)
 
-print(*news, sep="\n")
-print(*upvote, sep="\n")
+
+def highest_upvote():
+    h_up = max(upvote)
+    h_up_index = upvote.index(h_up)
+    print(news[h_up_index], ":- ", h_up, "\nThe URL :- ", url[h_up_index])
+
+
+highest_upvote()
