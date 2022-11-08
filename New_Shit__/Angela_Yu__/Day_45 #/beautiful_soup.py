@@ -12,5 +12,12 @@ soup = BeautifulSoup(contents, "html.parser")
 # print(soup.title.name)
 # print(soup.title.string)
 # print(soup.prettify())
-print(soup.a)
-print(soup.a.string)
+# print(soup.p)
+
+all_a = soup.find_all(name="a")
+print(all_a)
+for tag in all_a:
+    print(tag.getText(), ":- ", tag.get("href"))
+
+# url = soup.select_one(selector="table p a")
+# print(url)
