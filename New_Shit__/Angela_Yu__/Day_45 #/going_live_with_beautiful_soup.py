@@ -12,11 +12,17 @@ with open("web_site.html", "w") as f:
 
 soup = BeautifulSoup(web_site_data, "html.parser")
 
-all_tr = soup.find_all(name="tr", class_="athing")
-all_span = [tag.find(name="span", class_="titleline") for tag in all_tr]
+all_span = soup.find_all(name="span", class_="titleline")
 all_a = [tag.select_one("a") for tag in all_span]
+string = [tag.string for tag in all_a]
 href = [tag.get("href") for tag in all_a]
 
-print(len(all_a))
-print(*all_a, sep="\n")
-print(href)
+print(len(string))
+# print(*string, sep="\n")
+
+all_span = soup.find_all(name="span", class_="score")
+scores = [tag.string for tag in all_span]
+
+print(len(scores))
+# print(*scores, sep="\n")
+
