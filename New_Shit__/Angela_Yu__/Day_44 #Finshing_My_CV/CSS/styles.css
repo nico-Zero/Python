@@ -5,20 +5,23 @@ body {
     background-image: linear-gradient(#8ed4fcce, #7ac5f000);
 }
 
-h1 {
+.name {
     font-size: 5.625rem;
     margin: 0;
     font-family: "Sacramento", cursive;
+    color: #23acfc;
 }
 h2 {
     font-size: 2rem;
     font-family: "Montserrat", sans-serif;
+    font-weight: normal;
+    color: #00a2ff;
+    margin: 0;
 }
 h3 {
     font-family: "Montserrat", sans-serif;
 }
 .i_m {
-    margin: 0;
 }
 .profile_image {
     height: 80px;
@@ -48,10 +51,15 @@ h3 {
 .mountain {
     height: 500px;
 }
-.chilli-img {
-    height: 150px;
-}
 .computer-img {
-    height: 150px;
-    border-radius: 100%;
+    height: 50%;
+    width: 50%;
+}
+.cube-img {
+    height: 50%;
+    width: 50%;
+}
+.skill-row {
+    width: 50%;
+    margin: 100px auto 100px auto;
 }
