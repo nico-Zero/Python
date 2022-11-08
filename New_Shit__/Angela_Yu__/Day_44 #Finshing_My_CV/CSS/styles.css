@@ -113,7 +113,7 @@ hr {
 
 .bottom-container {
     background-color: #8100a1;
-    padding: 30px 0 20px;
+    padding: 30px 0 1px;
 }
 .footer-link {
     color: #330240;
@@ -125,6 +125,8 @@ hr {
     color: #000000;
 }
 .copy-right {
-    color: #330240;
-    margin: 30px auto 0;
+    color: #000000;
+    font-family: "Montserrat", sans-serif;
+    font-size: 0.8rem;
+    padding: 20px 0;
 }
