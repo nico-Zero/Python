@@ -15,7 +15,8 @@ soup = BeautifulSoup(web_site_data, "html.parser")
 all_tr = soup.find_all(name="tr", class_="athing")
 all_span = [tag.find(name="span", class_="titleline") for tag in all_tr]
 all_a = [tag.select_one("a") for tag in all_span]
-
+href = [tag.get("href") for tag in all_a]
 
 print(len(all_a))
 print(*all_a, sep="\n")
+print(href)
