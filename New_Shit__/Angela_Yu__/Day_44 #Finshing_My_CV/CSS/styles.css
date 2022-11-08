@@ -1,36 +1,50 @@
 body {
     margin: 0;
+    color: #40514e;
     text-align: center;
     font-family: "Merriweather", serif;
-    background-image: linear-gradient(#8ed4fcce, #7ac5f000);
+    background-image: linear-gradient(#8ed4fcce, #ffffff00);
 }
 
 .name {
     font-size: 5.625rem;
     margin: 0;
     font-family: "Sacramento", cursive;
-    color: #23acfc;
+    color: #cc00ff8d;
 }
 h2 {
+    color: #8100a1;
     font-size: 2rem;
     font-family: "Montserrat", sans-serif;
     font-weight: normal;
-    color: #00a2ff;
-    margin: 0;
 }
 h3 {
+    color: #8100a18d;
     font-family: "Montserrat", sans-serif;
 }
+
+hr {
+    border-color: #d2d2d2;
+    border-width: 10px;
+    border-style: none;
+    border-top-style: dotted;
+    width: 8rem;
+    margin: 50px auto 50px auto;
+}
+
 .i_m {
+    margin: 0;
 }
 .profile_image {
     height: 80px;
     position: fixed;
     top: 0;
     right: 0;
+    border-radius: 100%;
 }
 .profile_img-2 {
     height: 200px;
+    border-radius: 100%;
 }
 .data {
     text-decoration: underline;
@@ -52,14 +66,16 @@ h3 {
     height: 500px;
 }
 .computer-img {
-    height: 50%;
-    width: 50%;
+    width: 25%;
+    float: left;
 }
 .cube-img {
-    height: 50%;
-    width: 50%;
+    width: 25%;
+    float: right;
 }
-.skill-row {
-    width: 50%;
-    margin: 100px auto 100px auto;
+.skill-rows {
+    width: 40%;
+    margin: 50px auto 80px auto;
+    text-align: left;
+    line-height: 2;
 }
