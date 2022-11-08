@@ -6,19 +6,20 @@ body {
 }
 
 h1 {
+    font-size: 5.625rem;
     margin: 0;
     font-family: "Sacramento", cursive;
 }
 h2 {
+    font-size: 2rem;
     font-family: "Montserrat", sans-serif;
 }
 h3 {
     font-family: "Montserrat", sans-serif;
 }
-h4 {
-    font-family: "Montserrat", sans-serif;
+.i_m {
+    margin: 0;
 }
-
 .profile_image {
     height: 80px;
     position: fixed;
@@ -40,7 +41,7 @@ h4 {
 .cloud-2 {
     position: absolute;
     top: 30%;
-    left: 20%;
+    left: 18%;
     height: 150px;
 }
 
