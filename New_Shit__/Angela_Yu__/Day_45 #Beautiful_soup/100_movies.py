@@ -20,15 +20,19 @@ with open("100_html_data1.html", "w") as f:
 print("div")
 
 
-a = [tag.find_all(name="a", target="_self") for tag in div]
+a = [tag.find_all(name="a") for tag in div]
 all_a_string = []
 for i in a:
     [all_a_string.append(x.getText()) for x in i]
 
 movie_names = [
-    i.split(" review of ")[1]
-    for i in all_a_string
-    if i.count("Read Empire's review of")
+    i.split("review of ")[1] for i in all_a_string if i.count("Read Empire's review of")
 ]
 
-print(movie_names)
+list_of_movies = [
+    str(i[0]) + ". " + i[1] for i in enumerate(reversed(movie_names), start=1)
+]
+with open("100_movies_list.txt", "w") as file:
+    file.write(reduce(lambda x, y: x + "\n" + y, list_of_movies))
+
+print(*list_of_movies, sep="\n")
