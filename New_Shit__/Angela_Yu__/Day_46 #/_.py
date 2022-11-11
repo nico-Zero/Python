@@ -23,5 +23,11 @@ li = soup.find_all(name="li", class_=clas)
 with open("music.html", "w") as file:
     file.write(reduce(lambda x, y: str(x) + str(y), li))
 
-print(len(li))
-print(li)
+song_names = [
+    tag.select(selector="ul li h3")
+    for tag in li
+    if len(tag.select(selector="ul li h3")) != 0
+]
+
+print(len(song_names))
+print(song_names)
