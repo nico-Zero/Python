@@ -55,7 +55,6 @@ song_names = [
 
 print(*song_names, sep="\n")
 
-UID = "31h3swt2qxb4gnrht4euow47rha4"
 sp = spotipy.Spotify(
     auth_manager=SpotifyOAuth(
         scope="playlist-modify-private",
@@ -65,14 +64,14 @@ sp = spotipy.Spotify(
         cache_path="token.txt",
     )
 )
-user_id = sp.current_user()
+user_id = sp.current_user()["id"]
 
 year = date.split("-")[0]
 data_list = []
 for name in filtered_song_names:
     try:
         data = sp.search(q=f"track:{name} year:{year}", type="track")
-        data_list.append(data["tracks"]["items"][0])
+        data_list.append([data["tracks"]["items"][0]])
         print(name, "Done...")
     except Exception:
         continue
@@ -82,3 +81,6 @@ with open("song-data.json", "w") as f:
 
 user_data = sp.user(user_id)
 print(user_data)
+
+user_playlists = sp.user_playlists(user_id)
+print(user_playlists)
