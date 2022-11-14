@@ -6,14 +6,17 @@ from kivy.uix.boxlayout import BoxLayout
 from kivy.uix.anchorlayout import AnchorLayout
 from kivy.uix.gridlayout import GridLayout
 from kivy.uix.stacklayout import StackLayout
+from kivy.properties import StringProperty
 
 
 class WidgetsExample(GridLayout):
-    def __init__(self, **kwargs):
-        super().__init__(**kwargs)
+    hello = StringProperty("Hello!")
+    click_count = 0
 
-    def on_button_click(self, number):
-        print("Button clicked", number)
+    def on_button_click(self):
+        self.click_count += 1
+        print(f"Button clicked for {self.click_count} time")
+        self.hello = f"Clicked {self.click_count}"
 
 
 class MyApp(App):
