@@ -6,8 +6,8 @@ from kivy.uix.button import Button
 from kivy.uix.widget import Widget
 
 
-class GridLayoutExample(GridLayout):
-    pass
+# class GridLayoutExample(GridLayout):
+#     pass
 
 
 class AnchorLayoutExample(AnchorLayout):
