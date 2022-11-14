@@ -1,30 +1,53 @@
 #:kivy 2.1.0
 
-BoxLayoutExample:
-<BoxLayoutExample>:
-    orientation: "vertical"
-    Button:
-        text:"A"
-        size_hint: .8, .9
-    Button:
-        text:"A"
-        size_hint: .8, .9
-    Button:
-        text:"A"
-        size_hint: .8, .9
-    Button:
-        text:"A"
-        size_hint: .8, .9
-        
+AnchorLayoutExample:
 
-# MainWidget:
-# <MainWidget>:
-#     Button:
-#         text: "Hello"
-#         size: "100dp", "100dp"    
-#         pos: "50dp", "40dp"
-#     Label:
-#         text: "Hello2"
-#         size: "100dp", "100dp"    
-#         pos: "100dp", "80dp"
-#         color: 0,74,162,32
+
+<AnchorLayoutExample>:
+    # right, left, center
+    anchor_x: 'center'
+    # bottom, top, center
+    anchor_y: 'top'
+    BoxLayout:
+        size_hint: .5, .5
+        Button:
+            text:'A'
+        Button:
+            text:'B'
+
+<BoxLayoutExample>:
+    orientation: "horizontal"
+    Button:
+        text:"A"
+        size_hint: .5, .5
+        # height: "100dp"
+
+        # x, center_x ,right
+        # y, center_y ,top
+        pos_hint: {"top":1}
+
+    BoxLayout:
+        orientation: "vertical"
+        spacing: "20dp"
+        Button:
+            text:"A"
+
+        Button:
+            text:"B"
+
+        Button:
+            text:"C"
+
+    Label:
+        text:"C"
+
+<MainWidget>:
+    Button:
+        text: "Hello"
+        size: "100dp", "100dp"    
+        pos: "50dp", "40dp"
+    Label:
+        text: "Hello2"
+        size: "100dp", "100dp"    
+        pos: "100dp", "80dp"
+        color: 0,74,162,32
