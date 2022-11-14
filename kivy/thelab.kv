@@ -1,17 +1,20 @@
 #:kivy 2.1.0
 
-StackLayoutExample:
+ScrollViewExample:
+
+<ScrollViewExample@ScrollView>:
+    StackLayoutExample:
+        size_hint:1,None
+        height: self.minimum_height
+
 
 <StackLayoutExample>:
-    Button:
-        text:'A'
-        size_hint: .2,.2
-    Button:
-        text:'B'
-        size_hint: .2,.2
-    Button:
-        text:'C'
-        size_hint: .2,.2
+#    #left-right = lr, right-left = rl, top-bottom = tb, bottom-top = bt
+#    orientation:"lr-tb"
+#
+#    #left - - -
+#    padding: ('20dp', '20dp', '20dp', '20dp')
+#    spacing: "5dp", "10dp"
 
 <GridLayoutExample@GridLayout>:
     cols: 3
