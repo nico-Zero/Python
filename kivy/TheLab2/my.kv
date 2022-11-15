@@ -5,6 +5,7 @@ WidgetsExample:
 <WidgetsExample>:
     cols:3
     ToggleButton:
+        id : my_toggle
         text: "OFF"
         on_state: root.change_state(self)
         size_hint: None,1
@@ -12,19 +13,25 @@ WidgetsExample:
     Button:
         text:"Click Here"
         on_press: root.on_button_click()
-        disabled: not root.button_state
+        disabled: (False if my_toggle.state == "down" else True)
     Label:
         text: root.display
         font_name: 'fonts/Lcd.ttf'
         font_size: "100dp"
         color: 1 , .5 , 1 , 1
     Switch:
+        id: my_switch
         size_hint: None,1
         width: "100dp"
         on_active: root.change_way(self)
     Slider:
+        id:my_slider
         min:0
         max:100
         value:50
-        on_value: root.update_value(self)
-        disabled: not root.slider_state
+        disabled: not my_switch.active
+    Label:
+        text: str(round(my_slider.value))
+        font_name: 'fonts/Lcd.ttf'
+        font_size: "100dp"
+        color: 1 , .5 , 1 , 1
