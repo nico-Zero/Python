@@ -16,7 +16,7 @@ class WidgetsExample(GridLayout):
     def on_button_click(self):
         self.click_count += 1
         print(f"Button clicked for {self.click_count} time")
-        self.hello = f"Clicked {self.click_count}"
+        self.hello = str(self.click_count)
 
 
 class MyApp(App):
