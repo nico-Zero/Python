@@ -11,12 +11,20 @@ from kivy.properties import StringProperty
 
 class WidgetsExample(GridLayout):
     hello = StringProperty("Hello!")
+    count_state = 1
     click_count = 0
 
     def on_button_click(self):
-        self.click_count += 1
+        if self.count_state > 0:
+            self.click_count += 1
+        else:
+            self.click_count -= 1
         print(f"Button clicked for {self.click_count} time")
         self.hello = str(self.click_count)
+
+    def change_state(self, widget):
+        print("Button State:- ", widget.state)
+        self.count_state *= -1
 
 
 class MyApp(App):

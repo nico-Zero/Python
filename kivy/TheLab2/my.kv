@@ -4,6 +4,9 @@ WidgetsExample:
 
 <WidgetsExample>:
     cols:3
+    ToggleButton:
+        text:'A'
+        on_state: root.change_state(self)
     Button:
         text:"Click Here"
         on_press: root.on_button_click()
@@ -11,4 +14,4 @@ WidgetsExample:
         text: root.hello
         font_name: 'fonts/Lcd.ttf'
         font_size: "100dp"
-        color: 1 , 0 , 1 , 1
+        color: 1 , .5 , 1 , 1
