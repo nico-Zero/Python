@@ -6,25 +6,31 @@ from kivy.uix.boxlayout import BoxLayout
 from kivy.uix.anchorlayout import AnchorLayout
 from kivy.uix.gridlayout import GridLayout
 from kivy.uix.stacklayout import StackLayout
-from kivy.properties import StringProperty
+from kivy.properties import StringProperty, BooleanProperty
 
 
 class WidgetsExample(GridLayout):
     hello = StringProperty("Hello!")
-    count_state = 1
+    state = BooleanProperty(True)
     click_count = 0
+    number_x = 1
 
     def on_button_click(self):
-        if self.count_state > 0:
-            self.click_count += 1
-        else:
-            self.click_count -= 1
+        self.click_count += self.number_x
         print(f"Button clicked for {self.click_count} time")
         self.hello = str(self.click_count)
 
     def change_state(self, widget):
         print("Button State:- ", widget.state)
-        self.count_state *= -1
+        if self.state:
+            self.state = False
+            widget.text = "ON"
+        else:
+            self.state = True
+            widget.text = "OFF"
+
+    def change_way(self):
+        self.number_x *= -1
 
 
 class MyApp(App):

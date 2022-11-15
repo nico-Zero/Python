@@ -5,13 +5,20 @@ WidgetsExample:
 <WidgetsExample>:
     cols:3
     ToggleButton:
-        text:'A'
+        text: "OFF"
         on_state: root.change_state(self)
+        size_hint: None,1
+        width: "100dp"
     Button:
         text:"Click Here"
         on_press: root.on_button_click()
+        disabled: root.state
     Label:
         text: root.hello
         font_name: 'fonts/Lcd.ttf'
         font_size: "100dp"
         color: 1 , .5 , 1 , 1
+    Switch:
+        size_hint: None,1
+        width: "100dp"
+        on_active: root.change_way()
