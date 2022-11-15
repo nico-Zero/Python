@@ -12,13 +12,19 @@ WidgetsExample:
     Button:
         text:"Click Here"
         on_press: root.on_button_click()
-        disabled: root.state
+        disabled: not root.button_state
     Label:
-        text: root.hello
+        text: root.display
         font_name: 'fonts/Lcd.ttf'
         font_size: "100dp"
         color: 1 , .5 , 1 , 1
     Switch:
         size_hint: None,1
         width: "100dp"
-        on_active: root.change_way()
+        on_active: root.change_way(self)
+    Slider:
+        min:0
+        max:100
+        value:50
+        on_value: root.update_value(self)
+        disabled: not root.slider_state
