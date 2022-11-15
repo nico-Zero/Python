@@ -30,8 +30,21 @@ WidgetsExample:
         max:100
         value:50
         disabled: not my_switch.active
+    BoxLayout:
+        orientation:'vertical'
+        Label:
+            text: str(round(my_slider.value))
+            font_name: 'fonts/Lcd.ttf'
+            font_size: "100dp"
+            color: 1 , .5 , 1 , 1
+        ProgressBar:
+            max:100
+            value:my_slider.value
+    TextInput:
+        id:my_text_input
+        size_hint: None,1
+        width: "100dp"
+        multiline: False
+        on_text_validate: root.on_text_validate(self)
     Label:
-        text: str(round(my_slider.value))
-        font_name: 'fonts/Lcd.ttf'
-        font_size: "100dp"
-        color: 1 , .5 , 1 , 1
+        text:root.text_input

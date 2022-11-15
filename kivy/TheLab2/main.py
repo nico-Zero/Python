@@ -7,6 +7,7 @@ class WidgetsExample(GridLayout):
     number_x = 1
     click_count = 0
     display = StringProperty(str(click_count))
+    text_input = StringProperty()
 
     def on_button_click(self):
         self.click_count += self.number_x
@@ -22,6 +23,9 @@ class WidgetsExample(GridLayout):
 
     def change_way(self, widget):
         print("Switch:- ", widget.active)
+
+    def on_text_validate(self, widget):
+        self.text_input = widget.text
 
 
 class MyApp(App):
