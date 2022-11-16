@@ -1,7 +1,22 @@
 #:kivy 2.1.0
 
-WidgetsExample:
+ImageExample:
 
+
+
+<ImageExample@GridLayout>:
+    cols:3
+    Image:
+        source:"mini_devil.png"
+    Image:
+        source:"mini_devil.png"
+        allow_stretch:True
+    Image:
+        source:"mini_devil.png"
+        allow_stretch:True
+        keep_ratio: False
+        
+        
 <WidgetsExample>:
     cols:3
     ToggleButton:

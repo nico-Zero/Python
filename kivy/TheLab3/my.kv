@@ -1,0 +1,18 @@
+#:kivy 2.1.0
+
+#:set s 200
+
+
+CanvasExample1:
+
+
+<CanvasExample1>:
+    canvas:
+        Rectangle:
+            pos: self.center_x - s/2,self.center_y - s/2
+            size: dp(s),dp(s)
+        Ellipse:
+            pos: dp(10),dp(30)
+            size: dp(s/2),dp(s/3) 
+        Line:
+            points:(30,40, 300, 400)
