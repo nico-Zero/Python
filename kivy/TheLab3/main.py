@@ -1,11 +1,11 @@
 from kivy.app import App
 from kivy.uix.gridlayout import GridLayout
 from kivy.metrics import dp
-from kivy.properties import StringProperty, BooleanProperty
+from kivy.properties import StringProperty, BooleanProperty, Clock
 from kivy.uix.widget import Widget
-from kivy.graphics.vertex_instructions import Line
-from kivy.graphics.vertex_instructions import Rectangle
+from kivy.graphics.vertex_instructions import Line, Rectangle, Ellipse
 from kivy.graphics.context_instructions import Color
+from time import sleep
 
 
 class CanvasExample1(Widget):
@@ -56,7 +56,35 @@ class CanvasExample4(Widget):
 
 
 class CanvasExample5(Widget):
-    pass
+    def __init__(self, **kwargs):
+        super().__init__(**kwargs)
+        print(self.size)
+        with self.canvas:
+            self.ball_size = dp(50)
+            self.elip = Ellipse(
+                pos=(0, 0),
+                size=(self.ball_size, self.ball_size),
+            )
+        Clock.schedule_interval(self.update, 1)
+
+    def on_size(self, *args):
+        self.elip.pos = (
+            self.center_x - self.ball_size / 2,
+            self.center_y - self.ball_size / 2,
+        )
+
+    def update(self, dt):
+        print("update")
+        speed_x = dp(10)
+        speed_y = dp(10)
+        x, y = self.elip.pos
+
+        if 0 > x > self.width:
+            speed_x *= -1
+        if 0 > y > self.height:
+            speed_y *= -1
+
+        self.elip.pos = (x + speed_x, y + speed_y)
 
 
 class MyApp(App):
