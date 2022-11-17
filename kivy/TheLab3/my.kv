@@ -3,7 +3,7 @@
 #:set s 200
 
 
-CanvasExample4:
+CanvasExample5:
 
 
 <CanvasExample1>:
@@ -46,4 +46,10 @@ CanvasExample4:
     Button:
         text:'A'
         pos: 700, 0
-        on_press: root.on_button_click()
+        on_press: root.on_button_click(not my_switch.active)
+    Switch:
+        id: my_switch
+        pos: 600,0
+
+<CanvasExample5>:
+    canvas:
