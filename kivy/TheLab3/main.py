@@ -95,7 +95,16 @@ class CanvasExample5(Widget):
         self.elip.pos = (x + self.speed_x, y + self.speed_y)
 
 
+class CanvasExample6(Widget):
+    def __init__(self, **kwargs):
+        super().__init__(**kwargs)
+
+    def hello(self):
+        print("Hello!")
+
+
 class MyApp(App):
     pass
+
 
 MyApp().run()
