@@ -1,5 +1,6 @@
 from kivy.app import App
 from kivy.uix.gridlayout import GridLayout
+from kivy.uix.boxlayout import BoxLayout
 from kivy.metrics import dp
 from kivy.properties import StringProperty, BooleanProperty, Clock
 from kivy.uix.widget import Widget
@@ -101,6 +102,11 @@ class CanvasExample6(Widget):
 
     def hello(self):
         print("Hello!")
+
+
+class CanvasExample7(BoxLayout):
+    def __init__(self, **kwargs):
+        super().__init__(**kwargs)
 
 
 class MyApp(App):

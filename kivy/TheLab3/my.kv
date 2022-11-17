@@ -3,7 +3,7 @@
 #:set s 200
 
 
-CanvasExample6:
+CanvasExample7:
 
 
 <CanvasExample1>:
@@ -67,3 +67,25 @@ CanvasExample6:
                 Rectangle:
                     size: self.size
                     pos: self.pos
+
+<CanvasExample7>:
+    Widget:
+        canvas:
+            Color: 
+                rgb: 0, 0, 1
+            Rectangle:
+                size: self.size
+    Widget:
+        canvas:
+            Color: 
+                rgb: 1, 1, 1
+            Rectangle:
+                size: self.size
+                pos: self.pos
+    Widget:
+        canvas:
+            Color: 
+                rgb: 1, 0, 0
+            Rectangle:
+                size: self.size
+                pos: self.pos
