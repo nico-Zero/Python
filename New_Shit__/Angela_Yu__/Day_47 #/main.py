@@ -8,18 +8,18 @@ amazon_url = (
     input("Enter the product url:- ")
     or "https://www.amazon.in/gp/product/B07FTZ259M/ref=ewc_pr_img_1?smid=A3LD4MMBBTHP7M&psc=1"
 )
-amazon_url = amazon_url.split("product/")[1]
-amazon_product_ID = amazon_url.split("/ref")[0]
+
+header = {
+    "User-Agent": "Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101 Firefox/102.0",
+    "Accept-Language": "en-US,en;q=0.5",
+}
 
 
-camel = f"https://camelcamelcamel.com/product/{amazon_product_ID}/"
-print(camel)
+product_data = requests.get(url=amazon_url, headers=header)
+product_data.raise_for_status()
+product_data = product_data.text
 
-camel_data = requests.get(url=camel)
-camel_data.raise_for_status()
-camel_data = camel_data.text
+with open("product_data.html", "w") as f:
+    dump(product_data, f)
 
-with open("camel.html", "w") as f:
-    dump(camel_data, f)
-
-print(camel_data)
+print(product_data)
