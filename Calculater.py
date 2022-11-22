@@ -20,6 +20,7 @@ def Clear():
     moniter_1.delete(0,END)
     moniter_2.delete(0,END)
     value.clear()
+    
 
 def Core():
     moniter_2.delete(0,END)
