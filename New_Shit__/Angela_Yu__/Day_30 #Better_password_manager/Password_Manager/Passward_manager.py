@@ -7,10 +7,8 @@ import json
 
 # -------------------------------------------------------VARIABLES---------------------------------------------------------------
 state = ["Dark", "Light"]
-data_file = "New_Shit__/Angela_Yu__/Day_30 #Better_password_manager/Password_Manager/password.json"
-image = (
-    "New_Shit__/Angela_Yu__/Day_30 #Better_password_manager/Password_Manager/lock.png"
-)
+data_file = "password.json"
+image = "lock.png"
 customtkinter.set_appearance_mode(state := state[0])
 
 
@@ -33,6 +31,7 @@ def clear_info():
     info.configure(state=customtkinter.NORMAL)
     info.delete(0, customtkinter.END)
     info.configure(state=customtkinter.DISABLED)
+
 
 def send_info(message="---"):
     info.configure(state=customtkinter.NORMAL)
@@ -155,7 +154,7 @@ img = ImageTk.PhotoImage(img)
 lock_img = customtkinter.CTkLabel(width=144, height=144, borderwidth=0, image=img)
 
 # Labels
-top_label = customtkinter.CTkLabel(text="Password", text_font=("Courier",20))
+top_label = customtkinter.CTkLabel(text="Password", text_font=("Courier", 20))
 website = customtkinter.CTkLabel(text="Website :", text_font=("Courier", 12))
 email = customtkinter.CTkLabel(text="Username/Email :", text_font=("Courier", 12))
 password = customtkinter.CTkLabel(text="Password :", text_font=("Courier", 12))
@@ -217,8 +216,8 @@ ok = customtkinter.CTkButton(
     command=ok_button,
 )
 
-theme = customtkinter.CTkSwitch(text="",command=theme_switch)
-theme.place(x=0,y=0)
+theme = customtkinter.CTkSwitch(text="", command=theme_switch)
+theme.place(x=0, y=0)
 
 
 # Lock Image grid

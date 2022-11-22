@@ -68,7 +68,7 @@ def add_pass():
         config_reset(entry_website)
         config_reset(entry_email)
         config_reset(entry_password)
-        
+
         is_ok = customtkinter.CTkInputDialog(
             title=website, text=f"Email: {email}\nPassword: {password}\nComment:"
         )
@@ -84,7 +84,7 @@ def add_pass():
                 }
             )
             dataframe.to_csv(
-                "New_Shit__/Angela_Yu__/Day_29 #Password_manager/password.csv",
+                "password.csv",
                 mode="a",
                 index=False,
                 header=False,
@@ -102,7 +102,7 @@ display.title("Password Manager")
 display.config(padx=20, pady=20)
 
 # Lack Image
-img = Image.open("New_Shit__/Angela_Yu__/Day_29 #Password_manager/lock.png")
+img = Image.open("lock.png")
 img = ImageTk.PhotoImage(img)
 lock_img = customtkinter.CTkLabel(width=144, height=144, borderwidth=0, image=img)
 lock_img.grid(row=0, column=1)
