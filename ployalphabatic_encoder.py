@@ -38,3 +38,4 @@ while 1:
     print("".join(decoded_data))
     sleep(3)
     system("clear")
+
