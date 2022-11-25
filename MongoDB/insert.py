@@ -7,6 +7,7 @@ f_data = Faker()
 
 client = MongoClient("mongodb://localhost:27017")
 my_products = client["my_store"]["emp"]
+# my_products.delete_many({})
 
 bag = [
     {
@@ -19,5 +20,3 @@ bag = [
 ]
 
 print(my_products.insert_many(bag))
-
-my_products.delete_many({})
