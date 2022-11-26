@@ -78,13 +78,30 @@ potion = Item("health_potion", 2, [{"heal": 10}])
 # TODO:
 # 1) Initalize a MongoDB Client object to connect to your database with
 client = MongoClient("mongodb://localhost:27017")
-print(client.list_database_names())
-
+game_db = client["video_game"]
 
 # TODO:
 # 2) Create a function that takes in a Player object and inserts it into the database,
 #    Extra Challenge: check for duplicate player entries, if so, do not insert again
 
+tom = Player("tom", 100, 200, [potion, potion])
+
+
+def insert_player(player):
+    for data in player:
+        will_i_data = {
+            "name": data.name,
+            "max_health": data.max_health,
+            "max_energy": data.max_energy,
+            "items": [
+                {"name": x.name, "quantity": x.quantity, "effects": x.effects}
+                for x in data.items
+            ],
+        }
+        print("Inserted")
+
+
+insert_player([tom])
 
 # 3) Create a function that is able to find a Player in the databse by searching for their name
 
