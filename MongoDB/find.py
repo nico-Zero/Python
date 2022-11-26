@@ -11,10 +11,15 @@ my_emp = client["my_store"]["emp"]
 
 # [print(i) for i in my_emp.find({"age": 29})]
 
-cursor = my_emp.find({"age": 29})
+cursor = my_emp.find()
 print(cursor.alive)
 
 for i in cursor:
     print(i)
 
 print(cursor.alive)
+
+# sort()
+
+for i in cursor.sort("price", pymongo.ASCENDING):
+    print(i)
