@@ -72,7 +72,9 @@ class Item:
 
 
 # Example usage of Item:
-potion = Item("health_potion", 2, [{"heal": 10}])
+potion = Item("Health potion", 2, [{"heal": 10}])
+sword = Item("Demon sword", 1, [{"damage": 100}])
+bow = Item("Holy bow", 2, [{"heal": 90}])
 
 
 # TODO:
@@ -84,24 +86,32 @@ game_db = client["video_game"]
 # 2) Create a function that takes in a Player object and inserts it into the database,
 #    Extra Challenge: check for duplicate player entries, if so, do not insert again
 
-tom = Player("tom", 100, 200, [potion, potion])
+player_object = Player("nico", 20000, 90000, [potion, potion, sword, sword, bow])
 
 
 def insert_player(player):
     for data in player:
-        will_i_data = {
-            "name": data.name,
-            "max_health": data.max_health,
-            "max_energy": data.max_energy,
-            "items": [
-                {"name": x.name, "quantity": x.quantity, "effects": x.effects}
-                for x in data.items
-            ],
-        }
-        print("Inserted")
+        list_of_player_names = [
+            i["name"] for i in list(game_db["player"].find({}, {"_id": 0, "name": 1}))
+        ]
+        print(list_of_player_names)
+        if data.name not in list_of_player_names:
+            will_i_data = {
+                "name": data.name,
+                "max_health": data.max_health,
+                "max_energy": data.max_energy,
+                "items": [
+                    {"name": x.name, "quantity": x.quantity, "effects": x.effects}
+                    for x in data.items
+                ],
+            }
+            game_db["player"].insert_one(will_i_data)
+            print(f"Inserted player data of {data.name} to database.")
+        else:
+            print(f"Already a player named {data.name} in database.")
 
 
-insert_player([tom])
+insert_player([player_object])
 
 # 3) Create a function that is able to find a Player in the databse by searching for their name
 
