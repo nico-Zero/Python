@@ -1,6 +1,6 @@
 import copy
 import numpy as np
-
+from faker import Faker
 from pymongo import MongoClient
 
 
@@ -86,7 +86,12 @@ game_db = client["video_game"]
 # 2) Create a function that takes in a Player object and inserts it into the database,
 #    Extra Challenge: check for duplicate player entries, if so, do not insert again
 
-player_object = Player("nico", 20000, 90000, [potion, potion, sword, sword, bow])
+fake = Faker()
+
+player_objects = [
+    Player(fake.name(), 20000, 90000, [potion, potion, sword, sword, bow])
+    for _ in range(int(input("Enter number of players:- ")))
+]
 
 
 def insert_player(player):
@@ -111,7 +116,7 @@ def insert_player(player):
             print(f"Already a player named {data.name} in database.")
 
 
-insert_player([player_object])
+insert_player(player_objects)
 
 # 3) Create a function that is able to find a Player in the databse by searching for their name
 
