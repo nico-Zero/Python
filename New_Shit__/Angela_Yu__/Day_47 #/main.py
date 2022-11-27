@@ -22,4 +22,8 @@ product_data = product_data.text
 with open("product_data.html", "w") as f:
     dump(product_data, f)
 
-print(product_data)
+parsed_amazon_data = BeautifulSoup(product_data, "html.parser")
+span_class_name = "a-price-whole"
+data = parsed_amazon_data.find_all(name="span",class_=span_class_name)
+
+print(data)
