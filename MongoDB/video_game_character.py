@@ -2,6 +2,7 @@ import copy
 import numpy as np
 from faker import Faker
 from pymongo import MongoClient
+from random import randint
 
 
 class Player:
@@ -116,7 +117,7 @@ def insert_player(player):
 
 def find_player(player_name):
     player = game_db["player"].find_one({"name": player_name})
-    print(player)
+    print("\n", player)
     return player
 
 
@@ -138,7 +139,12 @@ def create_player_object(player_data):
 # TODO:
 # 5) Create at least 2 players, optionally give them items
 player_objects = [
-    Player(fake.name(), 20000, 90000, [potion, potion, sword, sword, bow])
+    Player(
+        fake.name(),
+        randint(10000, 100000),
+        randint(10000, 100000),
+        [potion, potion, sword, sword, bow],
+    )
     for _ in range(int(input("Enter number of players:- ")))
 ]
 
@@ -148,4 +154,4 @@ insert_player(player_objects)
 
 # 7) Load the player data from MongoDB into new player variables
 player_x = create_player_object(find_player(input("Enter a player name to find:- ")))
-print(type(player_x))
+print("\n", type(player_x))
