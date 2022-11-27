@@ -88,11 +88,6 @@ game_db = client["video_game"]
 
 fake = Faker()
 
-player_objects = [
-    Player(fake.name(), 20000, 90000, [potion, potion, sword, sword, bow])
-    for _ in range(int(input("Enter number of players:- ")))
-]
-
 
 def insert_player(player):
     for data in player:
@@ -116,18 +111,41 @@ def insert_player(player):
             print(f"Already a player named {data.name} in database.")
 
 
-insert_player(player_objects)
-
 # 3) Create a function that is able to find a Player in the databse by searching for their name
+
+
+def find_player(player_name):
+    player = game_db["player"].find_one({"name": player_name})
+    print(player)
+    return player
+
+
+# print(find_player(input("Enter a player name to find:- ")))
 
 
 # 4) Create a function that loads the data from the above function and returns a Player object configured with that data
 
+
+def create_player_object(player_data):
+    return Player(
+        player_data["name"],
+        player_data["max_health"],
+        player_data["max_energy"],
+        player_data["items"],
+    )
+
+
 # TODO:
 # 5) Create at least 2 players, optionally give them items
-
+player_objects = [
+    Player(fake.name(), 20000, 90000, [potion, potion, sword, sword, bow])
+    for _ in range(int(input("Enter number of players:- ")))
+]
 
 # 6) Insert Players into MongoDB
+insert_player(player_objects)
 
 
 # 7) Load the player data from MongoDB into new player variables
+player_x = create_player_object(find_player(input("Enter a player name to find:- ")))
+print(type(player_x))
