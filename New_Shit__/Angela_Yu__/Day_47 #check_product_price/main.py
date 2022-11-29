@@ -14,7 +14,7 @@ header = {
     "Accept-Language": "en-US,en;q=0.5",
 }
 
-
+PRICE = int(input("Check if the price is or lower then:- "))
 product_data = requests.get(url=amazon_url, headers=header)
 product_data.raise_for_status()
 product_data = product_data.text
@@ -24,6 +24,12 @@ with open("product_data.html", "w") as f:
 
 parsed_amazon_data = BeautifulSoup(product_data, "html.parser")
 span_class_name = "a-price-whole"
-data = parsed_amazon_data.find_all(name="span",class_=span_class_name)
+data = parsed_amazon_data.find(name="span", class_=span_class_name)
 
-print(data)
+price = int(data.getText()[:-1].replace(",", ""))
+
+if price < PRICE:
+    print("Yoo we got a good deal...")
+    print(price)
+else:
+    print("Sorry, man no deal right now!!!")
