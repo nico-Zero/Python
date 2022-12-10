@@ -1,7 +1,7 @@
 {
     "background.fullscreen": {
-        "image": "https://www.shutterstock.com/image-illustration/anime-wallpaper-desktop-pc-260nw-2021335151.jpg",
-        "opacity": 0.91,
+        "image": "https://images5.alphacoders.com/786/786651.png",
+        "opacity": 0.87,
         "size": "cover",
         "interval": 0
     },
@@ -15,7 +15,7 @@
         "height": "100%",
         "z-index": "9999",
         "background-size": "contain",
-        "opacity": 0.3,
+        "opacity": 0.2,
         },
         "background.useDefault": false,
     "python.analysis.typeCheckingMode": "basic",
