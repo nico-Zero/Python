@@ -25,3 +25,4 @@ print(submit_bug.get_attribute("href"))
 
 
 driver.quit()
+print("Hello")
