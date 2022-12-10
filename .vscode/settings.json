@@ -1,23 +1,4 @@
 {
-    "background.fullscreen": {
-        "image": "https://images5.alphacoders.com/786/786651.png",
-        "opacity": 0.87,
-        "size": "cover",
-        "interval": 0
-    },
-    "background.style": {
-        "content": "''",
-        "pointer-events": "none",
-        "position": "absolute",
-        "right": "0",
-        "bottom": "0",
-        "width": "100%",
-        "height": "100%",
-        "z-index": "9999",
-        "background-size": "contain",
-        "opacity": 0.2,
-        },
-        "background.useDefault": false,
     "python.analysis.typeCheckingMode": "basic",
     "python.formatting.provider": "black",
     "cSpell.enableFiletypes": [
