@@ -28,10 +28,11 @@ for i in response:
     if day == "rain":
         rain = True
 
-if rain:
-    client = Client(twilio_account_sid, twilio_auth_token)
-    message = client.messages.create(
-        body="Fuck. It will RAIN today!☔😠. Just Remember to bring a Umbrella",
-        from_="+12017206236",
-        to="+917247477955",
-    )
+
+client = Client("AC07a81f1226651d58932b3890f2aa5e65", "24581999d659aed4f1b079b84016aab0")
+message = client.messages.create(
+    body="Fuck. It will RAIN today!☔😠. Just Remember to bring a Umbrella",
+    from_="+12017206236",
+    to="+917247477955",
+)
+print("done")
