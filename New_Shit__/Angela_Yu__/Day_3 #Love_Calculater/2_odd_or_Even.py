@@ -5,6 +5,6 @@ while 1:
         print("Exiting...")
         break
     elif int(number) % 2 == 0:
-        print("Your number is Even number.")
+        print("It's an even number.")
     else:
-        print("Your number is Odd number.")
+        print("It's a odd number.")
