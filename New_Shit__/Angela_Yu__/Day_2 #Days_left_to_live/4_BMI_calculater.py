@@ -5,4 +5,3 @@ BMI = round(weight / height ** 2)
 
 print(f"Your BMI is {BMI}")
 
-
