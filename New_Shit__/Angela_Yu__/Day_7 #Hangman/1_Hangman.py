@@ -1,4 +1,4 @@
-from english_words import english_words_lower_set as words
+from english_words import get_english_words_set
 from PyDictionary import PyDictionary
 from functools import reduce
 from random import choice
