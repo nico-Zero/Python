@@ -1,5 +1,6 @@
 while 1:
-    height = input("Enter a height: ");
+    print("-----------------------------")
+    height = input("Enter a height: ")
     if height == "exit" :
         print("Exiting...")
         break
@@ -8,23 +9,21 @@ while 1:
         print("Sorry, you have to grow taller before you can ride.\n")
 
     else:   
+        print("You can ride the rollercoaster!")
         age = input("Enter your age: ")
         photo = input("Do you want a photo taken? Y or N ? ")
 
-        if age == "exit":
+        if age == "exit" or photo == "exit":
             print("Exiting...")
             break
-        if photo == "Y":
+        elif photo == "Y":
             photo_price = 3
         else:
             photo_price = 0
 
-        print("You can ride the rollercoaster!")
-        
         if int(age) < 12:
             print(f"Your ticket will be of ${5 + photo_price}")
         elif 12 <= int(age) < 18:
             print(f"Your ticket will be of ${7 + photo_price}") 
         elif int(age) >= 18:
             print(f"Your ticket will be of ${12 + photo_price}")
-        print()
