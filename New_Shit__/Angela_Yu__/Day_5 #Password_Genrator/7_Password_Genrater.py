@@ -1,4 +1,4 @@
-from random import choice, randint, shuffle
+from random import choice, shuffle #, randint
 from os import system
 
 print("Welcome to the Password Generator!")
@@ -52,7 +52,7 @@ for i in range(number_count):
 
 shuffle(password)
 
-system("clear")
+system("cls")
 
 print(f"\nHere is your Password 🔒: ", *password, sep="")
 
