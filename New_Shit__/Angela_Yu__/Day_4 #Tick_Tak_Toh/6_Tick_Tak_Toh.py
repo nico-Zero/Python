@@ -1,7 +1,8 @@
 import os
 
-os.system("clear")
+os.system("cls")
 
+x, y = 0, 0
 row1 = ["⬜", "⬜", "⬜"]
 row2 = ["⬜", "⬜", "⬜"]
 row3 = ["⬜", "⬜", "⬜"]
@@ -23,24 +24,27 @@ all_element = [[0, 0], [0, 1], [0, 2], [1, 0], [1, 1], [1, 2], [2, 0], [2, 1], [
 
 
 def update(map: list):
-    os.system("clear")
+    os.system("cls")
+    print(x, y)
     print(*map, sep="\n")
 
 
 def core(player: str, x: int, y: int, symbol: str):
     try:
+        if x == -1 or y == -1:
+            raise Exception("Wrong Position")
         tick_tak_toh[x][y]
     except:
         update(tick_tak_toh)
         print("You entered a wrong position. ")
-        if symbol == "🯀" or symbol == "〇":
+        if symbol == "X" or symbol == "〇":
             turn(player)
             insert(symbol)
         return
 
     if not tick_tak_toh[x][y] == "⬜":
         update(tick_tak_toh)
-        if tick_tak_toh[x][y] == "🯀":
+        if tick_tak_toh[x][y] == "X":
             print(f"{player1} marked this place already.")
         else:
             print(f"{player2} marked this place already.")
@@ -61,7 +65,7 @@ def turn(player):
         x = int(turn[0]) - 1
         y = int(turn[1]) - 1
     except:
-        x, y = None, None
+        x, y = 0, 0
         return
 
 
@@ -94,9 +98,9 @@ while 1:
         if turn(player1) == 0:
             break
 
-        core(player1, x, y, "🯀")
+        core(player1, x, y, "X")
 
-        if check("🯀") == 1:
+        if check("X") == 1:
             print(f"\n{player1} win...")
             break
 
