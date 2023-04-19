@@ -1,4 +1,5 @@
 while 1:
+    print("------------------------------")
     height = input("Enter a height: ");
     if height == "exit" :
         print("Exiting...")
@@ -29,5 +30,3 @@ while 1:
             print(f"Your ticket will be of ${12 + photo_price}")
         elif int(age) >= 45 and int(age) <= 55:
             print("Everything is going to be ok. Have a free ride on us!")
-
-        print()
