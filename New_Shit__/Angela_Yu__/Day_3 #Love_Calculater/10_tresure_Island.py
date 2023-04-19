@@ -1,12 +1,12 @@
 import os
 
 while 1:
-
+    count = None
     def tresure(): 
         global count 
         count = 0
 
-        os.system("clear")
+        os.system("cls")
 
         print("Welcome to Tresure Island.")
         print("Your mission is to find the tresure.")
@@ -44,4 +44,4 @@ while 1:
     if again == "n":
         break
 
-    os.system("clear")
+    os.system("cls")
