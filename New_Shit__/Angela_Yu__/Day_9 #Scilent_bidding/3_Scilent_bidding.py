@@ -2,7 +2,7 @@ from os import system
 
 BID_RECORD = {}
 
-system("clear")
+system("cls")
 while 1:
     name_of_bidder = input("What is your name? ")
     amount_of_bid = int(input("What is your bidding amount? $"))

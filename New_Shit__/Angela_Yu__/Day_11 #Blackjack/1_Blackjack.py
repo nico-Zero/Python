@@ -105,12 +105,12 @@ def total_points():
 # Checks if a player is busted or not.
 def got_bust():
     if t_p > 21:
-        system("clear")
+        system("cls")
         print_cards(0)
         print(player_name, "got busted.")
         return True
     elif t_c > 21:
-        system("clear")
+        system("cls")
         print_cards(0)
         print(computer_name, "got busted.")
         return True
@@ -146,7 +146,7 @@ def blackjack(x=1):
             and 10 in p_value
             and not (player_cards[0][24] == "0" or player_cards[1][24] == "0")
         ):
-            system("clear")
+            system("cls")
             print_cards(0)
             print(player_name, "won with blackjack.")
             return True
@@ -155,7 +155,7 @@ def blackjack(x=1):
             and 10 in c_value
             and not (computer_cards[0][24] == "0" or computer_cards[1][24] == "0")
         ):
-            system("clear")
+            system("cls")
             print_cards(0)
             print(computer_name, "won with blackjack.")
             return True
@@ -165,14 +165,14 @@ def blackjack(x=1):
 
 # The main game loop
 while 1:
-    # Now clear the screen and ask name of player and computer.
-    system("clear")
+    # Now cls the screen and ask name of player and computer.
+    system("cls")
     player_cards = [card(*random_card()), card(*random_card())]
     computer_cards = [card(*random_card()), card(*random_card())]
     player_name = input("What is your name? ").title() or "Player-1"
     computer_name = input("Computer name:- ").title() or "Computer"
     t = 1
-    system("clear")
+    system("cls")
     update_values()
     total_points()
 
@@ -194,7 +194,7 @@ while 1:
                 computer_cards.append(card(*random_card()))
                 update_values()
                 total_points()
-            system("clear")
+            system("cls")
             print_cards(0)
             if got_bust():
                 break
@@ -215,6 +215,6 @@ while 1:
         if got_bust():
             break
 
-        system("clear")
+        system("cls")
     if input("Would you like to play again? (y/n): ").lower() == "n":
         break
