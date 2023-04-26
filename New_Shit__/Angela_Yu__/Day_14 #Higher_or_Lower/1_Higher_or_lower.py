@@ -17,7 +17,7 @@ def values():
     return [f.name().title(), f.job().title(), f.country().title()]
 
 
-system("clear")
+system("cls")
 
 # Creating values for compression.
 a_value = values()
@@ -55,7 +55,7 @@ while 1:
         re = input("Who has more followers? Type 'A' or 'B' : ").lower()
 
         # Checking if the user is correct or not.
-        system("clear")
+        system("cls")
         if re == "a":
             if a > b:
                 # Updating values
@@ -80,8 +80,8 @@ while 1:
     # Asking if user would like to play the game again.
     score = 0
     if input("Would you like to play again? Y/N: ").lower() == "y":
-        system("clear")
+        system("cls")
         pass
     else:
-        system("clear")
+        system("cls")
         break
