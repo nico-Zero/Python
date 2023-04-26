@@ -68,7 +68,7 @@ def coin():
     return inserted
 
 
-system("clear")
+system("cls")
 # Main loop
 while 1:
     # The second main loop
@@ -78,7 +78,7 @@ while 1:
             break
 
         if i not in option and i not in option[0]:
-            system("clear")
+            system("cls")
             continue
 
         if check_quantity(i):
@@ -104,9 +104,9 @@ while 1:
             break
 
     x = input("Would you like to buy another coffee? Y/N: ").lower()
-    system("clear")
+    system("cls")
     if x == "n":
-        system("clear")
+        system("cls")
         break
 
     elif x == "admin" or x == "owner":
@@ -116,10 +116,10 @@ while 1:
             print(f"Your total profit is ${profit}")
             if input("Do you want to collect the money? Y/N ?").lower() == "y":
                 profit = 0
-                system("clear")
+                system("cls")
             else:
                 sleep(5)
-                system("clear")
+                system("cls")
                 pass
 
         elif check == "tank" or check == "t":
@@ -128,8 +128,8 @@ while 1:
                 water_capacity = 300
                 coffee_capacity = 100
                 milk_capacity = 200
-                system("clear")
-            system("clear")
-        system("clear")
+                system("cls")
+            system("cls")
+        system("cls")
     else:
-        system("clear")
+        system("cls")
