@@ -2,7 +2,7 @@ from os import system
 import pandas
 
 NATO_phonetic_alphabet = pandas.read_csv(
-    "New_Shit__/Angela_Yu__/Day_26 #NATO_phonetic_alphabet/NATO_alpha.csv"
+    "D:\Software\Python\\New_Shit__\Angela_Yu__\Day_26 #NATO_phonetic_alphabet\\NATO_alpha.csv"
 )
 
 
@@ -15,10 +15,10 @@ print(NATO_phonetic_alphabet, end="\n\n")
 while 1:
     code = input("What is the word? ")
     if code == "$exit" or code == "$quit":
-        system("clear")
+        system("cls")
         break
     elif code == "$clear":
-        system("clear")
+        system("cls")
         print(NATO_phonetic_alphabet)
         continue
 

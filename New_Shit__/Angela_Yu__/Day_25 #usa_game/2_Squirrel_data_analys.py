@@ -1,8 +1,8 @@
 # from sre_compile import isstring
 import pandas
 
-# squirrel = pandas.read_csv("New_Shit__/Angela_Yu__/Day_25 #/Squirrel_Data.csv")
-squirrel = pandas.read_csv("New_Shit__/Angela_Yu__/Day_25 #/squirrel_count.csv")
+squirrel = pandas.read_csv("D:\Software\Python\\New_Shit__\Angela_Yu__\Day_25 #usa_game\Squirrel_Data.csv")
+# squirrel = pandas.read_csv("D:\Software\Python\\New_Shit__\Angela_Yu__\Day_25 #usa_game\squirrel_count.csv")
 
 # colors = squirrel["Primary Fur Color"].to_list()
 # color = list(i for i in set(colors) if isstring(i))

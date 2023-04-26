@@ -30,7 +30,7 @@ scissors = """
 
 """
 option = [rock,paper,scissors]
-system("clear")
+system("cls")
 
 while 1:
     choice = int(input("What do you choose? Type 0 for Rock, 1 for Paper or 2 for Scissors.\n"))
@@ -55,4 +55,4 @@ while 1:
     qu = input("Would you like to play again? Y/N ? ").lower()
     if qu == "n":
         break
-    system("clear")
+    system("cls")
