@@ -4,7 +4,7 @@ from turtle import Turtle
 ALIGN = "center"
 FONT = ("Courier", 20, "normal")
 FILE = (
-    "Angela_Yu__/Day_24 #Better_snake_game/snake_game/high_score.txt"
+    "D:\Software\Python\\New_Shit__\Angela_Yu__\Day_24 #Better_snake_game\snake_game\high_score.txt"
 )
 
 
@@ -13,7 +13,7 @@ class Score_board(Turtle):
         super().__init__()
         self.score = 0
         with open(
-            "/media/zero/Software/Python/New_Shit__/" + FILE,
+            FILE,
             "r",
         ) as f:
             self.high_score = int(f.read())
@@ -38,7 +38,7 @@ class Score_board(Turtle):
             self.high_score = self.score
         if self.copy_of_high_score < self.high_score:
             with open(
-                "/media/zero/Software/Python/New_Shit__/" + FILE,
+                FILE,
                 "w",
             ) as f:
                 f.write(str(self.high_score))

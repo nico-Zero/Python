@@ -2,7 +2,7 @@ import colorgram
 
 
 def colors(j: int):
-    x = colorgram.extract("New_Shit__/Angela_Yu__/Day_18 #/pic/five.jpeg", j)
+    x = colorgram.extract("D:\Software\Python\\New_Shit__\Angela_Yu__\Day_18 #Dot_art\pic\\five.jpeg", j)
     return [(i.rgb.r, i.rgb.g, i.rgb.b) for i in x]
 
 
@@ -15,8 +15,8 @@ color_list = [
     "DarkKhaki",
     "Lavender",
     "Magenta",
-    "RebeccaPurple",
     "DarkMagenta",
     "MediumSlateBlue",
 ]
 
+print(colors(10))

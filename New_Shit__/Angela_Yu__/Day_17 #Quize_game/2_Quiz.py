@@ -3,7 +3,7 @@ from game import Game
 from os import system
 
 
-system("clear")
+system("cls")
 data = question_50_data
 quiz = Game(data)
 ans = None
@@ -15,7 +15,7 @@ for _ in range(ask_question):
     while ans not in word:
         print(f"score: {quiz.score}/{ask_question}")
         ans = input(que["question"] + " ? ")
-        system("clear")
+        system("cls")
     quiz.answer(que["correct_answer"], ans)
     ans = None
 

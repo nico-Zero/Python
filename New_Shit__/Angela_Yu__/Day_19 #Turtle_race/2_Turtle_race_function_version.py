@@ -20,7 +20,7 @@ list_of_turtle = [
 ]
 
 title = "Make Choice..."
-prompt_1 = reduce(lambda x, y: x + " " + y, list_of_color)
+prompt_1 = reduce(lambda x, y: x + "," + y, list_of_color)
 prompt_2 = "\nWhich color do you think will win?"
 
 
