@@ -61,7 +61,7 @@ def timer(sec, x):
     if time < 0:
         pass
     else:
-        system("clear")
+        system("cls")
 
         second = "0" + str(sec % x) if sec % x < 10 else str(sec % x)
         minute = "0" + str(int(sec / x)) if int(sec / x) < 10 else str(int(sec / x))
@@ -117,7 +117,7 @@ reset.grid(row=2, column=2)
 # -------------------------------------CANVAS--------------------------------
 canvas = tkinter.Canvas(width=200, height=224, bg=COLORS[3], highlightthickness=0)
 tomato_image = tkinter.PhotoImage(
-    file="New_Shit__/Angela_Yu__/Day_28 #Timer_software/tomato.png"
+    file="tomato.png"
 )
 canvas.create_image(100, 112, image=tomato_image)
 timer_text = canvas.create_text(
@@ -126,4 +126,4 @@ timer_text = canvas.create_text(
 canvas.grid(row=1, column=1)
 
 window.mainloop()
-system("clear")
+system("cls")

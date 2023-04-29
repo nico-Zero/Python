@@ -2,7 +2,7 @@ from faker import Faker
 from os import system
 import tkinter
 
-system("clear")
+system("cls")
 
 
 # tkinter window
@@ -20,7 +20,7 @@ label.config(text="He-He")
 # function for clicking the button
 def click(x):
     if x == "clear":
-        system("clear")
+        system("cls")
         return None
 
     print(f"☠️ 𒓋  {x}")

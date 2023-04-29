@@ -1,6 +1,9 @@
 import requests
 import customtkinter
 from tkinter import PhotoImage
+from PIL import Image
+
+
 
 # https://api.kanye.rest
 def kanye_quot():
@@ -15,15 +18,15 @@ def speak_kanye():
 
 display = customtkinter.CTk()
 
-background = PhotoImage(
-    file="New_Shit__/Angela_Yu__/Day_33 #API/kanye_quort_api/background.png"
+background = customtkinter.CTkImage(
+    dark_image=Image.open("background.png")
 )
-button_image = PhotoImage(
-    file="New_Shit__/Angela_Yu__/Day_33 #API/kanye_quort_api/kanye.png"
+button_image = customtkinter.CTkImage(
+    dark_image=Image.open("kanye.png")
 )
 bg_color = "#212325"
 
-display.set_appearance_mode("Dark")
+# display.set_appearance_mode("Dark")
 display.minsize(width=500, height=700)
 display.config(padx=20, pady=20)
 
@@ -37,13 +40,14 @@ shit = can.create_text(
 
 # button
 kanye_button = customtkinter.CTkButton(
+    master=can,
     text="",
     image=button_image,
-    bg=bg_color,
+    # bg=bg_color,
     fg_color=bg_color,
     width=0,
-    border=False,
-    highlightthickness=0,
+    # border=False,
+    # highlightthickness=0,
     command=speak_kanye,
 )
 
@@ -52,3 +56,4 @@ can.pack()
 kanye_button.pack()
 
 display.mainloop()
+

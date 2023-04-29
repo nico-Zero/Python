@@ -1,12 +1,12 @@
 from os import system
 import tkinter
 
-system("clear")
+system("cls")
 
 # function for clicking the button
 def click(x):
     if x == "clear":
-        system("clear")
+        system("cls")
         return None
 
     print(f"☠️ 𒓋  {x}")

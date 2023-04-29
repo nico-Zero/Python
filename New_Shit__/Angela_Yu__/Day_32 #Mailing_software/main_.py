@@ -38,3 +38,4 @@ if week_day == 1:
             friend_email,
             em.as_string(),
         )
+print("done...")
