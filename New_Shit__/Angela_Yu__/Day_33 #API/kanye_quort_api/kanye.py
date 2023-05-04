@@ -19,10 +19,10 @@ def speak_kanye():
 display = customtkinter.CTk()
 
 background = customtkinter.CTkImage(
-    dark_image=Image.open("background.png")
+    Image.open("background.png")
 )
 button_image = customtkinter.CTkImage(
-    dark_image=Image.open("kanye.png")
+    Image.open("kanye.png")
 )
 bg_color = "#212325"
 
