@@ -2,10 +2,10 @@
     "exercises": [
         {
             "tag_id": 317,
-            "user_input": "ran",
-            "duration_min": 600,
+            "user_input": "run",
+            "duration_min": 30,
             "met": 9.8,
-            "nf_calories": 6860,
+            "nf_calories": 343,
             "photo": {
                 "highres": "https://d2xdmhkmkbyw75.cloudfront.net/exercise/317_highres.jpg",
                 "thumb": "https://d2xdmhkmkbyw75.cloudfront.net/exercise/317_thumb.jpg",
@@ -13,38 +13,6 @@
             },
             "compendium_code": 12050,
             "name": "running",
-            "description": null,
-            "benefits": null
-        },
-        {
-            "tag_id": 100,
-            "user_input": "walk",
-            "duration_min": 248.55,
-            "met": 3.5,
-            "nf_calories": 1014.91,
-            "photo": {
-                "highres": "https://d2xdmhkmkbyw75.cloudfront.net/exercise/100_highres.jpg",
-                "thumb": "https://d2xdmhkmkbyw75.cloudfront.net/exercise/100_thumb.jpg",
-                "is_user_uploaded": false
-            },
-            "compendium_code": 17190,
-            "name": "walking",
-            "description": null,
-            "benefits": null
-        },
-        {
-            "tag_id": 118,
-            "user_input": "hills",
-            "duration_min": 1355.01,
-            "met": 5.3,
-            "nf_calories": 8378.48,
-            "photo": {
-                "highres": "https://d2xdmhkmkbyw75.cloudfront.net/exercise/118_highres.jpg",
-                "thumb": "https://d2xdmhkmkbyw75.cloudfront.net/exercise/118_thumb.jpg",
-                "is_user_uploaded": false
-            },
-            "compendium_code": 17082,
-            "name": "hillside walking",
             "description": null,
             "benefits": null
         }

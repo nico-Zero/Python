@@ -40,7 +40,7 @@ shit = can.create_text(
 
 # button
 kanye_button = customtkinter.CTkButton(
-    master=can,
+    master=display,
     text="",
     image=button_image,
     # bg=bg_color,

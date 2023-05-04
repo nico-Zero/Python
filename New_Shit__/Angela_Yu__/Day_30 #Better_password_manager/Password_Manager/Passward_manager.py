@@ -1,5 +1,6 @@
 from tkinter import Y
 import customtkinter
+from customtkinter import CTkImage
 from password_generator import pass_gen
 from PIL import Image, ImageTk
 import pyperclip
@@ -150,73 +151,59 @@ display.config(padx=20, pady=20)
 
 # Lack Image
 img = Image.open(image)
-img = ImageTk.PhotoImage(img)
-lock_img = customtkinter.CTkLabel(width=144, height=144, borderwidth=0, image=img)
+img = CTkImage(img)
+# img = ImageTk.PhotoImage(img)
+lock_img = customtkinter.CTkLabel(master =display, width=144, height=144, image=img)
 
 # Labels
-top_label = customtkinter.CTkLabel(text="Password", text_font=("Courier", 20))
-website = customtkinter.CTkLabel(text="Website :", text_font=("Courier", 12))
-email = customtkinter.CTkLabel(text="Username/Email :", text_font=("Courier", 12))
-password = customtkinter.CTkLabel(text="Password :", text_font=("Courier", 12))
-info_label = customtkinter.CTkLabel(text="Info :", text_font=("Courier", 12))
+top_label = customtkinter.CTkLabel(master =display, text="Password",font=("Courier", 12))
+website = customtkinter.CTkLabel(master =display, text="Website :", font=("Courier", 12))
+email = customtkinter.CTkLabel(master =display, text="Username/Email :", font=("Courier", 12))
+password = customtkinter.CTkLabel(master =display, text="Password :", font=("Courier", 12))
+info_label = customtkinter.CTkLabel(master =display, text="Info :", font=("Courier", 12))
 
 
 # EntryBoxes
-entry_website = customtkinter.CTkEntry(width=250)
+entry_website = customtkinter.CTkEntry(master =display, width=250)
 entry_website.focus()
-entry_email = customtkinter.CTkEntry(width=400)
-entry_password = customtkinter.CTkEntry(width=250)
-info = customtkinter.CTkEntry(width=400, state=customtkinter.DISABLED)
+entry_email = customtkinter.CTkEntry(master =display, width=400)
+entry_password = customtkinter.CTkEntry(master =display, width=250)
+info = customtkinter.CTkEntry(master =display, width=400, state=customtkinter.DISABLED)
 
 
 entry_group = [entry_website, entry_email, entry_password]
 
 # Buttons
-search = customtkinter.CTkButton(
+search = customtkinter.CTkButton(master =display, 
     corner_radius=7,
     text="Search Password",
-    highlightthickness=0,
-    bg="white",
-    border=False,
     command=search_password,
 )
-generate_password = customtkinter.CTkButton(
+generate_password = customtkinter.CTkButton(master =display, 
     corner_radius=7,
     text="Generate Password",
-    highlightthickness=0,
-    bg="white",
-    border=False,
     command=gen_pass_for_password_entry,
 )
-add_password = customtkinter.CTkButton(
+add_password = customtkinter.CTkButton(master =display, 
     width=400,
     corner_radius=8,
     text="Add Password",
-    highlightthickness=0,
-    bg="white",
-    border=False,
     command=add_pass,
 )
-clear = customtkinter.CTkButton(
+clear = customtkinter.CTkButton(master =display, 
     width=140,
     corner_radius=8,
     text="Clear Screen",
-    highlightthickness=0,
-    bg="white",
-    border=False,
     command=all_clear,
 )
-ok = customtkinter.CTkButton(
+ok = customtkinter.CTkButton(master =display, 
     width=140,
     corner_radius=8,
     text="Ok",
-    highlightthickness=0,
-    bg="white",
-    border=False,
     command=ok_button,
 )
 
-theme = customtkinter.CTkSwitch(text="", command=theme_switch)
+theme = customtkinter.CTkSwitch(master =display, text="", command=theme_switch)
 theme.place(x=0, y=0)
 
 

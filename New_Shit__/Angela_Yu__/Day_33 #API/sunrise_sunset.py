@@ -2,9 +2,9 @@ from time import sleep
 import requests
 from datetime import datetime
 
-MY_LAT = 22.359449
-MY_LNG = 82.750061
-parameter = {"lat": MY_LAT, "lng": MY_LNG, "formatted": 0}
+MY_LAT: float = 22.359449
+MY_LNG: float = 82.750061
+parameter: dict = {"lat": MY_LAT, "lng": MY_LNG, "formatted": 0}
 
 
 def vision(your_location, object_location):

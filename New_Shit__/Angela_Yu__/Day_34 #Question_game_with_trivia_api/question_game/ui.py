@@ -11,23 +11,22 @@ class QuizGameUi:
         self.window = customtkinter.CTk()
 
         self.window.title("Question Game")
-        self.window.set_appearance_mode("Dark")
+        # self.window.set_appearance_mode("Dark")
         self.window.geometry("440x800")
         self.window.config(padx=20, pady=50)
 
         # Images
         right = PhotoImage(
-            file="New_Shit__/Angela_Yu__/Day_34 #Question_game_with_trivia_api/question_game/right.png"
+            file="right.png"
         )
         wrong = PhotoImage(
-            file="New_Shit__/Angela_Yu__/Day_34 #Question_game_with_trivia_api/question_game/wrong.png"
+            file="wrong.png"
         )
 
         # Label
         self.score_label = customtkinter.CTkLabel(
+            master=self.window,
             text=f"Score: {self.quiz.get_score()}",
-            fg="white",
-            text_font=("Courier", 20),
         )
 
         # Question Canvas
@@ -45,20 +44,18 @@ class QuizGameUi:
 
         # Buttons
         self.right_button = customtkinter.CTkButton(
+            master=self.window,
             text="",
             fg_color=BG_COLOR,
             image=right,
-            highlightthickness=0,
-            border=False,
             width=0,
             command=lambda: self.question_motion("True"),
         )
         self.wrong_button = customtkinter.CTkButton(
+            master=self.window,
             text="",
             fg_color=BG_COLOR,
             image=wrong,
-            highlightthickness=0,
-            border=False,
             width=0,
             command=lambda: self.question_motion("False"),
         )

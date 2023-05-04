@@ -18,7 +18,7 @@ refined_data = requests.post(url=nutritionix_endpoint, json=parameters, headers=
 
 refined_data = refined_data.json()
 with open(
-    "New_Shit__/Angela_Yu__/Day_38 #Natural_Language_Processing_API/exercise_data.json",
+    "exercise_data.json",
     "w",
 ) as f:
     json.dump(refined_data, f, indent=4)
