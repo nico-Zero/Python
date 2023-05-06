@@ -3,8 +3,8 @@ from twilio.rest import Client
 
 
 url = "https://ai-weather-by-meteosource.p.rapidapi.com/hourly"
-twilio_account_sid = "AC07a81f1226651d58932b3890f2aa5e65"
-twilio_auth_token = "606344a8e18280136fc06755e7489eec"
+twilio_account_sid = "AC1ac2feb2140b9b5a239f841410dd3b5b"
+twilio_auth_token = "6385a7c47d814d2472b51af3c42125d2"
 
 
 # parameters = {"lat": "22.352600", "lon": "82.545403", "timezone": "GMT"}
@@ -29,10 +29,10 @@ for i in response:
         rain = True
 
 
-client = Client("AC07a81f1226651d58932b3890f2aa5e65", "24581999d659aed4f1b079b84016aab0")
+client = Client("AC1ac2feb2140b9b5a239f841410dd3b5b", "6385a7c47d814d2472b51af3c42125d2")
 message = client.messages.create(
     body="Fuck. It will RAIN today!☔😠. Just Remember to bring a Umbrella",
-    from_="+12017206236",
+    from_="+18623621471",
     to="+917247477955",
 )
 print("done")

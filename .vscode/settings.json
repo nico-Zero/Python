@@ -1,6 +1,6 @@
 {
     "python.analysis.typeCheckingMode": "basic",
-    "python.formatting.provider": "black",
+    "python.formatting.provider": "none",
     "cSpell.enableFiletypes": [
         "Log",
         "bat",
@@ -63,5 +63,8 @@
         "xquery",
         "xsl"
     ],
-    "cSpell.language": "en,lorem,en-US,en-GB"
+    "cSpell.language": "en,lorem,en-US,en-GB",
+    "[python]": {
+        "editor.defaultFormatter": "ms-python.black-formatter"
+    }
 }
