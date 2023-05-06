@@ -29,7 +29,7 @@ for i in response:
         rain = True
 
 
-client = Client("AC1ac2feb2140b9b5a239f841410dd3b5b", "6385a7c47d814d2472b51af3c42125d2")
+client = Client(twilio_account_sid, twilio_auth_token)
 message = client.messages.create(
     body="Fuck. It will RAIN today!☔😠. Just Remember to bring a Umbrella",
     from_="+18623621471",
