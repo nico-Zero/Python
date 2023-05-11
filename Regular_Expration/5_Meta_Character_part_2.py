@@ -3,7 +3,7 @@ import re
 # \d \D \s \S \w \W \b \B
 
 
-def match(x, test_string=["123abc456abc123789abc@#$%^123ABC\t\n\s\e"],ans="group"):
+def match(x, test_string=["123abc456abc123789abc@#$%^123ABC\t\n"],ans="group"):
     for string in test_string:
         print(f"{x} Example:-")
         print(f"Test String:- {repr(string)}", end="\n")
