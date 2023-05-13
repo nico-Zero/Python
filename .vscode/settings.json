@@ -66,5 +66,6 @@
     "cSpell.language": "en,lorem,en-US,en-GB",
     "[python]": {
         "editor.defaultFormatter": "ms-python.black-formatter"
-    }
+    },
+    "livePreview.defaultPreviewPath": "/New_Shit__/Angela_Yu__/Day_41_#Anker_Tag/hobbies.html"
 }
