@@ -4,7 +4,7 @@ from turtle import Turtle
 ALIGN = "center"
 FONT = ("Courier", 20, "normal")
 FILE = (
-    "D:\Software\Python\\New_Shit__\Angela_Yu__\Day_24 #Better_snake_game\snake_game\high_score.txt"
+    "high_score.txt"
 )
 
 

@@ -4,7 +4,6 @@
     // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
     "version": "0.2.0",
     "configurations": [
-        
         {
             "args": [
                 "--extensionDevelopmentPath=${workspaceFolder}"
@@ -67,6 +66,12 @@
             "program": "${file}",
             "console": "integratedTerminal",
             "justMyCode": true
+        },
+        {
+            "type": "chrome",
+            "name": "http://127.0.0.1:3000/New_Shit__/Angela_Yu__/Day_43_CSS/index.html",
+            "request": "launch",
+            "url": "http://127.0.0.1:3000/New_Shit__/Angela_Yu__/Day_43_CSS/index.html"
         }
     ]
 }

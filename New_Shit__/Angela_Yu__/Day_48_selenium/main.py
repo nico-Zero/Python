@@ -1,7 +1,7 @@
 from selenium import webdriver
 from selenium.webdriver.common.by import By
 
-chromedriver_path = "chromedriver"
+chromedriver_path = "chromedriver.exe"
 
 driver = webdriver.Chrome(executable_path=chromedriver_path)
 
