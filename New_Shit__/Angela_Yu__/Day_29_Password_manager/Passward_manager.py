@@ -103,15 +103,21 @@ display.config(padx=20, pady=20)
 
 # Lack Image
 img = Image.open("lock.png")
-img = ImageTk.PhotoImage(img)
-lock_img = customtkinter.CTkLabel(width=144, height=144, borderwidth=0, image=img)
+img = customtkinter.CTkImage(img)
+lock_img = customtkinter.CTkLabel(master=display, width=144, height=144, image=img)
 lock_img.grid(row=0, column=1)
 
 # Labels
-top_label = customtkinter.CTkLabel(text="Password", text_font=("Courier", 20))
-website = customtkinter.CTkLabel(text="Website :", text_font=("Courier", 12))
-email = customtkinter.CTkLabel(text="Username/Email :", text_font=("Courier", 12))
-password = customtkinter.CTkLabel(text="Password :", text_font=("Courier", 12))
+top_label = customtkinter.CTkLabel(
+    master=display, text="Password", font=("Courier", 20)
+)
+website = customtkinter.CTkLabel(master=display, text="Website :", font=("Courier", 12))
+email = customtkinter.CTkLabel(
+    master=display, text="Username/Email :", font=("Courier", 12)
+)
+password = customtkinter.CTkLabel(
+    master=display, text="Password :", font=("Courier", 12)
+)
 
 top_label.grid(row=1, column=1)
 website.grid(row=2, column=0)
@@ -119,10 +125,10 @@ email.grid(row=3, column=0)
 password.grid(row=4, column=0)
 
 # EntryBoxes
-entry_website = customtkinter.CTkEntry(width=400)
+entry_website = customtkinter.CTkEntry(master=display, width=400)
 entry_website.focus()
-entry_email = customtkinter.CTkEntry(width=400)
-entry_password = customtkinter.CTkEntry(width=250)
+entry_email = customtkinter.CTkEntry(master=display, width=400)
+entry_password = customtkinter.CTkEntry(master=display, width=250)
 
 entry_website.grid(columnspan=2, row=2, column=1)
 entry_email.grid(columnspan=2, row=3, column=1)
@@ -131,21 +137,16 @@ entry_password.grid(columnspan=1, row=4, column=1)
 
 # Buttons
 generate_password = customtkinter.CTkButton(
+    master=display,
     corner_radius=7,
     text="Generate Password",
-    highlightthickness=0,
-    bg="white",
-    border=False,
     command=gen_pass_for_password_entry,
 )
 add_password = customtkinter.CTkButton(
+    master=display,
     width=500,
-    pady=5,
     corner_radius=8,
     text="Add Password",
-    highlightthickness=0,
-    bg="white",
-    border=False,
     command=add_pass,
 )
 

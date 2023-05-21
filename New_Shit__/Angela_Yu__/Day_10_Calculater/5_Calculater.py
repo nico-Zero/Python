@@ -5,6 +5,7 @@ M_O = ["+", "-", "*", "/", "^"]
 value = []
 con = False
 
+
 # Moniter operation
 def button_press(x):
     no_value()
@@ -54,10 +55,13 @@ def Delete():
     try:
         if (moniter_1.get())[-2] == ".":
             moniter_1.delete(len(moniter_1.get()) - 2, END)
+            Core()
         else:
             moniter_1.delete(len(moniter_1.get()) - 1, END)
+            Core()
     except IndexError:
         moniter_1.delete(0, END)
+        moniter_2.delete(0, END)
         value.clear()
 
 

@@ -7,9 +7,11 @@ from random import choice
 # Display ->
 display = customtkinter.CTk()
 try:
-    data = read_csv("New_Shit__/Angela_Yu__/Day_31 #Learning_game/data/words_to_learn.csv")
+    data = read_csv(
+        "data\\words_to_learn.csv"
+    )
 except FileNotFoundError:
-    data = read_csv("New_Shit__/Angela_Yu__/Day_31 #Learning_game/data/fr_en.csv")
+    data = read_csv("data\\fr_en.csv")
 data = data.to_dict(orient="records")
 
 
@@ -17,14 +19,14 @@ STATE = ["Dark", "Light"]
 BACKGROUND_COLOR = "#B1DDC6"
 
 CARD_FRONT = PhotoImage(
-    file="New_Shit__/Angela_Yu__/Day_31 #Learning_game/images/card_front.png"
+    file="images\\card_front.png"
 )
 CARD_BACK = PhotoImage(
-    file="New_Shit__/Angela_Yu__/Day_31 #Learning_game/images/card_back.png"
+    file="images\\card_back.png"
 )
 
-RIGHT = PhotoImage(file="New_Shit__/Angela_Yu__/Day_31 #Learning_game/images/right.png")
-WRONG = PhotoImage(file="New_Shit__/Angela_Yu__/Day_31 #Learning_game/images/wrong.png")
+RIGHT = PhotoImage(file="images\\right.png")
+WRONG = PhotoImage(file="images\\wrong.png")
 
 
 # -------------------------------------------------------CUSTOMTKINTER-SETUPS---------------------------------------------------------------
@@ -32,6 +34,7 @@ customtkinter.set_appearance_mode(STATE := STATE[0])
 display.title("Flash-Game")
 display.minsize(width=1000, height=750)
 display.config(bg=BACKGROUND_COLOR, padx=50, pady=50)
+
 
 # -------------------------------------------------------FUNCTIONS---------------------------------------------------------------
 def new_word():
@@ -62,14 +65,14 @@ def right():
     print("Already know", chosen_one)
     data.remove(chosen_one)
     DataFrame(data).to_csv(
-        "New_Shit__/Angela_Yu__/Day_31 #Learning_game/data/words_to_learn.csv",
+        "data\\words_to_learn.csv",
         index=False,
     )
     start()
 
 
 def wrong():
-    print("Don't know", chosen_one) 
+    print("Don't know", chosen_one)
     start()
 
 
@@ -92,20 +95,18 @@ flash_card.place(x=50, y=0)
 
 # -------------------------------------------------------BUTTON---------------------------------------------------------------
 wrong_button = customtkinter.CTkButton(
+    master=display,
     text="",
     width=0,
     image=WRONG,
-    highlightthickness=0,
-    border=False,
     fg_color=BACKGROUND_COLOR,
     command=wrong,
 )
 right_button = customtkinter.CTkButton(
+    master=display,
     text="",
     width=0,
     image=RIGHT,
-    highlightthickness=0,
-    border=False,
     fg_color=BACKGROUND_COLOR,
     command=right,
 )

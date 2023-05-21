@@ -13,12 +13,12 @@ screen.setup(width=1093, height=740)
 screen.title("U.S State Game")
 
 # Image section.
-image = "D:\Software\Python\\New_Shit__\Angela_Yu__\Day_25 #usa_game\\usa_game\\blank_state_150.gif"
+image = "blank_state_150.gif"
 screen.addshape(image)
 t.shape(image)
 
 # Data section.
-state_file = "D:\Software\Python\\New_Shit__\Angela_Yu__\Day_25 #usa_game\\usa_game\\50_states.csv"
+state_file = "50_states.csv"
 usa_state = read_csv(state_file)
 
 # Listing Section
@@ -66,4 +66,4 @@ while 1 if 50 - len(state_name) < 50 else print("Win!!"):
         score += 1
 
 left_state_name = DataFrame({"state": state_name})
-left_state_name.to_csv("D:\Software\Python\\New_Shit__\Angela_Yu__\Day_25 #usa_game\\usa_game\learn_states.csv")
+left_state_name.to_csv("learn_states.csv")
