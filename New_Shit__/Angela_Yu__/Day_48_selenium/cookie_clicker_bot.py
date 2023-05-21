@@ -29,11 +29,12 @@ die = time() + 60 * 5
 while 1:
     big_cookie.click()
     if time() > timeout:
-        system("clear")
+        system("cls")
         money = int(driver.find_element(By.ID, "money").text.replace(",", ""))
         print("Money:- ", money)
         perfect_upgrade = max([i for i in items.values() if i < money])
         item = [i for i, j in items.items() if j == perfect_upgrade]
+        print(item)
         upgrade = driver.find_element(By.ID, item[0])
         upgrade.click()
 
