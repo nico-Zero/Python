@@ -1,4 +1,4 @@
-body {
+/* body {
     background-color: antiquewhite;
     font-size: 40px;
 }
@@ -6,10 +6,10 @@ h1 {
     color: whitesmoke;
     background-color: darkseagreen;
     font-size: 2em;
-    font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS",
-        sans-serif;
+    font-family: Arial, Helvetica, sans-serif;
     font-weight: 500;
     font-style: italic;
+    text-align: center;
 }
 h2 {
     color: #faf8f1;
@@ -36,4 +36,30 @@ footer {
 }
 html {
     font-size: xx-large;
+} */
+html {
+    font-size: 30px;
+}
+
+body {
+    background-color: cornflowerblue;
+    color: white;
+    font-size: 18px;
+}
+
+#color {
+    color: coral;
+}
+#font_size {
+    font-size: 2rem;
+}
+#font_weight {
+    font-weight: 900;
+}
+#font_family {
+    font-weight: 400;
+    font-family: "Caveat", cursive;
+}
+#text_align {
+    text-align: right;
 }
