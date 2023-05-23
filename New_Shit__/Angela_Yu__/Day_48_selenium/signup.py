@@ -6,7 +6,7 @@ from selenium.webdriver.chrome.options import Options
 chrome_options = Options()
 chrome_options.add_experimental_option("detach", True)
 
-webdriver_location = "chromedriver"
+webdriver_location = "....../webdriver/chromedriver.exe"
 
 driver = webdriver.Chrome(executable_path=webdriver_location, options=chrome_options)
 

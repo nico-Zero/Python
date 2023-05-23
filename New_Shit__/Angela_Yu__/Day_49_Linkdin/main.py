@@ -8,7 +8,9 @@ from os import system
 chrome_options = Options()
 chrome_options.add_experimental_option("detach", True)
 
-driver = webdriver.Chrome(executable_path="chromedriver", options=chrome_options)
+driver = webdriver.Chrome(
+    executable_path="....../webdriver/chromedriver.exe", options=chrome_options
+)
 
 data = driver.get(
     "https://www.linkedin.com/login?session_redirect=https%3A%2F%2Fin%2Elinkedin%2Ecom%2Fin%2Fyuvraj-mahilange-91097a248&fromSignIn=true&trk=public_profile_nav-header-signin"
