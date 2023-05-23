@@ -14,17 +14,16 @@ driver.get("https://www.python.org/")
 # price = driver.find_element(By.CLASS_NAME, "a-price-whole").text.replace(",", "")
 # print(int(price))
 
-# price = driver.find_element(By.NAME, "q")
-# print(price.get_attribute("placeholder"))
+# input_ = driver.find_element(By.NAME, "q")
+# print(input_.get_attribute("placeholder"))
 
 # python_logo = driver.find_element(By.CSS_SELECTOR, ".documentation-widget a")
 # print(python_logo.get_attribute("href"))
 
 submit_bug = driver.find_element(
-    By.XPATH, "/html/body/div/footer/div[2]/div/ul/li[3]/a"
+    By.XPATH, r"/html/body/div/footer/div[2]/div/ul/li[3]/a"
 )
 print(submit_bug.get_attribute("href"))
 
 
 driver.quit()
-
