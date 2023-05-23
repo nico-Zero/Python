@@ -8,7 +8,6 @@ data = requests.get(url=URL)
 data.raise_for_status()
 data = data.text
 
-
 soup = BeautifulSoup(data, "html.parser")
 div = soup.find_all(name="div", class_="jsx-4245974604 listicle-item-content")
 with open("100_html_data1.html", "w") as f:

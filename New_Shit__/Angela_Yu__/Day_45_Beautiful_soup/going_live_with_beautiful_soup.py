@@ -30,6 +30,5 @@ news = [tag.getText() for tag in all_a]
 url = [tag.get("href") for tag in all_a]
 upvote = [int(number.split(" ")[0]) for number in [tag.getText() for tag in all_span]]
 
-# highest_upvote()
-for news_, index in zip(news, range(1,len(news))):
-    print(index, news_, sep=". ", end="\n")
+highest_upvote()
+show_all_news()
