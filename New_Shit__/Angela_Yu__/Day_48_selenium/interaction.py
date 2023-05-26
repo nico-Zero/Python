@@ -18,11 +18,12 @@ driver.get("https://en.wikipedia.org/wiki/Main_Page")
 # int_num = int(number.text.replace(",", ""))
 # print(int_num)
 
-history = driver.find_element(By.LINK_TEXT, "View history")
-history.click()
+# history = driver.find_element(By.LINK_TEXT, "View history")
+# history.click()
 
-# search_box = driver.find_element(By.NAME, "search")
-# search_box.send_keys("python")
+search_box = driver.find_element(By.LINK_TEXT, r"Search");
+search_box.click()
+search_box.send_keys("python")
 # search_box.send_keys(Keys.ENTER)
 
 # driver.quit()
