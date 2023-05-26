@@ -15,8 +15,12 @@ driver.get("https://en.wikipedia.org/wiki/Main_Page")
 first_name = driver.find_element(By.NAME, "FirstName")
 last_name = driver.find_element(By.NAME, "LastName")
 email = driver.find_element(By.NAME, "Email")
+sign_up_button = driver.find_element(By.LINK_TEXT, "Sign Up")
 
 first_name.send_keys("yuvraj")
 last_name.send_keys("mahilange")
 email.send_keys("znadaxheat955@gmail.com")
-email.send_keys(Keys.ENTER)
+sign_up_button.click()
+
+
+# driver.quit()
