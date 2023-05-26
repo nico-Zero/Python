@@ -21,9 +21,10 @@ driver.get("https://en.wikipedia.org/wiki/Main_Page")
 # history = driver.find_element(By.LINK_TEXT, "View history")
 # history.click()
 
-search_box = driver.find_element(By.LINK_TEXT, r"Search");
+search_box = driver.find_element(By.LINK_TEXT, r"Search")
 search_box.click()
-search_box.send_keys("python")
-# search_box.send_keys(Keys.ENTER)
+input_box = driver.find_element(By.NAME, "search")
+input_box.send_keys("Python")
+input_box.send_keys(Keys.ENTER)
 
 # driver.quit()
