@@ -20,11 +20,11 @@ driver.get("https://www.python.org/")
 # python_logo = driver.find_element(By.CSS_SELECTOR, ".documentation-widget a")
 # print(python_logo.get_attribute("href"))
 
-submit_bug = driver.find_elements(
-    By.XPATH, r"/html/body/div/footer/div[2]/div/ul/li[3]/a"
-)
-for submit in submit_bug:
-    print(submit.get_attribute("href"))
+# submit_bug = driver.find_elements(
+#     By.XPATH, r"/html/body/div/footer/div[2]/div/ul/li[3]/a"
+# )
+# for submit in submit_bug:
+#     print(submit.get_attribute("href"))
 
 
 driver.quit()

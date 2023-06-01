@@ -45,28 +45,49 @@ python_developer_job.click()
 
 sleep(3)
 
-easy_apply = job.find_element()
+easy_apply = job.find_element(By.XPATH, '//button[text()="Easy Apply"]')
+easy_apply_on_or_off = easy_apply.get_attribute("aria-checked")
 
-# filter = driver.find_element(
-#     By.XPATH, "/html/body/div[5]/div[3]/div[4]/section/div/section/div/div/div/div/div/button"
-# )
-# filter.click()
+if easy_apply_on_or_off == "false":
+    filter = driver.find_element(
+        By.XPATH,
+        "/html/body/div[5]/div[3]/div[4]/section/div/section/div/div/div/div/div/button",
+    )
+    filter.click()
 
-# sleep(2)
+    sleep(2)
 
-# easy_apply = driver.find_element(By.XPATH, "/html/body/div[3]/div/div/div[2]/ul/li[9]/fieldset/div/div")
-# easy_apply.click()
+    easy_apply = driver.find_element(
+        By.XPATH, "/html/body/div[3]/div/div/div[2]/ul/li[9]/fieldset/div/div"
+    )
+    easy_apply.click()
 
-# sleep(1)
+    sleep(1)
 
-# apply_filter = driver.find_element(By.XPATH, "/html/body/div[3]/div/div/div[3]/div/button[2]")
-# apply_filter.click()
+    apply_filter = driver.find_element(
+        By.XPATH, "/html/body/div[3]/div/div/div[3]/div/button[2]"
+    )
+    apply_filter.click()
+
 
 sleep(5)
 
 jobs = driver.find_elements(By.CSS_SELECTOR, ".job-card-container--clickable")
+for job_x in jobs:
+    sleep(3)
+    print(job_x)
+    job_x.click()
+    driver.find_element(
+        By.XPATH, '//span[@class="artdeco-button__text" and text()="Easy Apply"]'
+    ).click()
+    driver.find_element(
+        By.XPATH,
+        "/html/body/div[3]/div/div/div[2]/div/div[2]/form/div/div/div[4]/div/div/div[1]/div/input",
+    ).send_keys("7247477955")
 
-print(*jobs, sep="\n")
-print(f"Total :- {len(jobs)} Jobs")
+    sleep(3)
 
-jobs[1].click()
+    driver.find_element(
+        By.XPATH,
+        "/html/body/div[3]/div/div/div[2]/div/div[2]/form/footer/div[2]/button",
+    ).click()
