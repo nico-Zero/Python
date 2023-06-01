@@ -40,10 +40,12 @@ job.click()
 
 sleep(5)
 
-python_developer_job = driver.find_element(By.ID,"recentSearchesIndex__0")
+python_developer_job = driver.find_element(By.ID, "recentSearchesIndex__0")
 python_developer_job.click()
 
 sleep(3)
+
+easy_apply = job.find_element()
 
 # filter = driver.find_element(
 #     By.XPATH, "/html/body/div[5]/div[3]/div[4]/section/div/section/div/div/div/div/div/button"
@@ -62,7 +64,7 @@ sleep(3)
 
 sleep(5)
 
-jobs = driver.find_elements(By.CSS_SELECTOR,".job-card-container--clickable")
+jobs = driver.find_elements(By.CSS_SELECTOR, ".job-card-container--clickable")
 
 print(*jobs, sep="\n")
 print(f"Total :- {len(jobs)} Jobs")
