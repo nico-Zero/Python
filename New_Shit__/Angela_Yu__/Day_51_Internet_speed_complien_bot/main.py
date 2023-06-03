@@ -14,8 +14,8 @@ chrome_options.add_experimental_option("detach", True)
 class InternetSpeedTwitterBot:
     def __init__(
         self,
-        up=150,
-        down=10,
+        down=150,
+        up=10,
         twitter_email="zandaxheart955@gmail.com",
         twitter_pass="Nico_Zero##(69)",
         twitter_name="@Zanda0690",
@@ -122,10 +122,10 @@ class InternetSpeedTwitterBot:
         tweet.click()
         tweet.send_keys(
             f"""Promised download speed:- {self.PROMISED_DOWN_SPEED} 
-         Current download speed:- {self.CURRENT_DOWNLOAD_SPEED}
-         Promised upload speed:- {self.PROMISED_UP_SPEED}
-         Current upload speed:- {self.CURRENT_UP_SPEED}"""
-        )
+Current download speed:- {self.CURRENT_DOWNLOAD_SPEED}
+Promised upload speed:- {self.PROMISED_UP_SPEED}
+Current upload speed:- {self.CURRENT_UP_SPEED}"""
+)
 
         sleep(1)
         finally_tweet = driver.find_element(
@@ -133,6 +133,7 @@ class InternetSpeedTwitterBot:
             "/html/body/div[1]/div/div/div[2]/main/div/div/div/div[1]/div/div[3]/div/div[2]/div[1]/div/div/div/div[2]/div[3]/div/div/div[2]/div[3]/div/span/span",
         ).click()
 
+        sleep(10)
         driver.quit()
 
 
