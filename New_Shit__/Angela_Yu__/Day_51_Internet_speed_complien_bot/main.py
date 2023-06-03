@@ -10,10 +10,6 @@ from os import system
 chrome_options = Options()
 chrome_options.add_experimental_option("detach", True)
 
-
-
-
-
 class InternetSpeedTwitterBot:
     def __init__(self, up=150, down=10,twitter_email="zandaxhearrt955@gmail.com",twitter_pass="Nico_Zero##(69)"):
         self.DRIVER = webdriver.Chrome(
@@ -30,9 +26,9 @@ class InternetSpeedTwitterBot:
         internet_speed = self.DRIVER.get("https://www.speedtest.net/")
         self.DRIVER.find_element(By.XPATH,"//span[@class='start-text' and text()='Go']").click()        
         for i in range(1,40):
-            system("cls")
-            sleep(1)
             print(i)
+            sleep(1)
+            system("cls")
 
         print("Found Current Internet speed.")
 
@@ -41,4 +37,3 @@ class InternetSpeedTwitterBot:
         
 the_bot = InternetSpeedTwitterBot()
 the_bot.get_internet_speed()
-
