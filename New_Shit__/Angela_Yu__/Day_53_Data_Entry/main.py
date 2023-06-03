@@ -14,5 +14,3 @@ driver = webdriver.Chrome(
     executable_path="....../webdriver/chromedriver.exe", options=chrome_options
 )
 
-
-
