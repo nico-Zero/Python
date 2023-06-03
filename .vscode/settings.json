@@ -67,5 +67,8 @@
     "[python]": {
         "editor.defaultFormatter": "ms-python.black-formatter"
     },
-    "livePreview.defaultPreviewPath": "/New_Shit__/Angela_Yu__/Day_41_#Anker_Tag/hobbies.html"
+    "livePreview.defaultPreviewPath": "/New_Shit__/Angela_Yu__/Day_41_#Anker_Tag/hobbies.html",
+    "cSpell.ignoreWords": [
+        "Zanda"
+    ]
 }
