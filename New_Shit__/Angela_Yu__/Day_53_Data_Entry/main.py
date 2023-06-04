@@ -27,10 +27,10 @@ print(f"Total Property Found:- {len(data_list)}")
 property_detail = []
 
 for fragment_list in data_list:
-    adderss = fragment_list.select_one(selector="div > div > a > address")
-    if adderss == None:
+    address = fragment_list.select_one(selector="div > div > a > address")
+    if address == None:
         continue
-    adderss = adderss.getText()
+    address = address.getText()
 
     address_link = fragment_list.select_one(selector="div > div > a").attrs["href"]
     if address_link[0] == "/":
@@ -41,8 +41,49 @@ for fragment_list in data_list:
     ).getText()[:6]
 
     property_detail.append(
-        [{"address": adderss, "price": price, "address_link": address_link}]
+        {"address": address, "price": price, "address_link": address_link}
     )
 
 
 print(*property_detail, sep="\n")
+
+driver = webdriver.Chrome(
+    executable_path="....../webdriver/chromedriver.exe", options=chrome_options
+)
+
+sf_renting_research = driver.get(form_link)
+
+for property in property_detail:
+    sleep(1)
+    address_q = driver.find_element(
+        By.XPATH,
+        "/html/body/div/div[2]/form/div[2]/div/div[2]/div[1]/div/div/div[2]/div/div[1]/div/div[1]/input",
+    )
+    address_q.click()
+    address_q.send_keys(property["address"])
+
+    price_q = driver.find_element(
+        By.XPATH,
+        "/html/body/div/div[2]/form/div[2]/div/div[2]/div[2]/div/div/div[2]/div/div[1]/div/div[1]/input",
+    )
+    price_q.click()
+    price_q.send_keys(property["price"])
+
+    address_link_q = driver.find_element(
+        By.XPATH,
+        "/html/body/div/div[2]/form/div[2]/div/div[2]/div[3]/div/div/div[2]/div/div[1]/div/div[1]/input",
+    )
+    address_link_q.click()
+    address_link_q.send_keys(property["address_link"])
+
+    submit = driver.find_element(
+        By.XPATH,
+        "/html/body/div/div[2]/form/div[2]/div/div[3]/div[1]/div[1]/div/span/span",
+    )
+    submit.click()
+
+    sleep(1)
+    another_response = driver.find_element(
+        By.XPATH, "/html/body/div[1]/div[2]/div[1]/div/div[4]/a"
+    )
+    another_response.click()
