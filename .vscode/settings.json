@@ -65,7 +65,7 @@
     ],
     "cSpell.language": "en,lorem,en-US,en-GB",
     "[python]": {
-        "editor.defaultFormatter": "ms-python.black-formatter"
+        "editor.defaultFormatter": "ms-python.python"
     },
     "livePreview.defaultPreviewPath": "/New_Shit__/Angela_Yu__/Day_41_#Anker_Tag/hobbies.html",
     "cSpell.ignoreWords": [
