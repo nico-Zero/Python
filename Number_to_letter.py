@@ -163,4 +163,3 @@ while 1:
                 three_digits(num % 1000, 0),
             )
             print()
-
