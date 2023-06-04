@@ -31,6 +31,7 @@ zillow_data = zillow_data.text
 
 # filtered_data = []
 
+
 # for fragment in data:
 #     address = fragment.select_one(selector=r"#zpid_37\.779613--122\.40396 > div > div.StyledPropertyCardDataWrapper-c11n-8-84-0__sc-1omp4c3-0.cXTjvn.property-card-data > a > address").getText()
 #     print(address)
