@@ -30,5 +30,3 @@ def calculator (calculator_function, n1, n2):
     return calculator_function(n1, n2)
 
 print(calculator(add, 23,34))
-
-
