@@ -68,7 +68,6 @@
         "editor.defaultFormatter": "ms-python.python"
     },
     "livePreview.defaultPreviewPath": "/New_Shit__/Angela_Yu__/Day_41_#Anker_Tag/hobbies.html",
-    "cSpell.ignoreWords": [
-        "Zanda"
-    ]
+    "cSpell.ignoreWords": ["Zanda"],
+    "C_Cpp.default.compilerPath": "c:\\MinGW\\bin\\mingw32-gcc-9.2.0.exe"
 }
