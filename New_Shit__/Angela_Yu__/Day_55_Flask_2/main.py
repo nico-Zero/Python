@@ -12,6 +12,11 @@ def hello_world():
 def bye_world():
     return "<p>Bye, World!<p>"
 
+@app.route('/user/<name>')
+def greet(name):
+    return f"Hello, {name.capitalize()}"
+
+
 if __name__ == "__main__":
     app.run()
 
