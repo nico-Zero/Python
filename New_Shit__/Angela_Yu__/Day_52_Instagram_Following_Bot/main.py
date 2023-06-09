@@ -22,9 +22,7 @@ class InstaFollower:
         else:
             self.Target_account = target_account
 
-        self.DRIVER = webdriver.Chrome(
-            executable_path="....../webdriver/chromedriver.exe", options=chrome_options # type: ignore
-        )
+        self.DRIVER = webdriver.Chrome(options=chrome_options)
 
         self.Email_ID = email
         self.Password = password

@@ -8,7 +8,7 @@ from os import system
 chrome_options = Options()
 chrome_options.add_experimental_option("detach", True)
 
-driver = webdriver.Chrome(executable_path="....../webdriver/chromedriver.exe", options=chrome_options)
+driver = webdriver.Chrome(options=chrome_options)
 
 data = driver.get("https://orteil.dashnet.org/experiments/cookie/")
 

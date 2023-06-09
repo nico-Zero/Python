@@ -55,9 +55,7 @@ for fragment_list in data_list:
 
 print(*property_detail, sep="\n")
 
-driver = webdriver.Chrome(
-    executable_path="....../webdriver/chromedriver.exe", options=chrome_options
-)
+driver = webdriver.Chrome(options=chrome_options)
 
 sf_renting_research = driver.get(form_link)
 

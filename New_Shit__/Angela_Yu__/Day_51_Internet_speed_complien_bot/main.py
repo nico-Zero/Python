@@ -29,9 +29,7 @@ class InternetSpeedTwitterBot:
         self.CURRENT_UP_SPEED = None
 
     def get_internet_speed(self):
-        driver = webdriver.Chrome(
-            executable_path="....../webdriver/chromedriver.exe", options=chrome_options
-        )
+        driver = webdriver.Chrome(options=chrome_options)
         internet_speed = driver.get("https://www.speedtest.net/")
 
         sleep(1)
@@ -63,9 +61,7 @@ class InternetSpeedTwitterBot:
         return {"download": download_speed, "upload": up_speed}
 
     def tweet_at_provider(self):
-        driver = webdriver.Chrome(
-            executable_path="....../webdriver/chromedriver.exe", options=chrome_options
-        )
+        driver = webdriver.Chrome(options=chrome_options)
         twitter_bot = driver.get("https://twitter.com/i/flow/login?lang=en")
 
         sleep(3)
