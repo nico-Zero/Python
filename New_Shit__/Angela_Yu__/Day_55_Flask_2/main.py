@@ -1,5 +1,4 @@
 from flask import Flask
-import heapq
 
 app = Flask(__name__)
 
@@ -14,10 +13,8 @@ def bye_world():
 
 @app.route('/user/<name>')
 def greet(name):
-    return f"Hello, {name.capitalize()}"
-
+    return f"Hello, {name}"
 
 if __name__ == "__main__":
-    app.run()
-
+    app.run(debug=True)
 
