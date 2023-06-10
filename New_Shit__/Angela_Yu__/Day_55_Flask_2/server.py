@@ -22,7 +22,7 @@ def high_low(number):
         x += 1
     
     print(lucky_number)
-    if not 1 > number > 10:
+    if not 1 <= number <= 10:
         return f"<h1>{number} FOR REAL NIGGER!!!</h1>" \
             "<img src='https://media3.giphy.com/media/2NABZ6SkKNTGjD6D2D/200.webp?cid=ecf05e47l1db6o0lxqvdrn6o55laqq2uywclopuia9xlmkkl&ep=v1_gifs_search&rid=200.webp&ct=g' width='500px' hight='1000px'>"
     elif number == lucky_number:
