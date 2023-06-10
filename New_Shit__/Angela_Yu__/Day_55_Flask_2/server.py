@@ -10,7 +10,7 @@ x = 0
 def home():
     return "<h1>Guess the lucky Number between 1 and 10.</h1>" \
             "<h1>And right the input in URL Bar.</h1>" \
-            "<img src='https://media1.giphy.com/media/sJz799uFb32es/giphy.webp?cid=ecf05e47b97mz4ptq75y2fiv0i1b7whbx8nu3q4v5lo8wj0g&ep=v1_gifs_search&rid=giphy.webp&ct=g' width='500px' hight='1000px'>"
+            "<img src='https://media3.giphy.com/media/l378khQxt68syiWJy/200w.webp?cid=ecf05e47m7f9svgzot3oqfigiybal5avh5fkxvuxhg7whxi8&ep=v1_gifs_search&rid=200w.webp&ct=g' width='500px' hight='1000px'>"
 
 @app.route("/<int:number>")
 def high_low(number):
