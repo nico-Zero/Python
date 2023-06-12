@@ -20,17 +20,19 @@
 
 <body>
     {% for blog_posts in all_posts: %}
+    {%if blog_posts["id"]:%}
     <u>
         <h1>{{blog_posts["title"]}}</h1>
     </u>
     <h2>{{blog_posts["content"]}}</h2>
     <h4>Author:- {{blog_posts["author"]}}, Date:- {{blog_posts["date"]}}</h4>
     <hr>
+    {% endif %}
     {% endfor %}
 </body>
 <footer>
     <center>
-        <p>I Nico-Zero and {{year}} is my year.</p>
+        <p>I Nico-Zero and {{year}} is my year. Lucky Number:- {{lucky_number}}</p>
     </center>
 </footer>
 

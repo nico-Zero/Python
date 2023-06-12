@@ -22,6 +22,7 @@
             <h1>And</h1>
             <h1>I am {{4*random_number}}</h1>
             <h2>Random Number:- {{random_number}}</h2>
+            <a href="{{ url_for('blog', l_number = random_number) }}">Go To Blog</a>
         </center>
     </body>
     <footer>
