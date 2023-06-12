@@ -14,15 +14,15 @@ def home():
     return render_template("index.html", random_number=random_num, year=current_year)
 
 
-@app.route("guess/<name>")
+@app.route("/guess/<name>")
 def guess(name: str):
-    gender = requests.get("https://api.genderize.io/?name=peter")
+    gender = requests.get(f"https://api.genderize.io/?name={name}")
     gender.raise_for_status()
-    gender = gender.json()
+    gender = gender.json()["gender"]
 
-    age = requests.get("https://api.agify.io/?name={name}")
+    age = requests.get(f"https://api.agify.io/?name={name}")
     age.raise_for_status()
-    age = age.json()
+    age = age.json()["age"]
 
     return render_template("guess.html", name=name.capitalize(), gender=gender, age=age)
 
