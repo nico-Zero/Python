@@ -14,7 +14,7 @@ def home():
     return render_template("index.html", random_number=random_num, year=current_year)
 
 
-@app.route("/guess/<name>")
+@app.route("/guess/<string:name>")
 def guess(name: str):
     gender = requests.get(f"https://api.genderize.io/?name={name}")
     gender.raise_for_status()
