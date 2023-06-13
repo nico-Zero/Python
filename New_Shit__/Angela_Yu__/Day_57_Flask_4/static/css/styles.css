@@ -5,7 +5,7 @@ footer {
     width: 100%;
     /* Height of the footer*/
     height: 40px;
-    background: rgb(0, 0, 0,0.2);
+    background: rgb(0, 0, 0, 0.2);
 }
 #header {
     position: fixed;
@@ -14,5 +14,5 @@ footer {
     width: 100%;
     /* Height of the footer*/
     height: 70px;
-    background: rgb(0, 0, 0,0.2);
+    background: rgb(0, 0, 0, 0.2);
 }
