@@ -4,31 +4,26 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="static/style.css" />
     <title>Blog</title>
-    <style>
-        footer {
-            position: fixed;
-            padding: 0px;
-            bottom: 0;
-            width: 100%;
-            /* Height of the footer*/
-            height: 40px;
-            background: rgb(0, 0, 0, 0.2);
-        }
-    </style>
 </head>
 
 <body>
-    {% for blog_posts in all_posts: %}
-    {%if blog_posts["id"]:%}
-    <u>
-        <h1>{{blog_posts["title"]}}</h1>
-    </u>
-    <h2>{{blog_posts["content"]}}</h2>
-    <h4>Author:- {{blog_posts["author"]}}, Date:- {{blog_posts["date"]}}</h4>
-    <hr>
-    {% endif %}
-    {% endfor %}
+    <div id="header"></div>
+    <div>
+        {% for blog_posts in all_posts: %}
+        <div>
+            {%if blog_posts["id"]:%}
+            <u>
+                <h1>{{blog_posts["title"]}}</h1>
+            </u>
+            <h2>{{blog_posts["content"]}}</h2>
+            <h4>Author:- {{blog_posts["author"]}}, Date:- {{blog_posts["date"]}}</h4>
+            <hr>
+            {% endif %}
+        </div>
+        {% endfor %}
+    </div>
 </body>
 <footer>
     <center>
