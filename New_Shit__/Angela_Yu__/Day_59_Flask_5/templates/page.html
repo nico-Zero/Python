@@ -28,7 +28,7 @@
         <div class="row gx-4 gx-lg-5 justify-content-center">
             <div class="col-md-10 col-lg-8 col-xl-7">
 
-                {% for blog in blog_posts[0:10]: %}
+                {% for blog in blog_posts[1-1:10]: %}
                 <!-- Post preview-->
                 <div class="post-preview">
                     <a href="{{url_for('post', blog_id=blog['id'])}}">
@@ -48,7 +48,9 @@
                 <!-- Pager-->
                 <div class="container">
                     <div class="row">
-                        <div class="d-flex justify-content-end mb-4 col-12"><a class="btn btn-primary text-uppercase"
+                        <div class="d-flex justify-content-start mb-4 col-6"><a class="btn btn-primary text-uppercase"
+                                href="#!">←Previous Posts</a></div>
+                        <div class="d-flex justify-content-end mb-4 col-6"><a class="btn btn-primary text-uppercase"
                                 href="#!">Next Page→</a></div>
                     </div>
                 </div>
