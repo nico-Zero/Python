@@ -49,10 +49,15 @@
                 <div class="container">
                     <div class="row">
                         <div class="d-flex justify-content-start mb-4 col-6"><a class="btn btn-primary text-uppercase"
-                                href="{{ url_for('home') if page_ == 2 else url_for(page_ - 1)}}">←Previous Posts</a>
+                                href="{% if previous_page == 1%}
+                                        {{url_for('home')}}
+                                        {% else %}
+                                        {{url_for('page',page_number=previous_page)}}
+                                        {% endif %}">←Previous
+                                Posts</a>
                         </div>
                         <div class="d-flex justify-content-end mb-4 col-6"><a class="btn btn-primary text-uppercase"
-                                href="{{url_for(page_ + 1)}}">Next Page→</a></div>
+                                href="{{url_for('page',page_number=next_page)}}">Next Page→</a></div>
                     </div>
                 </div>
             </div>

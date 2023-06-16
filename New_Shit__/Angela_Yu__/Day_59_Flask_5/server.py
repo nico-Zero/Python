@@ -58,9 +58,16 @@ def page(page_number: int):
         data_file.write(json.dumps(blogs, indent=4))
 
     year = date.today().year
-
+    image = "../static/assets/img/home-bg.jpg"
+    
     return render_template(
-        "page.html", current_year=year, blog_posts=blogs, page_=page_number
+        "page.html",
+        img=image,
+        current_year=year,
+        blog_posts=blogs,
+        page_=page_number,
+        next_page=page_number + 1,
+        previous_page=page_number - 1,
     )
 
 
