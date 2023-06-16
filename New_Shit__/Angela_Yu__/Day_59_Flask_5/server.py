@@ -7,7 +7,7 @@ app = Flask(__name__)
 
 @app.route("/")
 def home():
-    blogs = requests.get(" https://api.npoint.io/8c3e6fb14d194fc2c75c")
+    blogs = requests.get("https://api.npoint.io/b319f78fbe9660d688d9")
     blogs.raise_for_status()
     blogs = blogs.json()
     with open("data.json", "w") as data_file:
@@ -30,11 +30,11 @@ def about():
     return render_template("about.html", img=image)
 
 
-@app.route("/post/<int:blog_id>")
-def post(blog_id):
+@app.route("/post")
+def post():
     with open("data.json") as data_file:
         blog_data = json.load(data_file)
-        blog = [post for post in blog_data if post["id"] == blog_id][0]
+        blog = [post for post in blog_data if post["id"] == 1][0]
 
     image = "../static/assets/img/post-bg.jpg"
 
