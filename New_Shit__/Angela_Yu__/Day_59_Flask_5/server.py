@@ -49,11 +49,19 @@ def post(blog_id: int):
     return render_template("post.html", img=image, post=blog, current_year=year)
 
 
-@app.route("/page/<page_number>")
-def page(page_number):
+@app.route("/page/<int:page_number>")
+def page(page_number: int):
+    blogs = requests.get("https://api.npoint.io/b319f78fbe9660d688d9")
+    blogs.raise_for_status()
+    blogs = blogs.json()
+    with open("data.json", "w") as data_file:
+        data_file.write(json.dumps(blogs, indent=4))
+
     year = date.today().year
 
-    return render_template("page.html", current_year=year, page_=page_number)
+    return render_template(
+        "page.html", current_year=year, blog_posts=blogs, page_=page_number
+    )
 
 
 if __name__ == "__main__":
