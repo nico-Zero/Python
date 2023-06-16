@@ -49,11 +49,11 @@ def post(blog_id: int):
     return render_template("post.html", img=image, post=blog, current_year=year)
 
 
-@app.route("/page/2")
-def page():
+@app.route("/page/<page_number>")
+def page(page_number):
     year = date.today().year
 
-    return render_template("page.html", current_year=year)
+    return render_template("page.html", current_year=year, page_=page_number)
 
 
 if __name__ == "__main__":
