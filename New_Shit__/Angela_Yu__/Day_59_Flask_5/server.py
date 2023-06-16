@@ -51,15 +51,12 @@ def post(blog_id: int):
 
 @app.route("/page/<int:page_number>")
 def page(page_number: int):
-    blogs = requests.get("https://api.npoint.io/b319f78fbe9660d688d9")
-    blogs.raise_for_status()
-    blogs = blogs.json()
-    with open("data.json", "w") as data_file:
-        data_file.write(json.dumps(blogs, indent=4))
+    with open("data.json") as data_file:
+        blogs = json.load(data_file)
 
     year = date.today().year
     image = "../static/assets/img/home-bg.jpg"
-    
+
     return render_template(
         "page.html",
         img=image,
