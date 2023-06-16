@@ -5,22 +5,26 @@ app = Flask(__name__)
 
 @app.route("/")
 def home():
-    return render_template("index.html")
+    image = "../static/assets/img/home-bg.jpg"
+    return render_template("index.html", img=image)
 
 
 @app.route("/contact")
 def contact():
-    return render_template("contact.html")
+    image = "../static/assets/img/contact-bg.jpg"
+    return render_template("contact.html", img=image)
 
 
 @app.route("/about")
 def about():
-    return render_template("about.html")
+    image = "../static/assets/img/about-bg.jpg"
+    return render_template("about.html", img=image)
 
 
 @app.route("/post")
 def post():
-    return render_template("post.html")
+    image = "../static/assets/img/post-bg.jpg"
+    return render_template("post.html", img=image)
 
 
 if __name__ == "__main__":
