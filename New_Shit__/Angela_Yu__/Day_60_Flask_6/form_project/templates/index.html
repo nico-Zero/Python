@@ -9,7 +9,7 @@
 
 <body>
     <center> Hello World! </center>
-    <form action="/login" method="post">
+    <form action="{{url_for('login')}}" method="post">
         <label for="name_">Name:- </label><br>
         <input type="text" name="name_" id="name_" value="name"><br><br>
         <label for="password">Password:- </label><br>

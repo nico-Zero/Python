@@ -1,4 +1,4 @@
-from flask import Flask, render_template
+from flask import Flask, render_template, request
 from datetime import date
 import requests
 import json
@@ -65,6 +65,18 @@ def page(page_number: int):
         page_=page_number,
         next_page=page_number + 1,
         previous_page=page_number - 1,
+    )
+
+
+@app.route("/message", methods=["POST"])
+def sent_message():
+    name = request.form["name"]
+    email = request.form["email"]
+    phone = request.form["phone"]
+    message = request.form["message"]
+
+    return render_template(
+        "message.html", name=name, email=email, phone=phone, message=message
     )
 
 
