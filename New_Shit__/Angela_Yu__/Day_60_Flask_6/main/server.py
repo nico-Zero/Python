@@ -2,7 +2,7 @@ from flask import Flask, render_template, request
 from datetime import date
 import requests
 import json
-
+import smtplib
 
 app = Flask(__name__)
 
@@ -28,10 +28,25 @@ def contact():
         email = request.form["email"]
         phone = request.form["phone"]
         message = request.form["message"]
+
         image = "../static/assets/img/contact-bg.jpg"
         year = date.today().year
 
         print(name, email, phone, message, sep="\n")
+
+        our_email = "zandaxheart955@gmail.com"
+        message = f"""
+        From: From Person {email}
+        To: To Person {our_email}
+        Subject: Contact By Blog Site
+        {message}
+        """
+        try:
+            sending_email = smtplib.SMTP("localhost")
+            sending_email.sendmail(email, our_email, message)
+            print("Successfully sent email.")
+        except:
+            print("Unable to send email.")
 
         return render_template(
             "contact.html",
