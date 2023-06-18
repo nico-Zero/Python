@@ -34,13 +34,17 @@ def contact():
         print(name, email, phone, message, sep="\n")
 
         return render_template(
-            "contact.html", message="successful", img=image, current_year=year
+            "contact.html",
+            message="successful",
+            img=image,
+            current_year=year,
+            form_=True,
         )
     else:
         image = "../static/assets/img/contact-bg.jpg"
         year = date.today().year
 
-        return render_template("contact.html", img=image, current_year=year)
+        return render_template("contact.html", img=image, current_year=year, form_=True)
 
 
 @app.route("/about")
