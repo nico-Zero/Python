@@ -21,12 +21,26 @@ def home():
     return render_template("index.html", img=image, blog_posts=blogs, current_year=year)
 
 
-@app.route("/contact")
+@app.route("/contact", methods=["GET", "POST"])
 def contact():
-    image = "../static/assets/img/contact-bg.jpg"
-    year = date.today().year
+    if request.method == "POST":
+        name = request.form["name"]
+        email = request.form["email"]
+        phone = request.form["phone"]
+        message = request.form["message"]
+        image = "../static/assets/img/contact-bg.jpg"
+        year = date.today().year
 
-    return render_template("contact.html", img=image, current_year=year)
+        print(name, email, phone, message, sep="\n")
+
+        return render_template(
+            "contact.html", message="successful", img=image, current_year=year
+        )
+    else:
+        image = "../static/assets/img/contact-bg.jpg"
+        year = date.today().year
+
+        return render_template("contact.html", img=image, current_year=year)
 
 
 @app.route("/about")
@@ -65,18 +79,6 @@ def page(page_number: int):
         page_=page_number,
         next_page=page_number + 1,
         previous_page=page_number - 1,
-    )
-
-
-@app.route("/message", methods=["POST"])
-def sent_message():
-    name = request.form["name"]
-    email = request.form["email"]
-    phone = request.form["phone"]
-    message = request.form["message"]
-
-    return render_template(
-        "message.html", name=name, email=email, phone=phone, message=message
     )
 
 
