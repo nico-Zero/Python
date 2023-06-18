@@ -41,6 +41,7 @@ def contact():
         year = date.today().year
 
         return render_template("contact.html", img=image, current_year=year)
+    
 
 
 @app.route("/about")
