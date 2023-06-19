@@ -26,32 +26,33 @@ def home():
 
 @app.route("/contact", methods=["GET", "POST"])
 def contact():
+    image = "../static/assets/img/contact-bg.jpg"
+    year = date.today().year
     if request.method == "POST":
         name = request.form["name"]
         email = request.form["email"]
         phone = request.form["phone"]
-        message = request.form["message"]
+        message = f"""
+        From:- {email}
+        Message:-{request.form['message']}"""
 
-        our_email = "zandaxheart955@gmail.com"
+        my_email = "zandaxheart955@gmail.com"
         password = "slemixowrmjmezyt"
         subject = f"An Email from {name} by Blog Website."
-
-        image = "../static/assets/img/contact-bg.jpg"
-        year = date.today().year
 
         print(name, email, phone, message, sep="\n")
 
         try:
             em = EmailMessage()
-            em["From"] = our_email
+            em["From"] = my_email
             em["To"] = email
             em["subject"] = subject
             em.set_content(message)
             context = ssl.create_default_context()
 
             with smtplib.SMTP_SSL("smtp.gmail.com", 465, context=context) as smtp:
-                smtp.login(our_email, password)
-                smtp.sendmail(our_email, email, em.as_string())
+                smtp.login(my_email, password)
+                smtp.sendmail(my_email, my_email, em.as_string())
 
             print("successfully sent👌👌")
         except:
@@ -65,9 +66,6 @@ def contact():
             form_=True,
         )
     else:
-        image = "../static/assets/img/contact-bg.jpg"
-        year = date.today().year
-
         return render_template("contact.html", img=image, current_year=year, form_=True)
 
 
