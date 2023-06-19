@@ -2,7 +2,10 @@ from flask import Flask, render_template, request
 from datetime import date
 import requests
 import json
+
+from email.message import EmailMessage
 import smtplib
+import ssl
 
 app = Flask(__name__)
 
@@ -29,22 +32,28 @@ def contact():
         phone = request.form["phone"]
         message = request.form["message"]
 
+        our_email = "zandaxheart955@gmail.com"
+        password = "slemixowrmjmezyt"
+        subject = f"An Email from {name} by Blog Website."
+
         image = "../static/assets/img/contact-bg.jpg"
         year = date.today().year
 
         print(name, email, phone, message, sep="\n")
 
-        our_email = "zandaxheart955@gmail.com"
-        message = f"""
-        From: From Person {email}
-        To: To Person {our_email}
-        Subject: Contact By Blog Site
-        {message}
-        """
         try:
-            sending_email = smtplib.SMTP("localhost")
-            sending_email.sendmail(email, our_email, message)
-            print("Successfully sent email.")
+            em = EmailMessage()
+            em["From"] = our_email
+            em["To"] = email
+            em["subject"] = subject
+            em.set_content(message)
+            context = ssl.create_default_context()
+
+            with smtplib.SMTP_SSL("smtp.gmail.com", 465, context=context) as smtp:
+                smtp.login(our_email, password)
+                smtp.sendmail(our_email, email, em.as_string())
+
+            print("successfully sent👌👌")
         except:
             print("Unable to send email.")
 

@@ -19,7 +19,7 @@ em.set_content(message)
 
 context = ssl.create_default_context()
 
-with smtplib.SMTP_SSL('smtp.gmail.com', 456, context=context) as smtp:
+with smtplib.SMTP_SSL('smtp.gmail.com', 465, context=context) as smtp:
     smtp.login(our_email, password)
     smtp.sendmail(our_email, email, em.as_string())
 
