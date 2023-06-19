@@ -33,8 +33,8 @@ def contact():
         email = request.form["email"]
         phone = request.form["phone"]
         message = f"""
-        From:- {email}
-        Message:-{request.form['message']}"""
+From:- {email}
+Message:-{request.form['message']}"""
 
         my_email = "zandaxheart955@gmail.com"
         password = "slemixowrmjmezyt"
