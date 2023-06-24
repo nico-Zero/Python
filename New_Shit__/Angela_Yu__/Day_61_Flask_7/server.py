@@ -1,15 +1,29 @@
 from flask import Flask, render_template, redirect, request
 from flask_wtf import FlaskForm
 from wtforms import StringField, PasswordField, SubmitField
-from wtforms.validators import DataRequired
+from wtforms.validators import DataRequired, NumberRange, Email
 import secrets
 
 key = secrets.token_hex(64)
 
 
 class MyForm(FlaskForm):
-    email = StringField(label="Email:- ", validators=[DataRequired()])
-    password = PasswordField(label="Password:- ", validators=[DataRequired()])
+    email = StringField(
+        label="Email:- ",
+        validators=[
+            DataRequired(message="Just enter a valid email Mother Fucker!!!"),
+            Email(
+                message="I told you to enter a fucking god dam a valid email. BITCH!!!"
+            ),
+        ],
+    )
+    password = PasswordField(
+        label="Password:- ",
+        validators=[
+            DataRequired(message="Just enter a valid Password Mother Fucker!!!"),
+            NumberRange(min=8, max=30, message="8-30 Character Please."),
+        ],
+    )
     login = SubmitField(label="login")
 
 

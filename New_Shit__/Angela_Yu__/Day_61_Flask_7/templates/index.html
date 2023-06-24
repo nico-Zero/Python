@@ -9,7 +9,7 @@
 
 <body>
     <h1>Login</h1>
-    <form method="POST" action="{{url_for('home')}} ">
+    <form method="POST" action="{{url_for('home')}} " novalidate>
         {{ form.csrf_token }}
         <p>
             {{form.email.label}} <br> {{form.email(size=30)}}
