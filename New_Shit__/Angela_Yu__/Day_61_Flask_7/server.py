@@ -16,7 +16,7 @@ def home():
     form = MyForm()
     if form.validate_on_submit():
         return redirect("/")
-    return render_template("index.html")
+    return render_template("index.html", form=form)
 
 
 if __name__ == "__main__":
