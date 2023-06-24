@@ -1,13 +1,18 @@
-from flask import Flask, render_template, redirect, request
+from flask import Flask, render_template, redirect
 from flask_wtf import FlaskForm
-from wtforms import StringField, PasswordField, SubmitField
+from wtforms import StringField, PasswordField, SubmitField, ValidationError
 from wtforms.validators import DataRequired, NumberRange, Email
+
 import secrets
 
 key = secrets.token_hex(64)
 
 
 class MyForm(FlaskForm):
+    def Length(_form, field, min=8, max=30, messages="8-30 Character Please."):
+        if not min <= len(field.data) <= max:
+            raise ValidationError(messages)
+
     email = StringField(
         label="Email:- ",
         validators=[
@@ -21,7 +26,7 @@ class MyForm(FlaskForm):
         label="Password:- ",
         validators=[
             DataRequired(message="Just enter a valid Password Mother Fucker!!!"),
-            NumberRange(min=8, max=30, message="8-30 Character Please."),
+            Length,
         ],
     )
     login = SubmitField(label="login")
@@ -32,15 +37,17 @@ app.config["SECRET_KEY"] = key
 
 
 @app.route("/", methods=["GET", "POST"])
-def home():
+def login():
     em_ps_form = MyForm()
-    if request.method == "POST":
-        if em_ps_form.validate_on_submit():
-            email = request.form["email"]
-            password = request.form["password"]
-            print(f"Email:- {email}, Password:- {password}")
+    if em_ps_form.validate_on_submit():
+        email = em_ps_form.email.data
+        password = em_ps_form.password.data
+        print(f"Email:- {email}, Password:- {password}")
+        if not email == "admin@email.com" and password == "123456778":
+            return render_template("denied.html")
+        else:
+            return render_template("success.html")
 
-            return redirect("/")
     return render_template("index.html", form=em_ps_form)
 
 
