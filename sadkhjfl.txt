@@ -1,0 +1,238 @@
+local ModificationViewController = R14
+
+--[[
+frm = getLuaEngine()
+log = frm.mOutput
+log.Color = '0x000000'
+log.Font.Name = "Consolas"
+log.Font.Size = 9
+log.Font.Color = '1030655'
+frm.show()
+]]
+local al = getAddressList()
+local pr = al.getMemoryRecordByID( "16256" ) -- gets "[I > Crafting > Modify > Click Item > F > F] Get Weapon Coil|Outfit Weave Stats" memory record
+if pr.Count ~= 0x0 then
+  for i = 0, pr.Count - 1 do
+    pr.Child[0].destroy()
+  end
+end
+-- note that if you apply spaces at start of row, they get carried over in the .Text property
+local rarity_list = [[
+0:Common
+1:Uncommon
+2:Rare
+3:Very Rare
+]]
+
+-- [ModificationViewController + 0x08] - 0x20 = ViewDependentEntity (Weapon/Outfit selected for modding)
+local ViewDependentEntity = 0x0
+local p = readQword( ModificationViewController + 0x08 )
+if p ~= 0x0 then
+  ViewDependentEntity = p - 0x20
+end
+--print( string.format( "%016X ┉› ViewDependentEntity", ViewDependentEntity ) )
+-- [ModificationViewController + 0x38] - 0x20 = InventoryEntity (Coil/Weave you're hovering mouse on)
+local InventoryEntity = 0x0
+local p = readQword( ModificationViewController + 0x38 )
+if p ~= 0x0 then
+  InventoryEntity = p - 0x20
+end
+--print( string.format( "%016X ┉› InventoryEntity", InventoryEntity ) )
+local InventoryItemComponent = FindNamedComponentByRTTIClass( InventoryEntity + 0x288, "InventoryItemComponent" )
+local InventoryItemComponentResource = readQword( InventoryItemComponent + 0x30 )
+local InventoryItemComponentResource_LocalizedTextResource = readQword( InventoryItemComponentResource + 0x28 )
+local len_InventoryItemComponentResource_LocalizedTextResource = readInteger( InventoryItemComponentResource_LocalizedTextResource + 0x28 )
+local pstr_InventoryItemComponentResource_LocalizedTextResource = readQword( InventoryItemComponentResource_LocalizedTextResource + 0x20 )
+local name_InventoryItemComponent = readString( pstr_InventoryItemComponentResource_LocalizedTextResource, len_InventoryItemComponentResource_LocalizedTextResource )
+--print( string.format( "%016X    ╰→ InventoryItemComponent", InventoryItemComponent ) )
+if name_InventoryItemComponent == "Weapon Coil" then name_InventoryItemComponent = string.gsub( name_InventoryItemComponent, "Weapon ", "" ) end
+if name_InventoryItemComponent == "Outfit Weave" then name_InventoryItemComponent = ( string.gsub( name_InventoryItemComponent, "Outfit ", "" ) ) end
+--print( name_InventoryItemComponent )
+local ItemPriceInfo = readQword( InventoryItemComponentResource + 0x38 )
+local Price = 0x0
+local dwPrice = 0
+if ItemPriceInfo ~= 0x0 then
+  Price = ItemPriceInfo + 0x2C
+  dwPrice = readInteger( Price )
+end
+--print( string.format( "%016X       ╰→ Value: %d", Price, dwPrice ) )
+local LootItemDescriptionResource = readQword( InventoryItemComponentResource + 0x68 )
+local Rarity = 0x0
+local szRarity = "None"
+if LootItemDescriptionResource ~= 0x0 then
+  Rarity = LootItemDescriptionResource + 0x48
+  szRarity = readInteger( LootItemDescriptionResource + 0x48 )
+  if szRarity == 0x0 then szRarity = "Common" end
+  if szRarity == 0x1 then szRarity = "Uncommon" end
+  if szRarity == 0x2 then szRarity = "Rare" end
+  if szRarity == 0x3 then szRarity = "Very Rare" end
+end
+--print( string.format( "%016X       ╰→ Rarity: %s", Rarity, szRarity ) )
+-- RAX contains the EquipmentModificationItemComponent of the Coil/Weave in focus
+local EquipmentModificationItemComponent = RAX
+--print( string.format( "%016X    ╰→ EquipmentModificationItemComponent", EquipmentModificationItemComponent ) )
+local EquipmentModificationComponentResource = readQword( EquipmentModificationItemComponent + 0x30 )
+local len_StatModification_Table = readInteger( EquipmentModificationItemComponent + 0x58 )
+local ptr_StatModification_Table = EquipmentModificationItemComponent + 0x60
+local ArrayStart = readQword( ptr_StatModification_Table )
+local ArrayEnd = ArrayStart + (len_StatModification_Table - 1) * 8 * 4
+for i = ArrayStart, ArrayEnd, 8 * 4 do
+  local Stat = i + 0x10
+  local dwStat = readInteger( i + 0x10 )
+  local StatModificationTypeResource = readQword( i + 0x18 )
+  local pstr_StatModificationTypeResource = readQword( StatModificationTypeResource + 0x20 )
+  local name_Stat = readString( pstr_StatModificationTypeResource )
+  local ModifierStatDisplayEntry = readQword( StatModificationTypeResource + 0x30 )
+  local CurveResource = readQword( ModifierStatDisplayEntry + 0x30 )
+  -- note that [CurveResource + 0x64] contains a float limiter value
+  --print( string.format( "%016X       ╰→ ModifierStatDisplayEntry", ModifierStatDisplayEntry ) )
+  local BonusPercent = executeCodeEx( 0, nil, getAddressSafe( "funcWrapper" ), ModifierStatDisplayEntry, dwStat )
+  BonusPercent = byteTableToFloat( dwordToByteTable( BonusPercent ) ) * 100
+  BonusPercent = math.floor( BonusPercent + 0.5 )
+  --print( val )
+  -- none for Handling
+  -- none for Damage
+  if name_Stat == "Impact" then name_Stat = "Tear" end
+  if name_Stat == "FireElemental" then name_Stat = "Fire" end
+  -- none for Corruption
+  if name_Stat == "ShockElemental" then name_Stat = "Shock" end
+  if name_Stat == "CryoElemental" then name_Stat = "Freeze" end
+  if name_Stat == "Resistance_Ranged" then name_Stat = "Resist Ranged Attacks" end
+  if name_Stat == "Resistance_Melee" then name_Stat = "Resist Melee Attacks" end
+  -- none for Stealth
+  if name_Stat == "Resistance_Fire" then name_Stat = "Resist Fire" end
+  if name_Stat == "Resistance_Poison" then name_Stat = "Resist Corruption" end
+  if name_Stat == "Resistance_Electricity" then name_Stat = "Resist Shock" end
+  if name_Stat == "Resistance_Cryo" then name_Stat = "Resist Freeze" end
+  local Item = ""
+  --if i - ArrayStart == 0 then print( string.format( "\t\t       ┉› +%d%% %s %s", BonusPercent, name_Stat, name_InventoryItemComponent ) ) end
+  if i - ArrayStart == 0 then
+    Item = string.format( "+%d%% %s %s", BonusPercent, name_Stat, name_InventoryItemComponent )
+    ir = al.createMemoryRecord()
+    ir.appendToEntry( pr )
+    ir.setDescription( Item )
+    ir.isGroupHeader = true
+    ir.DontSave = true
+    -- Rarity
+    if Rarity ~= 0x0 then
+      -- Value
+      rr = al.createMemoryRecord()
+      rr.appendToEntry( ir )
+      rr.setDescription( "Rarity" )
+      rr.setAddress( Rarity )
+      rr.DontSave = true
+      rr.DropDownList.Text = rarity_list
+      rr.DropDownReadOnly = true -- Disallow manual user input
+      rr.DropDownDescriptionOnly = true -- Only show the description part
+      rr.DisplayAsDropDownListItem = true -- Make the record display values like the dropdownlist
+    end
+    -- Price
+    if Price ~= 0x0 then
+      vr = al.createMemoryRecord()
+      vr.appendToEntry( ir )
+      vr.setDescription( "Price" )
+      vr.setAddress( Price )
+      vr.DontSave = true
+    end
+    tbr = al.createMemoryRecord()
+    tbr.appendToEntry( ir )
+    tbr.setDescription( "Stats Table" )
+    tbr.setAddress( EquipmentModificationItemComponent + 0x60 )
+    tbr.Type = vtQword
+    tbr.DontSave = true
+    tbr.ShowAsHex = true
+    nmr = al.createMemoryRecord()
+    nmr.appendToEntry( ir )
+    nmr.setDescription( "Stats Num" )
+    nmr.setAddress( EquipmentModificationItemComponent + 0x58 )
+    nmr.Type = vtDword
+    nmr.DontSave = true
+  end
+  --print( string.format( "%016X          ╰→ Stat: %s", i, name_Stat ) )
+  --print( string.format( "%016X             ╰→ Bonus: %d [+%d%%]", Stat, dwStat, BonusPercent ) )
+  sr = al.createMemoryRecord()
+  sr.appendToEntry( ir )
+  sr.setDescription( string.format( "Stat #%d: %s [+%d%%]", ( ( i - ArrayStart ) / 8 / 4 ) + 1, name_Stat, BonusPercent ) )
+  sr.setAddress( Stat )
+  sr.DontSave = true
+  tr = al.createMemoryRecord()
+  tr.appendToEntry( ir )
+  tr.setDescription( string.format( "Stat #%d Table", ( ( i - ArrayStart ) / 8 / 4 ) + 1 ) )
+  tr.setAddress( Stat - 0x10 )
+  tr.Type = vtByteArray
+  tr.Aob.Size = 0x20
+  tr.DontSave = true
+  tr.ShowAsHex = true
+end
+--print( "" )
+str = al.createMemoryRecord()
+str.appendToEntry( ir )
+str.setDescription( "Stats Edit" )
+str.isGroupHeader = true
+str.DontSave = true
+str1 = al.createMemoryRecord()
+str1.appendToEntry( str )
+str1.setDescription( "Stat #1" )
+str1.setAddress( getAddressSafe( "statsEdit" ) + 0x00 )
+str1.Type = vtByteArray
+str1.Aob.Size = 0x20
+str1.DontSave = true
+str1.ShowAsHex = true
+str2 = al.createMemoryRecord()
+str2.appendToEntry( str )
+str2.setDescription( "Stat #2" )
+str2.setAddress( getAddressSafe( "statsEdit" ) + 0x20 )
+str2.Type = vtByteArray
+str2.Aob.Size = 0x20
+str2.DontSave = true
+str2.ShowAsHex = true
+str3 = al.createMemoryRecord()
+str3.appendToEntry( str )
+str3.setDescription( "Stat #3" )
+str3.setAddress( getAddressSafe( "statsEdit" ) + 0x40 )
+str3.Type = vtByteArray
+str3.Aob.Size = 0x20
+str3.DontSave = true
+str3.ShowAsHex = true
+str4 = al.createMemoryRecord()
+str4.appendToEntry( str )
+str4.setDescription( "Stat #4" )
+str4.setAddress( getAddressSafe( "statsEdit" ) + 0x60 )
+str4.Type = vtByteArray
+str4.Aob.Size = 0x20
+str4.DontSave = true
+str4.ShowAsHex = true
+str5 = al.createMemoryRecord()
+str5.appendToEntry( str )
+str5.setDescription( "Stat #5" )
+str5.setAddress( getAddressSafe( "statsEdit" ) + 0x80 )
+str5.Type = vtByteArray
+str5.Aob.Size = 0x20
+str5.DontSave = true
+str5.ShowAsHex = true
+str6 = al.createMemoryRecord()
+str6.appendToEntry( str )
+str6.setDescription( "Stat #6" )
+str6.setAddress( getAddressSafe( "statsEdit" ) + 0xA0 )
+str6.Type = vtByteArray
+str6.Aob.Size = 0x20
+str6.DontSave = true
+str6.ShowAsHex = true
+str7 = al.createMemoryRecord()
+str7.appendToEntry( str )
+str7.setDescription( "Stat #7" )
+str7.setAddress( getAddressSafe( "statsEdit" ) + 0xC0 )
+str7.Type = vtByteArray
+str7.Aob.Size = 0x20
+str7.DontSave = true
+str7.ShowAsHex = true
+str8 = al.createMemoryRecord()
+str8.appendToEntry( str )
+str8.setDescription( "Stat #8" )
+str8.setAddress( getAddressSafe( "statsEdit" ) + 0xE0 )
+str8.Type = vtByteArray
+str8.Aob.Size = 0x20
+str8.DontSave = true
+str8.ShowAsHex = true
+debug_continueFromBreakpoint( co_run )
+return 1
