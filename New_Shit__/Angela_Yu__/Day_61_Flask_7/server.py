@@ -43,10 +43,10 @@ def login():
         email = em_ps_form.email.data
         password = em_ps_form.password.data
         print(f"Email:- {email}, Password:- {password}")
-        if not email == "admin@email.com" and password == "123456778":
-            return render_template("denied.html")
-        else:
+        if email == "admin@email.com" and password == "12345678":
             return render_template("success.html")
+        else:
+            return render_template("denied.html")
 
     return render_template("index.html", form=em_ps_form)
 

@@ -1,16 +1,11 @@
-<!DOCTYPE html>
-<html lang="en">
+{% extends "index.html" %}
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Access Granted</title>
-</head>
+{% block title %}Success{% endblock %}
 
-<body>
+{% block content %}
+<div>
     <h1>Logged In</h1>
     <img src="https://media1.giphy.com/media/PPgZCwZPKrLcw75EG1/200w.webp?cid=ecf05e477hkqxmyrok0tigssmidur0txnzkzb8czr46sxgi0&ep=v1_gifs_search&rid=200w.webp&ct=g"
         alt="Fuck" width="1000px" height="700px">
-</body>
-
-</html>
+</div>
+{% endblock %}
