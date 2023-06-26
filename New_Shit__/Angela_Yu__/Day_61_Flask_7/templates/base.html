@@ -1,19 +1,12 @@
-<!DOCTYPE html>
-<html lang="en">
+{% extends "bootstrap/base.html" %}
 
-<head>
-    <meta charset="UTF-8">
-    <title>{% block title %}{% endblock %}</title>
-</head>
 
-<body>
-    <center>
-        <h1>Hello World</h1>
-    </center>
-    {% block content %}{% endblock %}
-    <center>
-        <h1>Extended From Base Website.</h1>
-    </center>
-</body>
-
-</html>
+{% block content %}
+<center>
+    <h1>Hello World</h1>
+</center>
+{% block content %}{% endblock %}
+<center>
+    <h1>Extended From Base Website.</h1>
+</center>
+{% endblock %}

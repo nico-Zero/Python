@@ -2,6 +2,7 @@ from flask import Flask, render_template, redirect
 from flask_wtf import FlaskForm
 from wtforms import StringField, PasswordField, SubmitField, ValidationError
 from wtforms.validators import DataRequired, NumberRange, Email
+from flask_bootstrap import Bootstrap
 
 import secrets
 
@@ -34,7 +35,7 @@ class MyForm(FlaskForm):
 
 app = Flask(__name__)
 app.config["SECRET_KEY"] = key
-
+Bootstrap(app)
 
 @app.route("/", methods=["GET", "POST"])
 def login():
