@@ -37,7 +37,13 @@ app = Flask(__name__)
 app.config["SECRET_KEY"] = key
 Bootstrap(app)
 
-@app.route("/", methods=["GET", "POST"])
+
+@app.route("/")
+def home():
+    return render_template("index.html")
+
+
+@app.route("/login", methods=["GET", "POST"])
 def login():
     em_ps_form = MyForm()
     if em_ps_form.validate_on_submit():
@@ -49,7 +55,7 @@ def login():
         else:
             return render_template("denied.html")
 
-    return render_template("index.html", form=em_ps_form)
+    return render_template("login.html", form=em_ps_form)
 
 
 if __name__ == "__main__":

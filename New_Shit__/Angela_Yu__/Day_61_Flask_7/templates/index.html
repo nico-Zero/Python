@@ -1,33 +1,16 @@
 {% extends "bootstrap/base.html" %}
-{% block title %}Login{% endblock %}
+{% block title %}This is an example page{% endblock %}
 
 {% block navbar %}
-<div class="navbar navbar-fixed-top">
-    <!-- ... -->
-</div>
+<main style="background-color: aliceblue;">
+    <h1 class="text-body-emphasis">Welcome</h1>
+    <p class="fs-5 col-md-8">Are you ready to discover our secrete.</p>
+    <div class="mb-5">
+        <a href="{{url_for('login')}}" class="btn btn-primary btn-lg px-4">Login</a>
+    </div>
+
+</main>
 {% endblock %}
 
 {% block content %}
-<h1>Login</h1>
-<form method="POST" action="{{url_for('login')}} " novalidate>
-    {{ form.csrf_token }}
-    <p>
-        {{form.email.label}} <br> {{form.email(size=30)}}
-        {% if form.email.errors %}
-        {% for error in form.email.errors%}
-        <span style="color:red">{{error}} </span>
-        {% endfor %}
-        {% endif %}
-    </p>
-    <p>
-        {{form.password.label}} <br> {{form.password(size=30)}}
-        {% if form.password.errors %}
-        {% for error in form.password.errors%}
-        <span style="color:red">{{error}} </span>
-        {% endfor %}
-        {% endif %}
-    </p>
-    <br>
-    {{form.login()}}
-</form>
 {% endblock %}
