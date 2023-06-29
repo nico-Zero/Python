@@ -68,7 +68,7 @@ def add_cafe():
             data = csv.writer(csv_file, delimiter=",")
             # data.writerow()
             print(form.data)
-            print(list(form.data.values())[:-2])
+            print([type(i) for i in list(form.data.values())[:-2]])
 
     return render_template("add.html", form=form)
 
