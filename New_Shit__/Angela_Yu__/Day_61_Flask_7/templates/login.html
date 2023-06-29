@@ -11,6 +11,6 @@
 {% block content %}
 <h1>Login</h1>
 <form method="POST" action="{{url_for('login')}} " novalidate>
-    {{wtf.quick_form(form, horizontal_columns=('lg',2,2))}}
+    {{wtf.quick_form(form)}}
 </form>
 {% endblock %}

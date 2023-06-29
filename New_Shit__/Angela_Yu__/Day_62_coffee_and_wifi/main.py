@@ -1,7 +1,7 @@
-from flask import Flask, render_template
+from flask import Flask, render_template, request
 from flask_bootstrap import Bootstrap
 from flask_wtf import FlaskForm
-from wtforms import StringField, SubmitField, SelectField, URLField
+from wtforms import StringField, SubmitField, SelectField, URLField, TimeField
 from wtforms.validators import DataRequired, URL
 import csv
 
@@ -12,12 +12,24 @@ Bootstrap(app)
 
 class CafeForm(FlaskForm):
     cafe = StringField("Cafe name", validators=[DataRequired()])
-    Location = URLField("Location", validators=[DataRequired(),URL()])
-    open_ = StringField("Open", validators=[DataRequired()])
-    close = StringField("Close", validators=[DataRequired()])
-    coffee = SelectField("Coffee", validators=[DataRequired()], choices=["✘","☕","☕☕","☕☕☕","☕☕☕☕","☕☕☕☕☕"])
-    wifi = SelectField("Wifi", validators=[DataRequired()], choices=["✘","💪","💪💪","💪💪💪","💪💪💪💪","💪💪💪💪💪"])
-    power = SelectField("Power", validators=[DataRequired()], choices=["✘","🔌","🔌🔌","🔌🔌🔌","🔌🔌🔌🔌","🔌🔌🔌🔌🔌"])
+    Location = URLField("Location", validators=[DataRequired(), URL()])
+    open_ = TimeField("Open", validators=[DataRequired()], format="%H:%M")
+    close = TimeField("Close", validators=[DataRequired()], format="%H:%M")
+    coffee = SelectField(
+        "Coffee",
+        validators=[DataRequired()],
+        choices=["✘", "☕", "☕☕", "☕☕☕", "☕☕☕☕", "☕☕☕☕☕"],
+    )
+    wifi = SelectField(
+        "Wifi",
+        validators=[DataRequired()],
+        choices=["✘", "💪", "💪💪", "💪💪💪", "💪💪💪💪", "💪💪💪💪💪"],
+    )
+    power = SelectField(
+        "Power",
+        validators=[DataRequired()],
+        choices=["✘", "🔌", "🔌🔌", "🔌🔌🔌", "🔌🔌🔌🔌", "🔌🔌🔌🔌🔌"],
+    )
 
     submit = SubmitField("Submit")
 
@@ -48,14 +60,16 @@ def cafes():
     return render_template("cafes.html", cafes=list_of_rows)
 
 
-@app.route("/add")
+@app.route("/add", methods=["GET", "POST"])
 def add_cafe():
     form = CafeForm()
     if form.validate_on_submit():
-        print("True")
-    # Exercise:
-    # Make the form write a new row into cafe-data.csv
-    # with   if form.validate_on_submit()
+        with open('cafe_data.csv', "+a" ,newline="", encoding="utf8") as csv_file:
+            data = csv.writer(csv_file, delimiter=",")
+            # data.writerow()
+            print(form.data)
+            print(list(form.data.values())[:-2])
+
     return render_template("add.html", form=form)
 
 
