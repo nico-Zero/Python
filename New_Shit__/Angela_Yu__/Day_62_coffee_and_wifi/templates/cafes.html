@@ -22,7 +22,13 @@
           {% for row in cafes[1:] %}
           <tr>
             {% for row_item in row %}
+
+            {% if row_item[:5]=="https" %}
+            <td><a href="{{row_item}}">Map Link</a></td>
+            {% else %}
             <td>{{row_item}}</td>
+            {% endif %}
+
             {% endfor %}
           </tr>
           {% endfor %}
