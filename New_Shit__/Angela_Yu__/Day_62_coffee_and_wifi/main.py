@@ -32,7 +32,7 @@ def home():
 
 @app.route("/cafes")
 def cafes():
-    with open("cafe_data.csv", newline="") as csv_file:
+    with open("cafe_data.csv", newline="", encoding="utf8") as csv_file:
         csv_data = csv.reader(csv_file, delimiter=",")
         list_of_rows = []
         for row in csv_data:
