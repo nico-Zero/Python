@@ -73,7 +73,7 @@ def add_cafe():
     return render_template("add.html", form=form)
 
 
-@app.route("/delete")
+@app.route("/delee")
 def delete_cafe():
     form = CafeForm()
     if form.validate_on_submit():
