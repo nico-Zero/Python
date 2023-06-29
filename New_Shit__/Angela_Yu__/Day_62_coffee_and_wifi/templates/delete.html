@@ -1,5 +1,6 @@
 {% extends 'bootstrap/base.html' %}
 
+{% block html_attribs %} data-bs-theme="dark" {% endblock %}
 {% block title %}Add A New Cafe{% endblock %}
 
 {% block content %}
@@ -9,7 +10,7 @@
 
             <h1>Add a new cafe into the database</h1>
 
-            <!-- This is where your WTForm will go -->
+
 
             <p class="space-above"><a href="{{url_for('cafes')}}">See all cafes</a></p>
 
