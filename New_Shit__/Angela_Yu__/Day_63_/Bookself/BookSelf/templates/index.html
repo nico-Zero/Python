@@ -6,7 +6,9 @@
 
 <h1>My Library</h1>
 <ul>
-  <li></li>
+  {% for item in books %}
+  <li>{{item['name']}} - {{item['author']}} - {{item['rating']}}</li>
+  {% endfor %}
 </ul>
 
 <a href="{{url_for('add')}}">Add New Book</a>
