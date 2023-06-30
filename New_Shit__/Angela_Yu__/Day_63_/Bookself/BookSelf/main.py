@@ -26,7 +26,7 @@ all_books = []
 @app.route("/")
 def home():
     
-    return render_template("index.html", books=all_books)
+    return render_template("index.html",library = bool(all_books) ,books=all_books)
 
 
 @app.route("/add", methods=["GET", "POST"])

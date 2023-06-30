@@ -6,9 +6,14 @@
 
 <h1>My Library</h1>
 <ul>
+  {% if library %}
   {% for item in books %}
   <li>{{item['name']}} - {{item['author']}} - {{item['rating']}}</li>
   {% endfor %}
+
+  {% else %}
+  <li>Library is Empty.</li>
+  {% endif %}
 </ul>
 
 <a href="{{url_for('add')}}">Add New Book</a>
