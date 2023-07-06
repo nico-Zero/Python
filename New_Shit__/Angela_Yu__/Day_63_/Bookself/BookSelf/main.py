@@ -44,6 +44,7 @@ def add():
         with open("books.csv", "+a", newline="", encoding="utf8") as csv_file:
             file = writer(csv_file, delimiter=",")
             file.writerow(data.values())
+            return redirect(url_for("home"))
 
     return render_template("add.html", form=form)
 
