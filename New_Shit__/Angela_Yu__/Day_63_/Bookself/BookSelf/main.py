@@ -3,7 +3,7 @@ from flask_bootstrap import Bootstrap
 from flask_wtf import FlaskForm
 from wtforms import StringField, SubmitField, SelectField
 from wtforms.validators import DataRequired
-
+import csv
 
 class Input_form(FlaskForm):
     name = StringField(label="Book Name:-", validators=[DataRequired()])
@@ -33,6 +33,8 @@ def home():
 def add():
     form = Input_form()
     if form.validate_on_submit():
+        with open("books.csv", "+a") as csv_file:
+            ...
         all_books.append({key: value for key, value in list(form.data.items())[:-2]})
         print(all_books)
     return render_template("add.html", form=form)
