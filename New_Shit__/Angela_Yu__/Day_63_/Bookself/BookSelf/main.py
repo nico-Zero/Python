@@ -52,10 +52,3 @@ def add():
 if __name__ == "__main__":
     app.run(debug=True)
 
-# all_books = []
-# with open("books.csv", newline="", encoding="utf8") as csv_file:
-#     file = reader(csv_file, delimiter=",")
-#     for row in file:
-#         all_books.append(row)
-
-# print(all_books)
