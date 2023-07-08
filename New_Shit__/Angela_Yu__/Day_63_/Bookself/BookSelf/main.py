@@ -33,7 +33,8 @@ def home():
         {"name": name, "author": author, "rating": rating}
         for name, author, rating in all_books[1:]
     ]
-    return render_template("index.html", library=bool(all_books), books=parsed_books)
+
+    return render_template("index.html", library=bool(parsed_books), books=parsed_books)
 
 
 @app.route("/add", methods=["GET", "POST"])
@@ -51,4 +52,3 @@ def add():
 
 if __name__ == "__main__":
     app.run(debug=True)
-
