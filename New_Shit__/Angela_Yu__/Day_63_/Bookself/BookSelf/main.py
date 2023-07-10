@@ -1,18 +1,20 @@
 from flask import Flask, render_template, request, redirect, url_for
 from flask_bootstrap import Bootstrap
 from flask_wtf import FlaskForm
-from wtforms import StringField, SubmitField, SelectField
-from wtforms.validators import DataRequired
+from wtforms import StringField, SubmitField, FloatField
+from wtforms.validators import DataRequired, NumberRange
 from csv import reader, writer
 
 
 class Input_form(FlaskForm):
     name = StringField(label="Book Name:-", validators=[DataRequired()])
     author = StringField(label="Book Author:-", validators=[DataRequired()])
-    rating = SelectField(
-        label="Rating:-",
-        validators=[DataRequired()],
-        choices=("❌", "⭐", "⭐⭐", "⭐⭐⭐", "⭐⭐⭐⭐", "⭐⭐⭐⭐⭐"),
+    rating = FloatField(
+        label="Rating(out of 10):-",
+        validators=[
+            DataRequired(),
+            NumberRange(max=10, min=0, message="Just fucking enter a rating between 0-10."),
+        ],
     )
     add = SubmitField("Add")
 

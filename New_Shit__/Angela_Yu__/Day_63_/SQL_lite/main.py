@@ -10,6 +10,14 @@ Bootstrap(app)
 app.config['SQLALCHEMY_DATABASE_URI'] = "sqlite:///book_keeping.db"
 db.init_app(app)
 
+class Books(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    title = db.Column(db.String(100), nullable=False, unique=True)
+    author = db.Column(db.String(100), nullable=False)
+    rating = db.Column(db.Float(100), nullable=False)
+
+with app.app_context():
+    db.create_all()
 
 @app.route("/")
 def home():
