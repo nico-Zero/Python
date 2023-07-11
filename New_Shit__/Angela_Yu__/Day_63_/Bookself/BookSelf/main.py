@@ -3,39 +3,52 @@ from flask_bootstrap import Bootstrap
 from flask_wtf import FlaskForm
 from wtforms import StringField, SubmitField, FloatField
 from wtforms.validators import DataRequired, NumberRange
-from csv import reader, writer
+from flask_sqlalchemy import SQLAlchemy
+import inspect
+
+db = SQLAlchemy()
+
+app = Flask(__name__)
+app.config["SECRET_KEY"] = "8BYkEfBA6O6donzWlSihBXox7C0sKR6b"
+app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///book_keeping.db"
+Bootstrap(app)
+db.init_app(app)
+
+
+class Books(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    title = db.Column(db.String(100), nullable=False, unique=True)
+    author = db.Column(db.String(100), nullable=False)
+    rating = db.Column(db.Float, nullable=False)
+
+
+with app.app_context():
+    db.create_all()
 
 
 class Input_form(FlaskForm):
-    name = StringField(label="Book Name:-", validators=[DataRequired()])
+    title = StringField(label="Book Name:-", validators=[DataRequired()])
     author = StringField(label="Book Author:-", validators=[DataRequired()])
     rating = FloatField(
         label="Rating(out of 10):-",
         validators=[
             DataRequired(),
-            NumberRange(max=10, min=0, message="Just fucking enter a rating between 0-10."),
+            NumberRange(
+                max=10, min=0, message="Just fucking enter a rating between 0-10."
+            ),
         ],
     )
     add = SubmitField("Add")
 
 
-app = Flask(__name__)
-app.config["SECRET_KEY"] = "8BYkEfBA6O6donzWlSihBXox7C0sKR6b"
-Bootstrap(app)
-
-
 @app.route("/")
 def home():
-    all_books = []
-    with open("books.csv", newline="", encoding="utf8") as csv_file:
-        file = reader(csv_file, delimiter=",")
-        for row in file:
-            all_books.append(row)
-    parsed_books = [
-        {"name": name, "author": author, "rating": rating}
-        for name, author, rating in all_books[1:]
-    ]
+    data = db.session.execute(db.select(Books).order_by(Books.title)).scalars()
 
+    data_list = [{"title":i.title, "author":i.author, "rating":i.rating} for i in data.all()]
+    print(data_list)
+
+    parsed_books = []
     return render_template("index.html", library=bool(parsed_books), books=parsed_books)
 
 
@@ -44,12 +57,29 @@ def add():
     form = Input_form()
     if form.validate_on_submit():
         data = {key: value for key, value in list(form.data.items())[:-2]}
-        with open("books.csv", "+a", newline="", encoding="utf8") as csv_file:
-            file = writer(csv_file, delimiter=",")
-            file.writerow(data.values())
+        try:
+            book = Books(
+                title=data["title"], author=data["author"], rating=data["rating"]
+            )
+            db.session.add(book)
+            db.session.commit()
+        except Exception as e:
+            print(e)
+            title = data["name"]
+            return render_template(
+                "add.html",
+                form=form,
+                error=f"'{title}' already exists in the database.",
+            )
+        else:
             return redirect(url_for("home"))
 
     return render_template("add.html", form=form)
+
+@app.route("/edit_rating", methods=["GET","POST"])
+def edit_rating():
+    
+    return render_template("edit_rating.html")
 
 
 if __name__ == "__main__":

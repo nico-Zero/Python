@@ -5,13 +5,7 @@
 
 {% block content %}
 <div class="container">
-    <h1>Adding Book to The Library</h1>
-    {{wtf.quick_form(form)}}
-    <br>
-
-    {% if error %}
-    <p style="color: red;">{{error}}</p>
-    {% endif %}
+    <h1>Editing Book Rating.</h1>
 
     <a href="{{url_for('home')}}">Go back to Home</a>
 </div>
