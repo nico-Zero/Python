@@ -9,7 +9,7 @@
     {{wtf.quick_form(form)}}
     <br>
     {% if error %}
-    <p style="color: red;">error</p>
+    <p style="color: red;">{{error}}</p>
     {% endif %}
     <a href="{{url_for('home')}}">Go back to Home</a>
 </div>

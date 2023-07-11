@@ -1,7 +1,7 @@
 from flask import Flask, render_template, request, redirect, url_for
 from flask_bootstrap import Bootstrap
 from flask_wtf import FlaskForm
-from wtforms import StringField, SubmitField, FloatField, IntegerField
+from wtforms import StringField, SubmitField, FloatField
 from wtforms.validators import DataRequired, NumberRange
 from flask_sqlalchemy import SQLAlchemy
 import inspect
@@ -51,13 +51,13 @@ class Edit_rating(FlaskForm):
 
 
 class Delete(FlaskForm):
-    id = FloatField(
-        label="Book ID:-",
+    title = StringField(
+        label="Book Title:-",
         validators=[
             DataRequired(),
         ],
     )
-    edit = SubmitField("Edit")
+    edit = SubmitField("Delete")
 
 
 @app.route("/")
@@ -113,7 +113,9 @@ def delete():
     form = Delete()
     if form.validate_on_submit():
         try:
-            book = db.get_or_404(Books, form.data["id"])
+            book = db.session.execute(
+                db.select(Books).filter_by(title=form.data["title"])
+            ).scalar_one()
             db.session.delete(book)
             db.session.commit()
             return redirect(url_for("home"))
@@ -122,7 +124,7 @@ def delete():
             return render_template(
                 "delete.html",
                 form=form,
-                error=f"Book ID {form.data['id']} does not exist.",
+                error=f"Book title '{form.data['title']}' does not exist.",
             )
 
     return render_template("delete.html", form=form)
