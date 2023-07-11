@@ -50,6 +50,16 @@ class Edit_rating(FlaskForm):
     edit = SubmitField("Edit")
 
 
+class Delete(FlaskForm):
+    id = FloatField(
+        label="Book ID:-",
+        validators=[
+            DataRequired(),
+        ],
+    )
+    edit = SubmitField("Edit")
+
+
 @app.route("/")
 def home():
     data = db.session.execute(db.select(Books).order_by(Books.id)).scalars()
@@ -96,6 +106,26 @@ def edit_rating(id):
         return redirect(url_for("home"))
 
     return render_template("edit_rating.html", form=form)
+
+
+@app.route("/delete", methods=["GET", "POST"])
+def delete():
+    form = Delete()
+    if form.validate_on_submit():
+        try:
+            book = db.get_or_404(Books, form.data["id"])
+            db.session.delete(book)
+            db.session.commit()
+            return redirect(url_for("home"))
+        except Exception as e:
+            print(e)
+            return render_template(
+                "delete.html",
+                form=form,
+                error=f"Book ID {form.data['id']} does not exist.",
+            )
+
+    return render_template("delete.html", form=form)
 
 
 if __name__ == "__main__":
