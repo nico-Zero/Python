@@ -114,7 +114,7 @@ def delete():
     if form.validate_on_submit():
         try:
             book = db.session.execute(
-                db.select(Books).filter_by(title=form.data["title"])
+                db.select(Books).where(Books.title == form.data["title"])
             ).scalar_one()
             db.session.delete(book)
             db.session.commit()
