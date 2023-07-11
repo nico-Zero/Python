@@ -33,12 +33,11 @@ class Input_form(FlaskForm):
         label="Rating(out of 10):-",
         validators=[
             DataRequired(),
-            NumberRange(
-                max=10, min=0, message="Rating must be 0-10."
-            ),
+            NumberRange(max=10, min=0, message="Rating must be 0-10."),
         ],
     )
     add = SubmitField("Add")
+
 
 class Edit_rating(FlaskForm):
     id = IntegerField(label="Book ID", validators=[DataRequired()])
@@ -46,18 +45,20 @@ class Edit_rating(FlaskForm):
         label="Rating(out of 10):-",
         validators=[
             DataRequired(),
-            NumberRange(
-                max=10, min=0, message="Rating must be 0-10."
-            ),
+            NumberRange(max=10, min=0, message="Rating must be 0-10."),
         ],
     )
+    edit = SubmitField("Edit")
 
 
 @app.route("/")
 def home():
     data = db.session.execute(db.select(Books).order_by(Books.title)).scalars()
 
-    parsed_books = [{"id":i.id,"title":i.title, "author":i.author, "rating":i.rating} for i in data.all()]
+    parsed_books = [
+        {"id": i.id, "title": i.title, "author": i.author, "rating": i.rating}
+        for i in data.all()
+    ]
 
     return render_template("index.html", library=bool(parsed_books), books=parsed_books)
 
@@ -86,9 +87,22 @@ def add():
 
     return render_template("add.html", form=form)
 
-@app.route("/edit_rating/<int:id>", methods=["GET","POST"])
+
+@app.route("/edit_rating/<int:id>", methods=["GET", "POST"])
 def edit_rating(id):
     form = Edit_rating()
+    if form.validate_on_submit():
+        try:
+            db.get_or_404(Books, form.id).rating = form.rating
+            db.session.commit()
+            return redirect(url_for("home"))
+        except Exception as e:
+            print(e)
+            return render_template(
+                "edit_rating.html",
+                form=form,
+                error=f"Book with '{form.id}' ID does not exist.",
+            )
 
     return render_template("edit_rating.html", form=form)
 
