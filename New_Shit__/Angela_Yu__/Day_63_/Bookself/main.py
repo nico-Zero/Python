@@ -40,7 +40,6 @@ class Input_form(FlaskForm):
 
 
 class Edit_rating(FlaskForm):
-    id = IntegerField(label="Book ID", validators=[DataRequired()])
     rating = FloatField(
         label="Rating(out of 10):-",
         validators=[
@@ -53,7 +52,7 @@ class Edit_rating(FlaskForm):
 
 @app.route("/")
 def home():
-    data = db.session.execute(db.select(Books).order_by(Books.title)).scalars()
+    data = db.session.execute(db.select(Books).order_by(Books.id)).scalars()
 
     parsed_books = [
         {"id": i.id, "title": i.title, "author": i.author, "rating": i.rating}
@@ -92,17 +91,9 @@ def add():
 def edit_rating(id):
     form = Edit_rating()
     if form.validate_on_submit():
-        try:
-            db.get_or_404(Books, form.id).rating = form.rating
-            db.session.commit()
-            return redirect(url_for("home"))
-        except Exception as e:
-            print(e)
-            return render_template(
-                "edit_rating.html",
-                form=form,
-                error=f"Book with '{form.id}' ID does not exist.",
-            )
+        db.get_or_404(Books, id).rating = form.data["rating"]
+        db.session.commit()
+        return redirect(url_for("home"))
 
     return render_template("edit_rating.html", form=form)
 
