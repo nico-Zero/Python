@@ -6,6 +6,8 @@
 {% block content %}
 <div class="container">
     <h1>Editing Book Rating.</h1>
+    <h4>Current Book Title:- {{item['title']}}</h2>
+    <h4>Current Rating:- {{item['rating']}} </h2>
     {{wtf.quick_form(form)}}
     <br>
     <a href="{{url_for('home')}}">Go back to Home</a>

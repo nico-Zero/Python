@@ -97,15 +97,19 @@ def add():
     return render_template("add.html", form=form)
 
 
-@app.route("/edit_rating/<int:id>", methods=["GET", "POST"])
-def edit_rating(id):
+@app.route(
+    "/edit_rating/<int:id>/<string:title>/<float:rating>", methods=["GET", "POST"]
+)
+def edit_rating(id, title, rating):
     form = Edit_rating()
     if form.validate_on_submit():
         db.get_or_404(Books, id).rating = form.data["rating"]
         db.session.commit()
         return redirect(url_for("home"))
 
-    return render_template("edit_rating.html", form=form)
+    return render_template(
+        "edit_rating.html", form=form, item={"title": title, "rating": rating}
+    )
 
 
 @app.route("/delete", methods=["GET", "POST"])
