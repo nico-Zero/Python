@@ -1,7 +1,7 @@
 from flask import Flask, render_template, request, redirect, url_for
 from flask_bootstrap import Bootstrap
 from flask_wtf import FlaskForm
-from wtforms import StringField, SubmitField, FloatField
+from wtforms import StringField, SubmitField, FloatField, IntegerField
 from wtforms.validators import DataRequired, NumberRange
 from flask_sqlalchemy import SQLAlchemy
 import inspect
@@ -34,21 +34,31 @@ class Input_form(FlaskForm):
         validators=[
             DataRequired(),
             NumberRange(
-                max=10, min=0, message="Just fucking enter a rating between 0-10."
+                max=10, min=0, message="Rating must be 0-10."
             ),
         ],
     )
     add = SubmitField("Add")
+
+class Edit_rating(FlaskForm):
+    id = IntegerField(label="Book ID", validators=[DataRequired()])
+    rating = FloatField(
+        label="Rating(out of 10):-",
+        validators=[
+            DataRequired(),
+            NumberRange(
+                max=10, min=0, message="Rating must be 0-10."
+            ),
+        ],
+    )
 
 
 @app.route("/")
 def home():
     data = db.session.execute(db.select(Books).order_by(Books.title)).scalars()
 
-    data_list = [{"title":i.title, "author":i.author, "rating":i.rating} for i in data.all()]
-    print(data_list)
+    parsed_books = [{"id":i.id,"title":i.title, "author":i.author, "rating":i.rating} for i in data.all()]
 
-    parsed_books = []
     return render_template("index.html", library=bool(parsed_books), books=parsed_books)
 
 
@@ -76,10 +86,11 @@ def add():
 
     return render_template("add.html", form=form)
 
-@app.route("/edit_rating", methods=["GET","POST"])
-def edit_rating():
-    
-    return render_template("edit_rating.html")
+@app.route("/edit_rating/<int:id>", methods=["GET","POST"])
+def edit_rating(id):
+    form = Edit_rating()
+
+    return render_template("edit_rating.html", form=form)
 
 
 if __name__ == "__main__":
