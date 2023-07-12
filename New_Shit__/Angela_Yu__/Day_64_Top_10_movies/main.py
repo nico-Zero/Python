@@ -9,17 +9,17 @@ import requests
 db = SQLAlchemy()
 
 app = Flask(__name__)
-Bootstrap5(app)
-app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///movies.db"
 app.config["SECRET_KEY"] = "8BYkEfBA6O6donzWlSihBXox7C0sKR6b"
+app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///movies.db"
+Bootstrap5(app)
 db.init_app(app)
 
 
-class Movies:
+class Movies(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(100), nullable=False, unique=True)
     year = db.Column(db.String(5), nullable=False)
-    rating = db.Column(db.Integer, nullable=False)
+    rating = db.Column(db.Float, nullable=False)
     image_url = db.Column(db.String(1000), nullable=True, unique=True)
     description = db.Column(db.String(1000), nullable=True)
     comment = db.Column(db.String(1000), nullable=True)
@@ -27,6 +27,9 @@ class Movies:
 
 with app.app_context():
     db.create_all()
+
+class AddMovies():
+    name = StringField(label="Movie Name:- ", validators=[DataRequired()])
 
 
 @app.route("/")

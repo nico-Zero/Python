@@ -49,16 +49,6 @@ class Edit_rating(FlaskForm):
     edit = SubmitField("Edit")
 
 
-class Delete(FlaskForm):
-    title = StringField(
-        label="Book Title:-",
-        validators=[
-            DataRequired(),
-        ],
-    )
-    edit = SubmitField("Delete")
-
-
 @app.route("/")
 def home():
     data = db.session.execute(db.select(Books).order_by(Books.id)).scalars()
