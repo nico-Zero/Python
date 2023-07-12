@@ -2,7 +2,7 @@ from flask import Flask, render_template, redirect, url_for, request
 from flask_bootstrap import Bootstrap5
 from flask_sqlalchemy import SQLAlchemy
 from flask_wtf import FlaskForm
-from wtforms import StringField, SubmitField, FloatField, URLField
+from wtforms import StringField, SubmitField, FloatField, URLField, IntegerField
 from wtforms.validators import DataRequired, NumberRange
 import requests
 
@@ -31,7 +31,13 @@ with app.app_context():
 
 class AddMovies(FlaskForm):
     name = StringField(label="Movie Name:- ", validators=[DataRequired()])
-    year = StringField(label="Year:- ", validators=[DataRequired()])
+    year = IntegerField(
+        label="Year:- ",
+        validators=[
+            DataRequired(),
+            NumberRange(min=1900, max=2500, message="Enter a valid year."),
+        ],
+    )
     rating = FloatField(
         label="Rating:- ",
         validators=[
@@ -40,9 +46,11 @@ class AddMovies(FlaskForm):
         ],
     )
     image_url = URLField(label="Image URL:- ", validators=[DataRequired()])
-    description = StringField(label="Description:- ", validators=[DataRequired()])
-    comment = StringField(label="Comment:- ", validators=[DataRequired()])
-    add = SubmitField(label="Add")
+    description = StringField(label="Description:- ")
+    comment = StringField(label="Comment:- ")
+    add = SubmitField(
+        label="Add",
+    )
 
 
 @app.route("/")
@@ -54,7 +62,18 @@ def home():
 def add_movies():
     form = AddMovies()
     if form.validate_on_submit():
-        ...
+        movie = Movies(
+            name=form.data.name,
+            year=form.data.year,
+            rating=form.data.rating,
+            image_url=form.data.image_url,
+            description=form.data.description,
+            comment=form.data.comment,
+        )
+
+        db.session.add(movie)
+        db.session.commit()
+        return redirect(url_for("home"))
 
     return render_template("add.html", form=form)
 
