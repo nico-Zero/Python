@@ -1,10 +1,9 @@
-from flask import Flask, render_template, redirect, url_for, request
+from flask import Flask, render_template, redirect, url_for
 from flask_bootstrap import Bootstrap5
 from flask_sqlalchemy import SQLAlchemy
 from flask_wtf import FlaskForm
 from wtforms import StringField, SubmitField, FloatField, URLField, IntegerField
 from wtforms.validators import DataRequired, NumberRange
-import requests
 
 db = SQLAlchemy()
 
@@ -22,12 +21,10 @@ class Movies(db.Model):
     rating = db.Column(db.Float, nullable=False)
     image_url = db.Column(db.String(1000), nullable=True, unique=True)
     description = db.Column(db.String(1000), nullable=True)
-    comment = db.Column(db.String(1000), nullable=True)
-
+    review = db.Column(db.String(1000), nullable=True)
 
 with app.app_context():
     db.create_all()
-
 
 class AddMovies(FlaskForm):
     name = StringField(label="Movie Name:- ", validators=[DataRequired()])
@@ -47,7 +44,7 @@ class AddMovies(FlaskForm):
     )
     image_url = URLField(label="Image URL:- ", validators=[DataRequired()])
     description = StringField(label="Description:- ")
-    comment = StringField(label="Comment:- ")
+    review = StringField(label="Review:- ")
     add = SubmitField(
         label="Add",
     )
@@ -55,7 +52,25 @@ class AddMovies(FlaskForm):
 
 @app.route("/")
 def home():
-    return render_template("index.html")
+    movies_data = db.session.execute(db.select(Movies).order_by(Movies.id)).scalars()
+
+    parsed_movies_data = [
+        {
+            "rank": num+1,
+            "id": movie.id,
+            "name": movie.name,
+            "year": movie.year,
+            "rating": movie.rating,
+            "image_url": movie.image_url,
+            "description": movie.description,
+            "review": movie.review,
+        }
+        for num, movie in enumerate(movies_data.all()[::-1])
+    ]
+
+    print(parsed_movies_data)
+
+    return render_template("index.html", data=parsed_movies_data)
 
 
 @app.route("/add", methods=["GET", "POST"])
@@ -63,12 +78,12 @@ def add_movies():
     form = AddMovies()
     if form.validate_on_submit():
         movie = Movies(
-            name=form.data.name,
-            year=form.data.year,
-            rating=form.data.rating,
-            image_url=form.data.image_url,
-            description=form.data.description,
-            comment=form.data.comment,
+            name=form.data["name"],
+            year=form.data["year"],
+            rating=form.data["rating"],
+            image_url=form.data["image_url"],
+            description=form.data["description"],
+            review=form.data["review"],
         )
 
         db.session.add(movie)
