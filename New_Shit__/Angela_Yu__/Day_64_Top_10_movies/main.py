@@ -82,7 +82,6 @@ def home():
 
     parsed_movies_data = [
         {
-            "rank": num + 1,
             "id": movie.id,
             "name": movie.name,
             "year": movie.year,
@@ -91,7 +90,7 @@ def home():
             "description": movie.description,
             "review": movie.review,
         }
-        for num, movie in enumerate(movies_data.all()[::-1])
+        for movie in movies_data.all()[::-1]
     ]
 
     return render_template("index.html", data=parsed_movies_data)
