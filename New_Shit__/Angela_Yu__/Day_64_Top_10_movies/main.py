@@ -57,6 +57,7 @@ class UpdateMovie(FlaskForm):
     image_url = URLField(label="Image URL:- ", validators=[DataRequired()])
     description = StringField(label="Description:- ")
     review = StringField(label="Review:- ")
+    ranking = StringField(label="Ranking:- ")
     update = SubmitField(
         label="Update",
     )
@@ -64,12 +65,13 @@ class UpdateMovie(FlaskForm):
 
 @app.route("/")
 def home():
-    movies_data = db.session.execute(db.select(Movies).order_by(Movies.id)).scalars()
+    movies_data = db.session.execute(db.select(Movies).order_by(Movies.ranking)).scalars()
 
     parsed_movies_data = [
         {
             "id": movie.id,
             "name": movie.name,
+            "ranking": movie.ranking,
             "year": movie.year,
             "rating": movie.rating,
             "image_url": movie.image_url,
@@ -82,7 +84,12 @@ def home():
     return render_template("index.html", data=parsed_movies_data)
 
 
-@app.route("/add/<str:get=get_1>/<movie_id>", methods=["GET", "POST"])
+@app.route(
+    "/add",
+    defaults={"get": "get_1", "movie_id": 0},
+    methods=["GET", "POST"],
+)
+@app.route("/add/<int:movie_id>/<get>", methods=["GET", "POST"])
 def add_movie(get, movie_id):
     form = AddMovie()
     if get == "get_2":
@@ -108,8 +115,8 @@ def add_movie(get, movie_id):
         db.session.add(movie)
         db.session.commit()
 
-        return redirect(url_for('edit_movie'))
-        
+        return redirect(url_for("edit_movie"))
+
     if form.validate_on_submit():
         return redirect(url_for("select_movie", movie_name=form.data["name"]))
 
@@ -127,20 +134,26 @@ def select_movie(movie_name):
     response.raise_for_status()
 
     parsed_data = [
-        {
-            "id": movie["id"],
-            "title": movie["original_title"],
-            "release_date": movie["release_date"],
-        }
+        [
+            movie["id"],
+            movie["original_title"],
+            movie["release_date"],
+        ]
         for movie in response.json()["results"]
     ]
 
     return render_template("select.html", parsed_data=parsed_data)
 
 
-@app.route("/edit/<movie_id>", methods=["GET", "POST"])
-def edit_movie(movie_id):
-    movie = db.get_or_404(Movies, movie_id)
+@app.route("/edit/<movie_name>", defaults={"movie_id": 0}, methods=["GET", "POST"])
+@app.route("/edit/<movie_id>", defaults={"movie_name": 0}, methods=["GET", "POST"])
+def edit_movie(movie_id, movie_name):
+    if movie_name == 0:
+        movie = db.get_or_404(Movies, movie_id)
+    else:
+        movie = db.session.execute(
+            db.select(Movies).where(Movies.name == movie_name)
+        ).scalar_one()
 
     form = UpdateMovie(
         name=movie.name,
