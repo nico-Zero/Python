@@ -6,7 +6,10 @@
 <div class="container">
   <h1 class="heading">Select Movie</h1>
   <p>
-    <a href="#"> MOVIE TITLE - MOVIE RELEASE DATE</a>
+    {% for movie in parsed_data %}
+    <a href="{{url_for('add_movie',get='get_2',movie_id=movie['id'])}}">{{movie['title']}} -
+      {{movie['release_date']}}</a>
+    {% endfor %}
   </p>
 
 </div>
