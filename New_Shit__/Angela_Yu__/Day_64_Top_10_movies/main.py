@@ -19,7 +19,6 @@ db.init_app(app)
 class Movies(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(100), nullable=False, unique=True)
-    ranking = db.Column(db.Integer, nullable=True)
     year = db.Column(db.String(5), nullable=False)
     image_url = db.Column(db.String(1000), nullable=False, unique=True)
     description = db.Column(db.String(1000), nullable=False)
@@ -39,14 +38,6 @@ class AddMovie(FlaskForm):
 
 
 class UpdateMovie(FlaskForm):
-    name = StringField(label="Movie Name:- ", validators=[DataRequired()])
-    year = IntegerField(
-        label="Year:- ",
-        validators=[
-            DataRequired(),
-            NumberRange(min=1900, max=2500, message="Enter a valid year."),
-        ],
-    )
     rating = FloatField(
         label="Rating:- ",
         validators=[
@@ -54,10 +45,7 @@ class UpdateMovie(FlaskForm):
             NumberRange(min=0, max=10, message="Rating Must be 0-10."),
         ],
     )
-    image_url = URLField(label="Image URL:- ", validators=[DataRequired()])
-    description = StringField(label="Description:- ")
     review = StringField(label="Review:- ")
-    ranking = StringField(label="Ranking:- ")
     update = SubmitField(
         label="Update",
     )
@@ -65,20 +53,22 @@ class UpdateMovie(FlaskForm):
 
 @app.route("/")
 def home():
-    movies_data = db.session.execute(db.select(Movies).order_by(Movies.ranking)).scalars()
+    movies_data = db.session.execute(
+        db.select(Movies).order_by(Movies.rating)
+    ).scalars()
 
     parsed_movies_data = [
         {
+            "rank": rank + 1,
             "id": movie.id,
             "name": movie.name,
-            "ranking": movie.ranking,
             "year": movie.year,
             "rating": movie.rating,
             "image_url": movie.image_url,
             "description": movie.description,
             "review": movie.review,
         }
-        for movie in movies_data.all()[::-1]
+        for rank, movie in enumerate(movies_data.all()[::-1])
     ]
 
     return render_template("index.html", data=parsed_movies_data)
@@ -107,7 +97,6 @@ def add_movie(get, movie_id):
             year=response["release_date"][:4],
             image_url=img_url + response["poster_path"],
             description=response["overview"],
-            ranking=None,
             rating=None,
             review=None,
         )
@@ -115,7 +104,7 @@ def add_movie(get, movie_id):
         db.session.add(movie)
         db.session.commit()
 
-        return redirect(url_for("edit_movie"))
+        return redirect(url_for("edit_movie", movie_name=response["original_title"]))
 
     if form.validate_on_submit():
         return redirect(url_for("select_movie", movie_name=form.data["name"]))
@@ -145,32 +134,21 @@ def select_movie(movie_name):
     return render_template("select.html", parsed_data=parsed_data)
 
 
-@app.route("/edit/<movie_name>", defaults={"movie_id": 0}, methods=["GET", "POST"])
-@app.route("/edit/<movie_id>", defaults={"movie_name": 0}, methods=["GET", "POST"])
-def edit_movie(movie_id, movie_name):
-    if movie_name == 0:
-        movie = db.get_or_404(Movies, movie_id)
-    else:
-        movie = db.session.execute(
-            db.select(Movies).where(Movies.name == movie_name)
-        ).scalar_one()
+@app.route("/edit/<movie_name>", methods=["GET", "POST"])
+def edit_movie(movie_name):
+    movie = db.session.execute(
+        db.select(Movies).where(Movies.name == movie_name)
+    ).scalar_one()
 
     form = UpdateMovie(
-        name=movie.name,
-        year=movie.year,
         rating=movie.rating,
-        image_url=movie.image_url,
-        description=movie.description,
         review=movie.review,
     )
 
     if form.validate_on_submit():
-        movie.name = form.data["name"]
-        movie.year = form.data["year"]
         movie.rating = form.data["rating"]
-        movie.image_url = form.data["image_url"]
-        movie.description = form.data["description"]
         movie.review = form.data["review"]
+
         db.session.commit()
         return redirect(url_for("home"))
 
@@ -187,3 +165,6 @@ def delete_movie(movie_id):
 
 if __name__ == "__main__":
     app.run(debug=True)
+
+for i in enumerate(range(10)):
+    ...
