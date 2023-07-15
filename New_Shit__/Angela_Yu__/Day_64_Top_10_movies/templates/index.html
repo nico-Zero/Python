@@ -7,7 +7,7 @@
   <h1 class="heading">My Top 10 Movies</h1>
   <p class="description">These are my all-time favourite movies.</p>
 
-  {% for movie in data %}
+  {% for movie in data[::-1] %}
   <div class="card">
     <div class="front" style="background-image: url({{movie['image_url']}})">
       <p class="large">{{movie['rank']}}</p>
