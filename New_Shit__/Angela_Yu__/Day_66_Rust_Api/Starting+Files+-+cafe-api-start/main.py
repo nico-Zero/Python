@@ -1,11 +1,14 @@
 from flask import Flask, jsonify, render_template, request
 from flask_sqlalchemy import SQLAlchemy
+from random import randint
+from inspect import getmembers
+from functools import reduce
 
 app = Flask(__name__)
 
 ##Connect to Database
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///cafes.db'
-app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///cafes.db"
+app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
 db = SQLAlchemy(app)
 
 
@@ -23,13 +26,22 @@ class Cafe(db.Model):
     can_take_calls = db.Column(db.Boolean, nullable=False)
     coffee_price = db.Column(db.String(250), nullable=True)
 
+    def to_dict(self):
+        return {i.name: getattr(self, i.name) for i in self.__table__.columns}
+
 
 @app.route("/")
 def home():
     return render_template("index.html")
-    
+
 
 ## HTTP GET - Read Record
+@app.route("/random")
+def random_cafe():
+    cafe = db.get_or_404(Cafe, randint(0, int(db.session.query(Cafe).count())))
+
+    return jsonify(cafe=cafe.to_dict())
+
 
 ## HTTP POST - Create Record
 
@@ -38,5 +50,5 @@ def home():
 ## HTTP DELETE - Delete Record
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     app.run(debug=True)
