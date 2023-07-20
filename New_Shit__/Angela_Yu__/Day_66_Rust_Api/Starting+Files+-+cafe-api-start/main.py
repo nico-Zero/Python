@@ -46,9 +46,22 @@ def random_cafe():
 @app.route("/all")
 def all_cafe():
     data = list(db.session.query(Cafe))
-    cafes = {index+1: i.to_dict() for index, i in enumerate(data)}
+    cafes = {index + 1: i.to_dict() for index, i in enumerate(data)}
 
     return jsonify(all_cafe=cafes)
+
+
+@app.route("/search")
+def search_cafe_by_location():
+    data = db.session.query(Cafe).filter(Cafe.location == request.args.get("loc"))
+
+    if bool(list(data)):
+        cafes = {index + 1: i.to_dict() for index, i in enumerate(data)}
+        return jsonify(cafe=cafes)
+    else:
+        return jsonify(
+            error={"Not Found": "Sorry, we don't have a cafe at that location."}
+        )
 
 
 ## HTTP POST - Create Record
