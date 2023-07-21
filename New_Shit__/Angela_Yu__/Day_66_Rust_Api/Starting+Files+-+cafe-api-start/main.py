@@ -64,6 +64,28 @@ def search_cafe_by_location():
         )
 
 
+@app.route("/add", methods=["POST"])
+def add_cafe():
+    data = request.args.to_dict()
+    cafe = Cafe(
+        name=data["name"],
+        map_url=data["map_url"],
+        img_url=data["img_url"],
+        location=data["location"],
+        seats=data["seats"],
+        has_toilet=bool(int(data["has_toilet"])),
+        has_wifi=bool(int(data["has_wifi"])),
+        has_sockets=bool(int(data["has_sockets"])),
+        can_take_calls=bool(int(data["can_take_calls"])),
+        coffee_price=data["coffee_price"],
+    )
+
+    db.session.add(cafe)
+    db.session.commit()
+
+    return jsonify(response={"success": "Successfully added the new cafe."})
+
+
 ## HTTP POST - Create Record
 
 ## HTTP PUT/PATCH - Update Record
