@@ -54,3 +54,22 @@
 #         file.write(f"{str(i)}. {j}\n")
 
 # print(*x,sep="\n")
+
+
+# def grater_then(a, b):
+#     if a > b:
+#         return a
+#     else:
+#         return b
+
+
+# def grater_then_2(a, b):
+#     return a * (a >= b) + b * (a < b)
+
+
+# def test(*args, functions=[]):
+#     for function in functions:
+#         print(function(*args))
+
+
+# test(5, 5, functions=[grater_then, grater_then_2])
