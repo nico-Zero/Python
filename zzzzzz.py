@@ -73,3 +73,19 @@
 
 
 # test(5, 5, functions=[grater_then, grater_then_2])
+
+
+def add_numbers(a, b):
+    """
+    This function adds two numbers and returns the result.
+    Parameters:
+        a (int): The first number.
+        b (int): The second number.
+    Returns:
+        int: The sum of the two numbers.
+    """
+    return a + b
+
+
+# To access the docstring of the function:
+print(help(add_numbers))
