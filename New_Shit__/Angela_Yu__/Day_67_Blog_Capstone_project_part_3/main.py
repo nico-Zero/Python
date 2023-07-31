@@ -83,7 +83,33 @@ def make_post():
     return render_template("make_post.html", form=form, is_edit=False)
 
 
-@app.route("/delete")
+@app.route("/edit_post/<int:post_id>", methods=["POST", "GET"])
+def edit_post(post_id):
+    post = db.get_or_404(BlogPost, post_id)
+
+    form = PostForm(
+        title=post.title,
+        subtitle=post.subtitle,
+        author=post.author,
+        img_url=post.img_url,
+        body=post.body,
+    )
+
+    if form.validate_on_submit():
+        post.title = form.data["title"]
+        post.subtitle = form.data["subtitle"]
+        post.author = form.data["author"]
+        post.img_url = form.data["img_url"]
+        post.body = form.data["body"]
+
+        db.session.commit()
+
+        return redirect(url_for("show_post", post_id=post_id))
+
+    return render_template("make_post.html", form=form, is_edit=True)
+
+
+@app.route("/delete/<int:post_id>")
 def delete_post(post_id):
     db.session.delete(db.get_or_404(BlogPost, post_id))
     db.session.commit()
