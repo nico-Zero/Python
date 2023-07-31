@@ -1,4 +1,3 @@
-
 from flask import Flask, render_template, redirect, url_for
 from flask_bootstrap import Bootstrap5
 from flask_sqlalchemy import SQLAlchemy
@@ -51,19 +50,15 @@ class CreatePostForm(FlaskForm):
 def get_all_posts():
     data = list(db.session.query(BlogPost))
     posts = [i.to_dict() for i in data]
-    print(posts)
     return render_template("index.html", all_posts=posts)
 
 
-# TODO: Add a route so that you can click on individual posts.
-@app.route("/")
+@app.route("/post/<int:post_id>")
 def show_post(post_id):
-    # TODO: Retrieve a BlogPost from the database based on the post_id
-    requested_post = "Grab the post from your database"
+    requested_post = db.get_or_404(BlogPost, post_id).to_dict()
     return render_template("post.html", post=requested_post)
 
 
-# Below is the code from previous lessons. No changes needed.
 @app.route("/about")
 def about():
     return render_template("about.html")
