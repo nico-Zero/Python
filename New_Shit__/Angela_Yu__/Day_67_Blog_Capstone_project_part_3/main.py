@@ -65,9 +65,20 @@ def show_post(post_id):
 @app.route("/new_post", methods=["POST", "GET"])
 def make_post():
     form = PostForm()
-    if request.method == "POST":
-        data = form.body
+    if form.validate_on_submit():
+        data = form.data
         print(data)
+        blog = BlogPost(
+            title=data["title"],
+            subtitle=data["subtitle"],
+            date=date.today().strftime("%B %d, %Y"),
+            body=data["body"],
+            author=data["author"],
+            img_url=data["img_url"],
+        )
+        db.session.add(blog)
+        db.session.commit()
+        redirect(url_for("show_post", post_id=blog.id))
 
     return render_template("make_post.html", form=form, is_edit=False)
 
