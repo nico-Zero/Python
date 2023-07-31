@@ -1,4 +1,4 @@
-from flask import Flask, render_template, redirect, url_for
+from flask import Flask, render_template, redirect, url_for, request
 from flask_bootstrap import Bootstrap5
 from flask_sqlalchemy import SQLAlchemy
 from flask_wtf import FlaskForm
@@ -65,6 +65,10 @@ def show_post(post_id):
 @app.route("/new_post", methods=["POST", "GET"])
 def make_post():
     form = PostForm()
+    if request.method == "POST":
+        data = form.body
+        print(data)
+
     return render_template("make_post.html", form=form, is_edit=False)
 
 
