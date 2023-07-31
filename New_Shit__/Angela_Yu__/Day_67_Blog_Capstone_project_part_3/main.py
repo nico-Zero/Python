@@ -78,9 +78,16 @@ def make_post():
         )
         db.session.add(blog)
         db.session.commit()
-        redirect(url_for("show_post", post_id=blog.id))
+        return redirect(url_for("show_post", post_id=blog.id))
 
     return render_template("make_post.html", form=form, is_edit=False)
+
+
+@app.route("/delete")
+def delete_post(post_id):
+    db.session.delete(db.get_or_404(BlogPost, post_id))
+    db.session.commit()
+    return redirect(url_for("get_all_posts"))
 
 
 @app.route("/about")
