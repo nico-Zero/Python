@@ -62,7 +62,7 @@ def show_post(post_id):
     return render_template("post.html", post=requested_post)
 
 
-@app.route("/new_post", methods=["POST", "GET"])
+@app.route("/new-post", methods=["POST", "GET"])
 def make_post():
     form = PostForm()
     if form.validate_on_submit():
@@ -83,7 +83,7 @@ def make_post():
     return render_template("make_post.html", form=form, is_edit=False)
 
 
-@app.route("/edit_post/<int:post_id>", methods=["POST", "GET"])
+@app.route("/edit-post/<int:post_id>", methods=["POST", "GET"])
 def edit_post(post_id):
     post = db.get_or_404(BlogPost, post_id)
 
@@ -103,13 +103,12 @@ def edit_post(post_id):
         post.body = form.data["body"]
 
         db.session.commit()
-
         return redirect(url_for("show_post", post_id=post_id))
 
     return render_template("make_post.html", form=form, is_edit=True)
 
 
-@app.route("/delete/<int:post_id>")
+@app.route("/delete-post/<int:post_id>")
 def delete_post(post_id):
     db.session.delete(db.get_or_404(BlogPost, post_id))
     db.session.commit()
