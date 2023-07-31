@@ -15,7 +15,10 @@ Bootstrap5(app)
 ##CONNECT TO DB
 app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///posts.db"
 db = SQLAlchemy()
+ckeditor = CKEditor()
+
 db.init_app(app)
+ckeditor.init_app(app)
 
 
 ##CONFIGURE TABLE
@@ -37,12 +40,12 @@ with app.app_context():
 
 
 ##WTForm
-class CreatePostForm(FlaskForm):
+class PostForm(FlaskForm):
     title = StringField("Blog Post Title", validators=[DataRequired()])
     subtitle = StringField("Subtitle", validators=[DataRequired()])
     author = StringField("Your Name", validators=[DataRequired()])
     img_url = StringField("Blog Image URL", validators=[DataRequired(), URL()])
-    body = "TODO: Add a CKEditorField"
+    body = CKEditorField("Blog Body", validators=[DataRequired()])
     submit = SubmitField("Submit Post")
 
 
@@ -57,6 +60,12 @@ def get_all_posts():
 def show_post(post_id):
     requested_post = db.get_or_404(BlogPost, post_id).to_dict()
     return render_template("post.html", post=requested_post)
+
+
+@app.route("/new_post", methods=["POST", "GET"])
+def make_post():
+    form = PostForm()
+    return render_template("make_post.html", form=form, is_edit=False)
 
 
 @app.route("/about")
