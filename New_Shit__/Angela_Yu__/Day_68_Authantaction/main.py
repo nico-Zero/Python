@@ -49,7 +49,7 @@ def user_loader(user_id):
 
 @app.route("/")
 def home():
-    return render_template("index.html", logged_in=current_user.is_authenticated)
+    return render_template("index.html", logged_in=current_user.is_authenticated)  # type: ignore
 
 
 @app.route("/register", methods=["POST", "GET"])
@@ -62,7 +62,7 @@ def register():
                 password=generate_password_hash(
                     str(request.form.get("password")), salt_length=12
                 ),
-            )
+            )  # type: ignore
             db.session.add(user)
             db.session.commit()
         except:
@@ -72,7 +72,7 @@ def register():
         login_user(user)
         return redirect(url_for("secrets", id=user.id))
 
-    return render_template("register.html", logged_in=current_user.is_authenticated)
+    return render_template("register.html", logged_in=current_user.is_authenticated)  # type: ignore
 
 
 @app.route("/login", methods={"GET", "POST"})
@@ -93,18 +93,18 @@ def login():
             flash("Invalid password")
             return redirect(url_for("login"))
 
-    return render_template("login.html", logged_in=current_user.is_authenticated)
+    return render_template("login.html", logged_in=current_user.is_authenticated)  # type: ignore
 
 
 @app.route("/secrets")
 @login_required
 def secrets():
-    user_name = current_user.name
+    user_name = current_user.name  # type: ignore
     return render_template(
         "secrets.html",
         logged_in=True,
         name=user_name,
-        logged_in=current_user.is_authenticated,
+        logged_in=current_user.is_authenticated,  # type: ignore
     )
 
 
