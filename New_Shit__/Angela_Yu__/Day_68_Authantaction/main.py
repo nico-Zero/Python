@@ -49,44 +49,63 @@ def user_loader(user_id):
 
 @app.route("/")
 def home():
-    return render_template("index.html")
+    return render_template("index.html", logged_in=current_user.is_authenticated)
 
 
 @app.route("/register", methods=["POST", "GET"])
 def register():
     if request.method == "POST":
-        user = User(
-            name=request.form.get("name"),
-            email=request.form.get("email"),
-            password=generate_password_hash(
-                str(request.form.get("password")), salt_length=20
-            ),
-        )
-        db.session.add(user)
-        db.session.commit()
+        try:
+            user = User(
+                name=request.form.get("name"),
+                email=request.form.get("email"),
+                password=generate_password_hash(
+                    str(request.form.get("password")), salt_length=12
+                ),
+            )
+            db.session.add(user)
+            db.session.commit()
+        except:
+            flash("This email is already registered.")
+            return redirect(url_for("login"))
 
         login_user(user)
         return redirect(url_for("secrets", id=user.id))
 
-    return render_template("register.html")
+    return render_template("register.html", logged_in=current_user.is_authenticated)
 
 
 @app.route("/login", methods={"GET", "POST"})
 def login():
     if request.method == "POST":
-        user_data = User.query.filter_by(email=request.form.get("email")).first()
+        try:
+            user_data = db.session.execute(
+                db.select(User).where(User.email == request.form.get("email"))
+            ).scalar_one()
+        except:
+            flash("This email does not exist in our database.")
+            return redirect(url_for("register"))
+
         if check_password_hash(user_data.password, str(request.form.get("password"))):
             login_user(user_data)
-        print(user_data)
-        return redirect(url_for("secrets", id=user_data.id))
-    return render_template("login.html")
+            return redirect(url_for("secrets"))
+        else:
+            flash("Invalid password")
+            return redirect(url_for("login"))
+
+    return render_template("login.html", logged_in=current_user.is_authenticated)
 
 
 @app.route("/secrets")
 @login_required
 def secrets():
     user_name = current_user.name
-    return render_template("secrets.html", logged_in=True, name=user_name)
+    return render_template(
+        "secrets.html",
+        logged_in=True,
+        name=user_name,
+        logged_in=current_user.is_authenticated,
+    )
 
 
 @app.route("/logout")
