@@ -50,7 +50,9 @@ def register():
         user = User(
             name=request.form.get("name"),
             email=request.form.get("email"),
-            password=request.form.get("password"),
+            password=generate_password_hash(
+                str(request.form.get("password")), salt_length=20
+            ),
         )
         db.session.add(user)
         db.session.commit()
@@ -59,8 +61,16 @@ def register():
     return render_template("register.html")
 
 
-@app.route("/login")
+@app.route("/login", methods={"GET", "POST"})
 def login():
+    if request.method == "POST":
+        user_data = db.session.execute(
+            db.select(User).where(User.email == request.form["email"])
+        ).scalar_one()
+
+        print(user_data)
+
+        return redirect(url_for("secrets", id=user_data.id))
     return render_template("login.html")
 
 
@@ -72,7 +82,7 @@ def secrets(id):
 
 @app.route("/logout")
 def logout():
-    pass
+    return redirect(url_for("home"))
 
 
 @app.route("/download")
