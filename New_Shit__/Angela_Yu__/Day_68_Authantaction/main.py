@@ -26,9 +26,12 @@ app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///users.db"
 db = SQLAlchemy()
 db.init_app(app)
 
+login_manager = LoginManager()
+login_manager.init_app(app)
+
 
 # CREATE TABLE IN DB
-class User(db.Model):
+class User(UserMixin, db.Model):
     id = db.Column(db.Integer, primary_key=True)
     email = db.Column(db.String(100), unique=True)
     password = db.Column(db.String(100))
@@ -37,6 +40,11 @@ class User(db.Model):
 
 with app.app_context():
     db.create_all()
+
+
+@login_manager.user_loader
+def user_loader(user_id):
+    return db.get_or_404(User, user_id)
 
 
 @app.route("/")
@@ -56,6 +64,8 @@ def register():
         )
         db.session.add(user)
         db.session.commit()
+
+        login_user(user)
         return redirect(url_for("secrets", id=user.id))
 
     return render_template("register.html")
@@ -64,28 +74,29 @@ def register():
 @app.route("/login", methods={"GET", "POST"})
 def login():
     if request.method == "POST":
-        user_data = db.session.execute(
-            db.select(User).where(User.email == request.form["email"])
-        ).scalar_one()
-
+        user_data = User.query.filter_by(email=request.form.get("email")).first()
+        if check_password_hash(user_data.password, str(request.form.get("password"))):
+            login_user(user_data)
         print(user_data)
-
         return redirect(url_for("secrets", id=user_data.id))
     return render_template("login.html")
 
 
-@app.route("/secrets/<int:id>")
-def secrets(id):
-    user_data = db.get_or_404(User, id)
-    return render_template("secrets.html", logged_in=True, user=user_data)
+@app.route("/secrets")
+@login_required
+def secrets():
+    user_name = current_user.name
+    return render_template("secrets.html", logged_in=True, name=user_name)
 
 
 @app.route("/logout")
 def logout():
+    logout_user()
     return redirect(url_for("home"))
 
 
 @app.route("/download")
+@login_required
 def download():
     return send_from_directory(
         "static",
