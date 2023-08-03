@@ -5,6 +5,7 @@ M_O = ["+", "-", "*", "/", "^"]
 value = []
 con = False
 
+
 # Moniter operation
 def button_press(x):
     no_value()
@@ -12,8 +13,7 @@ def button_press(x):
     if con:
         moniter_2.delete(0, END)
     moniter_1.insert(END, x)
-    if len(value) != 1:
-        Core()
+    Core()
     con = False
 
 
@@ -33,7 +33,7 @@ def Core():
             moniter_2.insert(END, f"={eval(x[:-1])}")
         else:
             moniter_2.insert(END, f"={eval(x)}")
-    except SyntaxError:
+    except (SyntaxError, IndexError):
         pass
 
 
@@ -59,6 +59,7 @@ def Delete():
     except IndexError:
         moniter_1.delete(0, END)
         value.clear()
+    Core()
 
 
 def Dot():
