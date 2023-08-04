@@ -19,7 +19,7 @@ from sqlalchemy.exc import IntegrityError, NoResultFound
 from functools import wraps
 
 # Import your forms from the forms.py
-from forms import CreatePostForm, RegisterUserForm, LoginForm
+from forms import CreatePostForm, RegisterUserForm, LoginForm, CommentForm
 
 
 """
@@ -48,12 +48,29 @@ login_manager.init_app(app)
 
 
 # CONNECT TO DB
-app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///posts.db"
+app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///blogs.db"
 db = SQLAlchemy()
 db.init_app(app)
 
+gravatar = Gravatar(
+    app,
+    size=100,
+    rating="x",
+)
+
 
 # CONFIGURE TABLES
+class User(UserMixin, db.Model):
+    __tablename__ = "user_data"
+    id = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.String(255), nullable=False)
+    email = db.Column(db.String(255), nullable=False, unique=True)
+    password = db.Column(db.String(255), nullable=False)
+
+    posts = relationship("BlogPost", back_populates="author")
+    comments = relationship("Comment", back_populates="comment_author")
+
+
 class BlogPost(db.Model):
     __tablename__ = "blog_posts"
     id = db.Column(db.Integer, primary_key=True)
@@ -61,16 +78,22 @@ class BlogPost(db.Model):
     subtitle = db.Column(db.String(250), nullable=False)
     date = db.Column(db.String(250), nullable=False)
     body = db.Column(db.Text, nullable=False)
-    author = db.Column(db.String(250), nullable=False)
     img_url = db.Column(db.String(250), nullable=False)
+    author_id = db.Column(db.Integer, db.ForeignKey("user_data.id"))
+
+    author = relationship("User", back_populates="posts")
+    comments = relationship("Comment", back_populates="parent_post")
 
 
-class User(UserMixin, db.Model):
-    __tablename__ = "user_data"
+class Comment(db.Model):
+    __tablename__ = "comments"
     id = db.Column(db.Integer, primary_key=True)
-    name = db.Column(db.String(255), nullable=False)
-    email = db.Column(db.String(255), nullable=False, unique=True)
-    password = db.Column(db.String(255), nullable=False)
+    text = db.Column(db.Text, nullable=False)
+    author_id = db.Column(db.Integer, db.ForeignKey("user_data.id"))
+    post_id = db.Column(db.Integer, db.ForeignKey("blog_posts.id"))
+
+    comment_author = relationship("User", back_populates="comments")
+    parent_post = relationship("BlogPost", back_populates="comments")
 
 
 with app.app_context():
@@ -110,7 +133,7 @@ def register():
             db.session.add(user)
             db.session.commit()
 
-        except IntegrityError as e:
+        except IntegrityError:
             flash(
                 "This email already exists in our database. Please Login to continue."
             )
@@ -154,14 +177,29 @@ def logout():
 def get_all_posts():
     result = db.session.execute(db.select(BlogPost))
     posts = result.scalars().all()
+
     return render_template("index.html", all_posts=posts, authenticated=current_user.is_authenticated)  # type: ignore
 
 
-@app.route("/post/<int:post_id>")
-@login_required
+@app.route("/post/<int:post_id>", methods=["POST", "GET"])
 def show_post(post_id):
     requested_post = db.get_or_404(BlogPost, post_id)
-    return render_template("post.html", post=requested_post, authenticated=current_user.is_authenticated)  # type: ignore
+    form = CommentForm()
+    if form.validate_on_submit():
+        if current_user.is_authenticated:  # type: ignore
+            comment = Comment(
+                text=form.data.get("body"),
+                comment_author=current_user,
+                parent_post=requested_post,
+            )
+            db.session.add(comment)
+            db.session.commit()
+            return redirect(url_for("show_post", post_id=post_id))
+        else:
+            flash("First Login or Register in order to comment !")
+            return redirect(url_for("login"))
+
+    return render_template("post.html", post=requested_post, form=form, authenticated=current_user.is_authenticated)  # type: ignore
 
 
 @app.route("/new-post", methods=["GET", "POST"])
