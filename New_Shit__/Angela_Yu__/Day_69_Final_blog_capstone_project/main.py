@@ -8,6 +8,7 @@ from flask_sqlalchemy import SQLAlchemy
 from functools import wraps
 from werkzeug.security import generate_password_hash, check_password_hash
 from sqlalchemy.orm import relationship
+from sqlalchemy.exc import IntegrityError
 
 # Import your forms from the forms.py
 from forms import CreatePostForm, RegisterUserForm
@@ -74,10 +75,28 @@ def user_loader(user_id):
     return db.get_or_404(User, user_id)
 
 
-# TODO: Use Werkzeug to hash the user's password when creating a new user.
 @app.route("/register", methods=["POST", "GET"])
 def register():
     form = RegisterUserForm()
+    if form.validate_on_submit():
+        try:
+            user = User(
+                name=form.data.get("name"),
+                email=form.data.get("email"),
+                password=generate_password_hash(
+                    form.data.get("password"), salt_length=12
+                ),
+            )  # type: ignore
+
+            db.session.add(user)
+            db.session.commit()
+            return redirect(url_for("get_all_posts"))
+        except IntegrityError as e:
+            flash(
+                "This email already exists in our database. Please Login to continue."
+            )
+            return redirect(url_for("login"))
+
     return render_template("register.html", form=form)
 
 
