@@ -8,15 +8,15 @@ from flask_sqlalchemy import SQLAlchemy
 from functools import wraps
 from werkzeug.security import generate_password_hash, check_password_hash
 from sqlalchemy.orm import relationship
-from sqlalchemy.exc import IntegrityError
+from sqlalchemy.exc import IntegrityError, NoResultFound
 
 # Import your forms from the forms.py
-from forms import CreatePostForm, RegisterUserForm
+from forms import CreatePostForm, RegisterUserForm, LoginForm
 
 
 """
-Make sure the required packages are installed: 
-Open the Terminal in PyCharm (bottom left). 
+Make sure the required packages are installed:
+Open the Terminal in PyCharm (bottom left).
 
 On Windows type:
 python -m pip install -r requirements.txt
@@ -90,24 +90,47 @@ def register():
 
             db.session.add(user)
             db.session.commit()
-            return redirect(url_for("get_all_posts"))
+
         except IntegrityError as e:
             flash(
                 "This email already exists in our database. Please Login to continue."
             )
             return redirect(url_for("login"))
+        else:
+            login_user(user)
+            return redirect(url_for("get_all_posts"))
 
     return render_template("register.html", form=form)
 
 
-# TODO: Retrieve a user from the database based on their email.
-@app.route("/login")
+@app.route("/login", methods=["GET", "POST"])
 def login():
-    return render_template("login.html")
+    form = LoginForm()
+    if form.validate_on_submit():
+        try:
+            user = db.session.execute(
+                db.select(User).where(User.email == form.data.get("email"))
+            ).scalar_one()
+        except NoResultFound:
+            flash("This email does not exist in our database. Please Sign UP!")
+            return redirect(url_for("register"))
+        else:
+            if (
+                generate_password_hash(form.data.get("password"), salt_length=12)
+                == user.password
+            ):
+                login_user(user)
+                return redirect(url_for("get_all_posts"))
+            else:
+                flash("Invalid password!!!")
+                return redirect(url_for("login"))
+
+    return render_template("login.html", form=form)
 
 
 @app.route("/logout")
 def logout():
+    logout_user()
     return redirect(url_for("get_all_posts"))
 
 
