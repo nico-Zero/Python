@@ -20,7 +20,7 @@
     <div class="row">
       {% with message = get_flashed_messages() %}
       {% if message: %}
-      <p style="color: red;">{{message[0]}}</p>
+      <p class="flash">{{message[0]}}</p>
       {% endif %}
       {% endwith %}
       <div class="col-lg-8 col-md-10 mx-auto">
