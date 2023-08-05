@@ -17,27 +17,14 @@ from werkzeug.security import generate_password_hash, check_password_hash
 from sqlalchemy.orm import relationship
 from sqlalchemy.exc import IntegrityError, NoResultFound
 from functools import wraps
+from os import environ
 
-# Import your forms from the forms.py
 from forms import CreatePostForm, RegisterUserForm, LoginForm, CommentForm
 
 
-"""
-Make sure the required packages are installed:
-Open the Terminal in PyCharm (bottom left).
-
-On Windows type:
-python -m pip install -r requirements.txt
-
-On MacOS type:
-pip3 install -r requirements.txt
-
-This will install the packages from the requirements.txt for this project.
-"""
-
 app = Flask(__name__)
 app.config["SECRET_KEY"] = generate_password_hash(
-    "##Nico_Zero@69_(python)_69", salt_length=10
+    str(environ.get("SECRET_KEY")), salt_length=10
 )
 
 ckeditor = CKEditor(app)
@@ -48,7 +35,7 @@ login_manager.init_app(app)
 
 
 # CONNECT TO DB
-app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///blogs.db"
+app.config["SQLALCHEMY_DATABASE_URI"] = environ.get("SQL_DB_URL")
 db = SQLAlchemy()
 db.init_app(app)
 
