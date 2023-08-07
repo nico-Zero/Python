@@ -105,7 +105,7 @@ class InstaFollower:
     def follow(self, account_list=None):
         for account in account_list or self.Found_Account_list:
             sleep(1)
-            _follow = account.find_element(By.TAG_NAME, "button")
+            _follow = account.find_element(By.TAG_NAME, "button")  # type: ignore
             _follow.click()
 
     def quit(self):
