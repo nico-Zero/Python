@@ -35,7 +35,7 @@ login_manager.init_app(app)
 
 
 # CONNECT TO DB
-app.config["SQLALCHEMY_DATABASE_URI"] = environ.get("SQL_DB_URL")
+app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///posts.db"
 db = SQLAlchemy()
 db.init_app(app)
 
