@@ -12,13 +12,13 @@ screen = pygame.display.set_mode((X, Y))
 # Changing Title of the windows
 pygame.display.set_caption("Space Invader")
 icon = pygame.image.load(
-    "/media/zero/Software/Python/Old_Shit__/Pygame/002-battleship.png"
+    "002-battleship.png"
 )
 pygame.display.set_icon(icon)
 
 # Player
 player_i = pygame.image.load(
-    "/media/zero/Software/Python/Old_Shit__/Pygame/png/005-battleship.png"
+    "/png/005-battleship.png"
 )
 player_x = 370
 player_y = 480
@@ -39,7 +39,7 @@ number_e = 10
 for i in range(number_e):
     enemy_i.append(
         pygame.image.load(
-            "/media/zero/Software/Python/Old_Shit__/Pygame/png/003-ufo.png"
+            "/png/003-ufo.png"
         )
     )
     enemy_x.append(random.randint(0, 756))
@@ -60,12 +60,12 @@ c_y = 0
 
 # Background
 background = pygame.image.load(
-    "/media/zero/Software/Python/Old_Shit__/Pygame/space_stars_sky_night_116649_800x600.jpg"
+    "/space_stars_sky_night_116649_800x600.jpg"
 )
 
 # Bullet
 bullet = pygame.image.load(
-    "/media/zero/Software/Python/Old_Shit__/Pygame/32pix_bullet/png/001-bullet.png"
+    "/32pix_bullet/png/001-bullet.png"
 )
 bullet_x = 0
 bullet_y = player_y - 32

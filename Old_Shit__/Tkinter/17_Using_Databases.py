@@ -9,7 +9,6 @@ root.title("Opendilog")
 root.call(
     "wm",
     "iconphoto",
-    root._w,
     PhotoImage(file="/media/zero/Software/__/Python/Tkinter/wifi-router.png"),
 )
 root.geometry("400x550")
