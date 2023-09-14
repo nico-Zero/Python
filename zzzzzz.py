@@ -89,3 +89,5 @@
 
 # # To access the docstring of the function:
 # print(help(add_numbers))
+
+print(ord("h"))
