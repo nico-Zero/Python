@@ -31,6 +31,7 @@ half_life = lifes / 2
 heart_bar = "❤️"
 hangman_pose = 0
 
+
 # The function which will update the CLI screen.
 def update():
     print(hangman)

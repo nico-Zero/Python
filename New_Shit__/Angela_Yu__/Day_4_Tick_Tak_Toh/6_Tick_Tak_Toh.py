@@ -60,6 +60,7 @@ def turn(player):
     global x, y
     turn = input(f"{player} enter the cordinates :\n").split(",")
     if turn[0] == "exit":
+        
         return 0
     try:
         x = int(turn[0]) - 1
