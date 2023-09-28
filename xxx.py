@@ -24,18 +24,18 @@ engine.setProperty("voices", voices[0].id)
 
 class Speak:
     def __init__(self) -> None:
-        self.x = None
+        self._x = None
 
     def take_command(self):
-        if self.x:
+        if self._x:
             system("cls")
-            print(self.x)
+            print(self._x)
 
         r = sr.Recognizer()
         with sr.Microphone() as source:
             print("Listening....")
             r.pause_threshold = 1
-            audio = r.listen(source, timeout=1, phrase_time_limit=5)
+            audio = r.listen(source, phrase_time_limit=5)
 
         try:
             print("Recognising....")
@@ -43,7 +43,7 @@ class Speak:
             print(f"user said: {_query}")
 
         except:
-            self.x = "say that again please.."
+            self._x = "say that again please.."
             self.take_command()
 
 
