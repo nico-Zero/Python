@@ -1,19 +1,20 @@
-# from time import sleep
-# import pyautogui as pg
-# from faker import Faker
-# # from random import choice
+# # from time import sleep
+# # import pyautogui as pg
+# # from faker import Faker
+# # # from random import choice
 
-# fa = Faker()
-# sleep(5)
-# for i in range(10):
-#     pg.write(f"hello {fa.name_male()}")
-#     # sleep(0.5)
-#     pg.press("Enter")
+# # fa = Faker()
+# # sleep(5)
+# # for i in range(10):
+# #     pg.write(f"hello {fa.name_male()}")
+# #     # sleep(0.5)
+# #     pg.press("Enter")
 
 
 import pyttsx3
 import speech_recognition as sr
 from os import system
+from datetime import datetime
 
 engine = pyttsx3.init("sapi5")
 voices = engine.getProperty("voices")
@@ -47,6 +48,18 @@ class Speak:
             self.take_command()
 
 
+def wish():
+    hour = int(datetime.now().hour)
+    if hour >= 0 and hour <= 12:
+        pyttsx3.speak("good morning")
+    elif hour > 12 and hour < 18:
+        pyttsx3.speak("good afternoon")
+    else:
+        pyttsx3.speak("Good evening")
+    pyttsx3.speak("I am jarvis Mam, please tell me how can i helo you")
+
+
 if __name__ == "__main__":
     jj = Speak()
     jj.take_command()
+    wish()
