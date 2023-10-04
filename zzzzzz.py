@@ -91,3 +91,20 @@
 # # print(help(add_numbers))
 
 # print(ord("h"))
+
+
+from prettytable import PrettyTable
+from prettytable import SINGLE_BORDER,FRAME
+x = PrettyTable()
+x.set_style(SINGLE_BORDER)
+x.header = False
+x.hrules = FRAME.
+
+x.add_row(["🌕","🌕","🌕","🌕"],divider=True)
+x.add_row(["🌕","🌕","🌕","🌕"],divider=True)
+x.add_row(["🌕","🌕","🌕","🌕"],divider=True)
+x.add_row(["🌕","🌕","🌕","🌕"],divider=True)
+x.add_row(["🌕","🌕","🌕","🌕"],divider=True)
+x.add_row(["🌕","🌕","🌕","🌕"],divider=True)
+
+print(x)
