@@ -2,7 +2,6 @@ import numpy as np
 from os import system
 from beautifultable import BeautifulTable
 
-
 class Tic_Tac_Toe:
     def __init__(self, player_1="", player_2="") -> None:
         self.player_1: str = player_1
