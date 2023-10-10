@@ -1,4 +1,3 @@
-import numpy as np
 from os import system
 from beautifultable import BeautifulTable
 from platform import uname
