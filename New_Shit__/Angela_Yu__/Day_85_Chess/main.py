@@ -42,17 +42,17 @@ class Player:
 
     def __set_starting_pieces(self):
         if self.player_number == 1:
-            self.__set_starting_pieces_locations(first_row=7, second_row=8)
+            self.__set_starting_pieces_locations(first_row=6, second_row=7)
         else:
-            self.__set_starting_pieces_locations(first_row=1, second_row=2)
+            self.__set_starting_pieces_locations(first_row=0, second_row=1)
 
     def __set_starting_pieces_locations(self, first_row, second_row):
         self.chess_pieces_locations = {
             key: location
             for key, location in zip(
                 self.chess_pieces_locations.keys(),
-                [(first_row, position) for position in range(1, 9)]
-                + [(second_row, position) for position in range(1, 9)],
+                [(first_row, position) for position in range(8)]
+                + [(second_row, position) for position in range(8)],
             )
         }
 
@@ -198,14 +198,16 @@ class Chess:
         return None
 
     def __validate_location(self, location):
-        print(self.current_player.chess_pieces_locations.values())
-        if location in self.current_player.chess_pieces_locations.values():
+        if (
+            location[0] - 1,
+            location[1] - 1,
+        ) in self.current_player.chess_pieces_locations.values():
             return location
         else:
             return None
 
     def __setup_game(self):
-        self.__game_map_array = self.__generate_map(9, 9)
+        self.__game_map_array = self.__generate_map(8, 8)
         self.player_1.setup()
         self.player_2.setup()
         self.__setup_map()
@@ -222,9 +224,6 @@ class Chess:
         return array(0)  # type: ignore
 
     def __setup_map(self):
-        for i in range(9):
-            self.__game_map_array[0][i] = i
-            self.__game_map_array[i][0] = i
         self.__update_game_map_array(self.player_1)
         self.__update_game_map_array(self.player_2)
         self.__update_game_map()
