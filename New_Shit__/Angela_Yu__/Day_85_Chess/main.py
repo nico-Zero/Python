@@ -42,17 +42,17 @@ class Player:
 
     def __set_starting_pieces(self):
         if self.player_number == 1:
-            self.__set_starting_pieces_locations(first_row=6, second_row=7)
+            self.__set_starting_pieces_locations(first_row=7, second_row=8)
         else:
-            self.__set_starting_pieces_locations(first_row=0, second_row=1)
+            self.__set_starting_pieces_locations(first_row=1, second_row=2)
 
     def __set_starting_pieces_locations(self, first_row, second_row):
         self.chess_pieces_locations = {
             key: location
             for key, location in zip(
                 self.chess_pieces_locations.keys(),
-                [(first_row, position) for position in range(8)]
-                + [(second_row, position) for position in range(8)],
+                [(first_row, position) for position in range(1, 9)]
+                + [(second_row, position) for position in range(1, 9)],
             )
         }
 
@@ -101,7 +101,7 @@ class Player:
             raise ValueError("Invalid color")
 
     def __get_chess_pieces_location(self):
-        white_pieces_location = {
+        return {
             "rook_1": (),
             "knight_1": (),
             "bishop_1": (),
@@ -119,30 +119,35 @@ class Player:
             "pawn_7": (),
             "pawn_8": (),
         }
-        black_pieces_location = {
-            "rook_1": (),
-            "knight_1": (),
-            "bishop_1": (),
-            "king": (),
-            "queen": (),
-            "bishop_2": (),
-            "knight_2": (),
-            "rook_2": (),
-            "pawn_1": (),
-            "pawn_2": (),
-            "pawn_3": (),
-            "pawn_4": (),
-            "pawn_5": (),
-            "pawn_6": (),
-            "pawn_7": (),
-            "pawn_8": (),
-        }
-        if self.color == "w":
-            return white_pieces_location
-        elif self.color == "b":
-            return black_pieces_location
-        else:
-            raise ValueError("Invalid color")
+
+
+class MoveSet:
+    def __init__(self, player_number):
+        self.player_number = player_number
+
+    def give_rook_moves(self, current_location):
+        ...
+
+    def give_knight_moves(self, current_location):
+        ...
+
+    def give_bishop_moves(self, current_location):
+        ...
+
+    def give_king_moves(self, current_location):
+        ...
+
+    def give_queen_moves(self, current_location):
+        ...
+
+    def give_pawn_moves(self, current_location):
+        ...
+
+    def check_attack(self, attack_location):
+        ...
+
+    def check_pawn_attack(self, attack_location):
+        ...
 
 
 class Chess:
@@ -156,13 +161,51 @@ class Chess:
         self.player_2 = Player(
             player_number=2, color="b" if self.player_1.color == "w" else "w"
         )
+        self.current_player = self.player_1
+        self.current_select_location: tuple = ()
+        self.current_move: tuple = ()
+
+    def __switch_player(self):
+        if self.current_player == self.player_1:
+            self.current_player = self.player_2
+        else:
+            self.current_player = self.player_1
 
     def run(self):
         self.__setup_game()
-        self.__display()
+        while True:
+            self.__display()
+            self.__take_location()
+            self.__update_game_map()
+
+    def __can_move_piece(self):
+        ...
+
+    def __take_location(self):
+        while True:
+            location = input(f"{self.current_player.name} enter your move :- ")
+            if filtered_location := self.__filter_str(location):
+                self.current_select_location = filtered_location
+                break
+            print("Invalid location !!!")
+
+    def __filter_str(self, move):
+        _move = [int(m) for m in move.split(" ") if m.isnumeric()]
+        _move = [m for m in _move if 0 < m <= 8]
+        if len(_move) >= 2:
+            if _move := self.__validate_location(tuple(_move[:2])):
+                return _move
+        return None
+
+    def __validate_location(self, location):
+        print(self.current_player.chess_pieces_locations.values())
+        if location in self.current_player.chess_pieces_locations.values():
+            return location
+        else:
+            return None
 
     def __setup_game(self):
-        self.__game_map_array = self.__generate_map(8, 8)
+        self.__game_map_array = self.__generate_map(9, 9)
         self.player_1.setup()
         self.player_2.setup()
         self.__setup_map()
@@ -179,16 +222,24 @@ class Chess:
         return array(0)  # type: ignore
 
     def __setup_map(self):
+        for i in range(9):
+            self.__game_map_array[0][i] = i
+            self.__game_map_array[i][0] = i
         self.__update_game_map_array(self.player_1)
         self.__update_game_map_array(self.player_2)
-
-        if not bool(self.__game_map):
-            for row in self.__game_map_array:
-                self.__game_map.rows.append(row)
+        self.__update_game_map()
 
     def __update_game_map_array(self, player: Player):
         for name, location in player.chess_pieces_locations.items():
             self.__game_map_array[location[0]][location[1]] = player.chess_pieces[name]
+
+    def __update_game_map(self):
+        if not bool(self.__game_map):
+            for row in self.__game_map_array:
+                self.__game_map.rows.append(row)
+        else:
+            for row in zip(range(len(self.__game_map_array)), self.__game_map_array):
+                self.__game_map.rows[row[0]] = row[1]
 
     def __display(self):
         system(commands["clear_screen"])
