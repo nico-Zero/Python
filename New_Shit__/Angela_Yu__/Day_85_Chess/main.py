@@ -3,7 +3,10 @@ from beautifultable import BeautifulTable
 from platform import uname
 
 commands = {"clear_screen": "cls" if uname().system == "Windows" else "clear"}
-system(commands["clear_screen"])
+
+
+def clear():
+    system(commands["clear_screen"])
 
 
 class Player:
@@ -19,7 +22,7 @@ class Player:
         )
         self.chess_pieces: dict = {}
         self.chess_pieces_locations: dict = {}
-        system(commands["clear_screen"])
+        clear()
 
     def setup(self):
         self.chess_pieces = self.__get_chess_pieces()
@@ -152,7 +155,7 @@ class MoveSet:
 
 class Chess:
     def __init__(self):
-        system(commands["clear_screen"])
+        clear()
 
         self.__game_map = BeautifulTable()
         self.__game_map.set_style(BeautifulTable.STYLE_BOX_ROUNDED)  # type: ignore
@@ -241,7 +244,7 @@ class Chess:
                 self.__game_map.rows[row[0]] = row[1]
 
     def __display(self):
-        system(commands["clear_screen"])
+        clear()
         print(self.__game_map)
 
     def get_players(self) -> None:
