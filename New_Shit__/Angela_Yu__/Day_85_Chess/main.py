@@ -159,7 +159,6 @@ class Chess:
         )
 
     def run(self):
-        system(commands["clear_screen"])
         self.__setup_game()
         self.__display()
 
@@ -193,6 +192,7 @@ class Chess:
             self.__game_map_array[location[0]][location[1]] = player.chess_pieces[name]
 
     def __display(self):
+        system(commands["clear_screen"])
         print(self.__game_map)
 
     def get_players(self) -> None:
