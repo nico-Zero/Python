@@ -22,11 +22,13 @@ class Player:
         )
         self.chess_pieces: dict = {}
         self.chess_pieces_locations: dict = {}
+        self.moves: object
         clear()
 
     def setup(self):
         self.chess_pieces = self.__get_chess_pieces()
         self.chess_pieces_locations = self.__get_chess_pieces_location()
+        self.moves = MoveSet(self.player_number, self)
         self.__setup_player_1()
         self.__set_starting_pieces()
 
@@ -125,26 +127,53 @@ class Player:
 
 
 class MoveSet:
-    def __init__(self, player_number):
-        self.player_number = player_number
+    def __init__(self, player_number, player: Player):
+        self.player_number: int = player_number
+        self.player = player
+        self.move_map = {
+            "rook": self.__get_rook_moves,
+            "knight": self.__get_knight_moves,
+            "bishop": self.__get_bishop_moves,
+            "king": self.__get_king_moves,
+            "queen": self.__get_queen_moves,
+            "pawn": self.__get_pawn_moves,
+        }
+        self.current_location: tuple = ()
+        self.current_piece: str = ""
 
-    def give_rook_moves(self, current_location):
+    def __get_rook_moves(self, game_map_array):
+        moves = [(move, self.current_location[1]) for move in range(8)] + [
+            (self.current_location[0], move) for move in range(8)
+        ]
+        return self.__right_moves(moves, game_map_array)
+
+    def __get_knight_moves(self, game_map_array):
         ...
 
-    def give_knight_moves(self, current_location):
+    def __get_bishop_moves(self, game_map_array):
         ...
 
-    def give_bishop_moves(self, current_location):
+    def __get_king_moves(self, game_map_array):
         ...
 
-    def give_king_moves(self, current_location):
+    def __get_queen_moves(self, game_map_array):
         ...
 
-    def give_queen_moves(self, current_location):
+    def __get_pawn_moves(self, game_map_array):
         ...
 
-    def give_pawn_moves(self, current_location):
-        ...
+    def __right_moves(self, moves, game_map_array):
+        return [move for move in moves if game_map_array[move[0]][move[1]] == ""]
+
+    def get_moves(self, current_location, game_map_array):
+        self.__update_values(current_location)
+        return self.move_map[self.current_piece](game_map_array)
+
+    def __update_values(self, current_location):
+        for key, value in self.player.chess_pieces_locations.items():
+            if current_location == value:
+                self.current_piece = key
+        self.current_location = current_location
 
     def check_attack(self, attack_location):
         ...
@@ -180,9 +209,6 @@ class Chess:
             self.__display()
             self.__take_location()
             self.__update_game_map()
-
-    def __can_move_piece(self):
-        ...
 
     def __take_location(self):
         while True:
@@ -247,7 +273,7 @@ class Chess:
         clear()
         print(self.__game_map)
 
-    def get_players(self) -> None:
+    def __get_players(self) -> None:
         print(self.player_1.chess_pieces)
         print(self.player_2.chess_pieces)
         print(self.player_1.chess_pieces_locations)
