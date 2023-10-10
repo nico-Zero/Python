@@ -75,14 +75,14 @@ class Tic_Tac_Toe:
             ]
         ):
             return "End"
-        elif not any([x == "_" for i in self.__game_map_array for x in i]):
+        elif not any([x == "" for i in self.__game_map_array for x in i]):
             return "Drew"
 
     def __check_move(self):
         weapon = self.__game_map_array[self.__current_move[0] - 1][
             self.__current_move[1] - 1
         ]
-        if weapon == "_":
+        if weapon == "":
             return True
         else:
             if weapon == self.__weapons[self.player_1]:
@@ -129,7 +129,7 @@ class Tic_Tac_Toe:
             if not shape or shape[axes] <= 0:
                 raise ValueError("length must be grater then Zero!!!")
             elif len(shape) == axes + 1:
-                return list("_" for _ in range(shape[axes]))
+                return list("" for _ in range(shape[axes]))
             elif len(shape) > axes:
                 return list(array(axes + 1) for _ in range(shape[axes]))
 
