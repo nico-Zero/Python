@@ -3,7 +3,7 @@ from beautifultable import BeautifulTable
 from platform import uname
 
 commands = {"clear_screen": "cls" if uname().system == "Windows" else "clear"}
-
+# nova
 
 def clear():
     system(commands["clear_screen"])
