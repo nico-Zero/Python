@@ -142,9 +142,9 @@ class MoveSet:
         self.current_piece: str = ""
 
     def __get_rook_moves(self, game_map_array):
-        moves = [(move, self.current_location[1]) for move in range(8)] + [
-            (self.current_location[0], move) for move in range(8)
-        ]
+        moves:list = []
+        for i in range(self.current_location[0]):
+            ...
         return self.__right_moves(moves, game_map_array)
 
     def __get_knight_moves(self, game_map_array):
@@ -163,6 +163,8 @@ class MoveSet:
         ...
 
     def __right_moves(self, moves, game_map_array):
+        if len(moves) == 1:
+            return game_map_array[moves[0][0]][moves[0][1]] == ""
         return [move for move in moves if game_map_array[move[0]][move[1]] == ""]
 
     def get_moves(self, current_location, game_map_array):
