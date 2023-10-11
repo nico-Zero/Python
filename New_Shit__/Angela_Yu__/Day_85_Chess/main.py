@@ -151,9 +151,9 @@ class MoveSet:
         self.current_location: tuple = ()
         self.current_piece: str = ""
         self.game_map_array: list = []
+        self.can: dict = {"moves": [], "attacks": []}
 
     def __get_rook_moves(self):
-        moves: list = []
         h_ranges = [
             range(self.current_location[1], 0),
             range(self.current_location[1], 8),
@@ -167,10 +167,11 @@ class MoveSet:
             for _ran in [v_ranges, h_ranges]:
                 for x in _ran:
                     if self.__right_moves([move_set_function(x)]):
-                        moves.append(move_set_function(x))
+                        self.can["moves"].append(move_set_function(x))
                     else:
+                        self.can["attacks"].append(move_set_function(x))
                         break
-        return moves
+        return self.can
 
     def __get_knight_moves(self):
         ...
