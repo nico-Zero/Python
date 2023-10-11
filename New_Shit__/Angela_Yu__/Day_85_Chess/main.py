@@ -23,7 +23,7 @@ class Player:
             )
             if self.color in ["w", "b"]:
                 break
-
+            print("Invalid color !!!")
         self.chess_pieces: dict = {}
         self.chess_pieces_locations: dict = {}
         self.moves = MoveSet(self.player_number, self)
@@ -187,24 +187,26 @@ class MoveSet:
     def __get_pawn_moves(self):
         moves: list = []
         if self.player_number == 1:
-            forward_1 = self.move_sets[1](self.current_location[1] - 1)
-            forward_2 = self.move_sets[1](self.current_location[1] - 2)
+            forward_1 = self.move_sets[0](self.current_location[0] - 1)
+            forward_2 = self.move_sets[0](self.current_location[0] - 2)
         else:
-            forward_1 = self.move_sets[1](self.current_location[1] + 1)
-            forward_2 = self.move_sets[1](self.current_location[1] + 2)
+            forward_1 = self.move_sets[0](self.current_location[0] + 1)
+            forward_2 = self.move_sets[0](self.current_location[0] + 2)
         if self.__right_moves(forward_1):
             moves.append(forward_1)
             if self.__right_moves(forward_2):
                 moves.append(forward_2)
+        return moves
 
     def __get_core(self, directions):
         ...
 
     def __right_moves(self, moves) -> bool:
-        return self.game_map_array[moves[0][0]][moves[0][1]] == ""
+        return self.game_map_array[moves[0]][moves[1]] == ""
 
     def get_moves(self, current_location, game_map_array):
         self.__update_values(current_location, game_map_array)
+        print(self.current_piece)
         return self.move_map[self.current_piece]()
 
     def __update_values(self, current_location, game_map_array):
@@ -252,6 +254,7 @@ class Chess:
                 self.__current_select_location, self.__game_map_array
             )
             print(moves)
+            break
 
     def __take_location(self):
         while True:
@@ -262,8 +265,8 @@ class Chess:
             print("Invalid location !!!")
 
     def __filter_str(self, move):
-        _move = [int(m) for m in move.split(" ") if m.isnumeric()]
-        _move = [m for m in _move if 0 < m <= 8]
+        _move = [int(m) - 1 for m in move.split(" ") if m.isnumeric()]
+        _move = [m for m in _move if 0 <= m <= 7]
         if len(_move) >= 2:
             if _move := self.__validate_location(tuple(_move[:2])):
                 return _move
@@ -271,8 +274,8 @@ class Chess:
 
     def __validate_location(self, location):
         if (
-            location[0] - 1,
-            location[1] - 1,
+            location[0],
+            location[1],
         ) in self.current_player.chess_pieces_locations.values():
             return location
         else:
