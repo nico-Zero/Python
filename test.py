@@ -1,31 +1,29 @@
-# # # # x = "​"
-# # # # print(str(len(x))+" Hello, world")
+# # # # # x = "​"
+# # # # # print(str(len(x))+" Hello, world")
 
-# # # # print(id(x))
+# # # # # print(id(x))
 
-# # # import platform
+# # # # import platform
 
-# # # print(platform.uname().system)
-
-
-# # import click
-
-# # @click.command("hello")
-# # @click.version_option("0.1.0", prog_name="hello")
-# # def hello():
-# #     click.echo("Hello, World!")
-
-# # if __name__ == "__main__":
-# #     hello()
+# # # # print(platform.uname().system)
 
 
-# x = 69
+# # # import click
 
-# for i in range(10):
-#     print(id(x))
+# # # @click.command("hello")
+# # # @click.version_option("0.1.0", prog_name="hello")
+# # # def hello():
+# # #     click.echo("Hello, World!")
+
+# # # if __name__ == "__main__":
+# # #     hello()
 
 
-import ctypes
-import sys
+# # x = 69
+
+# # for i in range(10):
+# #     print(id(x))
 
 
+# import ctypes
+# import sys

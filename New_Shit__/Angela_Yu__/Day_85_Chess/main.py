@@ -3,7 +3,7 @@ from beautifultable import BeautifulTable
 from platform import uname
 
 commands = {"clear_screen": "cls" if uname().system == "Windows" else "clear"}
-# nova
+
 
 def clear():
     system(commands["clear_screen"])
@@ -15,22 +15,28 @@ class Player:
         self.name = (
             input(f"Enter player {player_number} name :- ") if name == "" else name
         )
-        self.color = (
-            input(f"Enter player {player_number} color ('w','b'):- ").lower()
-            if color == ""
-            else color
-        )
+        while True:
+            self.color = (
+                input(f"Enter player {player_number} color ('w','b'):- ").lower()
+                if color == ""
+                else color
+            )
+            if self.color in ["w", "b"]:
+                break
+
         self.chess_pieces: dict = {}
         self.chess_pieces_locations: dict = {}
-        self.moves: object
+        self.moves = MoveSet(self.player_number, self)
         clear()
 
     def setup(self):
         self.chess_pieces = self.__get_chess_pieces()
         self.chess_pieces_locations = self.__get_chess_pieces_location()
-        self.moves = MoveSet(self.player_number, self)
         self.__setup_player_1()
         self.__set_starting_pieces()
+
+    def selected_piece_moves(self, current_location, game_map_array):
+        return self.moves.get_moves(current_location, game_map_array)
 
     def __setup_player_1(self):
         if self.player_number == 1:
@@ -138,44 +144,75 @@ class MoveSet:
             "queen": self.__get_queen_moves,
             "pawn": self.__get_pawn_moves,
         }
+        self.move_sets = [
+            lambda x: (x, self.current_location[1]),
+            lambda x: (self.current_location[0], x),
+        ]
         self.current_location: tuple = ()
         self.current_piece: str = ""
+        self.game_map_array: list = []
 
-    def __get_rook_moves(self, game_map_array):
-        moves:list = []
-        for i in range(self.current_location[0]):
-            ...
-        return self.__right_moves(moves, game_map_array)
+    def __get_rook_moves(self):
+        moves: list = []
+        h_ranges = [
+            range(self.current_location[1], 0),
+            range(self.current_location[1], 8),
+        ]
+        v_ranges = [
+            range(self.current_location[0], 0),
+            range(self.current_location[0], 8),
+        ]
 
-    def __get_knight_moves(self, game_map_array):
+        for move_set_function in self.move_sets[:2]:
+            for _ran in [v_ranges, h_ranges]:
+                for x in _ran:
+                    if self.__right_moves([move_set_function(x)]):
+                        moves.append(move_set_function(x))
+                    else:
+                        break
+        return moves
+
+    def __get_knight_moves(self):
         ...
 
-    def __get_bishop_moves(self, game_map_array):
+    def __get_bishop_moves(self):
         ...
 
-    def __get_king_moves(self, game_map_array):
+    def __get_king_moves(self):
         ...
 
-    def __get_queen_moves(self, game_map_array):
+    def __get_queen_moves(self):
         ...
 
-    def __get_pawn_moves(self, game_map_array):
+    def __get_pawn_moves(self):
+        moves: list = []
+        if self.player_number == 1:
+            forward_1 = self.move_sets[1](self.current_location[1] - 1)
+            forward_2 = self.move_sets[1](self.current_location[1] - 2)
+        else:
+            forward_1 = self.move_sets[1](self.current_location[1] + 1)
+            forward_2 = self.move_sets[1](self.current_location[1] + 2)
+        if self.__right_moves(forward_1):
+            moves.append(forward_1)
+            if self.__right_moves(forward_2):
+                moves.append(forward_2)
+
+    def __get_core(self, directions):
         ...
 
-    def __right_moves(self, moves, game_map_array):
-        if len(moves) == 1:
-            return game_map_array[moves[0][0]][moves[0][1]] == ""
-        return [move for move in moves if game_map_array[move[0]][move[1]] == ""]
+    def __right_moves(self, moves) -> bool:
+        return self.game_map_array[moves[0][0]][moves[0][1]] == ""
 
     def get_moves(self, current_location, game_map_array):
-        self.__update_values(current_location)
-        return self.move_map[self.current_piece](game_map_array)
+        self.__update_values(current_location, game_map_array)
+        return self.move_map[self.current_piece]()
 
-    def __update_values(self, current_location):
+    def __update_values(self, current_location, game_map_array):
         for key, value in self.player.chess_pieces_locations.items():
             if current_location == value:
-                self.current_piece = key
+                self.current_piece = key.split("_")[0]
         self.current_location = current_location
+        self.game_map_array = game_map_array
 
     def check_attack(self, attack_location):
         ...
@@ -196,7 +233,7 @@ class Chess:
             player_number=2, color="b" if self.player_1.color == "w" else "w"
         )
         self.current_player = self.player_1
-        self.current_select_location: tuple = ()
+        self.__current_select_location: tuple = ()
         self.current_move: tuple = ()
 
     def __switch_player(self):
@@ -211,12 +248,16 @@ class Chess:
             self.__display()
             self.__take_location()
             self.__update_game_map()
+            moves = self.current_player.selected_piece_moves(
+                self.__current_select_location, self.__game_map_array
+            )
+            print(moves)
 
     def __take_location(self):
         while True:
             location = input(f"{self.current_player.name} enter your move :- ")
             if filtered_location := self.__filter_str(location):
-                self.current_select_location = filtered_location
+                self.__current_select_location = filtered_location
                 break
             print("Invalid location !!!")
 
