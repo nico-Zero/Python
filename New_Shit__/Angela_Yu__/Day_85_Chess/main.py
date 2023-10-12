@@ -156,24 +156,24 @@ class MoveSet:
         return (self.current_location[0], x)
 
     def __get_rook_moves(self):
-        h_ranges = [
-            range(self.current_location[1], 0),
-            range(self.current_location[1], 8),
-        ]
-        v_ranges = [
-            range(self.current_location[0], 0),
-            range(self.current_location[0], 8),
-        ]
+        ranges = {
+            key: [
+                range(self.current_location[index], 0, -1),
+                range(self.current_location[index] + 1, 8, 1),
+            ]
+            for index, key in enumerate(["v_ranges", "h_ranges"])
+        }
 
-        for coordinate_functions in [self.__update_y, self.__update_x]:
-            for _ran in [v_ranges, h_ranges]:
+        for range_set, coordinate_function in [
+            (ranges["v_ranges"], self.__update_y),
+            (ranges["h_ranges"], self.__update_x),
+        ]:
+            for _ran in range_set:
                 for x in _ran:
-                    if self.__right_move([coordinate_functions(x)]):
-                        self.current_piece_can["moves"].append(coordinate_functions(x))
+                    if self.__right_move(coordinate_function(x)):
+                        self.current_piece_can["moves"].append(coordinate_function(x))
                     else:
-                        self.current_piece_can["attacks"].append(
-                            coordinate_functions(x)
-                        )
+                        self.current_piece_can["attacks"].append(coordinate_function(x))
                         break
         return self.current_piece_can
 
@@ -234,7 +234,8 @@ class MoveSet:
             else:
                 return False
         except:
-            raise ValueError("Invalid move passed in '__right_move' !!!")
+            return False
+            # raise ValueError("Invalid move passed in '__right_move' !!!")
 
     def get_moves(self, current_location, game_map_array):
         self.__update_values(current_location, game_map_array)
