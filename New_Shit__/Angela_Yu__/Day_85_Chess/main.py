@@ -144,14 +144,16 @@ class MoveSet:
             "queen": self.__get_queen_moves,
             "pawn": self.__get_pawn_moves,
         }
-        self.move_sets = [
-            lambda x: (x, self.current_location[1]),
-            lambda x: (self.current_location[0], x),
-        ]
         self.current_location: tuple = ()
         self.current_piece: str = ""
         self.game_map_array: list = []
-        self.can: dict = {"moves": [], "attacks": []}
+        self.current_piece_can: dict = {"moves": [], "attacks": []}
+
+    def __update_y(self, y):
+        return (y, self.current_location[1])
+
+    def __update_x(self, x):
+        return (self.current_location[0], x)
 
     def __get_rook_moves(self):
         h_ranges = [
@@ -163,15 +165,17 @@ class MoveSet:
             range(self.current_location[0], 8),
         ]
 
-        for move_set_function in self.move_sets[:2]:
+        for coordinate_functions in [self.__update_y, self.__update_x]:
             for _ran in [v_ranges, h_ranges]:
                 for x in _ran:
-                    if self.__right_moves([move_set_function(x)]):
-                        self.can["moves"].append(move_set_function(x))
+                    if self.__right_move([coordinate_functions(x)]):
+                        self.current_piece_can["moves"].append(coordinate_functions(x))
                     else:
-                        self.can["attacks"].append(move_set_function(x))
+                        self.current_piece_can["attacks"].append(
+                            coordinate_functions(x)
+                        )
                         break
-        return self.can
+        return self.current_piece_can
 
     def __get_knight_moves(self):
         ...
@@ -186,24 +190,51 @@ class MoveSet:
         ...
 
     def __get_pawn_moves(self):
-        moves: list = []
         if self.player_number == 1:
-            forward_1 = self.move_sets[0](self.current_location[0] - 1)
-            forward_2 = self.move_sets[0](self.current_location[0] - 2)
+            self.__update_pawn_can_moves(6, "-")
+            self.__update_pawn_attacks("-")
         else:
-            forward_1 = self.move_sets[0](self.current_location[0] + 1)
-            forward_2 = self.move_sets[0](self.current_location[0] + 2)
-        if self.__right_moves(forward_1):
-            moves.append(forward_1)
-            if self.__right_moves(forward_2):
-                moves.append(forward_2)
-        return moves
+            self.__update_pawn_can_moves(1, "+")
+            self.__update_pawn_attacks("+")
+        return self.current_piece_can
 
-    def __get_core(self, directions):
-        ...
+    def __update_pawn_can_moves(self, row: int, operation: str):
+        forward_1 = self.__update_y(eval(f"self.current_location[0] {operation} 1"))
+        if self.__can_pawn_move_2(row):
+            forward_2 = self.__update_y(eval(f"self.current_location[0] {operation} 2"))
+        if self.__right_move(forward_1):
+            self.current_piece_can["moves"].append(forward_1)
+            if self.__can_pawn_move_2(row):
+                if self.__right_move(forward_2):  # type:ignore
+                    self.current_piece_can["moves"].append(forward_2)  # type:ignore
 
-    def __right_moves(self, moves) -> bool:
-        return self.game_map_array[moves[0]][moves[1]] == ""
+    def __can_pawn_move_2(self, row):
+        return self.current_location[0] == row
+
+    def __update_pawn_attacks(self, operation):
+        attacks = self.__pawn_attack_coordinates(operation)
+        right_attacks = [attack for attack in attacks if self.__right_move(attack)]
+        self.current_piece_can["attacks"] += right_attacks
+
+    def __pawn_attack_coordinates(self, operation):
+        coordinates: list = []
+        for opera in ["-", "+"]:
+            coordinates.append(
+                (
+                    eval(f"self.current_location[0] {operation} 1"),
+                    eval(f"self.current_location[1] {opera} 1"),
+                )
+            )
+        return coordinates
+
+    def __right_move(self, moves) -> bool:
+        try:
+            if (0 <= moves[0] < 8) and (0 <= moves[1] < 8):
+                return self.game_map_array[moves[0]][moves[1]] == ""
+            else:
+                return False
+        except:
+            raise ValueError("Invalid move passed in '__right_move' !!!")
 
     def get_moves(self, current_location, game_map_array):
         self.__update_values(current_location, game_map_array)
@@ -218,9 +249,6 @@ class MoveSet:
         self.game_map_array = game_map_array
 
     def check_attack(self, attack_location):
-        ...
-
-    def check_pawn_attack(self, attack_location):
         ...
 
 
