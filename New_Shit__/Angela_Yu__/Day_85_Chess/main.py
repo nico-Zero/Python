@@ -1,6 +1,8 @@
 from os import system
 from beautifultable import BeautifulTable
+from prettytable import PrettyTable
 from platform import uname
+
 
 commands = {"clear_screen": "cls" if uname().system == "Windows" else "clear"}
 
@@ -29,23 +31,30 @@ class Player:
         self.moves = MoveSet(self.player_number, self)
         clear()
 
+    def reset_moves(self):
+        self.moves.reset()
+
     def setup(self):
         self.chess_pieces = self.__get_chess_pieces()
         self.chess_pieces_locations = self.__get_chess_pieces_location()
-        self.__setup_player_1()
+        self.__setup___player_1()
         self.__set_starting_pieces()
 
-    def selected_piece_moves(self, current_location, game_map_array):
-        return self.moves.get_moves(current_location, game_map_array)
+    def selected_piece_moves(
+        self, current_selected_location, game_map_array, enemy_pieces_locations
+    ):
+        return self.moves.get_moves(
+            current_selected_location, game_map_array, enemy_pieces_locations
+        )
 
-    def __setup_player_1(self):
+    def __setup___player_1(self):
         if self.player_number == 1:
-            self.chess_pieces = self.__player_1_pieces_reset(self.chess_pieces)
-            self.chess_pieces_locations = self.__player_1_pieces_reset(
+            self.chess_pieces = self.____player_1_pieces_reset(self.chess_pieces)
+            self.chess_pieces_locations = self.____player_1_pieces_reset(
                 self.chess_pieces_locations
             )
 
-    def __player_1_pieces_reset(self, values):
+    def ____player_1_pieces_reset(self, values):
         return {
             name: pieces
             for name, pieces in list(values.items())[8:] + list(values.items())[:8]
@@ -144,22 +153,20 @@ class MoveSet:
             "queen": self.__get_queen_moves,
             "pawn": self.__get_pawn_moves,
         }
-        self.current_location: tuple = ()
-        self.current_piece: str = ""
-        self.game_map_array: list = []
-        self.current_piece_can: dict = {"moves": [], "attacks": []}
+        self.current_selected_location: tuple = ()
+        self.current_piece: str
+        self.game_map_array: list
+        self.enemy_pieces_location: dict
+        self.__current_piece_can: dict = {"moves": [], "attacks": []}
 
-    def __update_y(self, y):
-        return (y, self.current_location[1])
-
-    def __update_x(self, x):
-        return (self.current_location[0], x)
+    def reset(self):
+        self.__current_piece_can = {"moves": [], "attacks": []}
 
     def __get_rook_moves(self):
         ranges = {
             key: [
-                range(self.current_location[index], 0, -1),
-                range(self.current_location[index] + 1, 8, 1),
+                range(self.current_selected_location[index] - 1, 0, -1),
+                range(self.current_selected_location[index] + 1, 8, 1),
             ]
             for index, key in enumerate(["v_ranges", "h_ranges"])
         }
@@ -171,11 +178,36 @@ class MoveSet:
             for _ran in range_set:
                 for x in _ran:
                     if self.__right_move(coordinate_function(x)):
-                        self.current_piece_can["moves"].append(coordinate_function(x))
+                        self.__current_piece_can["moves"].append(coordinate_function(x))
                     else:
-                        self.current_piece_can["attacks"].append(coordinate_function(x))
+                        attack = coordinate_function(x)
+                        if self.__can_attack(attack):
+                            self.__current_piece_can["attacks"].append(attack)
                         break
-        return self.current_piece_can
+
+        return self.__current_piece_can
+
+    def __can_attack(self, attack_location):
+        if self.__is_enemy_piece(attack_location):
+            return True
+        return False
+
+    def __is_enemy_piece(self, attack_location):
+        print(f"enemy :- {self.enemy_pieces_location}")
+        if attack_location in self.enemy_pieces_location.values():
+            return True
+        return False
+
+    def __is_friendly_piece(self, attack_location):
+        if attack_location in self.player.chess_pieces_locations.values():
+            return True
+        return False
+
+    def __update_y(self, y):
+        return (y, self.current_selected_location[1])
+
+    def __update_x(self, x):
+        return (self.current_selected_location[0], x)
 
     def __get_knight_moves(self):
         ...
@@ -196,33 +228,38 @@ class MoveSet:
         else:
             self.__update_pawn_can_moves(1, "+")
             self.__update_pawn_attacks("+")
-        return self.current_piece_can
+        return self.__current_piece_can
 
     def __update_pawn_can_moves(self, row: int, operation: str):
-        forward_1 = self.__update_y(eval(f"self.current_location[0] {operation} 1"))
-        if self.__can_pawn_move_2(row):
-            forward_2 = self.__update_y(eval(f"self.current_location[0] {operation} 2"))
+        forward_1 = self.__update_y(
+            eval(f"self.current_selected_location[0] {operation} 1")
+        )
         if self.__right_move(forward_1):
-            self.current_piece_can["moves"].append(forward_1)
-            if self.__can_pawn_move_2(row):
-                if self.__right_move(forward_2):  # type:ignore
-                    self.current_piece_can["moves"].append(forward_2)  # type:ignore
+            self.__current_piece_can["moves"].append(forward_1)
+
+        if self.__can_pawn_move_2(row):
+            forward_2 = self.__update_y(
+                eval(f"self.current_selected_location[0] {operation} 2")
+            )
+            if self.__right_move(forward_2):
+                self.__current_piece_can["moves"].append(forward_2)
 
     def __can_pawn_move_2(self, row):
-        return self.current_location[0] == row
+        return self.current_selected_location[0] == row
 
     def __update_pawn_attacks(self, operation):
         attacks = self.__pawn_attack_coordinates(operation)
-        right_attacks = [attack for attack in attacks if self.__right_move(attack)]
-        self.current_piece_can["attacks"] += right_attacks
+        print(f"attacks = {attacks}")
+        right_attacks = [attack for attack in attacks if self.__can_attack(attack)]
+        self.__current_piece_can["attacks"] += right_attacks
 
     def __pawn_attack_coordinates(self, operation):
         coordinates: list = []
         for opera in ["-", "+"]:
             coordinates.append(
                 (
-                    eval(f"self.current_location[0] {operation} 1"),
-                    eval(f"self.current_location[1] {opera} 1"),
+                    eval(f"self.current_selected_location[0] {operation} 1"),
+                    eval(f"self.current_selected_location[1] {opera} 1"),
                 )
             )
         return coordinates
@@ -234,88 +271,156 @@ class MoveSet:
             else:
                 return False
         except:
-            return False
-            # raise ValueError("Invalid move passed in '__right_move' !!!")
+            # return False
+            raise ValueError("Invalid move passed in '__right_move' !!!")
 
-    def get_moves(self, current_location, game_map_array):
-        self.__update_values(current_location, game_map_array)
+    def get_moves(
+        self, current_selected_location, game_map_array, enemy_pieces_location
+    ):
+        self.__update_values(
+            current_selected_location, game_map_array, enemy_pieces_location
+        )
         print(self.current_piece)
         return self.move_map[self.current_piece]()
 
-    def __update_values(self, current_location, game_map_array):
+    def __update_values(
+        self, current_selected_location, game_map_array, enemy_pieces_location
+    ):
         for key, value in self.player.chess_pieces_locations.items():
-            if current_location == value:
+            if current_selected_location == value:
                 self.current_piece = key.split("_")[0]
-        self.current_location = current_location
+        self.current_selected_location = current_selected_location
         self.game_map_array = game_map_array
-
-    def check_attack(self, attack_location):
-        ...
+        self.enemy_pieces_location = enemy_pieces_location
 
 
 class Chess:
     def __init__(self):
         clear()
 
-        self.__game_map = BeautifulTable()
-        self.__game_map.set_style(BeautifulTable.STYLE_BOX_ROUNDED)  # type: ignore
+        self.__game_display = BeautifulTable()
+        self.__game_display.set_style(BeautifulTable.STYLE_BOX_ROUNDED)  # type: ignore
         self.__game_map_array: list = []
-        self.player_1 = Player(player_number=1)
-        self.player_2 = Player(
-            player_number=2, color="b" if self.player_1.color == "w" else "w"
+        self.__player_1 = Player(player_number=1)
+        self.__player_2 = Player(
+            player_number=2, color="b" if self.__player_1.color == "w" else "w"
         )
-        self.current_player = self.player_1
-        self.__current_select_location: tuple = ()
-        self.current_move: tuple = ()
-
-    def __switch_player(self):
-        if self.current_player == self.player_1:
-            self.current_player = self.player_2
-        else:
-            self.current_player = self.player_1
+        self.current_player = self.__player_1
+        self.enemy_player = self.__player_2
+        self.__current_player_moves: dict
+        self.__current_select_location: tuple
+        self.__current_player_attack: tuple
 
     def run(self):
         self.__setup_game()
         while True:
             self.__display()
-            self.__take_location()
-            self.__update_game_map()
-            moves = self.current_player.selected_piece_moves(
-                self.__current_select_location, self.__game_map_array
+            self.__ask_select_location()
+            self.__current_player_moves = self.current_player.selected_piece_moves(
+                self.__current_select_location,
+                self.__game_map_array,
+                self.enemy_player.chess_pieces_locations,
             )
-            print(moves)
-            break
 
-    def __take_location(self):
+            self.__print_can()
+            self.current_player.reset_moves()
+            if input():
+                continue
+
+            if not self.__ask_move_location():
+                continue
+            self.__make_move()
+            self.__switch_player()
+
+    def __print_can(self):
+        readable = self.__readable_current_piece_can()
+        print(f"Can Move:- {readable['moves'] if readable['moves'] else None}")
+        print(f"Can Attack:- {readable['attacks'] if readable['attacks'] else None}")
+
+    def __readable_current_piece_can(self):
+        readable: dict = {}
+        coord_up_1 = lambda coord: (coord[0] + 1, coord[1] + 1)
+        for items in self.__current_player_moves.items():
+            readable[items[0]] = [coord_up_1(coord) for coord in items[1]]
+        return readable
+
+    def __ask_select_location(self):
         while True:
-            location = input(f"{self.current_player.name} enter your move :- ")
-            if filtered_location := self.__filter_str(location):
+            location = input(
+                f"{self.current_player.name.capitalize()}, select your piece :- "
+            )
+            location = self.__filter_coordinate(location)
+            if filtered_location := self.__right_location(location):
                 self.__current_select_location = filtered_location
                 break
             print("Invalid location !!!")
 
-    def __filter_str(self, move):
+    def __filter_coordinate(self, move):
         _move = [int(m) - 1 for m in move.split(" ") if m.isnumeric()]
-        _move = [m for m in _move if 0 <= m <= 7]
-        if len(_move) >= 2:
-            if _move := self.__validate_location(tuple(_move[:2])):
-                return _move
+        if _move:
+            return _move
         return None
 
-    def __validate_location(self, location):
-        if (
-            location[0],
-            location[1],
-        ) in self.current_player.chess_pieces_locations.values():
-            return location
+    def __right_location(self, location):
+        _move = [m for m in location if 0 <= m <= 7]
+        if len(_move) >= 2:
+            if (
+                _move[0],
+                _move[1],
+            ) in self.current_player.chess_pieces_locations.values():
+                return (_move[0], _move[1])
+        return None
+
+    def __ask_move_location(self):
+        while True:
+            move = input(
+                f"{self.current_player.name.capitalize()}, enter your move :- "
+            )
+            filtered_move = self.__filter_coordinate(move)
+            right_move = self.__right_move(filtered_move)
+            print(f"move :- {right_move}")
+            if right_move:
+                self.__current_player_attack = right_move
+                return True
+            else:
+                continue
+
+    def __right_move(self, moves):
+        if len(moves) >= 2:
+            move = tuple(moves[:2])
+            can = (
+                self.__current_player_moves["moves"]
+                + self.__current_player_moves["attacks"]
+            )
+            if move in can:
+                return move
+        return ()
+
+    def __make_move(self):
+        for piece_name, location in self.current_player.chess_pieces_locations.items():
+            if location == self.__current_select_location:
+                self.current_player.chess_pieces_locations[piece_name] = (
+                    self.__current_player_attack[0],
+                    self.__current_player_attack[1],
+                )
+        self.__game_map_array[self.__current_select_location[0]][
+            self.__current_select_location[1]
+        ] = ""
+        self.__update_map()
+
+    def __switch_player(self):
+        if self.current_player == self.__player_1:
+            self.current_player = self.__player_2
+            self.enemy_player = self.__player_1
         else:
-            return None
+            self.current_player = self.__player_1
+            self.enemy_player = self.__player_2
 
     def __setup_game(self):
         self.__game_map_array = self.__generate_map(8, 8)
-        self.player_1.setup()
-        self.player_2.setup()
-        self.__setup_map()
+        self.__player_1.setup()
+        self.__player_2.setup()
+        self.__update_map()
 
     def __generate_map(self, *shape: int) -> list[list[str]]:
         def array(axes):
@@ -328,32 +433,32 @@ class Chess:
 
         return array(0)  # type: ignore
 
-    def __setup_map(self):
-        self.__update_game_map_array(self.player_1)
-        self.__update_game_map_array(self.player_2)
-        self.__update_game_map()
+    def __update_map(self):
+        self.__update_game_map_array(self.__player_1)
+        self.__update_game_map_array(self.__player_2)
+        self.__update_game_display()
 
     def __update_game_map_array(self, player: Player):
         for name, location in player.chess_pieces_locations.items():
             self.__game_map_array[location[0]][location[1]] = player.chess_pieces[name]
 
-    def __update_game_map(self):
-        if not bool(self.__game_map):
+    def __update_game_display(self):
+        if not bool(self.__game_display):
             for row in self.__game_map_array:
-                self.__game_map.rows.append(row)
+                self.__game_display.rows.append(row)
         else:
-            for row in zip(range(len(self.__game_map_array)), self.__game_map_array):
-                self.__game_map.rows[row[0]] = row[1]
+            for row in enumerate(self.__game_map_array):
+                self.__game_display.rows[row[0]] = row[1]
 
     def __display(self):
         clear()
-        print(self.__game_map)
+        print(self.__game_display)
 
     def __get_players(self) -> None:
-        print(self.player_1.chess_pieces)
-        print(self.player_2.chess_pieces)
-        print(self.player_1.chess_pieces_locations)
-        print(self.player_2.chess_pieces_locations)
+        print(self.__player_1.chess_pieces)
+        print(self.__player_2.chess_pieces)
+        print(self.__player_1.chess_pieces_locations)
+        print(self.__player_2.chess_pieces_locations)
 
 
 game = Chess()
