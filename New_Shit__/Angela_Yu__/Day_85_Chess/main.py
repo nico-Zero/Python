@@ -475,3 +475,4 @@ class Chess:
 
 game = Chess()
 game.run()
+
