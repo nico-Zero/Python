@@ -215,10 +215,33 @@ class MoveSet:
         return (self.current_selected_location[0], x)
 
     def __get_knight_moves(self) -> dict:
+        # TODO: Make 
         ...
 
     def __get_bishop_moves(self) -> dict:
-        ...
+        ranges = {
+            key: [
+                range(self.current_selected_location[index] - 1, 0, -1),
+                range(self.current_selected_location[index] + 1, 8, 1),
+            ]
+            for index, key in enumerate(["Dimension_1_range", "Dimension_2_range"])
+        }
+
+        for range_set, coordinate_function in [
+            (ranges["Dimension_1_range"], self.__update_y),
+            (ranges["Dimension_2_range"], self.__update_x),
+        ]:
+            for _ran in range_set:
+                for x in _ran:
+                    if self.__right_move(coordinate_function(x)):
+                        self.__current_piece_can["moves"].append(coordinate_function(x))
+                    else:
+                        attack = coordinate_function(x)
+                        if self.__can_attack(attack):
+                            self.__current_piece_can["attacks"].append(attack)
+                        break
+
+        return self.__current_piece_can
 
     def __get_king_moves(self) -> dict:
         ...
