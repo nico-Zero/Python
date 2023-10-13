@@ -28,6 +28,7 @@ class Player:
             print("Invalid color !!!")
         self.chess_pieces: dict = {}
         self.chess_pieces_locations: dict = {}
+        self.pieces_death_locations: dict = {}
         self.moves = MoveSet(self.player_number, self)
         clear()
 
@@ -42,7 +43,7 @@ class Player:
 
     def got_killed(self, key: str = "") -> None:
         if not key == "":
-            self.chess_pieces_locations.pop(key)
+            self.pieces_death_locations[key] = self.chess_pieces_locations.pop(key)
 
     def selected_piece_moves(
         self, current_selected_location, game_map_array, enemy_pieces_locations
@@ -284,7 +285,6 @@ class MoveSet:
         self.__update_values(
             current_selected_location, game_map_array, enemy_pieces_location
         )
-        print(self.current_piece)
         return self.move_map[self.current_piece]()
 
     def __update_values(
@@ -311,7 +311,6 @@ class Chess:
         )
         self.current_player = self.__player_1
         self.enemy_player = self.__player_2
-        self.__enemy_player_piece_killed: str
         self.__current_player_moves: dict
         self.__current_select_location: tuple
         self.__current_player_attack: tuple
@@ -475,4 +474,3 @@ class Chess:
 
 game = Chess()
 game.run()
-
