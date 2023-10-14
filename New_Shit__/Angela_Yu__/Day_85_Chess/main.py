@@ -31,6 +31,8 @@ class Player:
         self.chess_pieces_locations: dict = {}
         self.pieces_death_locations: dict = {}
         self.moves = MoveSet(self.player_number, self)
+        self.got_check_mated: bool = False  # TODO: check mate and Player response
+        self.got_check: bool = False  # TODO: check and Player response
         clear()
 
     def reset_moves(self) -> None:
@@ -430,6 +432,9 @@ class Chess:
     def run(self) -> None:
         self.__setup_game()
         while True:
+            if self.current_player.got_check_mated == True:
+                print(f"{self.enemy_player.name} Won")
+
             self.__display()
             self.__ask_select_location()
             self.__current_player_moves = self.current_player.selected_piece_moves(

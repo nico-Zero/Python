@@ -28,8 +28,3 @@
 # import ctypes
 # import sys
 
-x = [1, 2, 3, 45]
-y = [1, 2, 3]
-
-print(*zip(x,y))
-
