@@ -31,7 +31,7 @@ class Player:
         self.chess_pieces_locations: dict = {}
         self.pieces_death_locations: dict = {}
         self.moves = MoveSet(self.player_number, self)
-        self.got_check_mated: bool = False  # TODO: check mate and Player response
+        self.got_check_mated: bool = False
         self.got_check: bool = False  # TODO: check and Player response
         clear()
 
