@@ -35,6 +35,46 @@ class Player:
         self.got_check: bool = False  # TODO: check and Player response
         clear()
 
+    def update_check(self, checks):
+        self.got_check = checks["check"]
+        self.got_check_mated = checks["check_mate"]
+
+    def can_give_check_mate(
+        self, game_map_array, enemy_king_location, enemy_king_moves
+    ):
+        is_attacked = {
+            piece_name: any(piece_attacks)
+            for piece_name, piece_attacks in self.__get_all_pieces_attacks(
+                game_map_array, enemy_king_location
+            ).items()
+        }
+        king_attacked_by = [
+            piece_name
+            for piece_name, piece_attacks in is_attacked.items()
+            if piece_attacks
+        ]
+        check = False
+        check_mate = False
+
+        if any(king_attacked_by):
+            check = True
+            if not (enemy_king_moves["moves"] and enemy_king_moves["attacks"]):
+                check_mate = True
+
+        return {"check": check, "check_mate": check_mate}
+
+    def __get_all_pieces_attacks(self, game_map_array, enemy_king_location) -> dict:
+        all_attacks = self.moves.get_all_pieces_attacks(
+            self.chess_pieces_locations, game_map_array, enemy_king_location
+        )
+        print(all_attacks)
+        return all_attacks
+
+    def get_king_moves(self, game_map_array, enemy_pieces_locations):
+        return self.moves.get_moves(
+            self.chess_pieces_locations["king"], game_map_array, enemy_pieces_locations
+        )
+
     def reset_moves(self) -> None:
         self.moves.reset()
 
@@ -48,7 +88,7 @@ class Player:
         if not key == "":
             self.pieces_death_locations[key] = self.chess_pieces_locations.pop(key)
 
-    def selected_piece_moves(
+    def get_selected_piece_moves(
         self, current_selected_location, game_map_array, enemy_pieces_locations
     ) -> dict:
         return self.moves.get_moves(
@@ -89,8 +129,8 @@ class Player:
             "rook_1": "♖",
             "knight_1": "♘",
             "bishop_1": "♗",
-            "king": "♔",
             "queen": "♕",
+            "king": "♔",
             "bishop_2": "♗",
             "knight_2": "♘",
             "rook_2": "♖",
@@ -107,8 +147,8 @@ class Player:
             "rook_1": "♜",
             "knight_1": "♞",
             "bishop_1": "♝",
-            "king": "♚",
             "queen": "♛",
+            "king": "♚",
             "bishop_2": "♝",
             "knight_2": "♞",
             "rook_2": "♜",
@@ -133,8 +173,8 @@ class Player:
             "rook_1": (),
             "knight_1": (),
             "bishop_1": (),
-            "king": (),
             "queen": (),
+            "king": (),
             "bishop_2": (),
             "knight_2": (),
             "rook_2": (),
@@ -162,13 +202,25 @@ class MoveSet:
             "pawn": self.__get_pawn_moves,
         }
         self.current_selected_location: tuple = ()
-        self.current_piece: str
+        self.current_piece_name: str
         self.game_map_array: list
-        self.enemy_pieces_location: dict
+        self.enemy_pieces_locations: dict
         self.__current_piece_can: dict = {"moves": [], "attacks": []}
 
     def reset(self):
         self.__current_piece_can = {"moves": [], "attacks": []}
+
+    def get_all_pieces_attacks(
+        self, chess_pieces_locations, game_map_array, enemy_pieces_locations
+    ) -> dict:
+        all_pieces_attacks = {}
+        for piece_name, piece_location in chess_pieces_locations.items():
+            all_pieces_attacks[piece_name] = self.get_moves(
+                piece_location, game_map_array, enemy_pieces_locations
+            )["attacks"]
+            self.reset()
+
+        return all_pieces_attacks
 
     def __get_rook_moves(self) -> dict:
         ranges = {
@@ -202,7 +254,7 @@ class MoveSet:
 
     def __is_enemy_piece(self, attack_location) -> bool:
         # print(f"enemy :- {self.enemy_pieces_location}")
-        if attack_location in self.enemy_pieces_location.values():
+        if attack_location in self.enemy_pieces_locations.values():
             return True
         return False
 
@@ -394,22 +446,29 @@ class MoveSet:
             raise ValueError("Invalid move passed in '__right_move' !!!")
 
     def get_moves(
-        self, current_selected_location, game_map_array, enemy_pieces_location
+        self, current_selected_location, game_map_array, enemy_pieces_locations
     ) -> dict:
         self.__update_values(
-            current_selected_location, game_map_array, enemy_pieces_location
+            current_selected_location, game_map_array, enemy_pieces_locations
         )
-        return self.move_map[self.current_piece]()
+        return self.move_map[self.current_piece_name]()
 
     def __update_values(
-        self, current_selected_location, game_map_array, enemy_pieces_location
+        self, current_selected_location, game_map_array, enemy_pieces_locations
     ) -> None:
-        for key, value in self.player.chess_pieces_locations.items():
-            if current_selected_location == value:
-                self.current_piece = key.split("_")[0]
+        self.current_piece_name = self.get_piece_name_by_location(
+            current_selected_location
+        )
         self.current_selected_location = current_selected_location
         self.game_map_array = game_map_array
-        self.enemy_pieces_location = enemy_pieces_location
+        self.enemy_pieces_locations = enemy_pieces_locations
+
+    def get_piece_name_by_location(self, piece_location: tuple):
+        piece_name: str = ""
+        for key, value in self.player.chess_pieces_locations.items():
+            if piece_location == value:
+                piece_name = key.split("_")[0]
+        return piece_name
 
 
 class Chess:
@@ -432,12 +491,9 @@ class Chess:
     def run(self) -> None:
         self.__setup_game()
         while True:
-            if self.current_player.got_check_mated == True:
-                print(f"{self.enemy_player.name} Won")
-
             self.__display()
             self.__ask_select_location()
-            self.__current_player_moves = self.current_player.selected_piece_moves(
+            self.__current_player_moves = self.current_player.get_selected_piece_moves(
                 self.__current_select_location,
                 self.__game_map_array,
                 self.enemy_player.chess_pieces_locations,
@@ -458,6 +514,21 @@ class Chess:
             if not self.__ask_move_location():
                 continue
             self.__make_move()
+
+            can_check = self.current_player.can_give_check_mate(
+                self.__game_map_array,
+                {"king": self.enemy_player.chess_pieces_locations["king"]},
+                self.enemy_player.get_king_moves(
+                    self.__game_map_array, self.current_player.chess_pieces_locations
+                ),
+            )
+            input()
+            self.enemy_player.update_check(can_check)
+
+            if self.enemy_player.got_check_mated == True:
+                print(f"{self.current_player.name.capitalize()} Won")
+                break
+
             self.__switch_player()
 
     def __print_can(self) -> None:
