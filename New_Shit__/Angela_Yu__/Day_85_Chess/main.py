@@ -233,15 +233,14 @@ class MoveSet:
         }
 
         for y in ranges["v_ranges"]:
-            for x in ranges["h_ranges"][::-1]:
-                for coordinate in zip(y, x):
+            for x in ranges["h_ranges"]:
+                for coordinate in zip(y, x[::-1]):
                     if self.__right_move(coordinate):
                         self.__current_piece_can["moves"].append(coordinate)
                     else:
                         attack = coordinate
                         if self.__can_attack(attack):
                             self.__current_piece_can["attacks"].append(attack)
-                        break
 
         return self.__current_piece_can
 
