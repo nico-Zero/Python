@@ -1,3 +1,10 @@
+############################################################## Made by Zero-Nico ##############################################################
+# TODO: Fix self.__get_knight_moves in MoveSet class. (Has a coordinator generation problem)
+# TODO: Fix self.__get_bishop_moves in MoveSet class. (May be has a coordinator generation problem)
+# TODO: Fix self.__get_queen_moves in MoveSet class. (Has a Double coordinator generation problem)
+# TODO: Make check validation Function in Chess class.
+
+
 from os import system
 from beautifultable import BeautifulTable
 
