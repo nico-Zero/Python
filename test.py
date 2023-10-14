@@ -28,3 +28,6 @@
 # import ctypes
 # import sys
 
+from termcolor import colored
+
+print(colored("♞♘","white"))

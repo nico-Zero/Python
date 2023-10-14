@@ -7,6 +7,7 @@
 
 from os import system
 from beautifultable import BeautifulTable
+from termcolor import colored
 
 # from prettytable import PrettyTable
 from platform import uname
@@ -20,20 +21,57 @@ def clear():
 
 
 class Player:
-    def __init__(self, player_number: int, name: str = "", color: str = "") -> None:
+    def __init__(
+        self,
+        player_number: int,
+        name: str = "",
+        color: str = "",
+        remove_color: str = "",
+        invalid_name: dict = {},
+    ) -> None:
         self.player_number = player_number
-        self.name = (
-            input(f"Enter player {player_number} name :- ") if name == "" else name
-        )
         while True:
-            self.color = (
-                input(f"Enter player {player_number} color ('w','b'):- ").lower()
-                if color == ""
-                else color
+            self.name = (
+                input(f"Enter player {player_number} name :- ").capitalize()
+                if name == ""
+                else name
             )
-            if self.color in ["w", "b"]:
+            if self.name in invalid_name.values():
+                for p_number, p_name in invalid_name.items():
+                    if p_name == self.name:
+                        print(f"Player {p_number} choose {self.name} first !!!")
+                continue
+            break
+
+        color_list = [
+            "black",
+            "red",
+            "green",
+            "yellow",
+            "blue",
+            "magenta",
+            "cyan",
+            "white",
+            "light_grey",
+            "dark_grey",
+            "light_red",
+            "light_green",
+            "light_yellow",
+            "light_blue",
+            "light_magenta",
+            "light_cyan",
+        ]
+        if remove_color:
+            color_list.remove(remove_color)
+
+        print("Can choose color form :- ", color_list)
+        while True:
+            self.color = input(f"Enter Color :- ").lower()
+            if self.color == "":
+                self.color = color
+            if self.color in color_list:
                 break
-            print("Invalid color !!!")
+            print("Invalid Color !!!")
         self.chess_pieces: dict = {}
         self.chess_pieces_locations: dict = {}
         self.pieces_death_locations: dict = {}
@@ -132,48 +170,25 @@ class Player:
         }
 
     def __get_chess_pieces(self) -> dict:
-        whitePieces = {
-            "rook_1": "♖",
-            "knight_1": "♘",
-            "bishop_1": "♗",
-            "queen": "♕",
-            "king": "♔",
-            "bishop_2": "♗",
-            "knight_2": "♘",
-            "rook_2": "♖",
-            "pawn_1": "♙",
-            "pawn_2": "♙",
-            "pawn_3": "♙",
-            "pawn_4": "♙",
-            "pawn_5": "♙",
-            "pawn_6": "♙",
-            "pawn_7": "♙",
-            "pawn_8": "♙",
+        chess_pieces = {
+            "rook_1": colored("♜", self.color),
+            "knight_1": colored("♞", self.color),
+            "bishop_1": colored("♝", self.color),
+            "queen": colored("♛", self.color),
+            "king": colored("♚", self.color),
+            "bishop_2": colored("♝", self.color),
+            "knight_2": colored("♞", self.color),
+            "rook_2": colored("♜", self.color),
+            "pawn_1": colored("♟", self.color),
+            "pawn_2": colored("♟", self.color),
+            "pawn_3": colored("♟", self.color),
+            "pawn_4": colored("♟", self.color),
+            "pawn_5": colored("♟", self.color),
+            "pawn_6": colored("♟", self.color),
+            "pawn_7": colored("♟", self.color),
+            "pawn_8": colored("♟", self.color),
         }
-        blackPieces = {
-            "rook_1": "♜",
-            "knight_1": "♞",
-            "bishop_1": "♝",
-            "queen": "♛",
-            "king": "♚",
-            "bishop_2": "♝",
-            "knight_2": "♞",
-            "rook_2": "♜",
-            "pawn_1": "♟",
-            "pawn_2": "♟",
-            "pawn_3": "♟",
-            "pawn_4": "♟",
-            "pawn_5": "♟",
-            "pawn_6": "♟",
-            "pawn_7": "♟",
-            "pawn_8": "♟",
-        }
-        if self.color == "w":
-            return whitePieces
-        elif self.color == "b":
-            return blackPieces
-        else:
-            raise ValueError("Invalid color")
+        return chess_pieces
 
     def __get_chess_pieces_location(self) -> dict:
         return {
@@ -450,7 +465,7 @@ class MoveSet:
                 return False
         except:
             # return False
-            raise ValueError("Invalid move passed in '__right_move' !!!")
+            raise ValueError("Invalid Move passed in '__right_move' !!!")
 
     def get_moves(
         self, current_selected_location, game_map_array, enemy_pieces_locations
@@ -485,9 +500,12 @@ class Chess:
         self.__game_display = BeautifulTable()
         self.__game_display.set_style(BeautifulTable.STYLE_BOX_ROUNDED)  # type: ignore
         self.__game_map_array: list = []
-        self.__player_1 = Player(player_number=1)
+        self.__player_1 = Player(player_number=1, color="black")
         self.__player_2 = Player(
-            player_number=2, color="b" if self.__player_1.color == "w" else "w"
+            player_number=2,
+            color="white",
+            remove_color=self.__player_1.color,
+            invalid_name={self.__player_1.player_number: self.__player_1.name},
         )
         self.current_player = self.__player_1
         self.enemy_player = self.__player_2
@@ -499,13 +517,7 @@ class Chess:
         self.__setup_game()
         while True:
             self.__display()
-            self.__ask_select_location()
-            self.__current_player_moves = self.current_player.get_selected_piece_moves(
-                self.__current_select_location,
-                self.__game_map_array,
-                self.enemy_player.chess_pieces_locations,
-            )
-
+            self.__process_select_location()
             self.__print_can()
             if input():
                 continue
@@ -518,7 +530,7 @@ class Chess:
 
             self.current_player.reset_moves()
 
-            if not self.__ask_move_location():
+            if not self.__process_move_location():
                 continue
             self.__make_move()
 
@@ -533,10 +545,17 @@ class Chess:
             self.enemy_player.update_check(can_check)
 
             if self.enemy_player.got_check_mated == True:
-                print(f"{self.current_player.name.capitalize()} Won")
+                print(f"{self.current_player.name} Won")
                 break
 
             self.__switch_player()
+
+    def __get_selected_piece_moves(self, selected_location):
+        self.__current_player_moves = self.current_player.get_selected_piece_moves(
+            selected_location,
+            self.__game_map_array,
+            self.enemy_player.chess_pieces_locations,
+        )
 
     def __print_can(self) -> None:
         readable = self.__readable_current_piece_can()
@@ -550,16 +569,13 @@ class Chess:
             readable[items[0]] = [coord_up_1(coord) for coord in items[1]]
         return readable
 
-    def __ask_select_location(self) -> None:
+    def __process_select_location(self) -> None:
         while True:
-            location = input(
-                f"{self.current_player.name.capitalize()}, select your piece :- "
-            )
+            location = input(f"{self.current_player.name}, select your piece :- ")
             location = self.__filter_coordinate(location)
             if filtered_location := self.__right_location(location):
                 self.__current_select_location = filtered_location
                 break
-            print("Invalid location !!!")
 
     def __filter_coordinate(self, move) -> list:
         _move = [int(m) - 1 for m in move.split(" ") if m.isnumeric()]
@@ -574,21 +590,30 @@ class Chess:
                 _move[0],
                 _move[1],
             ) in self.current_player.chess_pieces_locations.values():
-                return (_move[0], _move[1])
+                selected_location = (_move[0], _move[1])
+                self.__get_selected_piece_moves(selected_location)
+                if (
+                    self.__current_player_moves["moves"]
+                    or self.__current_player_moves["attacks"]
+                ):
+                    return (_move[0], _move[1])
+                else:
+                    print("Can't move this piece right now...")
+                    return ()
+
+        print("Invalid Location !!!")
         return ()
 
-    def __ask_move_location(self) -> bool:
+    def __process_move_location(self) -> bool:
         while True:
-            move = input(
-                f"{self.current_player.name.capitalize()}, enter your move :- "
-            )
+            move = input(f"{self.current_player.name}, enter your move :- ")
             filtered_move = self.__filter_coordinate(move)
             right_move = self.__right_move(filtered_move)
             if right_move:
                 self.__current_player_attack = right_move
                 return True
             else:
-                print("Invalid move!!!")
+                print("Invalid Move !!!")
                 continue
 
     def __right_move(self, moves) -> tuple:
