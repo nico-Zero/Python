@@ -1,6 +1,7 @@
 from os import system
 from beautifultable import BeautifulTable
-from prettytable import PrettyTable
+
+# from prettytable import PrettyTable
 from platform import uname
 
 
@@ -170,15 +171,15 @@ class MoveSet:
     def __get_rook_moves(self) -> dict:
         ranges = {
             key: [
-                range(self.current_selected_location[index] - 1, 0, -1),
+                range(self.current_selected_location[index] - 1, -1, -1),
                 range(self.current_selected_location[index] + 1, 8, 1),
             ]
             for index, key in enumerate(["v_ranges", "h_ranges"])
         }
 
         for range_set, coordinate_function in [
-            (ranges["v_ranges"], self.__update_y),
-            (ranges["h_ranges"], self.__update_x),
+            (ranges["v_ranges"], self.__updated_y_coordinate),
+            (ranges["h_ranges"], self.__updated_x_coordinate),
         ]:
             for _ran in range_set:
                 for x in _ran:
@@ -208,28 +209,76 @@ class MoveSet:
             return True
         return False
 
-    def __update_y(self, y) -> tuple:
+    def __updated_y_coordinate(self, y) -> tuple:
         return (y, self.current_selected_location[1])
 
-    def __update_x(self, x) -> tuple:
+    def __updated_x_coordinate(self, x) -> tuple:
         return (self.current_selected_location[0], x)
 
     def __get_knight_moves(self) -> dict:
-        # TODO: Make 
-        ...
+        ranges = {
+            key: [
+                range(
+                    self.current_selected_location[index] - 1,
+                    self.current_selected_location[index] - 3,
+                    -1,
+                ),
+                range(
+                    self.current_selected_location[index] + 1,
+                    self.current_selected_location[index] + 3,
+                    1,
+                ),
+            ]
+            for index, key in enumerate(["v_ranges", "h_ranges"])
+        }
+
+        for y in ranges["v_ranges"]:
+            for x in ranges["h_ranges"][::-1]:
+                for coordinate in zip(y, x):
+                    if self.__right_move(coordinate):
+                        self.__current_piece_can["moves"].append(coordinate)
+                    else:
+                        attack = coordinate
+                        if self.__can_attack(attack):
+                            self.__current_piece_can["attacks"].append(attack)
+                        break
+
+        return self.__current_piece_can
 
     def __get_bishop_moves(self) -> dict:
         ranges = {
             key: [
-                range(self.current_selected_location[index] - 1, 0, -1),
+                range(self.current_selected_location[index] - 1, -1, -1),
                 range(self.current_selected_location[index] + 1, 8, 1),
             ]
-            for index, key in enumerate(["Dimension_1_range", "Dimension_2_range"])
+            for index, key in enumerate(["v_ranges", "h_ranges"])
+        }
+
+        for y in ranges["v_ranges"]:
+            for x in ranges["h_ranges"]:
+                for coordinate in zip(y, x):
+                    if self.__right_move(coordinate):
+                        self.__current_piece_can["moves"].append(coordinate)
+                    else:
+                        attack = coordinate
+                        if self.__can_attack(attack):
+                            self.__current_piece_can["attacks"].append(attack)
+                        break
+
+        return self.__current_piece_can
+
+    def __get_king_moves(self) -> dict:
+        ranges = {
+            key: [
+                [self.current_selected_location[index] - 1],
+                [self.current_selected_location[index] + 1],
+            ]
+            for index, key in enumerate(["v_ranges", "h_ranges"])
         }
 
         for range_set, coordinate_function in [
-            (ranges["Dimension_1_range"], self.__update_y),
-            (ranges["Dimension_2_range"], self.__update_x),
+            (ranges["v_ranges"], self.__updated_y_coordinate),
+            (ranges["h_ranges"], self.__updated_x_coordinate),
         ]:
             for _ran in range_set:
                 for x in _ran:
@@ -241,13 +290,54 @@ class MoveSet:
                             self.__current_piece_can["attacks"].append(attack)
                         break
 
+        for y in ranges["v_ranges"]:
+            for x in ranges["h_ranges"]:
+                for coordinate in zip(y, x):
+                    if self.__right_move(coordinate):
+                        self.__current_piece_can["moves"].append(coordinate)
+                    else:
+                        attack = coordinate
+                        if self.__can_attack(attack):
+                            self.__current_piece_can["attacks"].append(attack)
+                        break
+
         return self.__current_piece_can
 
-    def __get_king_moves(self) -> dict:
-        ...
-
     def __get_queen_moves(self) -> dict:
-        ...
+        ranges = {
+            key: [
+                range(self.current_selected_location[index] - 1, -1, -1),
+                range(self.current_selected_location[index] + 1, 8, 1),
+            ]
+            for index, key in enumerate(["v_ranges", "h_ranges"])
+        }
+
+        for range_set, coordinate_function in [
+            (ranges["v_ranges"], self.__updated_y_coordinate),
+            (ranges["h_ranges"], self.__updated_x_coordinate),
+        ]:
+            for _ran in range_set:
+                for x in _ran:
+                    if self.__right_move(coordinate_function(x)):
+                        self.__current_piece_can["moves"].append(coordinate_function(x))
+                    else:
+                        attack = coordinate_function(x)
+                        if self.__can_attack(attack):
+                            self.__current_piece_can["attacks"].append(attack)
+                        break
+
+        for y in ranges["v_ranges"]:
+            for x in ranges["h_ranges"]:
+                for coordinate in zip(y, x):
+                    if self.__right_move(coordinate):
+                        self.__current_piece_can["moves"].append(coordinate)
+                    else:
+                        attack = coordinate
+                        if self.__can_attack(attack):
+                            self.__current_piece_can["attacks"].append(attack)
+                        break
+
+        return self.__current_piece_can
 
     def __get_pawn_moves(self) -> dict:
         if self.player_number == 1:
@@ -259,14 +349,14 @@ class MoveSet:
         return self.__current_piece_can
 
     def __update_pawn_can_moves(self, row: int, operation: str) -> None:
-        forward_1 = self.__update_y(
+        forward_1 = self.__updated_y_coordinate(
             eval(f"self.current_selected_location[0] {operation} 1")
         )
         if self.__right_move(forward_1):
             self.__current_piece_can["moves"].append(forward_1)
 
         if self.__can_pawn_move_2(row):
-            forward_2 = self.__update_y(
+            forward_2 = self.__updated_y_coordinate(
                 eval(f"self.current_selected_location[0] {operation} 2")
             )
             if self.__right_move(forward_2):
@@ -350,9 +440,16 @@ class Chess:
             )
 
             self.__print_can()
-            self.current_player.reset_moves()
             if input():
                 continue
+
+            if not (
+                self.__current_player_moves["moves"]
+                or self.__current_player_moves["attacks"]
+            ):
+                continue
+
+            self.current_player.reset_moves()
 
             if not self.__ask_move_location():
                 continue
@@ -405,11 +502,11 @@ class Chess:
             )
             filtered_move = self.__filter_coordinate(move)
             right_move = self.__right_move(filtered_move)
-            print(f"move :- {right_move}")
             if right_move:
                 self.__current_player_attack = right_move
                 return True
             else:
+                print("Invalid move!!!")
                 continue
 
     def __right_move(self, moves) -> tuple:
