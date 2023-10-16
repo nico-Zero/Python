@@ -92,10 +92,16 @@ class Player:
         self.can_only_counter_by: dict = {}
 
     def counter_check_by(self, game_map_array, checked_by_locations: dict, attack_ray):
+        print(f"attack :- {attack_ray}")
+        input()
+
         self.moves.update_attack_ray_moves(attack_ray["moves"])
         can_counter_check_by = self.__get_all_pieces_moves(
             game_map_array, checked_by_locations
         )
+
+        print(f"can_counter_check_by :- {can_counter_check_by}")
+        input()
 
         can_counter_check_by = {
             piece_name: moves
