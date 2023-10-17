@@ -4,7 +4,6 @@ from os import system
 from beautifultable import BeautifulTable
 from termcolor import colored
 
-# from prettytable import PrettyTable
 from platform import uname
 
 
