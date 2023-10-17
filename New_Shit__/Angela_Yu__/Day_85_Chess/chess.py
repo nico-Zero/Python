@@ -3,7 +3,6 @@
 from os import system
 from beautifultable import BeautifulTable
 from termcolor import colored
-
 from platform import uname
 
 
