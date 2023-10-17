@@ -67,6 +67,8 @@ class Player:
                 if self.name == ""
                 else self.name
             )
+            if self.name == "#exit":
+                exit()
             if len(self.name) == 0:
                 print("Invalid name !!!")
                 continue
@@ -82,6 +84,8 @@ class Player:
         print("Can choose color form :- ", self.color_list)
         while True:
             self.color = input(f"Enter Color :- ").lower()
+            if self.color == "#exit":
+                exit()
             if self.color in self.color_list:
                 break
             print("Invalid Color !!!")
@@ -857,6 +861,8 @@ class Chess:
     def __select_piece_location(self) -> None:
         while True:
             location = input(f"{self.current_player.name}, select your piece :- ")
+            if location == "#exit":
+                exit()
             location = self.__filter_coordinate(location)
             if filtered_location := self.__right_location(location):
                 self.__selected_piece_location = filtered_location
@@ -942,6 +948,8 @@ class Chess:
     def __give_move_location(self) -> bool:
         while True:
             move = input(f"{self.current_player.name}, enter your move :- ")
+            if move == "#exit":
+                exit()
             filtered_move = self.__filter_coordinate(move)
             right_move = self.__check_coordinate(filtered_move)
             if right_move:
@@ -980,9 +988,11 @@ class Chess:
 
         while True:
             upgrade_choice = input("Enter your upgrade name :- ").lower()
+            if upgrade_choice == "#exit":
+                exit()
             if upgrade_choice in self.current_player.pawn_upgrades.keys():
                 break
-            print("Invalid upgrade choice :- ")
+            print("Invalid upgrade choice !!!")
 
         similar_upgrade_pieces_count = sum(
             [
