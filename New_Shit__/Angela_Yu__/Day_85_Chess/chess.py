@@ -169,7 +169,11 @@ class Player:
 
     def __rearrange_player_2_pieces(self, values) -> dict | None:
         if self.game_mode == 2:
-            return values
+            return {
+                name: pieces
+                for name, pieces in list(values.items())[:8][::-1]
+                + list(values.items())[8:]
+            }
         else:
             ...
 
