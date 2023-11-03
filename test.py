@@ -1,33 +1,35 @@
-# # # # # # x = "​"
-# # # # # # print(str(len(x))+" Hello, world")
+def canPlaceFlowers(flowerbed: list[int], n: int):
+    global button
+    if len(flowerbed) <= 3 and n == 1:
+        return True
 
-# # # # # # print(id(x))
+    button = (
+        (flowerbed[0] == 1)
+        or ((sum(flowerbed[:2]) == 0) and (flowerbed[2] == 1))
+        or sum(flowerbed[:3]) == 0
+    )
+    plotable = 0
 
-# # # # # import platform
+    def switch():
+        global button
+        if button:
+            button = False
+        else:
+            button = True
 
-# # # # # print(platform.uname().system)
+    for bed in flowerbed:
+        if button and bed == 1:
+            continue
+        elif button:
+            plotable += 1
+            switch()
+            continue
+        switch()
 
-
-# # # # import click
-
-# # # # @click.command("hello")
-# # # # @click.version_option("0.1.0", prog_name="hello")
-# # # # def hello():
-# # # #     click.echo("Hello, World!")
-
-# # # # if __name__ == "__main__":
-# # # #     hello()
-
-
-# # # x = 69
-
-# # # for i in range(10):
-# # #     print(id(x))
+    return plotable >= n
 
 
-# # import ctypes
-# # import sys
+print(canPlaceFlowers([1, 0, 0, 0, 1], 2))
 
-# from termcolor import colored
-
-# print(colored("♞♘","white"))
+# x = "1234"
+# print(x[-2:])

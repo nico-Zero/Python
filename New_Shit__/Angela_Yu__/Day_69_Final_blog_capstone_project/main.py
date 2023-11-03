@@ -1,6 +1,6 @@
 from datetime import date
 from flask import Flask, abort, render_template, redirect, url_for, flash
-from flask_bootstrap import Bootstrap5
+from flask_bootstrap import Bootstrap
 from flask_ckeditor import CKEditor
 from flask_gravatar import Gravatar
 from flask_login import (
@@ -28,7 +28,7 @@ app.config["SECRET_KEY"] = generate_password_hash(
 )
 
 ckeditor = CKEditor(app)
-Bootstrap5(app)
+Bootstrap(app)
 
 login_manager = LoginManager()
 login_manager.init_app(app)
@@ -113,7 +113,7 @@ def register():
                 name=form.data.get("name"),
                 email=form.data.get("email"),
                 password=generate_password_hash(
-                    form.data.get("password"), salt_length=12
+                    form.data.get("password"), salt_length=12  # type: ignore
                 ),
             )  # type: ignore
 
@@ -144,7 +144,7 @@ def login():
             flash("This email does not exist in our database. Please Sign UP!")
             return redirect(url_for("register"))
         else:
-            if check_password_hash(user.password, form.data.get("password")):
+            if check_password_hash(user.password, form.data.get("password")):  # type: ignore
                 login_user(user)
                 return redirect(url_for("get_all_posts"))
             else:
