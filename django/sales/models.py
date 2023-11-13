@@ -37,7 +37,6 @@ class Sale(models.Model):
     def get_absolute_url(self):
         return reverse("sales:detail", kwargs={"pk": self.pk})
 
-
     def save(self, *args, **kwargs):
         if self.transaction_id == "":
             self.transaction_id = generate_code()
@@ -51,10 +50,10 @@ class Sale(models.Model):
 
 
 class CSV(models.Model):
-    file_name = models.FileField(upload_to="csvs")
-    activated = models.BooleanField(default=False)
+    file_name = models.CharField(max_length=120, null=True)
+    csv_file = models.FileField(upload_to="csvs", null=True)
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
 
     def __str__(self):
-        return self.file_name
+        return str(self.file_name)
