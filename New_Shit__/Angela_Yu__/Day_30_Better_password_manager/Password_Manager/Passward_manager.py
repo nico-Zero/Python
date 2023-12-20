@@ -71,6 +71,7 @@ def search_password():
     customtkinter.CTkInputDialog(
         title=website, text=f"Email: {data['email']}\nPassword: {data['password']}"
     ).get_input()
+    
 
 
 def gen_pass_for_password_entry():
