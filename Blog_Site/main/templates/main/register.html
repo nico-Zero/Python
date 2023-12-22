@@ -1,32 +1,39 @@
-{% from "bootstrap5/form.html" import render_form %} {% block content %} {%
-include "header.html" %}
+{% extends "index.html" %}
+
+{% block header-image %}'../static/assets/img/register-bg.jpg'{% endblock header-image %}
 
 <!-- Page Header -->
-<header
-  class="masthead"
-  style="background-image: url('../static/assets/img/register-bg.jpg')"
->
-  <div class="container position-relative px-4 px-lg-5">
-    <div class="row gx-4 gx-lg-5 justify-content-center">
-      <div class="col-md-10 col-lg-8 col-xl-7">
-        <div class="page-heading">
-          <h1>Register</h1>
-          <span class="subheading">Start Contributing to the Blog!</span>
-        </div>
+{% block header %}
+<div class="container position-relative px-4 px-lg-5">
+  <div class="row gx-4 gx-lg-5 justify-content-center">
+    <div class="col-md-10 col-lg-8 col-xl-7">
+      <div class="page-heading">
+        <h1>Register</h1>
+        <span class="subheading">Start Contributing to the Blog!</span>
       </div>
     </div>
   </div>
-</header>
+</div>
+{% endblock header %}
 
+<!--Main Content-->
+{% block content %}
 <main class="mb-4">
   <div class="container">
     <div class="row">
       <div class="col-lg-8 col-md-10 mx-auto">
-      <!--Rendering the registration form here-->
-      {{render_form(form, novalidate=True, button_map={"submit": "primary"}) }}
+        <div>
+          <form action="" method="POST">
+              {% csrf_token %}
+              {{form.as_p}}
+              <input type="submit" value="Register">
+          </form>
+
+          <p>Alredy Signed Up</p>
+          <a href="{% url "main:login" %}">Login</a>
+      </div>
       </div>
     </div>
   </div>
 </main>
-
-{% include "footer.html" %} {% endblock %}
+{% endblock content %}

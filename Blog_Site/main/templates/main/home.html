@@ -1,0 +1,65 @@
+{% extends "index.html" %} 
+{% load static %}
+
+{% block header-image %} '../static/assets/img/home-bg.jpg' {% endblock header-image %}
+
+{% block header %}
+	<div class="container position-relative px-4 px-lg-5">
+		<div class="row gx-4 gx-lg-5 justify-content-center">
+			<div class="col-md-10 col-lg-8 col-xl-7">
+				<div class="site-heading">
+					<h1>{{user.username | capfirst}}'s Blog</h1>
+					<span class="subheading"
+						>Behold! Here lies the collection of my blogs!</span
+					>
+				</div>
+			</div>
+		</div>
+	</div>
+{% endblock header %} 
+
+{% block content %}
+<div class="container px-4 px-lg-5">
+	<div class="row gx-4 gx-lg-5 justify-content-center">
+		<div class="col-md-10 col-lg-8 col-xl-7">
+			<!-- Post preview-->
+			{% for post in posts %}
+			<div class="post-preview">
+				<a href="{% url 'main:show_post' pk=post.id %}">
+					<h2 class="post-title">{{ post.title | capfirst}}</h2>
+					<h3 class="post-subtitle">{{ post.subtitle }}</h3>
+				</a>
+				<p class="post-meta">
+					Posted by
+					<!-- post.author.name is now a User object -->
+					<a href="{% url 'main:profile' post.author.user.pk %}">{{post.author.user.username}}</a>
+					on {{post.created}}
+					<!-- Only show delete button if user id is 1 (admin user) -->
+					{% if post.author.user == user %}
+					<a href="{% url 'main:delete_post' post.pk %}">✘</a>
+					{% endif %}
+				</p>
+			</div>
+			<!-- Divider-->
+			<hr class="my-4" />
+			{% endfor %}
+
+			<!-- New Post -->
+			<div class="d-flex justify-content-end mb-4">
+				<a
+					class="btn btn-primary float-right"
+					href="{% url 'main:create_post' %}"
+					>Create New Post</a
+				>
+			</div>
+
+			<!-- Pager-->
+			{% comment %} <div class="d-flex justify-content-end mb-4">
+				<a class="btn btn-secondary text-uppercase" href="#"
+					>Older Posts →</a
+				>
+			</div> {% endcomment %}
+		</div>
+	</div>
+</div>
+{% endblock content %}
