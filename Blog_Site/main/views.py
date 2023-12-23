@@ -4,7 +4,7 @@ from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from .models import Profile, Post
-from .forms import CommentForm, PostForm, EditProfileForm
+from .forms import CommentForm, PostForm, EditProfileForm, LoginForm, RegisterForm
 from django.http import HttpResponseRedirect
 from django.contrib.auth.forms import UserCreationForm
 
@@ -14,25 +14,25 @@ from django.contrib.auth.forms import UserCreationForm
 def loginPage_view(request):
     if request.user.is_authenticated:
         return redirect("main:home")
-
+        
     if request.method == "POST":
         username = request.POST.get("username").lower()
         password = request.POST.get("password")
-
         try:
             user = User.objects.get(username=username)
         except:
             messages.error(request, "User does not exist.")
-
         user = authenticate(request, username=username, password=password)
-
         if user is not None:
             login(request, user)
             return redirect("main:home")
         else:
             messages.error(request, "Username or password is incorrect.")
+    login_form = LoginForm()
 
-    return render(request, "main/login.html")
+    context = {"login_form": login_form}
+
+    return render(request, "main/login.html", context=context)
 
 
 @login_required(login_url='main:login')
@@ -42,14 +42,16 @@ def logout_view(request):
 
 
 def registerPage_view(request):
-    form = UserCreationForm()
+    form  = RegisterForm()
 
     if request.method == "POST":
-        form = UserCreationForm(request.POST)
+        form = RegisterForm(request.POST)
         if form.is_valid():
             user = form.save(commit=False)
             user.username = user.username.lower()
             user.save()
+            profile = Profile(user=user)
+            profile.save()
             login(request, user)
             return redirect("main:home")
         else:
@@ -86,7 +88,6 @@ def show_post_view(request, pk):
             comment.author = Profile.objects.get(user=request.user)
             comment.post = post
             comment.save()
-            print(comment)
             return HttpResponseRedirect(f"/post/{pk}/")
     else:
         comment_form = CommentForm()
