@@ -5,6 +5,8 @@ from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
 
 
+class SearchForm(forms.Form):
+    search = forms.CharField(max_length=120, required=False)
 
 class LoginForm(forms.Form):
     username = forms.CharField(max_length=120)

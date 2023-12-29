@@ -4,9 +4,8 @@ from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from .models import Profile, Post
-from .forms import CommentForm, PostForm, EditProfileForm, LoginForm, RegisterForm
+from .forms import CommentForm, PostForm, EditProfileForm, LoginForm, RegisterForm, SearchForm
 from django.http import HttpResponseRedirect
-from django.contrib.auth.forms import UserCreationForm
 
 # Create your views here.
 
@@ -65,9 +64,19 @@ def registerPage_view(request):
 def home_view(request):
     if not request.user.is_authenticated:
         return redirect("main:login")
+    search_form = SearchForm()
+    
     posts = Post.objects.all()
+    if request.method == "POST":
+        search_form = SearchForm(request.POST)
+        if search_form.is_valid():
+            search = dict(search_form.data.items())["search"]
+            posts = Post.objects.filter(title__contains=search)
+            search_form = SearchForm()
+    
     context = {
         "posts": posts,
+        "search_form": search_form
     }
     return render(request, "main/home.html", context=context)
 
@@ -165,7 +174,7 @@ def edit_profile_view(request):
             new_profile = edit_profile_form.save(commit=False)
             profile.about = new_profile.about
             profile.save()
-            return redirect("main:profile")
+            return redirect("main:profile", profile.pk)
 
     context = {
         "profile": profile,
