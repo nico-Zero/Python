@@ -4,7 +4,14 @@ from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from .models import Profile, Post
-from .forms import CommentForm, PostForm, EditProfileForm, LoginForm, RegisterForm, SearchForm
+from .forms import (
+    CommentForm,
+    PostForm,
+    EditProfileForm,
+    LoginForm,
+    RegisterForm,
+    SearchForm,
+)
 from django.http import HttpResponseRedirect
 
 # Create your views here.
@@ -13,7 +20,7 @@ from django.http import HttpResponseRedirect
 def loginPage_view(request):
     if request.user.is_authenticated:
         return redirect("main:home")
-        
+
     if request.method == "POST":
         username = request.POST.get("username").lower()
         password = request.POST.get("password")
@@ -34,14 +41,14 @@ def loginPage_view(request):
     return render(request, "main/login.html", context=context)
 
 
-@login_required(login_url='main:login')
+@login_required(login_url="main:login")
 def logout_view(request):
     logout(request)
     return redirect("main:login")
 
 
 def registerPage_view(request):
-    form  = RegisterForm()
+    form = RegisterForm()
 
     if request.method == "POST":
         form = RegisterForm(request.POST)
@@ -60,23 +67,38 @@ def registerPage_view(request):
     return render(request, "main/register.html", context=context)
 
 
-@login_required(login_url='main:login')
+@login_required(login_url="main:login")
 def home_view(request):
     if not request.user.is_authenticated:
         return redirect("main:login")
     search_form = SearchForm()
+    user_profile = Profile.objects.get(user=request.user)
     
     posts = Post.objects.all()
     if request.method == "POST":
+        like_post_pk = request.POST.get("like")
+        dislike_post_pk = request.POST.get("dislike")
         search_form = SearchForm(request.POST)
-        if search_form.is_valid():
+        if like_post_pk:
+            post = Post.objects.get(pk=like_post_pk)
+            user_profile.like(post)
+        elif dislike_post_pk:
+            post = Post.objects.get(pk=dislike_post_pk)
+            user_profile.dislike(post)
+        elif search_form.is_valid():
             search = dict(search_form.data.items())["search"]
             posts = Post.objects.filter(title__contains=search)
             search_form = SearchForm()
+
+    liked_post_list = [i.post for i in request.user.likes.all()]
+    disliked_post_list = [i.post for i in request.user.dislikes.all()]
+    
     
     context = {
         "posts": posts,
-        "search_form": search_form
+        "search_form": search_form,
+        "liked_post_list": liked_post_list,
+        "disliked_post_list": disliked_post_list,
     }
     return render(request, "main/home.html", context=context)
 
@@ -85,7 +107,7 @@ def about_view(request):
     return render(request, "main/about.html")
 
 
-@login_required(login_url='main:login')
+@login_required(login_url="main:login")
 def show_post_view(request, pk):
     post = Post.objects.get(pk=pk)
     comments = post.comments.all()  # type: ignore
@@ -110,7 +132,7 @@ def show_post_view(request, pk):
     return render(request, "main/post.html", context=context)
 
 
-@login_required(login_url='main:login')
+@login_required(login_url="main:login")
 def edit_post_view(request, pk):
     post = Post.objects.get(pk=pk)
     edit_post_form = PostForm(instance=post)
@@ -131,7 +153,7 @@ def edit_post_view(request, pk):
     return render(request, "main/edit_post.html", context=context)
 
 
-@login_required(login_url='main:login')
+@login_required(login_url="main:login")
 def create_post_view(request):
     if request.method == "POST":
         create_post_form = PostForm(request.POST)
@@ -149,7 +171,7 @@ def create_post_view(request):
     return render(request, "main/create_post.html", context=context)
 
 
-@login_required(login_url='main:login')
+@login_required(login_url="main:login")
 def delete_post_view(request, pk):
     post = Post.objects.get(pk=pk)
     post.delete()
@@ -157,14 +179,14 @@ def delete_post_view(request, pk):
     return redirect("main:home")
 
 
-@login_required(login_url='main:login')
+@login_required(login_url="main:login")
 def profile_view(request, pk):
     profile = Profile.objects.get(user=User.objects.get(pk=pk))
     context = {"profile": profile}
     return render(request, "main/profile.html", context=context)
 
 
-@login_required(login_url='main:login')
+@login_required(login_url="main:login")
 def edit_profile_view(request):
     profile = Profile.objects.get(user=request.user)
     edit_profile_form = EditProfileForm(instance=profile)
