@@ -16,6 +16,7 @@ pillow = "^10.2.0"
 mysql = "^0.0.3"
 postgres = "^4.0"
 dj-database-url = "^2.1.0"
+django-bootstrap5 = "^23.4"
 
 
 [build-system]
