@@ -2,7 +2,7 @@ from tkinter import Y
 import customtkinter
 from customtkinter import CTkImage
 from password_generator import pass_gen
-from PIL import Image, ImageTk
+from PIL import Image
 import pyperclip
 import json
 
