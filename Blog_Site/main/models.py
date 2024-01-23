@@ -100,6 +100,6 @@ class Comment(models.Model):
         return (
             "Author:- "
             + self.author.user.username.capitalize()
-            + ", Post:- "
+            + ", Blog:- "
             + self.post.title
         )

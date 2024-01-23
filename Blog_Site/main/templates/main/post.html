@@ -29,13 +29,13 @@
     <div class="row gx-4 gx-lg-5 justify-content-center">
       <div class="col-md-10 col-lg-8 col-xl-7">
         {{ post.body|safe }}
-        <!--Only show Edit Post button if user id is 1 (admin user) -->
+        <!--Only show Edit Blog button if user id is 1 (admin user) -->
         {% if post.author.user.id == user.id %}
         <div class="d-flex justify-content-end mb-4">
           <a
             class="btn btn-primary float-right"
             href="{% url 'main:edit_post' post.pk %}"
-            >Edit Post</a
+            >Edit Blog</a
           >
         </div>
         {% endif %}
