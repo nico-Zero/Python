@@ -49,3 +49,4 @@ for _ in range(10):
 print(x.heaplist)
 x._binHeap__perUp(x.currentSize) #type: ignore
 print(x.heaplist)
+
