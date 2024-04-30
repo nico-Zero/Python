@@ -39,7 +39,6 @@ class binHeap:
         for key in l:
             self.heaplist.append(key)
             self.currentSize += 1
-            
 
 
 x = binHeap()
@@ -47,5 +46,5 @@ for _ in range(10):
     x.insert(randint(1, 100))
 
 print(x.heaplist)
-x._binHeap__perUp(x.currentSize) #type: ignore
+x._binHeap__perUp(x.currentSize)  # type: ignore
 print(x.heaplist)
