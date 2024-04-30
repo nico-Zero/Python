@@ -40,7 +40,7 @@ class binHeap:
             self.heaplist.append(key)
             self.currentSize += 1
 
-    def __perDown(self,i):
+    def __perDown(self, i):
         while i * 2 <= self.currentSize:
             mc = self.findMin(i)
             if self.heaplist[i] > self.heaplist[mc]:
@@ -60,10 +60,12 @@ class binHeap:
                 return i * 2 + 1
 
     def delMin(self):
-        revlet = self.heaplist[1]
+        retval = self.heaplist[1]
         self.heaplist[1] = self.heaplist[self.currentSize]
         self.currentSize -= 1
         self.heaplist.pop()
+        self.__perDown(1)
+        return retval
 
 
 x = binHeap()
