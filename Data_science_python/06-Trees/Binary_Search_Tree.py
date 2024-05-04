@@ -231,14 +231,16 @@ def levelOrderPrint(tree_root):
 
 
 def delUMinMax(tree, key_list, min_n, max_n):
-    for key in list(key_list):
-        if not min_n < key < max_n:
-            tree.delete(key)
-        else:
-            continue
+    n_list = [key for key in key_list if not min_n < key < max_n]
+    r = choice(n_list)
+    new_tree = BinarySearchTree(r, tree.get(r).payload)
+    n_list.remove(r)
+    for n in n_list:
+        new_tree.put(n, tree.get(n).payload)
+    return new_tree
 
 
-delUMinMax(tree, jj, 300, 700)
+n_t = delUMinMax(tree, jj, 300, 700)
 
 print("After deleting :-")
-print_tree(tree)
+print_tree(n_t)
