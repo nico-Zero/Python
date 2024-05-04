@@ -198,10 +198,12 @@ def generateNode(tree: BinarySearchTree, n):
 
 def print_tree(tree):
     in_order_objs = tree.traversal("in")
+    obj_dict = dict()
     for node in in_order_objs:
+        obj_dict[node.key] = node.payload
         print(f"Key:- {node.key:^5}    Value:- {node.payload:^20}")
 
-    return in_order_objs
+    return obj_dict
 
 
 tree = BinarySearchTree(randint(300, 1000), fake.name())
@@ -211,9 +213,32 @@ generateNode(tree, 20)
 print(f"Before Deleting :-")
 jj = print_tree(tree)
 
-d = choice(jj).key
+d = choice(list(jj))
 tree.delete(d)
 
-print(f"After Deleting :- {d}")
 
+def levelOrderPrint(tree_root):
+    monitor = [tree_root]
+    counter = 1
+    result = {}
+    while True:
+        t = []
+        for n in monitor:
+            t += [n.leftChild, n.rightChild]
+            result[counter] += [n.key]
+        monitor = t
+        counter += 1
+
+
+def delUMinMax(tree, key_list, min_n, max_n):
+    for key in list(key_list):
+        if not min_n < key < max_n:
+            tree.delete(key)
+        else:
+            continue
+
+
+delUMinMax(tree, jj, 300, 700)
+
+print("After deleting :-")
 print_tree(tree)
