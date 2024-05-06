@@ -157,6 +157,7 @@
 
 # #     # Printing the tree
 # #     print_tree(root)
+print("Hello, World!")
 class Node:
     def __init__(self, val):
         self.left = None

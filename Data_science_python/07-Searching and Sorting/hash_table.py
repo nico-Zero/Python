@@ -5,9 +5,13 @@ class HashTable:
     def __init__(self, length):
         self.length = length
         self.table = [None] * self.length
+        self.slots = [None] * self.length
 
     def __hash_function(self, value):
         return value % self.length
+
+    def __rehash_function(self, value):
+        return (value + 1) % self.length
 
     def put(self, value):
         key = self.__hash_function(value)
