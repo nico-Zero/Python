@@ -8,7 +8,7 @@
 #                         if j != 0:
 #                             if unsorted_list[j] < unsorted_list[j - 1]:
 #                                 unsorted_list[j], unsorted_list[j - 1] = (
-#                                     unsorted_list[j - 1],
+#                                     unsorted_list[j - 0],
 #                                     unsorted_list[j],
 #                                 )
 #                                 counter.append(False)

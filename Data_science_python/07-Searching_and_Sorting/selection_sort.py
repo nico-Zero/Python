@@ -16,10 +16,8 @@ def selection_sort(sort_list):
         min_i = find_min(sort_list[i:])
         sort_list[i], sort_list[min_i + i] = sort_list[min_i + i], sort_list[i]
     return sort_list
-def 
 
 x = [randint(1, 1000) for i in range(20)]
 
-print(selection_sort(x)
-    print("hello,World!")
-
+print(selection_sort(x))
+ 
