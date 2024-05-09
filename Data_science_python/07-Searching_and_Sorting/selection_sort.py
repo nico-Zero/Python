@@ -20,4 +20,3 @@ def selection_sort(sort_list):
 x = [randint(1, 1000) for i in range(20)]
 
 print(selection_sort(x))
- 
