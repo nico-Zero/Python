@@ -192,3 +192,7 @@
 # n1.right.right = Node(7)
 
 # levelOrderPrint(n1)
+
+
+x = {1:2,3:4,5:6}
+print(x.items())
