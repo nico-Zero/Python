@@ -193,6 +193,13 @@
 
 # levelOrderPrint(n1)
 
+def jj(x:list):
+    x.remove(4)
 
-x = {1:2,3:4,5:6}
-print(x.items())
+
+def ss(x:list):
+    jj(x[:6])
+
+x = [1,2,3,4,5,6,7,8]
+ss(x)
+print(x)

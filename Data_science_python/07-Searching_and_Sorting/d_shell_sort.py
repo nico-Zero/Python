@@ -18,13 +18,9 @@ def shell_sort(sort_list):
         # print(sort_list)
     return insertion_sort(sort_list)
 
-x = [randint(1,1000) for _ in range(20)]
-
-print("Unsorted:- ")
-print(x)
+x = [randint(1,10000000) for _ in range(20000)]
 
 sorted_list = shell_sort(x)
 
-print("Sorted:- ")
-print(sorted_list)
+print(sorted_list == sorted(x))
 
