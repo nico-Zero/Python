@@ -188,10 +188,10 @@ class BinarySearchTree:
         return self.root.__iter__()  # type: ignore
 
 
-fake = faker.Faker()
 
 
 def generateNode(tree: BinarySearchTree, n):
+    fake = faker.Faker()
     for _ in range(n):
         tree.put(randint(1, 1000), fake.name())
 
@@ -204,18 +204,6 @@ def print_tree(tree):
         print(f"Key:- {node.key:^5}    Value:- {node.payload:^20}")
 
     return obj_dict
-
-
-tree = BinarySearchTree(randint(300, 1000), fake.name())
-
-generateNode(tree, 20)
-
-print("Before Deleting :-")
-jj = print_tree(tree)
-
-d = choice(list(jj))
-tree.delete(d)
-
 
 def levelOrderPrint(tree_root):
     monitor = [tree_root]
@@ -239,8 +227,3 @@ def delUMinMax(tree, key_list, min_n, max_n):
         new_tree.put(n, tree.get(n).payload)
     return new_tree
 
-
-n_t = delUMinMax(tree, jj, 300, 700)
-
-print("After deleting :-")
-print_tree(n_t)

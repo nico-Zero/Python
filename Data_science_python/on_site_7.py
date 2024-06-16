@@ -1,11 +1,18 @@
-from functools import reduce
+def solution(lis):
+    high_3 = lis[0] * lis[1] * lis[2]
 
-x = ''
-while not x.isnumeric():
-    x = input("Enter some number:- ")
+    high_2 = lis[0] * lis[1]
+    low_2 = lis[0] * lis[1]
 
-x = [int( i ) for i in x]
-x = sorted(x)[-3:]
-ans = reduce(lambda x, y: x * y, x)
+    high = max(lis[0], lis[1])
+    low = min(lis[0], lis[1])
 
-print(ans)
+    for num in lis[2:]:
+        high_3 = max(high_3, num * low_2, num* high_2)
+        high_2 = max(high_2, num * high, num * low)
+        low_2 = min(low_2, num * high, num * low)
+        high = max(high, num)
+        low = min(low, num)
+    return high_3
+
+print(solution([1,2,3,4,5,6,7,-1,-3,-23,-9,-10,23,34,23,0,3,1]))
