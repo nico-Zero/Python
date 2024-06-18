@@ -1,4 +1,5 @@
 import pandas as pd
+from pandas import DataFrame
 
 data = pd.read_csv("lsd_math_score_data.csv")
 
@@ -12,4 +13,11 @@ data["High_Score"] = 100
 
 data["High_Score"] = data["High_Score"] + data["Avg_Math_Test_Score"]
 
-print(data)
+data["High_Score"] = data["High_Score"] ** 3
+
+# print(type( data["Avg_Math_Test_Score"] ))
+
+columnList = [data["LSD_ppm"], data["Avg_Math_Test_Score"]]
+dataColumnList = DataFrame(columnList)
+
+print(dataColumnList)
