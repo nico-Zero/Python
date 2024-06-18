@@ -10,4 +10,6 @@ only_math_score = data["Avg_Math_Test_Score"]
 data["Test_Subject"] = "Jennifer Lopez"
 data["High_Score"] = 100
 
+data["High_Score"] = data["High_Score"] + data["Avg_Math_Test_Score"]
+
 print(data)
