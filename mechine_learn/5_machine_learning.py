@@ -13,4 +13,6 @@ x_1 = np.linspace(start=-3, stop=3, num=100)
 # print( next(x) )
 
 plt.plot(x_1, f(x_1))
+plt.xlabel("x", fontsize=12)
+plt.ylabel("f(x)", fontsize=12)
 plt.show()
