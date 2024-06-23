@@ -39,4 +39,5 @@ print(data)
 del data["High_Score"]
 
 print(data)
+# /run/media/nico/Nova/Lab/Python/mechine_learn
 
