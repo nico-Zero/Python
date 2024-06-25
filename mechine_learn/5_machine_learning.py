@@ -31,3 +31,4 @@ plt.plot(x_1, f(x_1))
 plt.xlabel("x", fontsize=12)
 plt.ylabel("f(x)", fontsize=12)
 plt.show()
+
