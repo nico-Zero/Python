@@ -1,5 +1,5 @@
-import matplotlib.pyplot as plt
 import numpy as np
+import matplotlib.pyplot as plt
 
 def f(x):
     return x**2 + x + 1
@@ -23,21 +23,29 @@ def df(x):
 
 ## Plot Function and deritive side by side.
 
-plt.figure(figsize=(10,5))
+plt.figure(figsize=(15,5))
 
 ## Plot 1
 
 plt.subplot(1,2,1)
+# plt.subplot(2,1,1)
 
-plt.plot(x_1, f(x_1))
+plt.plot(x_1, f(x_1), color="blue", linewidth=3)
 plt.xlabel("x", fontsize=12)
 plt.ylabel("f(x)", fontsize=12)
+plt.xlim(-3, 3)
+plt.ylim(0, 8)
 
 ## Plot 2
 plt.subplot(1,2,2)
+# plt.subplot(2,1,2)
 
-plt.plot(x_1, df(x_1))
+plt.plot(x_1, df(x_1), color="skyblue", linewidth=5)
 plt.xlabel("x", fontsize=12)
-plt.ylabel("f(x)", fontsize=12)
+plt.ylabel("df(x)", fontsize=12)
+plt.xlim(-2, 3)
+plt.ylim(-3, 6)
+plt.grid()
 
 plt.show()
+
