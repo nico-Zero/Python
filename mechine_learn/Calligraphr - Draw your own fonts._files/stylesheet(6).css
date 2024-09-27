@@ -1,0 +1,9 @@
+
+@font-face {
+    font-family: 'c2_new_lines';
+    src: url('c2newlines_y3q4y-regular-webfont.woff2') format('woff2'),
+    url('c2newlines_y3q4y-regular-webfont.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}

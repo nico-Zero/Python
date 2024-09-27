@@ -1,0 +1,35 @@
+{% extends "index.html" %}
+
+<!--Page Header Image -->
+{% block header-image %}'../static/assets/img/editing-profile-bg.png'{% endblock header-image %}
+
+<!--Page Header-->
+{% block header %}
+<div class="container position-relative px-4 px-lg-5">
+	<div class="row gx-4 gx-lg-5 justify-content-center">
+		<div class="col-md-10 col-lg-8 col-xl-7">
+			<div class="page-heading">
+				<h1>Editing {{profile.user.username | capfirst}}'s</h1>
+			</div>
+		</div>
+	</div>
+</div>
+{% endblock header %}
+
+<!--Main Content-->
+{% block content %}
+<main class="mb-4">
+	<div class="container px-4 px-lg-5">
+		<div class="row gx-4 gx-lg-5 justify-content-center">
+			<div class="col-md-10 col-lg-8 col-xl-7">
+                <form method="POST">
+                    {% csrf_token %}
+                    {{edit_profile_form.media}}
+                    {{edit_profile_form.as_p}}
+                    <input type="submit">
+                </form>
+            </div>
+		</div>
+	</div>
+</main>
+{% endblock content %}

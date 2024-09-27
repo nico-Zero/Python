@@ -1,0 +1,24 @@
+[tool.poetry]
+name = "blogger-heaven"
+version = "0.1.0"
+description = ""
+authors = ["nico-Zero <zandaxheart955@gmail.com>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.11"
+django = "4.2.9"
+django-bootstrap-v5 = "^1.0.11"
+django-bootstrap = "^0.2.4"
+django-ckeditor = "^6.7.0"
+gunicorn = "^21.2.0"
+pillow = "^10.2.0"
+mysql = "^0.0.3"
+postgres = "^4.0"
+dj-database-url = "^2.1.0"
+django-bootstrap5 = "^23.4"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"

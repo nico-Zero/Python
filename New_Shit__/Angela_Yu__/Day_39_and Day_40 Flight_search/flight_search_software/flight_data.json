@@ -1,0 +1,1672 @@
+[
+    {
+        "search_id": "01d9fb77-6c6f-c134-2e5c-5b7e24a11d47",
+        "currency": "IDR",
+        "fx_rate": 16073.43262,
+        "data": [
+            {
+                "id": "198125c34b6f00003eac97d7_0|198125c34b6f00003eac97d7_1",
+                "flyFrom": "RPR",
+                "flyTo": "CDG",
+                "cityFrom": "Raipur",
+                "cityCodeFrom": "RPR",
+                "cityTo": "Paris",
+                "cityCodeTo": "PAR",
+                "countryFrom": {
+                    "code": "IN",
+                    "name": "India"
+                },
+                "countryTo": {
+                    "code": "FR",
+                    "name": "France"
+                },
+                "nightsInDest": null,
+                "quality": 597.281869,
+                "distance": 7481.18,
+                "duration": {
+                    "departure": 96900,
+                    "return": 0,
+                    "total": 96900
+                },
+                "price": 5946351.996,
+                "conversion": {
+                    "EUR": 369.949104,
+                    "IDR": 5946351.996
+                },
+                "fare": {
+                    "adults": 5946352,
+                    "children": 5946352,
+                    "infants": 5946352
+                },
+                "bags_price": {
+                    "1": 0,
+                    "2": 0
+                },
+                "baglimit": {
+                    "hand_height": 40,
+                    "hand_length": 55,
+                    "hand_weight": 7,
+                    "hand_width": 20,
+                    "hold_dimensions_sum": 158,
+                    "hold_height": 52,
+                    "hold_length": 78,
+                    "hold_weight": 23,
+                    "hold_width": 28,
+                    "personal_item_height": 30,
+                    "personal_item_length": 40,
+                    "personal_item_weight": 3,
+                    "personal_item_width": 15
+                },
+                "availability": {
+                    "seats": 1
+                },
+                "airlines": [
+                    "UK"
+                ],
+                "route": [
+                    {
+                        "id": "198125c34b6f00003eac97d7_0",
+                        "combination_id": "198125c34b6f00003eac97d7",
+                        "flyFrom": "RPR",
+                        "flyTo": "DEL",
+                        "cityFrom": "Raipur",
+                        "cityCodeFrom": "RPR",
+                        "cityTo": "New Delhi",
+                        "cityCodeTo": "DEL",
+                        "airline": "UK",
+                        "flight_no": 798,
+                        "operating_carrier": "UK",
+                        "operating_flight_no": "798",
+                        "fare_basis": "VOBDINYV",
+                        "fare_category": "M",
+                        "fare_classes": "Q",
+                        "fare_family": "",
+                        "return": 0,
+                        "bags_recheck_required": false,
+                        "vi_connection": false,
+                        "guarantee": false,
+                        "equipment": null,
+                        "vehicle_type": "aircraft",
+                        "local_arrival": "2022-11-15T22:20:00.000Z",
+                        "utc_arrival": "2022-11-15T16:50:00.000Z",
+                        "local_departure": "2022-11-15T20:15:00.000Z",
+                        "utc_departure": "2022-11-15T14:45:00.000Z"
+                    },
+                    {
+                        "id": "198125c34b6f00003eac97d7_1",
+                        "combination_id": "198125c34b6f00003eac97d7",
+                        "flyFrom": "DEL",
+                        "flyTo": "CDG",
+                        "cityFrom": "New Delhi",
+                        "cityCodeFrom": "DEL",
+                        "cityTo": "Paris",
+                        "cityCodeTo": "PAR",
+                        "airline": "UK",
+                        "flight_no": 21,
+                        "operating_carrier": "UK",
+                        "operating_flight_no": "21",
+                        "fare_basis": "VOBDINYV",
+                        "fare_category": "M",
+                        "fare_classes": "V",
+                        "fare_family": "",
+                        "return": 0,
+                        "bags_recheck_required": false,
+                        "vi_connection": false,
+                        "guarantee": false,
+                        "equipment": null,
+                        "vehicle_type": "aircraft",
+                        "local_arrival": "2022-11-16T18:40:00.000Z",
+                        "utc_arrival": "2022-11-16T17:40:00.000Z",
+                        "local_departure": "2022-11-16T13:45:00.000Z",
+                        "utc_departure": "2022-11-16T08:15:00.000Z"
+                    }
+                ],
+                "booking_token": "E72vJ7CLTkLrAX14mcKxC09FT6fktjKorpkyknnMRCc5z71mjl4y--7ajPYNBN0szD5PrhC04JLThc3sbKHtV2QojFVYgTxSQMbvt0fGbG6Zun_pmqSanixOItfKUJl1JQpm8T2KUsGsH5CathBtdKvO610fhjastwD5ODPBtC8q9SbYWYGJusiLe1Jx0IDgNHEufBfY8qE0Z8yZStfiL7zsAvcgxry1vSI1RPhPG9750MADgLIX3_o7rVkNzqc_QNxlNHvySw9C1OoQpmRADETZPPIkJeUF8cLBboR3wcaUqABdNzttn5ld2kGsOTjcUHR1wGkwyAzcOqQ0MHFTGq_C06CWCQMU9cCugnc7Mj4pirCi3T63reyOSpz9tg3tLWryc97KYHBh5aNUh-hTxMrgGO-4aPi16jZbMvgla9_FaVSTroTzLFTsjkuXK9Ms6OyhczPogfU7Y1noAsZp0Hg==",
+                "deep_link": "https://www.kiwi.com/deep?affilid=nicozeroflightsearch&currency=IDR&flightsId=198125c34b6f00003eac97d7_0%7C198125c34b6f00003eac97d7_1&from=RPR&lang=en&passengers=1&to=CDG&booking_token=E72vJ7CLTkLrAX14mcKxC09FT6fktjKorpkyknnMRCc5z71mjl4y--7ajPYNBN0szD5PrhC04JLThc3sbKHtV2QojFVYgTxSQMbvt0fGbG6Zun_pmqSanixOItfKUJl1JQpm8T2KUsGsH5CathBtdKvO610fhjastwD5ODPBtC8q9SbYWYGJusiLe1Jx0IDgNHEufBfY8qE0Z8yZStfiL7zsAvcgxry1vSI1RPhPG9750MADgLIX3_o7rVkNzqc_QNxlNHvySw9C1OoQpmRADETZPPIkJeUF8cLBboR3wcaUqABdNzttn5ld2kGsOTjcUHR1wGkwyAzcOqQ0MHFTGq_C06CWCQMU9cCugnc7Mj4pirCi3T63reyOSpz9tg3tLWryc97KYHBh5aNUh-hTxMrgGO-4aPi16jZbMvgla9_FaVSTroTzLFTsjkuXK9Ms6OyhczPogfU7Y1noAsZp0Hg==",
+                "facilitated_booking_available": true,
+                "pnr_count": 1,
+                "has_airport_change": false,
+                "technical_stops": 0,
+                "throw_away_ticketing": false,
+                "hidden_city_ticketing": false,
+                "virtual_interlining": false,
+                "local_arrival": "2022-11-16T18:40:00.000Z",
+                "utc_arrival": "2022-11-16T17:40:00.000Z",
+                "local_departure": "2022-11-15T20:15:00.000Z",
+                "utc_departure": "2022-11-15T14:45:00.000Z"
+            }
+        ],
+        "_results": 17,
+        "search_params": {
+            "flyFrom_type": "airport",
+            "to_type": "airport",
+            "seats": {
+                "passengers": 1,
+                "adults": 1,
+                "children": 0,
+                "infants": 0
+            }
+        },
+        "all_stopover_airports": [],
+        "sort_version": 0
+    },
+    {
+        "search_id": "510d0866-8a52-8f03-a9fb-39ed8b2d961d",
+        "currency": "IDR",
+        "fx_rate": 16073.43262,
+        "data": [
+            {
+                "id": "1981168e4b6f0000bda5eee6_0|1981168e4b6f0000bda5eee6_1|168e204e4b7000003cdaf7a9_0|204e00424b71000019826147_0",
+                "flyFrom": "RPR",
+                "flyTo": "BER",
+                "cityFrom": "Raipur",
+                "cityCodeFrom": "RPR",
+                "cityTo": "Berlin",
+                "cityCodeTo": "BER",
+                "countryFrom": {
+                    "code": "IN",
+                    "name": "India"
+                },
+                "countryTo": {
+                    "code": "DE",
+                    "name": "Germany"
+                },
+                "nightsInDest": null,
+                "quality": 812.728332,
+                "distance": 6699.32,
+                "duration": {
+                    "departure": 179700,
+                    "return": 0,
+                    "total": 179700
+                },
+                "price": 6451811.9939,
+                "conversion": {
+                    "EUR": 401.396027,
+                    "IDR": 6451811.9939
+                },
+                "fare": {
+                    "adults": 6451811.99,
+                    "children": 6451811.99,
+                    "infants": 6451811.99
+                },
+                "bags_price": {
+                    "1": 111.888
+                },
+                "baglimit": {
+                    "hand_height": 35,
+                    "hand_length": 55,
+                    "hand_weight": 7,
+                    "hand_width": 23,
+                    "hold_dimensions_sum": 158,
+                    "hold_height": 52,
+                    "hold_length": 78,
+                    "hold_weight": 15,
+                    "hold_width": 28
+                },
+                "availability": {
+                    "seats": 1
+                },
+                "airlines": [
+                    "W6",
+                    "6E"
+                ],
+                "route": [
+                    {
+                        "id": "1981168e4b6f0000bda5eee6_0",
+                        "combination_id": "1981168e4b6f0000bda5eee6",
+                        "flyFrom": "RPR",
+                        "flyTo": "BOM",
+                        "cityFrom": "Raipur",
+                        "cityCodeFrom": "RPR",
+                        "cityTo": "Mumbai",
+                        "cityCodeTo": "BOM",
+                        "airline": "6E",
+                        "flight_no": 6291,
+                        "operating_carrier": "",
+                        "operating_flight_no": "",
+                        "fare_basis": "JCINT",
+                        "fare_category": "M",
+                        "fare_classes": "J",
+                        "fare_family": "",
+                        "return": 0,
+                        "bags_recheck_required": false,
+                        "vi_connection": false,
+                        "guarantee": false,
+                        "equipment": null,
+                        "vehicle_type": "aircraft",
+                        "local_arrival": "2022-11-15T19:30:00.000Z",
+                        "utc_arrival": "2022-11-15T14:00:00.000Z",
+                        "local_departure": "2022-11-15T17:35:00.000Z",
+                        "utc_departure": "2022-11-15T12:05:00.000Z"
+                    },
+                    {
+                        "id": "1981168e4b6f0000bda5eee6_1",
+                        "combination_id": "1981168e4b6f0000bda5eee6",
+                        "flyFrom": "BOM",
+                        "flyTo": "AUH",
+                        "cityFrom": "Mumbai",
+                        "cityCodeFrom": "BOM",
+                        "cityTo": "Abu Dhabi",
+                        "cityCodeTo": "AUH",
+                        "airline": "6E",
+                        "flight_no": 1835,
+                        "operating_carrier": "6E",
+                        "operating_flight_no": "1835",
+                        "fare_basis": "JCINT",
+                        "fare_category": "M",
+                        "fare_classes": "J",
+                        "fare_family": "",
+                        "return": 0,
+                        "bags_recheck_required": false,
+                        "vi_connection": false,
+                        "guarantee": false,
+                        "equipment": null,
+                        "vehicle_type": "aircraft",
+                        "local_arrival": "2022-11-15T23:40:00.000Z",
+                        "utc_arrival": "2022-11-15T19:40:00.000Z",
+                        "local_departure": "2022-11-15T21:40:00.000Z",
+                        "utc_departure": "2022-11-15T16:10:00.000Z"
+                    },
+                    {
+                        "id": "168e204e4b7000003cdaf7a9_0",
+                        "combination_id": "168e204e4b7000003cdaf7a9",
+                        "flyFrom": "AUH",
+                        "flyTo": "CLJ",
+                        "cityFrom": "Abu Dhabi",
+                        "cityCodeFrom": "AUH",
+                        "cityTo": "Cluj-Napoca",
+                        "cityCodeTo": "CLJ",
+                        "airline": "W6",
+                        "flight_no": 3488,
+                        "operating_carrier": "",
+                        "operating_flight_no": "",
+                        "fare_basis": "JKREG",
+                        "fare_category": "M",
+                        "fare_classes": "J",
+                        "fare_family": "",
+                        "return": 0,
+                        "bags_recheck_required": true,
+                        "vi_connection": true,
+                        "guarantee": true,
+                        "equipment": null,
+                        "vehicle_type": "aircraft",
+                        "local_arrival": "2022-11-17T02:25:00.000Z",
+                        "utc_arrival": "2022-11-17T00:25:00.000Z",
+                        "local_departure": "2022-11-16T22:30:00.000Z",
+                        "utc_departure": "2022-11-16T18:30:00.000Z"
+                    },
+                    {
+                        "id": "204e00424b71000019826147_0",
+                        "combination_id": "204e00424b71000019826147",
+                        "flyFrom": "CLJ",
+                        "flyTo": "BER",
+                        "cityFrom": "Cluj-Napoca",
+                        "cityCodeFrom": "CLJ",
+                        "cityTo": "Berlin",
+                        "cityCodeTo": "BER",
+                        "airline": "W6",
+                        "flight_no": 3357,
+                        "operating_carrier": "",
+                        "operating_flight_no": "",
+                        "fare_basis": "LREG",
+                        "fare_category": "M",
+                        "fare_classes": "L",
+                        "fare_family": "",
+                        "return": 0,
+                        "bags_recheck_required": true,
+                        "vi_connection": true,
+                        "guarantee": true,
+                        "equipment": null,
+                        "vehicle_type": "aircraft",
+                        "local_arrival": "2022-11-17T15:00:00.000Z",
+                        "utc_arrival": "2022-11-17T14:00:00.000Z",
+                        "local_departure": "2022-11-17T14:05:00.000Z",
+                        "utc_departure": "2022-11-17T12:05:00.000Z"
+                    }
+                ],
+                "booking_token": "EvsaAJ1XtQrlzoNOkWxHE16eMnluUeOmx7gX82CWr4zwYPIrI32pNilbod2Uq3kbXyBub1S2xKxP0toLelomN8CPEGnve9z6b0s_H46ZhvTGFQv9MAvLDtkMj5bUdVxdp8edvj-z5IIqxEsNHzbrddKegWa0n5MCP32QcFTzE4hPnx5PRLCNKZK_ghT3eOGHlqkOQ_1VUfFnMmu6nFHEWUldfLld6qqkTPI1-woaTRDz5RoVb__nAC8rDycrgNEyOtlNwrQnJhvqT8GYti7jVuFTaL2MkOYQDhhKNgx2QD9jzjChdppT-8ijs_WYRk5S0bBKTwP4g-658yhjFXZlF2qXyqHv8emeMfgSyc3NBlV7QJiYL201huQmbj8CytwooMYg-mDjOixvsOr2oi7xM_Y_E46oJHowaVLr5Lsp5vE4xOCBhEJlWRcwu3BYSwpHmn9dd3g3ZX6461AnPfm1kLMFm1pgrCJ0vjeijZ4Glby-U5KevdQqHoFXn2XzkRbwIj2Plt2EXPt5Ydk2BtfGn7PLYaY1wDXfn7btdJoqfbSUqkTDdmUcCE0Qt2PGG9aLMt-jF8LLblikgZq7FZHluMLrX3UPv7wVO4mbkaXswOpNFSzUvipFIExZbPLiFqFBM",
+                "deep_link": "https://www.kiwi.com/deep?affilid=nicozeroflightsearch&currency=IDR&flightsId=1981168e4b6f0000bda5eee6_0%7C1981168e4b6f0000bda5eee6_1%7C168e204e4b7000003cdaf7a9_0%7C204e00424b71000019826147_0&from=RPR&lang=en&passengers=1&to=BER&booking_token=EvsaAJ1XtQrlzoNOkWxHE16eMnluUeOmx7gX82CWr4zwYPIrI32pNilbod2Uq3kbXyBub1S2xKxP0toLelomN8CPEGnve9z6b0s_H46ZhvTGFQv9MAvLDtkMj5bUdVxdp8edvj-z5IIqxEsNHzbrddKegWa0n5MCP32QcFTzE4hPnx5PRLCNKZK_ghT3eOGHlqkOQ_1VUfFnMmu6nFHEWUldfLld6qqkTPI1-woaTRDz5RoVb__nAC8rDycrgNEyOtlNwrQnJhvqT8GYti7jVuFTaL2MkOYQDhhKNgx2QD9jzjChdppT-8ijs_WYRk5S0bBKTwP4g-658yhjFXZlF2qXyqHv8emeMfgSyc3NBlV7QJiYL201huQmbj8CytwooMYg-mDjOixvsOr2oi7xM_Y_E46oJHowaVLr5Lsp5vE4xOCBhEJlWRcwu3BYSwpHmn9dd3g3ZX6461AnPfm1kLMFm1pgrCJ0vjeijZ4Glby-U5KevdQqHoFXn2XzkRbwIj2Plt2EXPt5Ydk2BtfGn7PLYaY1wDXfn7btdJoqfbSUqkTDdmUcCE0Qt2PGG9aLMt-jF8LLblikgZq7FZHluMLrX3UPv7wVO4mbkaXswOpNFSzUvipFIExZbPLiFqFBM",
+                "facilitated_booking_available": false,
+                "pnr_count": 3,
+                "has_airport_change": false,
+                "technical_stops": 0,
+                "throw_away_ticketing": false,
+                "hidden_city_ticketing": false,
+                "virtual_interlining": true,
+                "local_arrival": "2022-11-17T15:00:00.000Z",
+                "utc_arrival": "2022-11-17T14:00:00.000Z",
+                "local_departure": "2022-11-15T17:35:00.000Z",
+                "utc_departure": "2022-11-15T12:05:00.000Z"
+            }
+        ],
+        "_results": 17,
+        "search_params": {
+            "flyFrom_type": "airport",
+            "to_type": "airport",
+            "seats": {
+                "passengers": 1,
+                "adults": 1,
+                "children": 0,
+                "infants": 0
+            }
+        },
+        "all_stopover_airports": [],
+        "sort_version": 0
+    },
+    {
+        "search_id": "8144069e-7ed7-e401-7f5c-9445ffd292d6",
+        "currency": "IDR",
+        "fx_rate": 16073.43262,
+        "data": [
+            {
+                "id": "198107114b6f0000d0aefe43_0|071121bc4b6f00004f4b90b2_0|21bc097b4b7000003fd00736_0|21bc097b4b7000003fd00736_1",
+                "flyFrom": "RPR",
+                "flyTo": "HND",
+                "cityFrom": "Raipur",
+                "cityCodeFrom": "RPR",
+                "cityTo": "Tokyo",
+                "cityCodeTo": "TYO",
+                "countryFrom": {
+                    "code": "IN",
+                    "name": "India"
+                },
+                "countryTo": {
+                    "code": "JP",
+                    "name": "Japan"
+                },
+                "nightsInDest": null,
+                "quality": 562.381789,
+                "distance": 5821.05,
+                "duration": {
+                    "departure": 90300,
+                    "return": 0,
+                    "total": 90300
+                },
+                "price": 5621131.0007,
+                "conversion": {
+                    "EUR": 349.715654,
+                    "IDR": 5621131.0007
+                },
+                "fare": {
+                    "adults": 5621131,
+                    "children": 5621131,
+                    "infants": 5621131
+                },
+                "bags_price": {
+                    "1": 166.506
+                },
+                "baglimit": {
+                    "hand_height": 36,
+                    "hand_length": 56,
+                    "hand_weight": 7,
+                    "hand_width": 23,
+                    "hold_dimensions_sum": 158,
+                    "hold_height": 52,
+                    "hold_length": 78,
+                    "hold_weight": 15,
+                    "hold_width": 28
+                },
+                "availability": {
+                    "seats": 2
+                },
+                "airlines": [
+                    "6E",
+                    "AK",
+                    "VJ",
+                    "D7"
+                ],
+                "route": [
+                    {
+                        "id": "198107114b6f0000d0aefe43_0",
+                        "combination_id": "198107114b6f0000d0aefe43",
+                        "flyFrom": "RPR",
+                        "flyTo": "DEL",
+                        "cityFrom": "Raipur",
+                        "cityCodeFrom": "RPR",
+                        "cityTo": "New Delhi",
+                        "cityCodeTo": "DEL",
+                        "airline": "6E",
+                        "flight_no": 5344,
+                        "operating_carrier": "6E",
+                        "operating_flight_no": "5344",
+                        "fare_basis": "L0IP",
+                        "fare_category": "M",
+                        "fare_classes": "L",
+                        "fare_family": "",
+                        "return": 0,
+                        "bags_recheck_required": false,
+                        "vi_connection": false,
+                        "guarantee": false,
+                        "equipment": null,
+                        "vehicle_type": "aircraft",
+                        "local_arrival": "2022-11-15T20:10:00.000Z",
+                        "utc_arrival": "2022-11-15T14:40:00.000Z",
+                        "local_departure": "2022-11-15T18:00:00.000Z",
+                        "utc_departure": "2022-11-15T12:30:00.000Z"
+                    },
+                    {
+                        "id": "071121bc4b6f00004f4b90b2_0",
+                        "combination_id": "071121bc4b6f00004f4b90b2",
+                        "flyFrom": "DEL",
+                        "flyTo": "SGN",
+                        "cityFrom": "New Delhi",
+                        "cityCodeFrom": "DEL",
+                        "cityTo": "Ho Chi Minh City",
+                        "cityCodeTo": "SGN",
+                        "airline": "VJ",
+                        "flight_no": 896,
+                        "operating_carrier": "VJ",
+                        "operating_flight_no": "896",
+                        "fare_basis": "",
+                        "fare_category": "M",
+                        "fare_classes": "A",
+                        "fare_family": "",
+                        "return": 0,
+                        "bags_recheck_required": true,
+                        "vi_connection": true,
+                        "guarantee": true,
+                        "equipment": null,
+                        "vehicle_type": "aircraft",
+                        "local_arrival": "2022-11-16T04:40:00.000Z",
+                        "utc_arrival": "2022-11-15T21:40:00.000Z",
+                        "local_departure": "2022-11-15T22:20:00.000Z",
+                        "utc_departure": "2022-11-15T16:50:00.000Z"
+                    },
+                    {
+                        "id": "21bc097b4b7000003fd00736_0",
+                        "combination_id": "21bc097b4b7000003fd00736",
+                        "flyFrom": "SGN",
+                        "flyTo": "KUL",
+                        "cityFrom": "Ho Chi Minh City",
+                        "cityCodeFrom": "SGN",
+                        "cityTo": "Kuala Lumpur",
+                        "cityCodeTo": "KUL",
+                        "airline": "AK",
+                        "flight_no": 521,
+                        "operating_carrier": "AK",
+                        "operating_flight_no": "521",
+                        "fare_basis": "W02HTHRU",
+                        "fare_category": "M",
+                        "fare_classes": "W",
+                        "fare_family": "",
+                        "return": 0,
+                        "bags_recheck_required": true,
+                        "vi_connection": true,
+                        "guarantee": true,
+                        "equipment": null,
+                        "vehicle_type": "aircraft",
+                        "local_arrival": "2022-11-16T12:35:00.000Z",
+                        "utc_arrival": "2022-11-16T04:35:00.000Z",
+                        "local_departure": "2022-11-16T09:25:00.000Z",
+                        "utc_departure": "2022-11-16T02:25:00.000Z"
+                    },
+                    {
+                        "id": "21bc097b4b7000003fd00736_1",
+                        "combination_id": "21bc097b4b7000003fd00736",
+                        "flyFrom": "KUL",
+                        "flyTo": "HND",
+                        "cityFrom": "Kuala Lumpur",
+                        "cityCodeFrom": "KUL",
+                        "cityTo": "Tokyo",
+                        "cityCodeTo": "TYO",
+                        "airline": "D7",
+                        "flight_no": 522,
+                        "operating_carrier": "D7",
+                        "operating_flight_no": "522",
+                        "fare_basis": "W02HTHRU",
+                        "fare_category": "M",
+                        "fare_classes": "W",
+                        "fare_family": "",
+                        "return": 0,
+                        "bags_recheck_required": false,
+                        "vi_connection": false,
+                        "guarantee": false,
+                        "equipment": null,
+                        "vehicle_type": "aircraft",
+                        "local_arrival": "2022-11-16T22:35:00.000Z",
+                        "utc_arrival": "2022-11-16T13:35:00.000Z",
+                        "local_departure": "2022-11-16T14:35:00.000Z",
+                        "utc_departure": "2022-11-16T06:35:00.000Z"
+                    }
+                ],
+                "booking_token": "Evf9SJsBjssWeXAQHe2S7ezE8T7k9vlz6mKIk9jPjjBwJ-pMngp3dlH5FBYD2CL-OKFSEsDreNSRDIWvnwyYfqDCVAqSkDCNv1RnWBrZaqUJijgAXgjkeQjHmfwTInhWeqQSmrpeHgh4xI126eyuD4pHG_CxJtazDabAih7hgotFIKR-0guBhbw4tgh7qXz2No7WVvEC84stPzurKMpSZRJqoSktxchNGweMP8rc8aELFDGqxKtyc_ebNOkcmcPCizoDkHzMug_44m1ih5c6JKhsjhGz_LL5xTour4OIfBYiPwap6I1OoPogVa_oB7owoGDf1ESRg8U4Q6o-OHfjfRC32jxMw15Y5-7ubDX1ouguKcbrB6wcNg--JjUHaiyAMq7lENxOyuBqrX19TLEX_dhlR5_mFxv-RWf8klur7sti0Vnl14pIPwV4JCnWV3CkytJgl4NA_ev-PSs_msU2-D3GzRw5HAMf8gRKcMTuUFxolfDdzHGTDfkycEs6puagRHjaMyzu-trKuQmyhZVBlgnn8i3XMltJ5v7Z8id7QtnxpI0xn3hlXb6AeAxfVpYWJWLHcL4_zQ6-in0hcH5kYWx5vpvwoRk5j5PSmyNh_fAqJoeFsf4XM4AUYoui-0VnTUrDyZpHkJHMxISera32IGg==",
+                "deep_link": "https://www.kiwi.com/deep?affilid=nicozeroflightsearch&currency=IDR&flightsId=198107114b6f0000d0aefe43_0%7C071121bc4b6f00004f4b90b2_0%7C21bc097b4b7000003fd00736_0%7C21bc097b4b7000003fd00736_1&from=RPR&lang=en&passengers=1&to=HND&booking_token=Evf9SJsBjssWeXAQHe2S7ezE8T7k9vlz6mKIk9jPjjBwJ-pMngp3dlH5FBYD2CL-OKFSEsDreNSRDIWvnwyYfqDCVAqSkDCNv1RnWBrZaqUJijgAXgjkeQjHmfwTInhWeqQSmrpeHgh4xI126eyuD4pHG_CxJtazDabAih7hgotFIKR-0guBhbw4tgh7qXz2No7WVvEC84stPzurKMpSZRJqoSktxchNGweMP8rc8aELFDGqxKtyc_ebNOkcmcPCizoDkHzMug_44m1ih5c6JKhsjhGz_LL5xTour4OIfBYiPwap6I1OoPogVa_oB7owoGDf1ESRg8U4Q6o-OHfjfRC32jxMw15Y5-7ubDX1ouguKcbrB6wcNg--JjUHaiyAMq7lENxOyuBqrX19TLEX_dhlR5_mFxv-RWf8klur7sti0Vnl14pIPwV4JCnWV3CkytJgl4NA_ev-PSs_msU2-D3GzRw5HAMf8gRKcMTuUFxolfDdzHGTDfkycEs6puagRHjaMyzu-trKuQmyhZVBlgnn8i3XMltJ5v7Z8id7QtnxpI0xn3hlXb6AeAxfVpYWJWLHcL4_zQ6-in0hcH5kYWx5vpvwoRk5j5PSmyNh_fAqJoeFsf4XM4AUYoui-0VnTUrDyZpHkJHMxISera32IGg==",
+                "facilitated_booking_available": true,
+                "pnr_count": 3,
+                "has_airport_change": false,
+                "technical_stops": 0,
+                "throw_away_ticketing": false,
+                "hidden_city_ticketing": false,
+                "virtual_interlining": true,
+                "local_arrival": "2022-11-16T22:35:00.000Z",
+                "utc_arrival": "2022-11-16T13:35:00.000Z",
+                "local_departure": "2022-11-15T18:00:00.000Z",
+                "utc_departure": "2022-11-15T12:30:00.000Z"
+            }
+        ],
+        "_results": 17,
+        "search_params": {
+            "flyFrom_type": "airport",
+            "to_type": "airport",
+            "seats": {
+                "passengers": 1,
+                "adults": 1,
+                "children": 0,
+                "infants": 0
+            }
+        },
+        "all_stopover_airports": [],
+        "sort_version": 0
+    },
+    {
+        "search_id": "ea752e72-629b-9845-9092-150775a12de9",
+        "currency": "IDR",
+        "fx_rate": 16073.43262,
+        "data": [
+            {
+                "id": "198107114b6f0000d0aefe43_0|071121bc4b6f00004f4b90b2_0|21bc03724b70000078d806cb_0|21bc03724b70000078d806cb_1",
+                "flyFrom": "RPR",
+                "flyTo": "SYD",
+                "cityFrom": "Raipur",
+                "cityCodeFrom": "RPR",
+                "cityTo": "Sydney",
+                "cityCodeTo": "SYD",
+                "countryFrom": {
+                    "code": "IN",
+                    "name": "India"
+                },
+                "countryTo": {
+                    "code": "AU",
+                    "name": "Australia"
+                },
+                "nightsInDest": null,
+                "quality": 938.685954,
+                "distance": 9572.24,
+                "duration": {
+                    "departure": 135000,
+                    "return": 0,
+                    "total": 135000
+                },
+                "price": 10073006.9928,
+                "conversion": {
+                    "EUR": 626.686734,
+                    "IDR": 10073006.9928
+                },
+                "fare": {
+                    "adults": 10073006.99,
+                    "children": 10073006.99,
+                    "infants": 10073006.99
+                },
+                "bags_price": {
+                    "1": 155.898
+                },
+                "baglimit": {
+                    "hand_height": 36,
+                    "hand_length": 54,
+                    "hand_weight": 7,
+                    "hand_width": 23,
+                    "hold_dimensions_sum": 158,
+                    "hold_height": 50,
+                    "hold_length": 70,
+                    "hold_weight": 15,
+                    "hold_width": 38
+                },
+                "availability": {
+                    "seats": 2
+                },
+                "airlines": [
+                    "TR",
+                    "VJ",
+                    "6E"
+                ],
+                "route": [
+                    {
+                        "id": "198107114b6f0000d0aefe43_0",
+                        "combination_id": "198107114b6f0000d0aefe43",
+                        "flyFrom": "RPR",
+                        "flyTo": "DEL",
+                        "cityFrom": "Raipur",
+                        "cityCodeFrom": "RPR",
+                        "cityTo": "New Delhi",
+                        "cityCodeTo": "DEL",
+                        "airline": "6E",
+                        "flight_no": 5344,
+                        "operating_carrier": "6E",
+                        "operating_flight_no": "5344",
+                        "fare_basis": "L0IP",
+                        "fare_category": "M",
+                        "fare_classes": "L",
+                        "fare_family": "",
+                        "return": 0,
+                        "bags_recheck_required": false,
+                        "vi_connection": false,
+                        "guarantee": false,
+                        "equipment": null,
+                        "vehicle_type": "aircraft",
+                        "local_arrival": "2022-11-15T20:10:00.000Z",
+                        "utc_arrival": "2022-11-15T14:40:00.000Z",
+                        "local_departure": "2022-11-15T18:00:00.000Z",
+                        "utc_departure": "2022-11-15T12:30:00.000Z"
+                    },
+                    {
+                        "id": "071121bc4b6f00004f4b90b2_0",
+                        "combination_id": "071121bc4b6f00004f4b90b2",
+                        "flyFrom": "DEL",
+                        "flyTo": "SGN",
+                        "cityFrom": "New Delhi",
+                        "cityCodeFrom": "DEL",
+                        "cityTo": "Ho Chi Minh City",
+                        "cityCodeTo": "SGN",
+                        "airline": "VJ",
+                        "flight_no": 896,
+                        "operating_carrier": "VJ",
+                        "operating_flight_no": "896",
+                        "fare_basis": "",
+                        "fare_category": "M",
+                        "fare_classes": "A",
+                        "fare_family": "",
+                        "return": 0,
+                        "bags_recheck_required": true,
+                        "vi_connection": true,
+                        "guarantee": true,
+                        "equipment": null,
+                        "vehicle_type": "aircraft",
+                        "local_arrival": "2022-11-16T04:40:00.000Z",
+                        "utc_arrival": "2022-11-15T21:40:00.000Z",
+                        "local_departure": "2022-11-15T22:20:00.000Z",
+                        "utc_departure": "2022-11-15T16:50:00.000Z"
+                    },
+                    {
+                        "id": "21bc03724b70000078d806cb_0",
+                        "combination_id": "21bc03724b70000078d806cb",
+                        "flyFrom": "SGN",
+                        "flyTo": "SIN",
+                        "cityFrom": "Ho Chi Minh City",
+                        "cityCodeFrom": "SGN",
+                        "cityTo": "Singapore",
+                        "cityCodeTo": "SIN",
+                        "airline": "TR",
+                        "flight_no": 303,
+                        "operating_carrier": "TR",
+                        "operating_flight_no": "303",
+                        "fare_basis": "S1CODVNA",
+                        "fare_category": "M",
+                        "fare_classes": "S",
+                        "fare_family": "",
+                        "return": 0,
+                        "bags_recheck_required": true,
+                        "vi_connection": true,
+                        "guarantee": true,
+                        "equipment": null,
+                        "vehicle_type": "aircraft",
+                        "local_arrival": "2022-11-16T21:05:00.000Z",
+                        "utc_arrival": "2022-11-16T13:05:00.000Z",
+                        "local_departure": "2022-11-16T18:15:00.000Z",
+                        "utc_departure": "2022-11-16T11:15:00.000Z"
+                    },
+                    {
+                        "id": "21bc03724b70000078d806cb_1",
+                        "combination_id": "21bc03724b70000078d806cb",
+                        "flyFrom": "SIN",
+                        "flyTo": "SYD",
+                        "cityFrom": "Singapore",
+                        "cityCodeFrom": "SIN",
+                        "cityTo": "Sydney",
+                        "cityCodeTo": "SYD",
+                        "airline": "TR",
+                        "flight_no": 2,
+                        "operating_carrier": "TR",
+                        "operating_flight_no": "2",
+                        "fare_basis": "S1CODVNA",
+                        "fare_category": "M",
+                        "fare_classes": "S",
+                        "fare_family": "",
+                        "return": 0,
+                        "bags_recheck_required": false,
+                        "vi_connection": false,
+                        "guarantee": false,
+                        "equipment": null,
+                        "vehicle_type": "aircraft",
+                        "local_arrival": "2022-11-17T13:00:00.000Z",
+                        "utc_arrival": "2022-11-17T02:00:00.000Z",
+                        "local_departure": "2022-11-17T02:00:00.000Z",
+                        "utc_departure": "2022-11-16T18:00:00.000Z"
+                    }
+                ],
+                "booking_token": "EkScQhFXp1p6fee0dX9AopAJ8WxBMxy5fGfzsCZYk0Pnn46zO5gkXbIV3PNPQm-pYedOmEIuda63nDePlkaPVpMz0_tLXql-yyT8UA5ESCcuGYq_2xTi9cl9sQQGqUDj4OQfl0HDY8bhh6TYYIge1R6cNUwf580GY1WfPzycKUA6K7AJFyckaEqZmEoh4lGfD_gy7VQ1kjLrIcPQ7RhrOkRiv56w5KELFga-YAM6wUCNTCusivN5vlEcG0lmW-HloR65dLovf9IT23d2wgOpUWnk-iRo5R8z2I5pnq59-ioR35KKnDp-6Y0OGvxoVLE5sEyIVO1pnppVHHX_jBRRTE-rSr771sRXPCAx4cNfaJDWFSH2Xn_RwfrtpCK2F98dI09FV6NeGMTuiXABsdKJRy7bOhImLkOscjD9eC07UaNyjmvToPVxunAuY7i_xj5rKIy91rw56TIlGGhQIH-RjBEA-vx07z1PL91CjiRJt1LSpU23gB1re6g0qo4l_i8ZCJH_Wu6iiIIHi8aqmxXQBjGKs-JiuELcK3yajuoMyQd3cTssftpSHthhV7GIDUsW71oFV_N4LJp2mr53Dk7_dbYwUTav56JISug158HY5y_FH4bG1pgEkP32f0aN8FPjbolAkU7Ia8_pkMrgKM2WF8Q==",
+                "deep_link": "https://www.kiwi.com/deep?affilid=nicozeroflightsearch&currency=IDR&flightsId=198107114b6f0000d0aefe43_0%7C071121bc4b6f00004f4b90b2_0%7C21bc03724b70000078d806cb_0%7C21bc03724b70000078d806cb_1&from=RPR&lang=en&passengers=1&to=SYD&booking_token=EkScQhFXp1p6fee0dX9AopAJ8WxBMxy5fGfzsCZYk0Pnn46zO5gkXbIV3PNPQm-pYedOmEIuda63nDePlkaPVpMz0_tLXql-yyT8UA5ESCcuGYq_2xTi9cl9sQQGqUDj4OQfl0HDY8bhh6TYYIge1R6cNUwf580GY1WfPzycKUA6K7AJFyckaEqZmEoh4lGfD_gy7VQ1kjLrIcPQ7RhrOkRiv56w5KELFga-YAM6wUCNTCusivN5vlEcG0lmW-HloR65dLovf9IT23d2wgOpUWnk-iRo5R8z2I5pnq59-ioR35KKnDp-6Y0OGvxoVLE5sEyIVO1pnppVHHX_jBRRTE-rSr771sRXPCAx4cNfaJDWFSH2Xn_RwfrtpCK2F98dI09FV6NeGMTuiXABsdKJRy7bOhImLkOscjD9eC07UaNyjmvToPVxunAuY7i_xj5rKIy91rw56TIlGGhQIH-RjBEA-vx07z1PL91CjiRJt1LSpU23gB1re6g0qo4l_i8ZCJH_Wu6iiIIHi8aqmxXQBjGKs-JiuELcK3yajuoMyQd3cTssftpSHthhV7GIDUsW71oFV_N4LJp2mr53Dk7_dbYwUTav56JISug158HY5y_FH4bG1pgEkP32f0aN8FPjbolAkU7Ia8_pkMrgKM2WF8Q==",
+                "facilitated_booking_available": true,
+                "pnr_count": 3,
+                "has_airport_change": false,
+                "technical_stops": 0,
+                "throw_away_ticketing": false,
+                "hidden_city_ticketing": false,
+                "virtual_interlining": true,
+                "local_arrival": "2022-11-17T13:00:00.000Z",
+                "utc_arrival": "2022-11-17T02:00:00.000Z",
+                "local_departure": "2022-11-15T18:00:00.000Z",
+                "utc_departure": "2022-11-15T12:30:00.000Z"
+            }
+        ],
+        "_results": 17,
+        "search_params": {
+            "flyFrom_type": "airport",
+            "to_type": "airport",
+            "seats": {
+                "passengers": 1,
+                "adults": 1,
+                "children": 0,
+                "infants": 0
+            }
+        },
+        "all_stopover_airports": [],
+        "sort_version": 0
+    },
+    {
+        "search_id": "5395b9f8-4746-391b-74af-c17fc76d103c",
+        "currency": "IDR",
+        "fx_rate": 16073.43262,
+        "data": [
+            {
+                "id": "1981168e4b6f0000bda5eee6_0|1981168e4b6f0000bda5eee6_1|168e1db84b700000d5522d40_0",
+                "flyFrom": "RPR",
+                "flyTo": "SAW",
+                "cityFrom": "Raipur",
+                "cityCodeFrom": "RPR",
+                "cityTo": "Istanbul",
+                "cityCodeTo": "IST",
+                "countryFrom": {
+                    "code": "IN",
+                    "name": "India"
+                },
+                "countryTo": {
+                    "code": "TR",
+                    "name": "Turkey"
+                },
+                "nightsInDest": null,
+                "quality": 455.303373,
+                "distance": 5367.48,
+                "duration": {
+                    "departure": 61200,
+                    "return": 0,
+                    "total": 61200
+                },
+                "price": 4939426.007,
+                "conversion": {
+                    "EUR": 307.303743,
+                    "IDR": 4939426.007
+                },
+                "fare": {
+                    "adults": 4939426.01,
+                    "children": 4939426.01,
+                    "infants": 4939426.01
+                },
+                "bags_price": {
+                    "1": 62.24
+                },
+                "baglimit": {
+                    "hand_height": 35,
+                    "hand_length": 55,
+                    "hand_weight": 7,
+                    "hand_width": 20,
+                    "hold_dimensions_sum": 158,
+                    "hold_height": 52,
+                    "hold_length": 78,
+                    "hold_weight": 15,
+                    "hold_width": 28
+                },
+                "availability": {
+                    "seats": 4
+                },
+                "airlines": [
+                    "PC",
+                    "6E"
+                ],
+                "route": [
+                    {
+                        "id": "1981168e4b6f0000bda5eee6_0",
+                        "combination_id": "1981168e4b6f0000bda5eee6",
+                        "flyFrom": "RPR",
+                        "flyTo": "BOM",
+                        "cityFrom": "Raipur",
+                        "cityCodeFrom": "RPR",
+                        "cityTo": "Mumbai",
+                        "cityCodeTo": "BOM",
+                        "airline": "6E",
+                        "flight_no": 6291,
+                        "operating_carrier": "",
+                        "operating_flight_no": "",
+                        "fare_basis": "JCINT",
+                        "fare_category": "M",
+                        "fare_classes": "J",
+                        "fare_family": "",
+                        "return": 0,
+                        "bags_recheck_required": false,
+                        "vi_connection": false,
+                        "guarantee": false,
+                        "equipment": null,
+                        "vehicle_type": "aircraft",
+                        "local_arrival": "2022-11-15T19:30:00.000Z",
+                        "utc_arrival": "2022-11-15T14:00:00.000Z",
+                        "local_departure": "2022-11-15T17:35:00.000Z",
+                        "utc_departure": "2022-11-15T12:05:00.000Z"
+                    },
+                    {
+                        "id": "1981168e4b6f0000bda5eee6_1",
+                        "combination_id": "1981168e4b6f0000bda5eee6",
+                        "flyFrom": "BOM",
+                        "flyTo": "AUH",
+                        "cityFrom": "Mumbai",
+                        "cityCodeFrom": "BOM",
+                        "cityTo": "Abu Dhabi",
+                        "cityCodeTo": "AUH",
+                        "airline": "6E",
+                        "flight_no": 1835,
+                        "operating_carrier": "6E",
+                        "operating_flight_no": "1835",
+                        "fare_basis": "JCINT",
+                        "fare_category": "M",
+                        "fare_classes": "J",
+                        "fare_family": "",
+                        "return": 0,
+                        "bags_recheck_required": false,
+                        "vi_connection": false,
+                        "guarantee": false,
+                        "equipment": null,
+                        "vehicle_type": "aircraft",
+                        "local_arrival": "2022-11-15T23:40:00.000Z",
+                        "utc_arrival": "2022-11-15T19:40:00.000Z",
+                        "local_departure": "2022-11-15T21:40:00.000Z",
+                        "utc_departure": "2022-11-15T16:10:00.000Z"
+                    },
+                    {
+                        "id": "168e1db84b700000d5522d40_0",
+                        "combination_id": "168e1db84b700000d5522d40",
+                        "flyFrom": "AUH",
+                        "flyTo": "SAW",
+                        "cityFrom": "Abu Dhabi",
+                        "cityCodeFrom": "AUH",
+                        "cityTo": "Istanbul",
+                        "cityCodeTo": "IST",
+                        "airline": "PC",
+                        "flight_no": 407,
+                        "operating_carrier": "PC",
+                        "operating_flight_no": "407",
+                        "fare_basis": "PWEB/INT",
+                        "fare_category": "M",
+                        "fare_classes": "P",
+                        "fare_family": "",
+                        "return": 0,
+                        "bags_recheck_required": true,
+                        "vi_connection": true,
+                        "guarantee": true,
+                        "equipment": null,
+                        "vehicle_type": "aircraft",
+                        "local_arrival": "2022-11-16T08:05:00.000Z",
+                        "utc_arrival": "2022-11-16T05:05:00.000Z",
+                        "local_departure": "2022-11-16T04:05:00.000Z",
+                        "utc_departure": "2022-11-16T00:05:00.000Z"
+                    }
+                ],
+                "booking_token": "Ejvh3tjZ0ry1C6M-LtTbWRFkIbUKxlc-jaaKz6VgEDh7rV5yOlKOcOYrNH9WhOoQRXFBI9bZx9HPEOi_Y8XUcp92NkEvpp3UsK_h0I0OHpbybXw3tpeVHg0BUp8hIdvH84eC7DHYKvZHl2OpAi3CcK0sunpiKN77BkSUJ97EScfh-pjcEWCy6D7Jf7nqsQVhtbWexRjMdCwZpSykEl-O6XGe6C34cinyEUNVlkiVx9DUoA_mpDkjzY0ZsNxy0EvJfRMdKGOoosaSqES_Ci_hSe4QWQTnqAj4PAsiIUvB7wSEnWk94oNVN1on6f9uZLmaubp0JYw6WesLJfvza9wxEAJ91PFTJj6qXn51H9XUIQiDQ0CX_Tgoa96375bdJHn1A2_UgRbT8FOatsze4aBoQf61MoAyAIRBFUw9byGkx24lSdv9-wWimLWN_Zy-vG5vcFxFSZlkYuZ1ET5qev-lp0l1Ba0NeVuugGBNNTKdL4bcl7Y_4d8Fm3-pWUx05dh8B",
+                "deep_link": "https://www.kiwi.com/deep?affilid=nicozeroflightsearch&currency=IDR&flightsId=1981168e4b6f0000bda5eee6_0%7C1981168e4b6f0000bda5eee6_1%7C168e1db84b700000d5522d40_0&from=RPR&lang=en&passengers=1&to=SAW&booking_token=Ejvh3tjZ0ry1C6M-LtTbWRFkIbUKxlc-jaaKz6VgEDh7rV5yOlKOcOYrNH9WhOoQRXFBI9bZx9HPEOi_Y8XUcp92NkEvpp3UsK_h0I0OHpbybXw3tpeVHg0BUp8hIdvH84eC7DHYKvZHl2OpAi3CcK0sunpiKN77BkSUJ97EScfh-pjcEWCy6D7Jf7nqsQVhtbWexRjMdCwZpSykEl-O6XGe6C34cinyEUNVlkiVx9DUoA_mpDkjzY0ZsNxy0EvJfRMdKGOoosaSqES_Ci_hSe4QWQTnqAj4PAsiIUvB7wSEnWk94oNVN1on6f9uZLmaubp0JYw6WesLJfvza9wxEAJ91PFTJj6qXn51H9XUIQiDQ0CX_Tgoa96375bdJHn1A2_UgRbT8FOatsze4aBoQf61MoAyAIRBFUw9byGkx24lSdv9-wWimLWN_Zy-vG5vcFxFSZlkYuZ1ET5qev-lp0l1Ba0NeVuugGBNNTKdL4bcl7Y_4d8Fm3-pWUx05dh8B",
+                "facilitated_booking_available": true,
+                "pnr_count": 2,
+                "has_airport_change": false,
+                "technical_stops": 0,
+                "throw_away_ticketing": false,
+                "hidden_city_ticketing": false,
+                "virtual_interlining": true,
+                "local_arrival": "2022-11-16T08:05:00.000Z",
+                "utc_arrival": "2022-11-16T05:05:00.000Z",
+                "local_departure": "2022-11-15T17:35:00.000Z",
+                "utc_departure": "2022-11-15T12:05:00.000Z"
+            }
+        ],
+        "_results": 22,
+        "search_params": {
+            "flyFrom_type": "airport",
+            "to_type": "airport",
+            "seats": {
+                "passengers": 1,
+                "adults": 1,
+                "children": 0,
+                "infants": 0
+            }
+        },
+        "all_stopover_airports": [],
+        "sort_version": 0
+    },
+    {
+        "search_id": "875fe0b1-415f-1b48-15de-fc920efad537",
+        "currency": "IDR",
+        "fx_rate": 16073.43262,
+        "data": [
+            {
+                "id": "198107114b6f0000d0aefe43_0|071110ff4b6f00004f82fb1d_0|071110ff4b6f00004f82fb1d_1",
+                "flyFrom": "RPR",
+                "flyTo": "KUL",
+                "cityFrom": "Raipur",
+                "cityCodeFrom": "RPR",
+                "cityTo": "Kuala Lumpur",
+                "cityCodeTo": "KUL",
+                "countryFrom": {
+                    "code": "IN",
+                    "name": "India"
+                },
+                "countryTo": {
+                    "code": "MY",
+                    "name": "Malaysia"
+                },
+                "nightsInDest": null,
+                "quality": 365.348067,
+                "distance": 2982.39,
+                "duration": {
+                    "departure": 57900,
+                    "return": 0,
+                    "total": 57900
+                },
+                "price": 3611407.0017,
+                "conversion": {
+                    "EUR": 224.681752,
+                    "IDR": 3611407.0017
+                },
+                "fare": {
+                    "adults": 3611407,
+                    "children": 3611407,
+                    "infants": 3611407
+                },
+                "bags_price": {
+                    "1": 68.528
+                },
+                "baglimit": {
+                    "hand_height": 36,
+                    "hand_length": 56,
+                    "hand_weight": 7,
+                    "hand_width": 23,
+                    "hold_dimensions_sum": 158,
+                    "hold_height": 52,
+                    "hold_length": 78,
+                    "hold_weight": 15,
+                    "hold_width": 28
+                },
+                "availability": {
+                    "seats": 4
+                },
+                "airlines": [
+                    "6E",
+                    "VJ"
+                ],
+                "route": [
+                    {
+                        "id": "198107114b6f0000d0aefe43_0",
+                        "combination_id": "198107114b6f0000d0aefe43",
+                        "flyFrom": "RPR",
+                        "flyTo": "DEL",
+                        "cityFrom": "Raipur",
+                        "cityCodeFrom": "RPR",
+                        "cityTo": "New Delhi",
+                        "cityCodeTo": "DEL",
+                        "airline": "6E",
+                        "flight_no": 5344,
+                        "operating_carrier": "6E",
+                        "operating_flight_no": "5344",
+                        "fare_basis": "L0IP",
+                        "fare_category": "M",
+                        "fare_classes": "L",
+                        "fare_family": "",
+                        "return": 0,
+                        "bags_recheck_required": false,
+                        "vi_connection": false,
+                        "guarantee": false,
+                        "equipment": null,
+                        "vehicle_type": "aircraft",
+                        "local_arrival": "2022-11-15T20:10:00.000Z",
+                        "utc_arrival": "2022-11-15T14:40:00.000Z",
+                        "local_departure": "2022-11-15T18:00:00.000Z",
+                        "utc_departure": "2022-11-15T12:30:00.000Z"
+                    },
+                    {
+                        "id": "071110ff4b6f00004f82fb1d_0",
+                        "combination_id": "071110ff4b6f00004f82fb1d",
+                        "flyFrom": "DEL",
+                        "flyTo": "SGN",
+                        "cityFrom": "New Delhi",
+                        "cityCodeFrom": "DEL",
+                        "cityTo": "Ho Chi Minh City",
+                        "cityCodeTo": "SGN",
+                        "airline": "VJ",
+                        "flight_no": 896,
+                        "operating_carrier": "VJ",
+                        "operating_flight_no": "896",
+                        "fare_basis": "",
+                        "fare_category": "M",
+                        "fare_classes": "Z",
+                        "fare_family": "",
+                        "return": 0,
+                        "bags_recheck_required": true,
+                        "vi_connection": true,
+                        "guarantee": true,
+                        "equipment": null,
+                        "vehicle_type": "aircraft",
+                        "local_arrival": "2022-11-16T04:40:00.000Z",
+                        "utc_arrival": "2022-11-15T21:40:00.000Z",
+                        "local_departure": "2022-11-15T22:20:00.000Z",
+                        "utc_departure": "2022-11-15T16:50:00.000Z"
+                    },
+                    {
+                        "id": "071110ff4b6f00004f82fb1d_1",
+                        "combination_id": "071110ff4b6f00004f82fb1d",
+                        "flyFrom": "SGN",
+                        "flyTo": "KUL",
+                        "cityFrom": "Ho Chi Minh City",
+                        "cityCodeFrom": "SGN",
+                        "cityTo": "Kuala Lumpur",
+                        "cityCodeTo": "KUL",
+                        "airline": "VJ",
+                        "flight_no": 825,
+                        "operating_carrier": "VJ",
+                        "operating_flight_no": "825",
+                        "fare_basis": "",
+                        "fare_category": "M",
+                        "fare_classes": "Z",
+                        "fare_family": "",
+                        "return": 0,
+                        "bags_recheck_required": false,
+                        "vi_connection": false,
+                        "guarantee": false,
+                        "equipment": null,
+                        "vehicle_type": "aircraft",
+                        "local_arrival": "2022-11-16T12:35:00.000Z",
+                        "utc_arrival": "2022-11-16T04:35:00.000Z",
+                        "local_departure": "2022-11-16T09:40:00.000Z",
+                        "utc_departure": "2022-11-16T02:40:00.000Z"
+                    }
+                ],
+                "booking_token": "EBM4FfefHkmdA6M7mWYE6hmASp5uco99UiO52k07qmIPWUjBP1l5PJhAV7JF_KYjq7TEq9NCkn5BqRGPPQeq2UwN7SkBYn9aMwWmTl19ij9btz_0gb0_swa5vyB-RqwvuVgpice5xP1tx-6qbUAtP586ZyasTRTyY0CickAq1-mGclqjSixuNsaDp9-v3VpYDI1LU7Sdkuc4u_BC2xVciPlLBYl_KCIiSEFXrOrqr_Ug7TxwF9MH43xz_j7MJaXDCZ-Q5PrxYDS6j6IWC9MFdqWQvvvqlIasIqsr3kAxA1z834Pc_Kjnp2oMk021xGfDK_-94ygvsP0yU_l6sBP2zUT8tKcdZiHT8o2rzqBv20pU7bB6LtHL-QG1Putve3zuUhc7hlmdKGWCT4vrOMsN-McHHl9naM0w9RwaFmRFtXJ_sINnnCsWFzUUDxihdupKWxUaYElIdpSfHJR8mfVoqSR3NAdrS4oD5aVccfdY9wkm34LzDDiLsUv4w1gIZT6eDjBlF84Z4IEJhZlLM63Tdhg==",
+                "deep_link": "https://www.kiwi.com/deep?affilid=nicozeroflightsearch&currency=IDR&flightsId=198107114b6f0000d0aefe43_0%7C071110ff4b6f00004f82fb1d_0%7C071110ff4b6f00004f82fb1d_1&from=RPR&lang=en&passengers=1&to=KUL&booking_token=EBM4FfefHkmdA6M7mWYE6hmASp5uco99UiO52k07qmIPWUjBP1l5PJhAV7JF_KYjq7TEq9NCkn5BqRGPPQeq2UwN7SkBYn9aMwWmTl19ij9btz_0gb0_swa5vyB-RqwvuVgpice5xP1tx-6qbUAtP586ZyasTRTyY0CickAq1-mGclqjSixuNsaDp9-v3VpYDI1LU7Sdkuc4u_BC2xVciPlLBYl_KCIiSEFXrOrqr_Ug7TxwF9MH43xz_j7MJaXDCZ-Q5PrxYDS6j6IWC9MFdqWQvvvqlIasIqsr3kAxA1z834Pc_Kjnp2oMk021xGfDK_-94ygvsP0yU_l6sBP2zUT8tKcdZiHT8o2rzqBv20pU7bB6LtHL-QG1Putve3zuUhc7hlmdKGWCT4vrOMsN-McHHl9naM0w9RwaFmRFtXJ_sINnnCsWFzUUDxihdupKWxUaYElIdpSfHJR8mfVoqSR3NAdrS4oD5aVccfdY9wkm34LzDDiLsUv4w1gIZT6eDjBlF84Z4IEJhZlLM63Tdhg==",
+                "facilitated_booking_available": true,
+                "pnr_count": 2,
+                "has_airport_change": false,
+                "technical_stops": 0,
+                "throw_away_ticketing": false,
+                "hidden_city_ticketing": false,
+                "virtual_interlining": true,
+                "local_arrival": "2022-11-16T12:35:00.000Z",
+                "utc_arrival": "2022-11-16T04:35:00.000Z",
+                "local_departure": "2022-11-15T18:00:00.000Z",
+                "utc_departure": "2022-11-15T12:30:00.000Z"
+            }
+        ],
+        "_results": 18,
+        "search_params": {
+            "flyFrom_type": "airport",
+            "to_type": "airport",
+            "seats": {
+                "passengers": 1,
+                "adults": 1,
+                "children": 0,
+                "infants": 0
+            }
+        },
+        "all_stopover_airports": [],
+        "sort_version": 0
+    },
+    {
+        "search_id": "fa601c9d-e940-9394-dcd7-932a9d0ed7d3",
+        "currency": "IDR",
+        "fx_rate": 16073.43262,
+        "data": [
+            {
+                "id": "198107114b6f00006d66fe34_0|071120a14b7000008bf9c043_0|071120a14b7000008bf9c043_1",
+                "flyFrom": "RPR",
+                "flyTo": "JFK",
+                "cityFrom": "Raipur",
+                "cityCodeFrom": "RPR",
+                "cityTo": "New York",
+                "cityCodeTo": "NYC",
+                "countryFrom": {
+                    "code": "IN",
+                    "name": "India"
+                },
+                "countryTo": {
+                    "code": "US",
+                    "name": "United States"
+                },
+                "nightsInDest": null,
+                "quality": 930.532997,
+                "distance": 12703.35,
+                "duration": {
+                    "departure": 100200,
+                    "return": 0,
+                    "total": 100200
+                },
+                "price": 11184970.0029,
+                "conversion": {
+                    "EUR": 695.866917,
+                    "IDR": 11184970.0029
+                },
+                "fare": {
+                    "adults": 11184970,
+                    "children": 11184970,
+                    "infants": 11184970
+                },
+                "bags_price": {
+                    "1": 0
+                },
+                "baglimit": {
+                    "hand_height": 36,
+                    "hand_length": 55,
+                    "hand_weight": 7,
+                    "hand_width": 20,
+                    "hold_dimensions_sum": 158,
+                    "hold_height": 52,
+                    "hold_length": 78,
+                    "hold_weight": 15,
+                    "hold_width": 28,
+                    "personal_item_height": 30,
+                    "personal_item_length": 40,
+                    "personal_item_weight": 3,
+                    "personal_item_width": 15
+                },
+                "availability": {
+                    "seats": 4
+                },
+                "airlines": [
+                    "UK",
+                    "KU"
+                ],
+                "route": [
+                    {
+                        "id": "198107114b6f00006d66fe34_0",
+                        "combination_id": "198107114b6f00006d66fe34",
+                        "flyFrom": "RPR",
+                        "flyTo": "DEL",
+                        "cityFrom": "Raipur",
+                        "cityCodeFrom": "RPR",
+                        "cityTo": "New Delhi",
+                        "cityCodeTo": "DEL",
+                        "airline": "UK",
+                        "flight_no": 798,
+                        "operating_carrier": "UK",
+                        "operating_flight_no": "798",
+                        "fare_basis": "QL1PYS",
+                        "fare_category": "M",
+                        "fare_classes": "Q",
+                        "fare_family": "",
+                        "return": 0,
+                        "bags_recheck_required": false,
+                        "vi_connection": false,
+                        "guarantee": false,
+                        "equipment": null,
+                        "vehicle_type": "aircraft",
+                        "local_arrival": "2022-11-15T22:20:00.000Z",
+                        "utc_arrival": "2022-11-15T16:50:00.000Z",
+                        "local_departure": "2022-11-15T20:15:00.000Z",
+                        "utc_departure": "2022-11-15T14:45:00.000Z"
+                    },
+                    {
+                        "id": "071120a14b7000008bf9c043_0",
+                        "combination_id": "071120a14b7000008bf9c043",
+                        "flyFrom": "DEL",
+                        "flyTo": "KWI",
+                        "cityFrom": "New Delhi",
+                        "cityCodeFrom": "DEL",
+                        "cityTo": "Kuwait City",
+                        "cityCodeTo": "KWI",
+                        "airline": "KU",
+                        "flight_no": 382,
+                        "operating_carrier": "KU",
+                        "operating_flight_no": "382",
+                        "fare_basis": "TPROWIN1",
+                        "fare_category": "M",
+                        "fare_classes": "T",
+                        "fare_family": "",
+                        "return": 0,
+                        "bags_recheck_required": true,
+                        "vi_connection": true,
+                        "guarantee": true,
+                        "equipment": null,
+                        "vehicle_type": "aircraft",
+                        "local_arrival": "2022-11-16T04:50:00.000Z",
+                        "utc_arrival": "2022-11-16T01:50:00.000Z",
+                        "local_departure": "2022-11-16T02:15:00.000Z",
+                        "utc_departure": "2022-11-15T20:45:00.000Z"
+                    },
+                    {
+                        "id": "071120a14b7000008bf9c043_1",
+                        "combination_id": "071120a14b7000008bf9c043",
+                        "flyFrom": "KWI",
+                        "flyTo": "JFK",
+                        "cityFrom": "Kuwait City",
+                        "cityCodeFrom": "KWI",
+                        "cityTo": "New York",
+                        "cityCodeTo": "NYC",
+                        "airline": "KU",
+                        "flight_no": 117,
+                        "operating_carrier": "KU",
+                        "operating_flight_no": "117",
+                        "fare_basis": "TPROWIN1",
+                        "fare_category": "M",
+                        "fare_classes": "T",
+                        "fare_family": "",
+                        "return": 0,
+                        "bags_recheck_required": false,
+                        "vi_connection": false,
+                        "guarantee": false,
+                        "equipment": null,
+                        "vehicle_type": "aircraft",
+                        "local_arrival": "2022-11-16T13:35:00.000Z",
+                        "utc_arrival": "2022-11-16T18:35:00.000Z",
+                        "local_departure": "2022-11-16T08:00:00.000Z",
+                        "utc_departure": "2022-11-16T05:00:00.000Z"
+                    }
+                ],
+                "booking_token": "EobYzoo4ev4LFwJ1wB5Ce4pgVjmf50LGS1f6FMY9qqmwS-RfmMz1hYMryj2CqmW-W8mY8U2J_tlu3xfd04YM7O4B_NgiohXPRRAjyllItCLU6GmT5n-m7ZBkTfwFtha0flyuz8osuZ--jk8OX1QwtyxrNJ8wvnusZF9hBieyXy4umPnW-E-CwseXY-nhYlG7u9-aUGpi8IOOe7vDFr2eYU0LF42vh_v9cNIGjKOzrOwUghoeK-0ImvLLA47QKVtWN8mTz1NtGF-D2IirFqZIkPbOVCrSXoNxGNquXjeTJwMo5bXJ02eQzHfiVQG_CjtJyu94OjiSPYNt0m6Ec_Xss2KnIWbHjYuUwSOsLvv_ZVpfaPKxwQ0KwNzlyiANxMqa-qBaVnDSaCDMZpq31phadeMuyjqXnUsSQ1yc2OntFMmE7QZyPj2HlfcwQZDySx6G45_Ywz588jET8vv65OGkqrNc0naUo6VpIEzLdgMj9hElKOGKfiX4uqQ-2pVslO75WheMQ2ms09yl0kOBq6ihW59j60TqoJ5KgGysJDPqYmUnemPkQNa9MMyryDsEqAGT3zIO_E1OCfSENAGagOBIvDuK6phRyEAFh7pwOUra1idk=",
+                "deep_link": "https://www.kiwi.com/deep?affilid=nicozeroflightsearch&currency=IDR&flightsId=198107114b6f00006d66fe34_0%7C071120a14b7000008bf9c043_0%7C071120a14b7000008bf9c043_1&from=RPR&lang=en&passengers=1&to=JFK&booking_token=EobYzoo4ev4LFwJ1wB5Ce4pgVjmf50LGS1f6FMY9qqmwS-RfmMz1hYMryj2CqmW-W8mY8U2J_tlu3xfd04YM7O4B_NgiohXPRRAjyllItCLU6GmT5n-m7ZBkTfwFtha0flyuz8osuZ--jk8OX1QwtyxrNJ8wvnusZF9hBieyXy4umPnW-E-CwseXY-nhYlG7u9-aUGpi8IOOe7vDFr2eYU0LF42vh_v9cNIGjKOzrOwUghoeK-0ImvLLA47QKVtWN8mTz1NtGF-D2IirFqZIkPbOVCrSXoNxGNquXjeTJwMo5bXJ02eQzHfiVQG_CjtJyu94OjiSPYNt0m6Ec_Xss2KnIWbHjYuUwSOsLvv_ZVpfaPKxwQ0KwNzlyiANxMqa-qBaVnDSaCDMZpq31phadeMuyjqXnUsSQ1yc2OntFMmE7QZyPj2HlfcwQZDySx6G45_Ywz588jET8vv65OGkqrNc0naUo6VpIEzLdgMj9hElKOGKfiX4uqQ-2pVslO75WheMQ2ms09yl0kOBq6ihW59j60TqoJ5KgGysJDPqYmUnemPkQNa9MMyryDsEqAGT3zIO_E1OCfSENAGagOBIvDuK6phRyEAFh7pwOUra1idk=",
+                "facilitated_booking_available": true,
+                "pnr_count": 2,
+                "has_airport_change": false,
+                "technical_stops": 0,
+                "throw_away_ticketing": false,
+                "hidden_city_ticketing": false,
+                "virtual_interlining": true,
+                "local_arrival": "2022-11-16T13:35:00.000Z",
+                "utc_arrival": "2022-11-16T18:35:00.000Z",
+                "local_departure": "2022-11-15T20:15:00.000Z",
+                "utc_departure": "2022-11-15T14:45:00.000Z"
+            }
+        ],
+        "_results": 23,
+        "search_params": {
+            "flyFrom_type": "airport",
+            "to_type": "airport",
+            "seats": {
+                "passengers": 1,
+                "adults": 1,
+                "children": 0,
+                "infants": 0
+            }
+        },
+        "all_stopover_airports": [],
+        "sort_version": 0
+    },
+    {
+        "search_id": "03a05eef-ea85-a0e0-8629-d55dac518958",
+        "currency": "IDR",
+        "fx_rate": 16073.43262,
+        "data": [
+            {
+                "id": "198107564b6f00000312af50_0|198107564b6f00000312af50_1|07560f9c4b70000053aec4cf_0|07560f9c4b70000053aec4cf_1",
+                "flyFrom": "RPR",
+                "flyTo": "SFO",
+                "cityFrom": "Raipur",
+                "cityCodeFrom": "RPR",
+                "cityTo": "San Francisco",
+                "cityCodeTo": "SFO",
+                "countryFrom": {
+                    "code": "IN",
+                    "name": "India"
+                },
+                "countryTo": {
+                    "code": "US",
+                    "name": "United States"
+                },
+                "nightsInDest": null,
+                "quality": 1136.848354,
+                "distance": 13020.59,
+                "duration": {
+                    "departure": 183900,
+                    "return": 0,
+                    "total": 183900
+                },
+                "price": 11511514.9989,
+                "conversion": {
+                    "EUR": 716.182739,
+                    "IDR": 11511514.9989
+                },
+                "fare": {
+                    "adults": 11511515,
+                    "children": 11511515,
+                    "infants": 11511515
+                },
+                "bags_price": {
+                    "1": 0
+                },
+                "baglimit": {
+                    "hand_height": 35,
+                    "hand_length": 55,
+                    "hand_weight": 7,
+                    "hand_width": 25,
+                    "hold_dimensions_sum": 158,
+                    "hold_height": 52,
+                    "hold_length": 78,
+                    "hold_weight": 15,
+                    "hold_width": 28
+                },
+                "availability": {
+                    "seats": null
+                },
+                "airlines": [
+                    "KE",
+                    "6E"
+                ],
+                "route": [
+                    {
+                        "id": "198107564b6f00000312af50_0",
+                        "combination_id": "198107564b6f00000312af50",
+                        "flyFrom": "RPR",
+                        "flyTo": "BLR",
+                        "cityFrom": "Raipur",
+                        "cityCodeFrom": "RPR",
+                        "cityTo": "Bengaluru",
+                        "cityCodeTo": "BLR",
+                        "airline": "6E",
+                        "flight_no": 979,
+                        "operating_carrier": "6E",
+                        "operating_flight_no": "979",
+                        "fare_basis": "JCINT",
+                        "fare_category": "M",
+                        "fare_classes": "J",
+                        "fare_family": "",
+                        "return": 0,
+                        "bags_recheck_required": false,
+                        "vi_connection": false,
+                        "guarantee": false,
+                        "equipment": null,
+                        "vehicle_type": "aircraft",
+                        "local_arrival": "2022-11-15T22:00:00.000Z",
+                        "utc_arrival": "2022-11-15T16:30:00.000Z",
+                        "local_departure": "2022-11-15T19:50:00.000Z",
+                        "utc_departure": "2022-11-15T14:20:00.000Z"
+                    },
+                    {
+                        "id": "198107564b6f00000312af50_1",
+                        "combination_id": "198107564b6f00000312af50",
+                        "flyFrom": "BLR",
+                        "flyTo": "BKK",
+                        "cityFrom": "Bengaluru",
+                        "cityCodeFrom": "BLR",
+                        "cityTo": "Bangkok",
+                        "cityCodeTo": "BKK",
+                        "airline": "6E",
+                        "flight_no": 75,
+                        "operating_carrier": "6E",
+                        "operating_flight_no": "75",
+                        "fare_basis": "JCINT",
+                        "fare_category": "M",
+                        "fare_classes": "J",
+                        "fare_family": "",
+                        "return": 0,
+                        "bags_recheck_required": false,
+                        "vi_connection": false,
+                        "guarantee": false,
+                        "equipment": null,
+                        "vehicle_type": "aircraft",
+                        "local_arrival": "2022-11-16T12:05:00.000Z",
+                        "utc_arrival": "2022-11-16T05:05:00.000Z",
+                        "local_departure": "2022-11-16T06:30:00.000Z",
+                        "utc_departure": "2022-11-16T01:00:00.000Z"
+                    },
+                    {
+                        "id": "07560f9c4b70000053aec4cf_0",
+                        "combination_id": "07560f9c4b70000053aec4cf",
+                        "flyFrom": "BKK",
+                        "flyTo": "ICN",
+                        "cityFrom": "Bangkok",
+                        "cityCodeFrom": "BKK",
+                        "cityTo": "Seoul",
+                        "cityCodeTo": "SEL",
+                        "airline": "KE",
+                        "flight_no": 652,
+                        "operating_carrier": "KE",
+                        "operating_flight_no": "652",
+                        "fare_basis": "QLE00AYK",
+                        "fare_category": "M",
+                        "fare_classes": "Q",
+                        "fare_family": "",
+                        "return": 0,
+                        "bags_recheck_required": true,
+                        "vi_connection": true,
+                        "guarantee": true,
+                        "equipment": null,
+                        "vehicle_type": "aircraft",
+                        "local_arrival": "2022-11-17T06:40:00.000Z",
+                        "utc_arrival": "2022-11-16T21:40:00.000Z",
+                        "local_departure": "2022-11-16T23:15:00.000Z",
+                        "utc_departure": "2022-11-16T16:15:00.000Z"
+                    },
+                    {
+                        "id": "07560f9c4b70000053aec4cf_1",
+                        "combination_id": "07560f9c4b70000053aec4cf",
+                        "flyFrom": "ICN",
+                        "flyTo": "SFO",
+                        "cityFrom": "Seoul",
+                        "cityCodeFrom": "SEL",
+                        "cityTo": "San Francisco",
+                        "cityCodeTo": "SFO",
+                        "airline": "KE",
+                        "flight_no": 23,
+                        "operating_carrier": "KE",
+                        "operating_flight_no": "23",
+                        "fare_basis": "QLE00AYK",
+                        "fare_category": "M",
+                        "fare_classes": "Q",
+                        "fare_family": "",
+                        "return": 0,
+                        "bags_recheck_required": false,
+                        "vi_connection": false,
+                        "guarantee": false,
+                        "equipment": null,
+                        "vehicle_type": "aircraft",
+                        "local_arrival": "2022-11-17T09:25:00.000Z",
+                        "utc_arrival": "2022-11-17T17:25:00.000Z",
+                        "local_departure": "2022-11-17T16:00:00.000Z",
+                        "utc_departure": "2022-11-17T07:00:00.000Z"
+                    }
+                ],
+                "booking_token": "Eh09uqGhp89mlyMdFh3qLjdtmQukQfsFYBLwDmQiSU2tYAfBItuileH6tU5-WBlLhMF5uljGrKswfuUPDFjwcRbZemp3uZhVhGmTGhFVODEPIPY7Sp5yxBCFqcRNVOTdwEs4Ri_oRb24SEqFysKCwMtiAWuoryVr5yCVdu4YgaEDTr_oAsEW8dtpTGfG1c2xS1ejoXixIqnZ6pu6ZCzYczdAtBbtdyhoATVDTzg1EE3sOMBZ4PNHeuxVU8T8LOaWMKWLEcSvATgLX1uWQDTDIAERUJKEYHwWGUisINbgUZStuUmTxeRHCSb9JL25JxSAbLGesHt_JN37iaVNwbZoTamiSXz38r2Lx7Nq8_IMrZHOmw2CJcvAQGUXAK2mU4fQ6e-sguItO1Xp_yYoS3M0Y8iFDDQhfank5Sm_bEe7SUK1Ctkeu84nI12gg7cECpVg8JI5l0xZwRUCb93teKbHFWYyX8KTGwn-DqseCUxnVGHFyDQk_ru-9v-OxdB_CLfCxqDTcj-j-9zgvROWgyWZ1VaSuZoXjGCsa3OYfWIWLINvfsORd7lXOq6boC3uDOq5WLaKBk7CygA_xbLgEVZKf_y7eXiManymt5e4DBcjyz2g=",
+                "deep_link": "https://www.kiwi.com/deep?affilid=nicozeroflightsearch&currency=IDR&flightsId=198107564b6f00000312af50_0%7C198107564b6f00000312af50_1%7C07560f9c4b70000053aec4cf_0%7C07560f9c4b70000053aec4cf_1&from=RPR&lang=en&passengers=1&to=SFO&booking_token=Eh09uqGhp89mlyMdFh3qLjdtmQukQfsFYBLwDmQiSU2tYAfBItuileH6tU5-WBlLhMF5uljGrKswfuUPDFjwcRbZemp3uZhVhGmTGhFVODEPIPY7Sp5yxBCFqcRNVOTdwEs4Ri_oRb24SEqFysKCwMtiAWuoryVr5yCVdu4YgaEDTr_oAsEW8dtpTGfG1c2xS1ejoXixIqnZ6pu6ZCzYczdAtBbtdyhoATVDTzg1EE3sOMBZ4PNHeuxVU8T8LOaWMKWLEcSvATgLX1uWQDTDIAERUJKEYHwWGUisINbgUZStuUmTxeRHCSb9JL25JxSAbLGesHt_JN37iaVNwbZoTamiSXz38r2Lx7Nq8_IMrZHOmw2CJcvAQGUXAK2mU4fQ6e-sguItO1Xp_yYoS3M0Y8iFDDQhfank5Sm_bEe7SUK1Ctkeu84nI12gg7cECpVg8JI5l0xZwRUCb93teKbHFWYyX8KTGwn-DqseCUxnVGHFyDQk_ru-9v-OxdB_CLfCxqDTcj-j-9zgvROWgyWZ1VaSuZoXjGCsa3OYfWIWLINvfsORd7lXOq6boC3uDOq5WLaKBk7CygA_xbLgEVZKf_y7eXiManymt5e4DBcjyz2g=",
+                "facilitated_booking_available": true,
+                "pnr_count": 2,
+                "has_airport_change": false,
+                "technical_stops": 0,
+                "throw_away_ticketing": false,
+                "hidden_city_ticketing": false,
+                "virtual_interlining": true,
+                "local_arrival": "2022-11-17T09:25:00.000Z",
+                "utc_arrival": "2022-11-17T17:25:00.000Z",
+                "local_departure": "2022-11-15T19:50:00.000Z",
+                "utc_departure": "2022-11-15T14:20:00.000Z"
+            }
+        ],
+        "_results": 22,
+        "search_params": {
+            "flyFrom_type": "airport",
+            "to_type": "airport",
+            "seats": {
+                "passengers": 1,
+                "adults": 1,
+                "children": 0,
+                "infants": 0
+            }
+        },
+        "all_stopover_airports": [],
+        "sort_version": 0
+    },
+    {
+        "search_id": "d5f924b5-4316-b251-439f-6f72eaf1875c",
+        "currency": "IDR",
+        "fx_rate": 16073.43262,
+        "data": [
+            {
+                "id": "198104914b6f000046e61bbb_0|049107c74b700000f5de3b9b_0|049107c74b700000f5de3b9b_1",
+                "flyFrom": "RPR",
+                "flyTo": "CPT",
+                "cityFrom": "Raipur",
+                "cityCodeFrom": "RPR",
+                "cityTo": "Cape Town",
+                "cityCodeTo": "CPT",
+                "countryFrom": {
+                    "code": "IN",
+                    "name": "India"
+                },
+                "countryTo": {
+                    "code": "ZA",
+                    "name": "South Africa"
+                },
+                "nightsInDest": null,
+                "quality": 915.597321,
+                "distance": 9073.75,
+                "duration": {
+                    "departure": 158400,
+                    "return": 0,
+                    "total": 158400
+                },
+                "price": 8866076.9993,
+                "conversion": {
+                    "EUR": 551.598231,
+                    "IDR": 8866076.9993
+                },
+                "fare": {
+                    "adults": 8866077,
+                    "children": 8866077,
+                    "infants": 8866077
+                },
+                "bags_price": {
+                    "1": 0
+                },
+                "baglimit": {
+                    "hand_height": 38,
+                    "hand_length": 55,
+                    "hand_weight": 7,
+                    "hand_width": 22,
+                    "hold_dimensions_sum": 158,
+                    "hold_height": 52,
+                    "hold_length": 78,
+                    "hold_weight": 15,
+                    "hold_width": 28
+                },
+                "availability": {
+                    "seats": null
+                },
+                "airlines": [
+                    "ET",
+                    "6E"
+                ],
+                "route": [
+                    {
+                        "id": "198104914b6f000046e61bbb_0",
+                        "combination_id": "198104914b6f000046e61bbb",
+                        "flyFrom": "RPR",
+                        "flyTo": "BOM",
+                        "cityFrom": "Raipur",
+                        "cityCodeFrom": "RPR",
+                        "cityTo": "Mumbai",
+                        "cityCodeTo": "BOM",
+                        "airline": "6E",
+                        "flight_no": 5249,
+                        "operating_carrier": "",
+                        "operating_flight_no": "",
+                        "fare_basis": "L0IP",
+                        "fare_category": "M",
+                        "fare_classes": "L",
+                        "fare_family": "",
+                        "return": 0,
+                        "bags_recheck_required": false,
+                        "vi_connection": false,
+                        "guarantee": false,
+                        "equipment": null,
+                        "vehicle_type": "aircraft",
+                        "local_arrival": "2022-11-15T23:25:00.000Z",
+                        "utc_arrival": "2022-11-15T17:55:00.000Z",
+                        "local_departure": "2022-11-15T21:15:00.000Z",
+                        "utc_departure": "2022-11-15T15:45:00.000Z"
+                    },
+                    {
+                        "id": "049107c74b700000f5de3b9b_0",
+                        "combination_id": "049107c74b700000f5de3b9b",
+                        "flyFrom": "BOM",
+                        "flyTo": "ADD",
+                        "cityFrom": "Mumbai",
+                        "cityCodeFrom": "BOM",
+                        "cityTo": "Addis Ababa",
+                        "cityCodeTo": "ADD",
+                        "airline": "ET",
+                        "flight_no": 641,
+                        "operating_carrier": "ET",
+                        "operating_flight_no": "641",
+                        "fare_basis": "QDOWINA/WEB",
+                        "fare_category": "M",
+                        "fare_classes": "Q",
+                        "fare_family": "",
+                        "return": 0,
+                        "bags_recheck_required": true,
+                        "vi_connection": true,
+                        "guarantee": true,
+                        "equipment": null,
+                        "vehicle_type": "aircraft",
+                        "local_arrival": "2022-11-16T14:35:00.000Z",
+                        "utc_arrival": "2022-11-16T11:35:00.000Z",
+                        "local_departure": "2022-11-16T11:40:00.000Z",
+                        "utc_departure": "2022-11-16T06:10:00.000Z"
+                    },
+                    {
+                        "id": "049107c74b700000f5de3b9b_1",
+                        "combination_id": "049107c74b700000f5de3b9b",
+                        "flyFrom": "ADD",
+                        "flyTo": "CPT",
+                        "cityFrom": "Addis Ababa",
+                        "cityCodeFrom": "ADD",
+                        "cityTo": "Cape Town",
+                        "cityCodeTo": "CPT",
+                        "airline": "ET",
+                        "flight_no": 847,
+                        "operating_carrier": "ET",
+                        "operating_flight_no": "847",
+                        "fare_basis": "QDOWINA/WEB",
+                        "fare_category": "M",
+                        "fare_classes": "Q",
+                        "fare_family": "",
+                        "return": 0,
+                        "bags_recheck_required": false,
+                        "vi_connection": false,
+                        "guarantee": false,
+                        "equipment": null,
+                        "vehicle_type": "aircraft",
+                        "local_arrival": "2022-11-17T13:45:00.000Z",
+                        "utc_arrival": "2022-11-17T11:45:00.000Z",
+                        "local_departure": "2022-11-17T08:15:00.000Z",
+                        "utc_departure": "2022-11-17T05:15:00.000Z"
+                    }
+                ],
+                "booking_token": "Ea9F7OdokU5AB7TGOShZmiu9k0VZ956KVlNFxpVCaDYFFQwM9KylIy6m1V3pW8CNgLtrwMWZ-6rijan1jtCBklRGXnZLI0Tarx08NQ9Gx6HLIckIYKmoDgXAQFTJIPIhXVa2MlokN659yRVF8TR4h_as1zaiyaDqe-SSBaDW_XV-mSx6UNVohxuq4De3BuDYcuwlwGxky46iSnIHp-zBiJaDzlw5bnOV1EYa9TKc280-dbNysbxnWoyax1VfJgRuYCyGfF-2j4vOVZhpFpu6L14H_lk-M2SFiwBIQHuykUTMQ3G1a9HmXNWkR2FPwmOsFz69koqHd7XsOmYqi9p9ScXPTbBqRg76VPesG6SW-YcO4t1QzpC8WbvjyGBSURBlwXmB5FERO4Ydq15ZfpOTQHNF1usg5pvYvWRM6QsrIb3glfp61KznLuVZ3FvLidpIHvXwsB7W0-RAFesV2zhpn2Y1fIVlf0oD6qN0tpnJPmfCuMoGsfCWmVWKzVhW8XcaJvgRlh2dvDjfhxbs1VT7M5fUUcqjqiEi0YbZsbhmL9fLQ8GQOoGBVvGS11aNvaWBd",
+                "deep_link": "https://www.kiwi.com/deep?affilid=nicozeroflightsearch&currency=IDR&flightsId=198104914b6f000046e61bbb_0%7C049107c74b700000f5de3b9b_0%7C049107c74b700000f5de3b9b_1&from=RPR&lang=en&passengers=1&to=CPT&booking_token=Ea9F7OdokU5AB7TGOShZmiu9k0VZ956KVlNFxpVCaDYFFQwM9KylIy6m1V3pW8CNgLtrwMWZ-6rijan1jtCBklRGXnZLI0Tarx08NQ9Gx6HLIckIYKmoDgXAQFTJIPIhXVa2MlokN659yRVF8TR4h_as1zaiyaDqe-SSBaDW_XV-mSx6UNVohxuq4De3BuDYcuwlwGxky46iSnIHp-zBiJaDzlw5bnOV1EYa9TKc280-dbNysbxnWoyax1VfJgRuYCyGfF-2j4vOVZhpFpu6L14H_lk-M2SFiwBIQHuykUTMQ3G1a9HmXNWkR2FPwmOsFz69koqHd7XsOmYqi9p9ScXPTbBqRg76VPesG6SW-YcO4t1QzpC8WbvjyGBSURBlwXmB5FERO4Ydq15ZfpOTQHNF1usg5pvYvWRM6QsrIb3glfp61KznLuVZ3FvLidpIHvXwsB7W0-RAFesV2zhpn2Y1fIVlf0oD6qN0tpnJPmfCuMoGsfCWmVWKzVhW8XcaJvgRlh2dvDjfhxbs1VT7M5fUUcqjqiEi0YbZsbhmL9fLQ8GQOoGBVvGS11aNvaWBd",
+                "facilitated_booking_available": true,
+                "pnr_count": 2,
+                "has_airport_change": false,
+                "technical_stops": 0,
+                "throw_away_ticketing": false,
+                "hidden_city_ticketing": false,
+                "virtual_interlining": true,
+                "local_arrival": "2022-11-17T13:45:00.000Z",
+                "utc_arrival": "2022-11-17T11:45:00.000Z",
+                "local_departure": "2022-11-15T21:15:00.000Z",
+                "utc_departure": "2022-11-15T15:45:00.000Z"
+            }
+        ],
+        "_results": 17,
+        "search_params": {
+            "flyFrom_type": "airport",
+            "to_type": "airport",
+            "seats": {
+                "passengers": 1,
+                "adults": 1,
+                "children": 0,
+                "infants": 0
+            }
+        },
+        "all_stopover_airports": [],
+        "sort_version": 0
+    }
+]

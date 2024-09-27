@@ -1,0 +1,10 @@
+
+@font-face {
+    font-family: 'rienenfonte_2_fjj7rregular';
+    src: url('rienenfonte2_fjj7r-regular-webfont.woff2') format('woff2'),
+         url('rienenfonte2_fjj7r-regular-webfont.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+

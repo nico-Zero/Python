@@ -1,0 +1,45 @@
+{% extends "index.html" %} {% block header-image %}'../static/assets/img/login-bg.jpg'{% endblock header-image %}
+
+<!-- Page Header -->
+{% block header %}
+<div class="container position-relative px-4 px-lg-5">
+	<div class="row gx-4 gx-lg-5 justify-content-center">
+		<div class="col-md-10 col-lg-8 col-xl-7">
+			<div class="page-heading">
+				<h1>Log In</h1>
+				<span class="subheading">Welcome to Blogger</span>
+			</div>
+		</div>
+	</div>
+</div>
+{% endblock header %}
+
+<!--Main Content-->
+{% block content %}
+<main class="mb-4">
+	<div class="container">
+		<div class="row">
+			<div class="col-lg-8 col-md-10 mx-auto">
+				<div>
+					<form action="" method="POST">
+						{% csrf_token %}
+						{{login_form.as_p}}
+						<input type="submit" value="Login" />
+					</form>
+	
+					<p>Haven't signed up yet</p>
+	
+					<div class="d-flex justify-content-end mb-4">
+						<a
+							class="btn btn-primary float-right"
+							href="{% url 'main:register' %}"
+							>Signup</a
+						>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</main>
+
+{% endblock content %}

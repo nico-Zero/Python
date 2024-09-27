@@ -1,0 +1,77 @@
+{% extends "base.html" %} {% load crispy_forms_tags %} {% load static %} 
+{% block scripts %}
+<script src="{%static 'sales/home.js' %}" defer></script>
+{% endblock scripts %} {% block title %} Home {% endblock title %} 
+{% block content %}
+
+<div
+	class="modal fade"
+	id="reportModal"
+	tabindex="-1"
+	aria-labelledby="exampleModalLabel"
+	aria-hidden="true"
+>
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title" id="exampleModalLabel">
+					Add Report
+				</h5>
+				<button
+					type="button"
+					class="btn-close"
+					data-bs-dismiss="modal"
+					aria-label="Close"
+				></button>
+			</div>
+			<div class="modal-body" id="modal-body">
+				<dir id="alert-box" class="p-0"></dir>
+				<form id="report-form" action="">
+					{% csrf_token %} {{report_form|crispy}}
+					<button type="submit" class="btn btn-info mt-2">
+						save
+					</button>
+				</form>
+			</div>
+		</div>
+	</div>
+</div>
+
+{% if no_data %}
+<div class="alert alert-warning" role="alert">{{no_data}}</div>
+{% endif %}
+
+<form action="" method="POST">
+	{% csrf_token %} {{search_form|crispy}}
+	<button type="submit" class="btn btn-primary mt-3">search</button>
+</form>
+
+{% if sales_df %}
+<br />
+<h1>Sales</h1>
+{{sales_df|safe}}
+
+<br />
+<h1>Position</h1>
+{{positions_df|safe}}
+
+<br />
+<h1>Mearged</h1>
+{{manged_df|safe}}
+
+<br />
+<img src="data:image/png;base64, {{chart|safe}}" alt="No Image" id="img" />
+
+{% endif %}
+
+<br />
+<button
+	class="not-visible btn btn-primary"
+	id="report-btn"
+	data-bs-toggle="modal"
+	data-bs-target="#reportModal"
+>
+	Add Report
+</button>
+
+{% endblock content %}

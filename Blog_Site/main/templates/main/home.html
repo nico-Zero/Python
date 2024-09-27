@@ -1,0 +1,110 @@
+{% extends "index.html" %} 
+{% load static %}
+
+{% block header-image %} '../static/assets/img/home-bg.jpg' {% endblock header-image %}
+
+{% block header %}
+	<div class="container position-relative px-4 px-lg-5">
+		<div class="row gx-4 gx-lg-5 justify-content-center">
+			<div class="col-md-10 col-lg-8 col-xl-7">
+				<div class="site-heading">
+					<h1>{{user.username | capfirst}}'s Blog</h1>
+					<span class="subheading"
+						>Behold! Here lies the collection of my blogs!</span
+					>
+				</div>
+			</div>
+		</div>
+	</div>
+{% endblock header %} 
+
+{% block content %}
+<div class="container px-4 px-lg-5">
+	<div class="d-flex justify-content-end">
+		<form method="POST">
+			{% csrf_token %}
+			{{search_form.media}}
+			{{search_form.as_p}}
+			<input type="hidden">
+		</form>
+	</div>
+	<div class="row gx-4 gx-lg-5 justify-content-center">
+		<div class="col-md-10 col-lg-8 col-xl-7">
+			<!-- Blog preview-->
+			{% if posts %}
+			{% for post in posts %}
+
+			<div class="container">
+				<div class="row">
+					<div class="col-md-10">
+						<div class="row">
+							<div class="col-md-12">
+								<div class="post-preview">
+									<a href="{% url 'main:show_post' pk=post.id %}">
+										<h2 class="post-title">{{ post.title | capfirst}}</h2>
+										<h3 class="post-subtitle">{{ post.subtitle }}</h3>
+									</a>
+									<p class="post-meta">
+										Posted by
+										<!-- post.author.name is now a User object -->
+										<a href="{% url 'main:profile' post.author.user.pk %}">{{post.author.user.username}}</a>
+										on {{post.created}}
+										<!-- Only show delete button if user id is 1 (admin user) -->
+										{% if post.author.user == user %}
+										<a href="{% url 'main:delete_post' post.pk %}">✘</a>
+										{% endif %}
+									</p>
+								</div>
+								<!-- Divider-->
+								<hr class="my-4" />
+							</div>
+						</div>
+					</div>
+				    <div class="col-md-1">
+					    <div class="row">
+					        <div class="col-md-12 ">
+								<form method="POST">
+									{% csrf_token %}
+									<input type="hidden" name="like" value="{{post.pk}}">
+									{% if post in liked_post_list %}
+									<input type="image" src="{% static "/assets/like_dislike_24/png/red_like.png" %}" alt="Submit">
+									{% else %}
+									<input type="image" src="{% static "/assets/like_dislike_24/png/black_like.png" %}" alt="Submit">
+									{% endif %}
+								</form>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-md-12 ">
+								<form method="POST">
+									{% csrf_token %}
+									<input type="hidden" name="dislike" value="{{post.pk}}">
+									{% if post in disliked_post_list  %}
+									<input type="image" src="{% static "/assets/like_dislike_24/png/blue_dislike.png" %}" alt="Submit">
+									{% else %}
+									<input type="image" src="{% static "/assets/like_dislike_24/png/black_dislike.png" %}" alt="Submit">
+									{% endif %}
+								</form>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			{% endfor %}
+			{% else %}
+			<div class="post-preview">
+				<h2>No Blogs...</h2>
+			</div>
+			{% endif %}
+			<!-- New Blog -->
+			<div class="d-flex justify-content-end mb-4">
+				<a
+					class="btn btn-primary float-right"
+					href="{% url 'main:create_post' %}"
+					>Create New Blog</a
+				>
+			</div>
+		</div>
+	</div>
+</div>
+{% endblock content %}

@@ -1,0 +1,90 @@
+#:kivy 2.1.0
+
+ScrollViewExample:
+
+<PageLayoutExample@PageLayout>:
+    MainWidget:
+    BoxLayoutExample:
+    AnchorLayoutExample:
+    GridLayoutExample:
+    ScrollViewExample:
+
+<ScrollViewExample@ScrollView>:
+    StackLayoutExample:
+        size_hint:1,None
+        height: self.minimum_height
+
+
+<StackLayoutExample>:
+#    #left-right = lr, right-left = rl, top-bottom = tb, bottom-top = bt
+#    orientation:"lr-tb"
+#
+#    #left - - -
+#    padding: ('20dp', '20dp', '20dp', '20dp')
+#    spacing: "5dp", "10dp"
+
+<GridLayoutExample@GridLayout>:
+    cols: 3
+    # rows: 1
+    Button:
+        text: "A"
+        size_hint: .5,.5
+    BoxLayoutExample:
+    Button:
+        text: "C"
+    Button:
+        text: "D"
+        size_hint: .5,.5
+    Button:
+        text: "E"
+    Button:
+        text: "F"
+
+<AnchorLayoutExample>:
+    # right, left, center
+    anchor_x: 'center'
+    # bottom, top, center
+    anchor_y: 'top'
+    BoxLayout:
+        size_hint: .5, .5
+        Button:
+            text:'A'
+        Button:
+            text:'B'
+
+<BoxLayoutExample>:
+    orientation: "horizontal"
+    Button:
+        text:"A"
+        size_hint: .5, .5
+        # height: "100dp"
+
+        # x, center_x ,right
+        # y, center_y ,top
+        pos_hint: {"center_y":.5}
+
+    BoxLayout:
+        orientation: "vertical"
+        spacing: "20dp"
+        Button:
+            text:"A"
+
+        Button:
+            text:"B"
+
+        Button:
+            text:"C"
+
+    Label:
+        text:"C"
+
+<MainWidget>:
+    Button:
+        text: "Hello"
+        size: "100dp", "100dp"    
+        pos: "50dp", "40dp"
+    Label:
+        text: "Hello2"
+        size: "100dp", "100dp"    
+        pos: "100dp", "80dp"
+        color: 0,74,162,32

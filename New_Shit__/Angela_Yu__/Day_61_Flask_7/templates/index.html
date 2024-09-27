@@ -1,0 +1,15 @@
+{% extends "bootstrap/base.html" %}
+{% block title %}This is an example page{% endblock %}
+
+{% block navbar %}
+<div class="container-fluid py-5">
+    <h1 class="display-5 fw-bold">Welcome</h1>
+    <p class="col-md-8 fs-4">Are you ready to discover our secret.</p>
+    <a href="{{url_for('login')}}">
+        <button class="btn btn-primary btn-lg" type="button">Login</button>
+    </a>
+</div>
+{% endblock %}
+
+{% block content %}
+{% endblock %}
