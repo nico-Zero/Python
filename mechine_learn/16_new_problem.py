@@ -98,8 +98,11 @@ def pre_processing(data: DataFrame):
     update_nltk()
     data["MESSAGE"] = data["MESSAGE"].str.lower()
     # print(data["MESSAGE"])
-    ss = "Hello i am zero, and i want to be happy.".lower()
-    print(word_tokenize(ss))
+    message_list = []
+    for message in data["MESSAGE"]:
+        message_list.append(set(word_tokenize(message)))
+    print(message_list[0])
+
     return None
 
 
