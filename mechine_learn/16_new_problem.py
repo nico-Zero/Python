@@ -4,15 +4,18 @@
 # from concurrent.futures import ThreadPoolExecutor
 import json
 import os
+from pprint import pprint
 
 import nltk
 import pandas as pd
+from bs4 import BeautifulSoup
 from matplotlib import pyplot as plt
 from nltk.corpus import stopwords
 from nltk.stem import PorterStemmer
 from nltk.tokenize import word_tokenize
 from pandas.compat import sys
 from pandas.core.api import DataFrame
+from wordcloud import WordCloud
 
 
 def to_binary(text):
@@ -24,7 +27,6 @@ def email_body(directory):
     body = str()
     for filename in os.listdir(directory):
         filenames.append(os.path.join(directory, filename))
-
     for filename in filenames:
         ff = filename.split("/")
         with open(filename, encoding="latin-1") as file:
@@ -43,12 +45,30 @@ def email_body_df(path: dict):
     body = email_body(path["path"])
     rows = list()
     row_name = list()
-
     for eb in body:
         rows.append({"MESSAGE": eb["message"], "CLASSIFIER": path["classifier"]})
         row_name.append(eb["filename"])
     df = pd.DataFrame(rows, index=row_name)  # type: ignore
     return df
+
+
+def update_nltk():
+    to_download_list = ["punkt", "punkt_tab", "stopwords"]
+    for download in to_download_list:
+        nltk.download(download, quiet=True)
+
+
+def pre_processing(data):
+    update_nltk()
+    pre_processed_data = list()
+    stemmer = PorterStemmer()
+    stop_words = stopwords.words("english")
+    data = BeautifulSoup(data, "html.parser").get_text()
+    for word in set(word_tokenize(data.lower())):
+        if word not in stop_words and word.isalpha():
+            stemmed_word = stemmer.stem(word)
+            pre_processed_data.append(stemmed_word)
+    return pre_processed_data
 
 
 def clean_data(data: DataFrame, save_file_path: str, save_to_file: bool = False):
@@ -57,6 +77,7 @@ def clean_data(data: DataFrame, save_file_path: str, save_to_file: bool = False)
     data["DOC_ID"] = document_ids
     data["FILE_NAME"] = data.index
     data.set_index("DOC_ID", inplace=True)
+    data["MESSAGE"] = data["MESSAGE"].apply(pre_processing)
     if save_to_file:
         json_data = json.loads(str(data.to_json()))
         with open(save_file_path, "w") as file:
@@ -88,22 +109,11 @@ def get_clened_data(
     return cleaned_data
 
 
-def update_nltk():
-    to_download_list = ["punkt", "punkt_tab", "stopwords"]
-    for download in to_download_list:
-        nltk.download(download, quiet=True)
-
-
-def pre_processing(data: DataFrame):
-    update_nltk()
-    data["MESSAGE"] = data["MESSAGE"].str.lower()
-    # print(data["MESSAGE"])
-    message_list = []
-    for message in data["MESSAGE"]:
-        message_list.append(set(word_tokenize(message)))
-    print(message_list[0])
-
-    return None
+def joiner(words):
+    result = []
+    for dd in words:
+        result += dd
+    return result
 
 
 # Main function.
@@ -123,8 +133,10 @@ def main(
                 if len(content.strip()) == 0:
                     print(f"This '{save_file_path}' is empty...")
                     raise
+        else:
+            raise
     except:
-        cleaned_data = get_clened_data(
+        data = get_clened_data(
             directory_paths=directory_paths,
             save_file_path=save_file_path,
             save_to_file=save_to_file,
@@ -133,10 +145,10 @@ def main(
             _stap=_stap,
         )
     else:
-        cleaned_data = pd.read_json(save_file_path)
+        data = pd.read_json(save_file_path)
     if graph:
-        amount_of_ham = cleaned_data["CLASSIFIER"].value_counts()[0]
-        amount_of_spam = cleaned_data["CLASSIFIER"].value_counts()[1]
+        amount_of_ham = data["CLASSIFIER"].value_counts()[0]
+        amount_of_spam = data["CLASSIFIER"].value_counts()[1]
         print(amount_of_spam)
         print(amount_of_ham)
         category_name = ["Spam", "Legit Mails"]
@@ -158,8 +170,26 @@ def main(
         circle = plt.Circle((0, 0), radius=0.5, color="white")  # type: ignore
         plt.gca().add_artist(circle)
         plt.show()
-    pre_processing(cleaned_data)
-    return cleaned_data
+    doc_ids_ham = data[data["CLASSIFIER"] == 0].index
+    doc_ids_spam = data[data["CLASSIFIER"] == 1].index
+    all_words = joiner(data["MESSAGE"])
+    all_ham_words = joiner(data["MESSAGE"].loc[doc_ids_ham])
+    all_spam_words = joiner(data["MESSAGE"].loc[doc_ids_spam])
+    ham_word_count = pd.Series(all_ham_words).value_counts()
+    spam_word_count = pd.Series(all_spam_words).value_counts()
+
+    # print("Total ham words count:- ", len(all_ham_words))
+    # print("Total spam words count:- ", len(all_spam_words))
+    # print("Total words count:- ", len(all_words))
+    # print("Top 10 word count in ham words:- \n", ham_word_count[:10], "\n", sep="")
+    # print("Top 10 word count in spam words:- \n", spam_word_count[:10], "\n", sep="")
+
+    word_cloud = WordCloud().generate(" ".join(all_words))
+    plt.imshow(word_cloud, interpolation="bilinear")
+    plt.axis("off")
+    plt.show()
+
+    return data
 
 
 directorys = [
