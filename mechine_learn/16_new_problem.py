@@ -5,6 +5,7 @@
 import json
 import os
 from pprint import pprint
+import numpy as np
 
 import nltk
 import pandas as pd
@@ -15,7 +16,10 @@ from nltk.stem import PorterStemmer
 from nltk.tokenize import word_tokenize
 from pandas.compat import sys
 from pandas.core.api import DataFrame
+from PIL import Image
 from wordcloud import WordCloud
+
+VOCAB_SIZE = 2500
 
 
 def to_binary(text):
@@ -86,41 +90,22 @@ def clean_data(data: DataFrame, save_file_path: str, save_to_file: bool = False)
     return data
 
 
-def get_clened_data(
+def joiner(data):
+    result = {
+        "WORDS": [],
+        "CLASSIFIER": [],
+    }
+    for words, classifier in data[["MESSAGE", "CLASSIFIER"]].values:
+        for word in words:
+            result["WORDS"].append(word)
+            result["CLASSIFIER"].append(classifier)
+    return pd.DataFrame(result)
+
+
+def get_data(
     directory_paths: dict,
     save_file_path: str,
-    save_to_file: bool = True,
-    _from: int | None = None,
-    _to: int | None = None,
-    _stap: int | None = None,
-):
-    emails = dict()
-    for path in list(directory_paths.values())[_from:_to:_stap]:
-        if not os.path.exists(path["path"]):
-            raise ValueError("Wrong directory path.")
-        if emails.get(path["classifier"]) is None:
-            emails[path["classifier"]] = email_body_df(path)
-        else:
-            emails[path["classifier"]] = emails[path["classifier"]]._append(
-                email_body_df(path)
-            )
-    all_email = pd.concat(emails.values())
-    cleaned_data = clean_data(all_email, save_file_path, save_to_file=save_to_file)
-    return cleaned_data
-
-
-def joiner(words):
-    result = []
-    for dd in words:
-        result += dd
-    return result
-
-
-# Main function.
-def main(
-    directory_paths: dict,
-    save_file_path: str,
-    graph: bool = False,
+    vocab_df_path: str | None = None,
     save_to_file: bool = True,
     _from: int | None = None,
     _to: int | None = None,
@@ -131,21 +116,119 @@ def main(
             with open(save_file_path) as file:
                 content = file.read()
                 if len(content.strip()) == 0:
-                    print(f"This '{save_file_path}' is empty...")
                     raise
         else:
             raise
     except:
-        data = get_clened_data(
-            directory_paths=directory_paths,
-            save_file_path=save_file_path,
-            save_to_file=save_to_file,
-            _from=_from,
-            _to=_to,
-            _stap=_stap,
-        )
+        print(f"This data file is empty...")
+        print(f"Genrating data...")
+        emails = dict()
+        for path in list(directory_paths.values())[_from:_to:_stap]:
+            if not os.path.exists(path["path"]):
+                raise ValueError("Wrong directory path.")
+            if emails.get(path["classifier"]) is None:
+                emails[path["classifier"]] = email_body_df(path)
+            else:
+                emails[path["classifier"]] = emails[path["classifier"]]._append(
+                    email_body_df(path)
+                )
+        all_email = pd.concat(emails.values())
+        cleaned_data = clean_data(all_email, save_file_path, save_to_file=save_to_file)
     else:
-        data = pd.read_json(save_file_path)
+        cleaned_data = pd.read_json(save_file_path)
+
+    all_words = joiner(cleaned_data)
+    doc_ids_ham = cleaned_data[cleaned_data["CLASSIFIER"] == 0].index
+    doc_ids_spam = cleaned_data[cleaned_data["CLASSIFIER"] == 1].index
+    all_ham_words = joiner(cleaned_data.loc[doc_ids_ham])
+    all_spam_words = joiner(cleaned_data.loc[doc_ids_spam])
+    ham_word_count = pd.Series(all_ham_words.WORDS).value_counts()
+    ham_word_set = pd.DataFrame(
+        {"WORDS": ham_word_count.index, "COUNT": ham_word_count.values},
+        index=range(1, ham_word_count.shape[0] + 1),
+    )
+    ham_word_set.index.name = "WORD_ID"
+    spam_word_count = pd.Series(all_spam_words.WORDS).value_counts()
+    spam_word_set = pd.DataFrame(
+        {"WORDS": spam_word_count.index, "COUNT": spam_word_count.values},
+        index=range(1, spam_word_count.shape[0] + 1),
+    )
+    spam_word_set.index.name = "WORD_ID"
+    try:
+        if vocab_df_path:
+            with open(vocab_df_path) as file:
+                vocabs = file.read()
+                if len(vocabs.strip()) == 0:
+                    raise
+        else:
+            raise
+    except:
+        print(f"The vocab data file is empty...")
+        print(f"Genrating data...")
+        unique_words = pd.Series(all_words.WORDS).value_counts()
+        vocab_set = pd.DataFrame(
+            {"VOCAB_WORDS": unique_words.index, "COUNT": unique_words.values},
+            index=range(1, unique_words.shape[0] + 1),
+        )
+        vocab_set.index.name = "WORD_ID"
+        if vocab_df_path:
+            vocab_set_json = json.loads(str(vocab_set.to_json()))
+            with open(vocab_df_path, "w") as file:
+                file.write(json.dumps(vocab_set_json, indent=4))
+                file.close()
+
+    else:
+        vocab_set = pd.read_json(vocab_df_path)
+
+    result = {
+        "data": cleaned_data,
+        "vocab_set": vocab_set,
+        "ham_set": ham_word_set,
+        "spam_set": spam_word_set,
+        "all_words": all_words,
+        "all_ham_wprds": all_ham_words,
+        "all_spam_wprds": all_spam_words,
+    }
+
+    return result
+
+
+def checker(word, df_in, column):
+    top_2500 = set(df_in[column][:VOCAB_SIZE].values)
+    if word in top_2500:
+        print(f"Yes : {word}")
+    else:
+        print(f"No  : {word}")
+
+
+# Main function.
+def main(
+    directory_paths: dict,
+    save_file_path: str,
+    vocab_df_path: str | None = None,
+    graph: bool = False,
+    save_to_file: bool = True,
+    _from: int | None = None,
+    _to: int | None = None,
+    _stap: int | None = None,
+):
+
+    all_data = get_data(
+        directory_paths=directory_paths,
+        save_file_path=save_file_path,
+        save_to_file=save_to_file,
+        vocab_df_path=vocab_df_path,
+        _from=_from,
+        _to=_to,
+        _stap=_stap,
+    )
+
+    data = all_data["data"]
+    vocab_set = all_data["vocab_set"]
+    ham_set = all_data["ham_set"]
+    spam_set = all_data["spam_set"]
+    all_words = all_data["all_words"]
+
     if graph:
         amount_of_ham = data["CLASSIFIER"].value_counts()[0]
         amount_of_spam = data["CLASSIFIER"].value_counts()[1]
@@ -170,24 +253,18 @@ def main(
         circle = plt.Circle((0, 0), radius=0.5, color="white")  # type: ignore
         plt.gca().add_artist(circle)
         plt.show()
-    doc_ids_ham = data[data["CLASSIFIER"] == 0].index
-    doc_ids_spam = data[data["CLASSIFIER"] == 1].index
-    all_words = joiner(data["MESSAGE"])
-    all_ham_words = joiner(data["MESSAGE"].loc[doc_ids_ham])
-    all_spam_words = joiner(data["MESSAGE"].loc[doc_ids_spam])
-    ham_word_count = pd.Series(all_ham_words).value_counts()
-    spam_word_count = pd.Series(all_spam_words).value_counts()
 
-    # print("Total ham words count:- ", len(all_ham_words))
-    # print("Total spam words count:- ", len(all_spam_words))
-    # print("Total words count:- ", len(all_words))
-    # print("Top 10 word count in ham words:- \n", ham_word_count[:10], "\n", sep="")
-    # print("Top 10 word count in spam words:- \n", spam_word_count[:10], "\n", sep="")
+    all_words2 = joiner(data)
+    print(all_words2.value_counts().reset_index())
+    print(all_words2["WORDS"].value_counts().reset_index())
 
-    word_cloud = WordCloud().generate(" ".join(all_words))
-    plt.imshow(word_cloud, interpolation="bilinear")
-    plt.axis("off")
-    plt.show()
+    # words = ["mechine", "learning", "fun", "learn", "data", "science", "app", "brewery"]
+    # for word in words:
+    #     checker(word, vocab_set, "VOCAB_WORDS")
+
+    # print(vocab_set)
+
+    # print(data.MESSAGE.apply(len).max())
 
     return data
 
@@ -205,4 +282,8 @@ file_paths = {
     for path, classifier in directorys
 }
 
-main(directory_paths=file_paths, save_file_path="./16_clened_data.json")
+main(
+    directory_paths=file_paths,
+    save_file_path="./16_clened_data.json",
+    vocab_df_path="./16_vocab_dataframe.json",
+)
