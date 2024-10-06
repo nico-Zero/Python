@@ -20,6 +20,7 @@ from pandas.compat import sys
 from pandas.core.api import DataFrame
 from PIL import Image
 from pandas.core.common import random_state
+from pandas.io.formats.format import save_to_buffer
 from wordcloud import WordCloud
 from sklearn.model_selection import train_test_split
 
@@ -67,7 +68,6 @@ def update_nltk():
 
 
 def pre_processing(data):
-    update_nltk()
     pre_processed_data = list()
     stemmer = PorterStemmer()
     stop_words = stopwords.words("english")
@@ -79,19 +79,29 @@ def pre_processing(data):
     return pre_processed_data
 
 
-def clean_data(data: DataFrame, save_file_path: str, save_to_file: bool = False):
+def clean_data(
+    data: DataFrame,
+    clean_save_file_path: str,
+    unclean_save_file_path: str,
+    save_to_file: bool = False,
+):
     data.drop(list(set(data[data["MESSAGE"].str.len() == 0].index)), inplace=True)
     document_ids = range(len(data))
     data["DOC_ID"] = document_ids
     data["FILE_NAME"] = data.index
     data.set_index("DOC_ID", inplace=True)
+    unclened_data = deepcopy(data)
     data["MESSAGE"] = data["MESSAGE"].apply(pre_processing)
     if save_to_file:
-        json_data = json.loads(str(data.to_json()))
-        with open(save_file_path, "w") as file:
-            file.write(json.dumps(json_data, indent=4))
-            file.close()
-    return data
+        clean_json_data = json.loads(str(data.to_json()))
+        with open(clean_save_file_path, "w") as cfile:
+            cfile.write(json.dumps(clean_json_data, indent=4))
+            cfile.close()
+        unclean_json_data = json.loads(str(unclened_data.to_json()))
+        with open(unclean_save_file_path, "w") as ufile:
+            ufile.write(json.dumps(unclean_json_data, indent=4))
+            ufile.close()
+    return (unclened_data, data)
 
 
 def joiner(data):
@@ -115,7 +125,8 @@ def get_train_test_data(data, target):
 
 def get_data(
     directory_paths: dict,
-    save_file_path: str,
+    clean_save_file_path: str,
+    unclean_save_file_path: str,
     vocab_df_path: str | None = None,
     save_to_file: bool = True,
     _from: int | None = None,
@@ -123,16 +134,24 @@ def get_data(
     _stap: int | None = None,
 ):
     try:
-        if os.path.exists(save_file_path):
-            with open(save_file_path) as file:
-                content = file.read()
+        if os.path.exists(clean_save_file_path) and os.path.exists(
+            unclean_save_file_path
+        ):
+            with open(clean_save_file_path) as cfile:
+                content = cfile.read()
                 if len(content.strip()) == 0:
+                    print(f"{clean_save_file_path} is Empty...")
+                    raise
+            with open(unclean_save_file_path) as ufile:
+                content = ufile.read()
+                if len(content.strip()) == 0:
+                    print(f"{unclean_save_file_path} is Empty...")
                     raise
         else:
+            print(f"{clean_save_file_path} | {unclean_save_file_path} Not Found...")
             raise
     except:
-        print(f"This data file is empty...")
-        print(f"Genrating data...")
+        print(f"Gatherings data...")
         emails = dict()
         for path in list(directory_paths.values())[_from:_to:_stap]:
             if not os.path.exists(path["path"]):
@@ -144,9 +163,17 @@ def get_data(
                     email_body_df(path)
                 )
         all_email = pd.concat(emails.values())
-        cleaned_data = clean_data(all_email, save_file_path, save_to_file=save_to_file)
+        data = clean_data(
+            all_email,
+            clean_save_file_path,
+            unclean_save_file_path,
+            save_to_file=save_to_file,
+        )
+        unclened_data = data[0]
+        cleaned_data = data[1]
     else:
-        cleaned_data = pd.read_json(save_file_path)
+        unclened_data = pd.read_json(unclean_save_file_path)
+        cleaned_data = pd.read_json(clean_save_file_path)
 
     all_words = joiner(cleaned_data)
     doc_ids_ham = cleaned_data[cleaned_data["CLASSIFIER"] == 0].index
@@ -167,15 +194,16 @@ def get_data(
     spam_word_set.index.name = "WORD_ID"
     try:
         if vocab_df_path:
-            with open(vocab_df_path) as file:
-                vocabs = file.read()
+            with open(vocab_df_path) as cfile:
+                vocabs = cfile.read()
                 if len(vocabs.strip()) == 0:
+                    print(f"{vocab_df_path} is Empty...")
                     raise
         else:
+            print(f"{vocab_df_path} Not Found...")
             raise
     except:
-        print(f"The vocab data file is empty...")
-        print(f"Genrating data...")
+        print(f"Gatherings data...")
         unique_words = pd.Series(all_words.WORDS).value_counts()
         vocab_set = pd.DataFrame(
             {"VOCAB_WORDS": unique_words.index, "COUNT": unique_words.values},
@@ -184,9 +212,9 @@ def get_data(
         vocab_set.index.name = "WORD_ID"
         if vocab_df_path:
             vocab_set_json = json.loads(str(vocab_set.to_json()))
-            with open(vocab_df_path, "w") as file:
-                file.write(json.dumps(vocab_set_json, indent=4))
-                file.close()
+            with open(vocab_df_path, "w") as cfile:
+                cfile.write(json.dumps(vocab_set_json, indent=4))
+                cfile.close()
 
     else:
         vocab_set = pd.read_json(vocab_df_path)
@@ -195,9 +223,10 @@ def get_data(
     top_ham_words = all_ham_words["WORDS"].value_counts()[:VOCAB_SIZE]
     top_spam_words = all_spam_words["WORDS"].value_counts()[:VOCAB_SIZE]
 
-    vocab_count_data = deepcopy(cleaned_data[["MESSAGE", "CLASSIFIER"]].explode("MESSAGE").value_counts(["MESSAGE", "CLASSIFIER"]).reset_index())  # type: ignore
-    vocab_count_data["WORDS"] = vocab_count_data["MESSAGE"]
-    vocab_count_data.drop(columns=["MESSAGE"], inplace=True)
+    vocab_class_count_data = deepcopy(cleaned_data[["MESSAGE", "CLASSIFIER"]].explode("MESSAGE").value_counts(["MESSAGE", "CLASSIFIER"]).reset_index())  # type: ignore
+    vocab_class_count_data.rename(
+        columns={"MESSAGE": "WORDS", "count": "COUNT"}, inplace=True
+    )
 
     top_words_index = top_words.index  # type: ignore
     top_ham_words_index = top_ham_words.index  # type: ignore
@@ -205,11 +234,15 @@ def get_data(
 
     word_sheet = pd.DataFrame.from_records(cleaned_data["MESSAGE"].tolist())
     x_train, x_test, y_train, y_test = get_train_test_data(
-        word_sheet, cleaned_data["CLASSIFIER"]
+        cleaned_data["MESSAGE"], cleaned_data["CLASSIFIER"]
     )
 
+    train_sparse_matrix = make_sparse_matrix(x_train, y_train, top_words_index)  # type: ignore
+    test_sparse_matrix = make_sparse_matrix(x_test, y_test, top_words_index)  # type: ignore
+
     result = {
-        "data": cleaned_data,
+        "unclean_data": unclened_data,
+        "clean_data": cleaned_data,
         "vocab_set": vocab_set,
         "ham_set": ham_word_set,
         "spam_set": spam_word_set,
@@ -222,10 +255,18 @@ def get_data(
         "top_words_index": top_words_index,
         "top_ham_words_index": top_ham_words_index,
         "top_spam_words_index": top_spam_words_index,
-        "vocab_count_data": vocab_count_data,
+        "vocab_class_count_data": vocab_class_count_data,
         "word_sheet": word_sheet,
-        "train_data": {"x_train": x_train, "y_train": y_train},
-        "test_data": {"x_test": x_test, "y_test": y_test},
+        "train_data": {
+            "x_train": x_train,
+            "y_train": y_train,
+            "train_sparse_matrix": train_sparse_matrix,
+        },
+        "test_data": {
+            "x_test": x_test,
+            "y_test": y_test,
+            "test_sparse_matrix": test_sparse_matrix,
+        },
     }
 
     return result
@@ -266,15 +307,32 @@ def make_graph(data):
     plt.show()
 
 
-def make_sparse_matrix(df, indexed_words, labels):
-
-    return None
+def make_sparse_matrix(data: pd.Series, target: pd.Series, index: pd.Index):
+    result = (
+        pd.DataFrame(
+            {"MESSAGE_ID": data.index, "MESSAGE": data.values, "CLASSIFIER": target}
+        )
+        .explode("MESSAGE")
+        .value_counts(["MESSAGE_ID", "MESSAGE", "CLASSIFIER"])
+        .reset_index()
+    )
+    result.rename(
+        columns={"MESSAGE": "WORD_ID", "count": "COUNT"},
+        inplace=True,
+    )
+    result["WORD_ID"] = result["WORD_ID"].map({word: i for i, word in enumerate(index.tolist())})  # type: ignore
+    result.dropna(subset=["WORD_ID"], inplace=True)
+    result["WORD_ID"] = result["WORD_ID"].astype(int)
+    result.reset_index(drop=True, inplace=True)
+    result.sort_values(["MESSAGE_ID", "WORD_ID", "CLASSIFIER", "COUNT"], inplace=True)
+    return result
 
 
 # Main function.
 def main(
     directory_paths: dict,
-    save_file_path: str,
+    clean_save_file_path: str,
+    unclean_save_file_path: str,
     vocab_df_path: str | None = None,
     graph: bool = False,
     save_to_file: bool = True,
@@ -285,7 +343,8 @@ def main(
 
     all_data = get_data(
         directory_paths=directory_paths,
-        save_file_path=save_file_path,
+        clean_save_file_path=clean_save_file_path,
+        unclean_save_file_path=unclean_save_file_path,
         save_to_file=save_to_file,
         vocab_df_path=vocab_df_path,
         _from=_from,
@@ -293,7 +352,8 @@ def main(
         _stap=_stap,
     )
 
-    data = all_data["data"]
+    unclened_data = all_data["unclean_data"]
+    cleaned_data = all_data["clean_data"]
     vocab_set = all_data["vocab_set"]
     ham_set = all_data["ham_set"]
     spam_set = all_data["spam_set"]
@@ -301,22 +361,36 @@ def main(
     top_words = all_data["top_words"]
     top_ham_words = all_data["top_ham_words"]
     top_spam_words = all_data["top_spam_words"]
-    vocab_count_data = all_data["vocab_count_data"]
+    vocab_class_count_data = all_data["vocab_class_count_data"]
     top_words_index = all_data["top_words_index"]
     top_ham_words_index = all_data["top_ham_words_index"]
     top_spam_words_index = all_data["top_spam_words_index"]
     train_data = all_data["train_data"]
     test_data = all_data["test_data"]
+    train_sparse_matrix = all_data["train_data"]["train_sparse_matrix"]
+    test_sparse_matrix = all_data["test_data"]["test_sparse_matrix"]
 
     if graph:
-        make_graph(data)
+        make_graph(cleaned_data)
 
-    print("X Train data:- ", train_data["x_train"].shape)  # type: ignore
-    print("X Train data:- ", train_data["y_train"].shape)  # type: ignore
-    print("X Test data:- ", test_data["x_test"].shape)  # type: ignore
-    print("X Test data:- ", test_data["y_test"].shape)  # type: ignore
+    # print("X Train data:- ", train_data["x_train"])  # type: ignore
+    # print("X Train data:- ", train_data["y_train"])  # type: ignore
+    # print("X Test data:- ", test_data["x_test"])  # type: ignore
+    # print("X Test data:- ", test_data["y_test"])  # type: ignore
 
-    return data
+    # print(top_words)
+    # print(vocab_class_count_data)
+    # print(top_words_index)
+    # print(data)
+    # print(vocab_set)
+
+    print(train_sparse_matrix[train_sparse_matrix["COUNT"] > 5])
+    print(test_sparse_matrix[test_sparse_matrix["COUNT"] > 5])
+    print(top_words_index[309])
+    print(top_words_index[884])
+    print(top_words_index[96])
+
+    return None
 
 
 directorys = [
@@ -334,7 +408,8 @@ file_paths = {
 
 main(
     directory_paths=file_paths,
-    save_file_path="./16_clened_data.json",
+    clean_save_file_path="./16_clean_data.json",
+    unclean_save_file_path="./16_unclean_data.json",
     vocab_df_path="./16_vocab_dataframe.json",
     graph=False,
 )
