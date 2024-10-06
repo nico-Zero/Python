@@ -5,7 +5,9 @@
 import json
 import os
 from pprint import pprint
+from tkinter import Message
 import numpy as np
+from copy import deepcopy
 
 import nltk
 import pandas as pd
@@ -17,7 +19,9 @@ from nltk.tokenize import word_tokenize
 from pandas.compat import sys
 from pandas.core.api import DataFrame
 from PIL import Image
+from pandas.core.common import random_state
 from wordcloud import WordCloud
+from sklearn.model_selection import train_test_split
 
 VOCAB_SIZE = 2500
 
@@ -102,6 +106,13 @@ def joiner(data):
     return pd.DataFrame(result)
 
 
+def get_train_test_data(data, target):
+    x_train, x_test, y_train, y_test = train_test_split(
+        data, target, test_size=0.3, random_state=42
+    )
+    return (x_train, x_test, y_train, y_test)
+
+
 def get_data(
     directory_paths: dict,
     save_file_path: str,
@@ -180,14 +191,41 @@ def get_data(
     else:
         vocab_set = pd.read_json(vocab_df_path)
 
+    top_words = all_words["WORDS"].value_counts()[:VOCAB_SIZE]
+    top_ham_words = all_ham_words["WORDS"].value_counts()[:VOCAB_SIZE]
+    top_spam_words = all_spam_words["WORDS"].value_counts()[:VOCAB_SIZE]
+
+    vocab_count_data = deepcopy(cleaned_data[["MESSAGE", "CLASSIFIER"]].explode("MESSAGE").value_counts(["MESSAGE", "CLASSIFIER"]).reset_index())  # type: ignore
+    vocab_count_data["WORDS"] = vocab_count_data["MESSAGE"]
+    vocab_count_data.drop(columns=["MESSAGE"], inplace=True)
+
+    top_words_index = top_words.index  # type: ignore
+    top_ham_words_index = top_ham_words.index  # type: ignore
+    top_spam_words_index = top_spam_words.index  # type: ignore
+
+    word_sheet = pd.DataFrame.from_records(cleaned_data["MESSAGE"].tolist())
+    x_train, x_test, y_train, y_test = get_train_test_data(
+        word_sheet, cleaned_data["CLASSIFIER"]
+    )
+
     result = {
         "data": cleaned_data,
         "vocab_set": vocab_set,
         "ham_set": ham_word_set,
         "spam_set": spam_word_set,
         "all_words": all_words,
-        "all_ham_wprds": all_ham_words,
-        "all_spam_wprds": all_spam_words,
+        "all_ham_words": all_ham_words,
+        "all_spam_words": all_spam_words,
+        "top_words": top_words,
+        "top_ham_words": top_ham_words,
+        "top_spam_words": top_spam_words,
+        "top_words_index": top_words_index,
+        "top_ham_words_index": top_ham_words_index,
+        "top_spam_words_index": top_spam_words_index,
+        "vocab_count_data": vocab_count_data,
+        "word_sheet": word_sheet,
+        "train_data": {"x_train": x_train, "y_train": y_train},
+        "test_data": {"x_test": x_test, "y_test": y_test},
     }
 
     return result
@@ -199,6 +237,38 @@ def checker(word, df_in, column):
         print(f"Yes : {word}")
     else:
         print(f"No  : {word}")
+    return None
+
+
+def make_graph(data):
+    amount_of_ham = data["CLASSIFIER"].value_counts()[0]
+    amount_of_spam = data["CLASSIFIER"].value_counts()[1]
+    print(amount_of_spam)
+    print(amount_of_ham)
+    category_name = ["Spam", "Legit Mails"]
+    sizes = [amount_of_spam, amount_of_ham]
+    custom_colors = [
+        "#9b59b6",
+        "#2ecc71",
+    ]
+    plt.pie(
+        sizes,
+        labels=category_name,
+        textprops={"fontsize": 15},
+        startangle=90,
+        autopct="%1.0f%%",
+        colors=custom_colors,
+        pctdistance=0.8,
+        # explode=[0, 0.05],
+    )
+    circle = plt.Circle((0, 0), radius=0.5, color="white")  # type: ignore
+    plt.gca().add_artist(circle)
+    plt.show()
+
+
+def make_sparse_matrix(df, indexed_words, labels):
+
+    return None
 
 
 # Main function.
@@ -228,43 +298,23 @@ def main(
     ham_set = all_data["ham_set"]
     spam_set = all_data["spam_set"]
     all_words = all_data["all_words"]
+    top_words = all_data["top_words"]
+    top_ham_words = all_data["top_ham_words"]
+    top_spam_words = all_data["top_spam_words"]
+    vocab_count_data = all_data["vocab_count_data"]
+    top_words_index = all_data["top_words_index"]
+    top_ham_words_index = all_data["top_ham_words_index"]
+    top_spam_words_index = all_data["top_spam_words_index"]
+    train_data = all_data["train_data"]
+    test_data = all_data["test_data"]
 
     if graph:
-        amount_of_ham = data["CLASSIFIER"].value_counts()[0]
-        amount_of_spam = data["CLASSIFIER"].value_counts()[1]
-        print(amount_of_spam)
-        print(amount_of_ham)
-        category_name = ["Spam", "Legit Mails"]
-        sizes = [amount_of_spam, amount_of_ham]
-        custom_colors = [
-            "#9b59b6",
-            "#2ecc71",
-        ]
-        plt.pie(
-            sizes,
-            labels=category_name,
-            textprops={"fontsize": 15},
-            startangle=90,
-            autopct="%1.0f%%",
-            colors=custom_colors,
-            pctdistance=0.8,
-            # explode=[0, 0.05],
-        )
-        circle = plt.Circle((0, 0), radius=0.5, color="white")  # type: ignore
-        plt.gca().add_artist(circle)
-        plt.show()
+        make_graph(data)
 
-    all_words2 = joiner(data)
-    print(all_words2.value_counts().reset_index())
-    print(all_words2["WORDS"].value_counts().reset_index())
-
-    # words = ["mechine", "learning", "fun", "learn", "data", "science", "app", "brewery"]
-    # for word in words:
-    #     checker(word, vocab_set, "VOCAB_WORDS")
-
-    # print(vocab_set)
-
-    # print(data.MESSAGE.apply(len).max())
+    print("X Train data:- ", train_data["x_train"].shape)  # type: ignore
+    print("X Train data:- ", train_data["y_train"].shape)  # type: ignore
+    print("X Test data:- ", test_data["x_test"].shape)  # type: ignore
+    print("X Test data:- ", test_data["y_test"].shape)  # type: ignore
 
     return data
 
@@ -286,4 +336,5 @@ main(
     directory_paths=file_paths,
     save_file_path="./16_clened_data.json",
     vocab_df_path="./16_vocab_dataframe.json",
+    graph=False,
 )

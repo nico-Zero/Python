@@ -6,17 +6,13 @@ from sklearn.model_selection import train_test_split
 from sklearn.linear_model import LinearRegression
 import statsmodels.api as sm
 from statsmodels.stats.outliers_influence import variance_inflation_factor
-<<<<<<< HEAD
-=======
 from pprint import pprint
 from function import *
->>>>>>> 5e99c8e (.)
 
 # training and test dataset split.
 data = pd.read_csv("boston.csv")
 prices = data["PRICES"]
 features = data.drop("PRICES", axis=1)
-<<<<<<< HEAD
 
 # Data Transformation.
 p = data["PRICES"]
@@ -48,7 +44,6 @@ results.bic
 # vif = [variance_inflation_factor(x_incl_const, i) for i in range(x_incl_const.shape[1])]
 # vif = pd.DataFrame({"Conf_Name": x_incl_const.columns, "VIF": np.around(vif, 3)})  # type: ignore
 # print(vif)
-=======
 p = data["PRICES"]
 lp = np.log(data["PRICES"])
 
@@ -117,4 +112,3 @@ the_dataframe = pd.DataFrame(
     }
 )
 print(the_dataframe)
->>>>>>> 5e99c8e (.)
