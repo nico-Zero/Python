@@ -240,6 +240,13 @@ def get_data(
     train_sparse_matrix = make_sparse_matrix(x_train, y_train, top_words_index)  # type: ignore
     test_sparse_matrix = make_sparse_matrix(x_test, y_test, top_words_index)  # type: ignore
 
+    with open("16_train_data.json", "w") as tfile:
+        train_json_data = json.loads(str(train_sparse_matrix.to_json()))
+        tfile.write(json.dumps(train_json_data, indent=4))
+        tfile.close()
+    with open("16_test_data.json", "w") as tfile:
+        ...
+
     result = {
         "unclean_data": unclened_data,
         "clean_data": cleaned_data,
@@ -323,8 +330,8 @@ def make_sparse_matrix(data: pd.Series, target: pd.Series, index: pd.Index):
     result["WORD_ID"] = result["WORD_ID"].map({word: i for i, word in enumerate(index.tolist())})  # type: ignore
     result.dropna(subset=["WORD_ID"], inplace=True)
     result["WORD_ID"] = result["WORD_ID"].astype(int)
-    result.reset_index(drop=True, inplace=True)
     result.sort_values(["MESSAGE_ID", "WORD_ID", "CLASSIFIER", "COUNT"], inplace=True)
+    result.reset_index(drop=True, inplace=True)
     return result
 
 
@@ -384,11 +391,11 @@ def main(
     # print(data)
     # print(vocab_set)
 
-    print(train_sparse_matrix[train_sparse_matrix["COUNT"] > 5])
-    print(test_sparse_matrix[test_sparse_matrix["COUNT"] > 5])
-    print(top_words_index[309])
-    print(top_words_index[884])
-    print(top_words_index[96])
+    print(train_sparse_matrix)
+    print(test_sparse_matrix)
+    # print(top_words_index[309])
+    # print(top_words_index[884])
+    # print(top_words_index[96])
 
     return None
 
