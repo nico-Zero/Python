@@ -36,5 +36,13 @@ def make_full_matrix(
 
 
 full_matrix = make_full_matrix(train_data)
-print(full_matrix.head())
-print(full_matrix.tail())
+
+x = list(full_matrix.value_counts("CLASSIFIER"))
+spam_percentage = x[1] / sum(x)
+
+sub_full_matrix = full_matrix.loc[:, full_matrix.columns != "CLASSIFIER"]
+# print(sub_full_matrix)
+jj = sub_full_matrix.sum(
+    axis=1,
+)
+print(jj)
