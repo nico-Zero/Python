@@ -245,7 +245,9 @@ def get_data(
         tfile.write(json.dumps(train_json_data, indent=4))
         tfile.close()
     with open("16_test_data.json", "w") as tfile:
-        ...
+        test_json_data = json.loads(str(test_sparse_matrix.to_json()))
+        tfile.write(json.dumps(test_json_data, indent=4))
+        tfile.close()
 
     result = {
         "unclean_data": unclened_data,
@@ -380,7 +382,7 @@ def main(
     if graph:
         make_graph(cleaned_data)
 
-    # print("X Train data:- ", train_data["x_train"])  # type: ignore
+    # ham_set print("X Train data:- ", train_data["x_train"])  # type: ignore
     # print("X Train data:- ", train_data["y_train"])  # type: ignore
     # print("X Test data:- ", test_data["x_test"])  # type: ignore
     # print("X Test data:- ", test_data["y_test"])  # type: ignore
