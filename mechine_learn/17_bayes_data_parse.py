@@ -42,7 +42,17 @@ spam_percentage = x[1] / sum(x)
 
 sub_full_matrix = full_matrix.loc[:, full_matrix.columns != "CLASSIFIER"]
 # print(sub_full_matrix)
-jj = sub_full_matrix.sum(
+tokan_count = sub_full_matrix.sum(
     axis=1,
 )
-print(jj)
+
+# print(tokan_count.sum())
+
+spam_messages = full_matrix[full_matrix["CLASSIFIER"] == 1]
+# print(spam_messages)
+spam_message_length = spam_messages.shape[0]
+
+ham_messages = full_matrix[full_matrix["CLASSIFIER"] == 0]
+ham_message_length = ham_messages.shape[0]
+print(ham_messages)
+print(ham_message_length)
