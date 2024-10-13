@@ -74,7 +74,7 @@ def calc(data):
         "spam_message_length": spam_message_length,
         "spam_percentage": spam_percentage,
         "total_tokans": total_tokans,
-        "tokan_count ": tokan_count,
+        "tokan_count": tokan_count,
         "total_ham_tokens": total_ham_tokens,
         "tokan_count_ham": tokan_count_ham,
         "total_spam_tokens": total_spam_tokens,
