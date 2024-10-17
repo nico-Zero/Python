@@ -1,4 +1,5 @@
 import pandas as pd
+
 # from pandas import DataFrame
 
 data = pd.read_csv("lsd_math_score_data.csv")
@@ -40,4 +41,3 @@ del data["High_Score"]
 
 print(data)
 # /run/media/nico/Nova/Lab/Python/mechine_learn
-

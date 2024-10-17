@@ -1,7 +1,6 @@
-import pandas as pd
+import mimesis
+from mimesis.locales import Locale
 
-data = pd.read_json("./16_clened_data.json")
-idata = pd.read_json("./16_vocab_dataframe.json")
+text = mimesis.Text(Locale.EN)
 
-jj = data[["MESSAGE", "CLASSIFIER"]].explode("MESSAGE").value_counts(["MESSAGE", "CLASSIFIER"])  # type: ignore
-print(jj.reset_index())
+print(text.text(quantity=20))
